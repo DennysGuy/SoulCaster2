@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c8ok5h5m1ggwb"]
+
+[ext_resource type="Script" uid="uid://cp8jbvxrpbbpf" path="res://src/Scripts/test_realm.gd" id="1_ca2mb"]
+
+[node name="TestRealm" type="Node3D" unique_id=290320890]
+script = ExtResource("1_ca2mb")
