@@ -2,5 +2,20 @@
 
 [ext_resource type="Script" uid="uid://cdxtm3oao6svc" path="res://src/Scripts/Player/player.gd" id="1_6mi4a"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6mi4a"]
+
 [node name="Player" type="Node3D" unique_id=870613777]
 script = ExtResource("1_6mi4a")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1769006235]
+transform = Transform3D(0.47278905, 0, 0, 0, 1, 0, 0, 0, 0.5764741, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_6mi4a")
+
+[node name="Head" type="Node3D" parent="." unique_id=1125939474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera" type="Camera3D" parent="Head" unique_id=757378360]
+
+[node name="Timer" type="Timer" parent="." unique_id=1518696669]
+process_callback = 0
+one_shot = true

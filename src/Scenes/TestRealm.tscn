@@ -1,6 +1,65 @@
 [gd_scene format=3 uid="uid://c8ok5h5m1ggwb"]
 
 [ext_resource type="Script" uid="uid://cp8jbvxrpbbpf" path="res://src/Scripts/test_realm.gd" id="1_ca2mb"]
+[ext_resource type="PackedScene" uid="uid://b661qq3np83p6" path="res://src/Scenes/Player.tscn" id="2_h01ol"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rty5i"]
+albedo_color = Color(0, 0.52535284, 0.3643165, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h01ol"]
+albedo_color = Color(0.9999998, 0.039060414, 0.5440779, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfhgb"]
+albedo_color = Color(5.246252e-06, 0.6668177, 0.34717104, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mocxq"]
+albedo_color = Color(0.19518411, 0.6036107, 0.99999994, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss387"]
+albedo_color = Color(0.7061287, 0.55687857, 0, 1)
 
 [node name="TestRealm" type="Node3D" unique_id=290320890]
 script = ExtResource("1_ca2mb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1859460658]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.647583)
+material_override = SubResource("StandardMaterial3D_rty5i")
+size = Vector3(15, 0.05, 15)
+
+[node name="Player" parent="." unique_id=870613777 node_paths=PackedStringArray("look_at_point_1", "look_at_point_2", "look_at_point_3", "look_at_point_4") instance=ExtResource("2_h01ol")]
+look_at_point_1 = NodePath("../Point1")
+look_at_point_2 = NodePath("../Point2")
+look_at_point_3 = NodePath("../Point4")
+look_at_point_4 = NodePath("../Point3")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=712394984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03540039, 1.119627, -6.987447)
+material_override = SubResource("StandardMaterial3D_h01ol")
+size = Vector3(4.581, 2.5, 0.394)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1120408638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03540039, 1.119627, 5.423997)
+material_override = SubResource("StandardMaterial3D_sfhgb")
+size = Vector3(4.581, 2.5, 0.394)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1336878109]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.095635, 1.119627, -0.25073767)
+material_override = SubResource("StandardMaterial3D_mocxq")
+size = Vector3(4.581, 2.5, 0.394)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1727420678]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.8044944, 1.119627, -0.25073767)
+material_override = SubResource("StandardMaterial3D_ss387")
+size = Vector3(4.581, 2.5, 0.394)
+
+[node name="Point1" type="Marker3D" parent="." unique_id=679263532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
+
+[node name="Point2" type="Marker3D" parent="." unique_id=1686410825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.432, 2, -0.057)
+
+[node name="Point3" type="Marker3D" parent="." unique_id=2084814001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
+
+[node name="Point4" type="Marker3D" parent="." unique_id=1546003723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -2)
