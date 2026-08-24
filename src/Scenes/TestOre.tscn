@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://bnujpnfle0d5l"]
+
+[ext_resource type="PackedScene" uid="uid://dueo76m7dnsjy" path="res://Assets/TestOre.gltf" id="1_0nb3d"]
+[ext_resource type="Script" uid="uid://behklm821gtwf" path="res://src/Scripts/test_ore.gd" id="1_0oabc"]
+[ext_resource type="PackedScene" uid="uid://byerexir7pws6" path="res://src/Scenes/OreCollider.tscn" id="3_m1sm3"]
+[ext_resource type="Script" uid="uid://cthjv8ulf3hq6" path="res://src/Scripts/Statemachine/state_machine.gd" id="4_s44uc"]
+[ext_resource type="Script" uid="uid://b2b1jehkwef40" path="res://src/Scripts/Statemachine/Ore/ore_idle.gd" id="5_gwgns"]
+[ext_resource type="Script" uid="uid://bwok6gi8dsd0g" path="res://src/Scripts/Statemachine/Ore/ore_spawn_in.gd" id="6_cgh55"]
+[ext_resource type="Script" uid="uid://cuj71taa282t7" path="res://src/Scripts/Statemachine/Ore/ore_hurt.gd" id="7_h2r6c"]
+
+[sub_resource type="Animation" id="Animation_gwgns"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestOreModel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_0oabc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestOreModel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.1, 0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TestOreModel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s44uc"]
+resource_name = "Shake"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestOreModel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13, 0.26),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3, 3, 3), Vector3(3.1, 3.1, 3.1), Vector3(3, 3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TestOreModel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.09, 0.14, 0.18, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.028998733, 0, 0), Vector3(0, 0, -0.06558657), Vector3(-0.017909646, 0, 0.023503304), Vector3(-0.046407104, 0, 0.023503304), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_m1sm3"]
+resource_name = "SpawnIn"
+length = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestOreModel:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.17),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(3.2, 3.2, 3.2), Vector3(3, 3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s44uc"]
+_data = {
+&"Idle": SubResource("Animation_gwgns"),
+&"RESET": SubResource("Animation_0oabc"),
+&"Shake": SubResource("Animation_s44uc"),
+&"SpawnIn": SubResource("Animation_m1sm3")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m1sm3"]
+radius = 0.8610571
+
+[node name="TestOre" type="Node3D" unique_id=519608720 node_paths=PackedStringArray("hurt_state")]
+script = ExtResource("1_0oabc")
+hurt_state = NodePath("StateMachine/Hurt")
+
+[node name="TestOreModel" parent="." unique_id=1139113720 instance=ExtResource("1_0nb3d")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1256745844]
+libraries/ = SubResource("AnimationLibrary_s44uc")
+
+[node name="OreCollider" parent="." unique_id=982682263 instance=ExtResource("3_m1sm3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OreCollider" unique_id=938644452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07901317, 0)
+shape = SubResource("SphereShape3D_m1sm3")
+
+[node name="StateMachine" type="Node" parent="." unique_id=556605569 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_s44uc")
+initial_state = NodePath("SpawnIn")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=546590454]
+script = ExtResource("5_gwgns")
+animation_name = "Idle"
+
+[node name="SpawnIn" type="Node" parent="StateMachine" unique_id=1251038762 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("6_cgh55")
+idle_state = NodePath("../Idle")
+animation_name = "SpawnIn"
+
+[node name="Hurt" type="Node" parent="StateMachine" unique_id=1553601028 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("7_h2r6c")
+idle_state = NodePath("../Idle")
+animation_name = "Shake"
+
+[node name="Timer" type="Timer" parent="." unique_id=391845554]
+process_callback = 0
+one_shot = true

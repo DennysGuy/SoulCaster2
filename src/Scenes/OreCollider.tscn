@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://byerexir7pws6"]
+
+[ext_resource type="Script" uid="uid://cubgutmkqiob4" path="res://src/Scripts/ore_collider.gd" id="1_bwgab"]
+
+[node name="OreCollider" type="StaticBody3D" unique_id=982682263]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("1_bwgab")

@@ -1,21 +1,69 @@
 [gd_scene format=3 uid="uid://b661qq3np83p6"]
 
 [ext_resource type="Script" uid="uid://cdxtm3oao6svc" path="res://src/Scripts/Player/player.gd" id="1_6mi4a"]
+[ext_resource type="Script" uid="uid://37dd3k1rjoje" path="res://src/Scripts/Player/gun_arm.gd" id="2_4mdpm"]
+[ext_resource type="PackedScene" uid="uid://c404wx3xqh3y1" path="res://Assets/handgun/GUN.gltf" id="2_qm7rr"]
+[ext_resource type="PackedScene" uid="uid://balonwd6aty4n" path="res://Assets/Rifle/Avtomat.gltf" id="3_g1uh0"]
+[ext_resource type="Texture2D" uid="uid://cv75wrw0gonpm" path="res://Assets/CrosshairTest.png" id="4_5dq0m"]
+[ext_resource type="Script" uid="uid://vg8ube71bjtu" path="res://src/Scripts/Player/cross_hair.gd" id="5_ma0cp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6mi4a"]
 
-[node name="Player" type="Node3D" unique_id=870613777]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4mdpm"]
+radius = 0.81640625
+height = 4.309082
+
+[node name="Player" type="CharacterBody3D" unique_id=1844450298 groups=["Player"]]
 script = ExtResource("1_6mi4a")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1769006235]
-transform = Transform3D(0.47278905, 0, 0, 0, 1, 0, 0, 0, 0.5764741, 0, 1, 0)
+transform = Transform3D(1.6262206, 0, 0, 0, 2.2008412, 0, 0, 0, 1.337285, 0, 1.545491, 0)
 mesh = SubResource("CapsuleMesh_6mi4a")
 
 [node name="Head" type="Node3D" parent="." unique_id=1125939474]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4291844, 0)
 
 [node name="Camera" type="Camera3D" parent="Head" unique_id=757378360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9865484)
+current = true
+
+[node name="Marker3D" type="Marker3D" parent="Head" unique_id=1365446704]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.1637569, -1.5, -0.9678489)
+
+[node name="GunArm" type="Node3D" parent="Head/Marker3D" unique_id=405541628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5517621, 1.1643828, 0)
+script = ExtResource("2_4mdpm")
+
+[node name="Pistol" parent="Head/Marker3D/GunArm" unique_id=1215788280 instance=ExtResource("2_qm7rr")]
+transform = Transform3D(-4.371139e-09, 0, -0.10000001, 0, 0.1, 0, 0.10000001, 0, -4.371139e-09, -0.10428095, -0.16332889, -0.81708467)
+
+[node name="Skeleton3D" parent="Head/Marker3D/GunArm/Pistol/GUN_002" parent_id_path=PackedInt32Array(1215788280, 1642163288) index="0" unique_id=1205193048]
+bones/0/position = Vector3(-1.2199527, -2.3033183, 0.031247579)
+bones/0/rotation = Quaternion(0.62801933, -0.38946187, -0.5061076, -0.44470915)
+bones/1/position = Vector3(0.16566853, -1.834335, 1.844534)
+bones/2/rotation = Quaternion(0.20769206, -0.6263514, -0.20353639, 0.723271)
+bones/3/position = Vector3(0.02388667, -0.2677606, 0.37655908)
+bones/3/rotation = Quaternion(0.0003802823, -0.0023242563, 0.007128631, 0.9999718)
+
+[node name="Rifle" parent="Head/Marker3D/GunArm" unique_id=643033720 instance=ExtResource("3_g1uh0")]
+transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, -0.72377586, -1.8323209, -1.012764)
+visible = false
 
 [node name="Timer" type="Timer" parent="." unique_id=1518696669]
 process_callback = 0
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1345359542]
+
+[node name="CrossHair" type="TextureRect" parent="CanvasLayer" unique_id=693258582]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_5dq0m")
+script = ExtResource("5_ma0cp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1951491715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7551332, 0)
+shape = SubResource("CapsuleShape3D_4mdpm")
+
+[editable path="Head/Marker3D/GunArm/Pistol"]
+[editable path="Head/Marker3D/GunArm/Rifle"]
