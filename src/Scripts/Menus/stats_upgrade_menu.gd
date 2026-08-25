@@ -20,11 +20,13 @@ class_name StatsUpgradeMenu extends Control
 @onready var ore_spawn_time_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/OreSpawnTimeUpgradeButton
 @onready var reload_speed_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/ReloadSpeedUpgradeButton
 
+@onready var upgrade_buttons : Array[Button] = [attack_damage_upgrade_button, attack_speed_upgrade_button, movement_speed_upgrade_button, crit_chance_upgrade_button, crit_damage_upgrade_button, starting_timer_upgrade_button, defense_level_upgrade_button, ore_spawn_time_upgrade_button, reload_speed_upgrade_button]
+@onready var stats: Label = $StatsPanel/Stats
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	init_upgrades()
+	update_stats_description()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -65,3 +67,45 @@ func _on_ore_spawn_time_upgrade_button_button_up() -> void:
 
 func _on_reload_speed_upgrade_button_button_up() -> void:
 	pass # Replace with function body.
+
+func init_upgrades() -> void:
+	attack_damage_level.text = "Attack Damage Level: %s/%s" % [PlayerStats.stat_levels["Attack Damage"]["Level"], PlayerStats.stat_levels["Attack Damage"]["Max Level"]]
+	attack_speed_level.text = "Attack Speed Level: %s/%s" % [PlayerStats.stat_levels["Attack Speed"]["Level"], PlayerStats.stat_levels["Attack Speed"]["Max Level"]]
+	movement_speed_level.text = "Movement Speed Level: %s/%s" % [PlayerStats.stat_levels["Movement Speed"]["Level"], PlayerStats.stat_levels["Movement Speed"]["Max Level"]]
+	crit_chance_level.text = "Crit Chance Level: %s/%s" % [PlayerStats.stat_levels["Crit Chance"]["Level"], PlayerStats.stat_levels["Crit Chance"]["Max Level"]]
+	crit_damage_level.text = "Crit Damage Level: %s/%s" % [PlayerStats.stat_levels["Crit Damage"]["Level"], PlayerStats.stat_levels["Crit Damage"]["Max Level"]]
+	starting_timer_level.text = "Starting Timer Level: %s/%s" % [PlayerStats.stat_levels["Starting Timer"]["Level"], PlayerStats.stat_levels["Starting Timer"]["Max Level"]]
+	defense_level.text = "Defense Level: %s/%s" % [PlayerStats.stat_levels["Defense"]["Level"], PlayerStats.stat_levels["Defense"]["Max Level"]]
+	ore_spawn_time_level.text = "Ore Spawn Time Level: %s/%s" % [PlayerStats.stat_levels["Ore Spawn Time"]["Level"], PlayerStats.stat_levels["Ore Spawn Time"]["Max Level"]]
+	reload_speed_level.text = "Reload Speed Level: %s/%s" % [PlayerStats.stat_levels["Reload Speed"]["Level"], PlayerStats.stat_levels["Reload Speed"]["Max Level"]]
+
+	if PlayerStats.player_stats["Ability Points"] <= 0:
+		for button in upgrade_buttons:
+			button.disabled =  true
+	else:
+		for button in upgrade_buttons:
+			button.disabled = false
+
+
+func update_stats_description() -> void:
+	stats.text = """
+	Attack Damage: %s
+	Attack Speed: %s %%
+	Movement Speed: %s %%
+	Crit Chance: %s %%
+	Crit Damage: %s %%
+	Starting Timer: %s
+	Defense: %s %%
+	Ore Spawn Time: %s
+	Reload Speed: %s %%
+	""" % [
+		PlayerStats.player_stats["Attack Damage"],
+		int(PlayerStats.player_stats["Attack Speed"] * 100),
+		int(PlayerStats.player_stats["Movement Speed"] * 100),
+		int(PlayerStats.player_stats["Crit Chance"] * 100),
+		int(PlayerStats.player_stats["Crit Damage"] * 100),
+		PlayerStats.player_stats["Starting Timer"],
+		int(PlayerStats.player_stats["Defense"] * 100),
+		PlayerStats.player_stats["Ore Spawn Time"],
+		int(PlayerStats.player_stats["Reload Speed"] * 100)
+	]

@@ -17,3 +17,15 @@ var player_stats : Dictionary = {
 	"Currency": 0.0,
 	"Ore": 0.0
 }
+
+var stat_levels : Dictionary = {
+	"Attack Damage": {"Level": 0, "Max Level": 20, "Interval": 2}, 
+	"Attack Speed": {"Level": 0, "Max Level": 10, "Interval": 0.1},
+	"Movement Speed": {"Level": 0, "Max Level": 5, "Interval": 0.1},
+	"Crit Chance": {"Level": 0, "Max Level": 15, "Interval": 0.05},
+	"Crit Damage": {"Level": 0, "Max Level": 15, "Interval": 0.1},
+	"Starting Timer": {"Level": 0, "Max Level": 5, "Interval": 10},
+	"Defense": {"Level": 0, "Max Level": 5, "Interval": 0.1},
+	"Ore Spawn Time": {"Level": 0, "Max Level": 5, "Interval": 0.1},
+	"Reload Speed": {"Level": 0, "Max Level": 10, "Interval": 0.1},
+}
