@@ -4,12 +4,8 @@ const CHANCE_TO_BE_SASSY : int = 30
 
 func enter() -> void:
 	var random_num : int = randi_range(0,100)
-	parent.animation_player.speed_scale = 0.8
-	if random_num <= CHANCE_TO_BE_SASSY:
-		parent.play_walk_animation("walk 2 (sassy)")
-		parent.move_speed += 20
-	else:
-		parent.play_walk_animation("walk")
+	parent.animation_player.speed_scale = 1.0
+	parent.play_walk_animation("Run")
 
 func exit() -> void:
 	pass

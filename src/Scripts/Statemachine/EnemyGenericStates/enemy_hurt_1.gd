@@ -5,8 +5,8 @@ class_name EnemyHurt1 extends State
 
 func enter() -> void:
 
-	parent.animation_player.play("hurt1")
-	parent.timer.wait_time = 0.6
+	parent.animation_player.play("Hurt")
+	parent.timer.wait_time = 0.6667
 	parent.timer.start()
 
 

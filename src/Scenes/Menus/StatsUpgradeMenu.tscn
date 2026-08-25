@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://xjwhti5n3ar8"]
+
+[ext_resource type="Script" uid="uid://bg0aa7imrlatv" path="res://src/Scripts/Menus/stats_upgrade_menu.gd" id="1_s2mh1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rb1w"]
+bg_color = Color(0.40693712, 0.26840532, 0.14822346, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="StatsUpgradeMenu" type="Control" unique_id=253772515]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s2mh1")
+
+[node name="Panel" type="Panel" parent="." unique_id=2081258980]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6rb1w")
+
+[node name="Label" type="Label" parent="." unique_id=750834385]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -157.0
+offset_top = 21.0
+offset_right = 157.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Stats Upgrade Menu"
+
+[node name="StatsUpgradePanel" type="Panel" parent="." unique_id=1158240410]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = -268.0
+offset_right = 888.0
+offset_bottom = 316.0
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="StatsUpgradePanel" unique_id=409960809]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -321.5
+offset_top = -204.0
+offset_right = 39.5
+offset_bottom = 206.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/v_separation = 10
+
+[node name="AttackDamageLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=2055826723]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Attack Damage: 0"
+
+[node name="AttackSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=360790909]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Attack Speed: 0"
+
+[node name="MovementSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1708522686]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Movement Speed: 0"
+
+[node name="CritChanceLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=465853052]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Crit Chance Level: 0"
+
+[node name="CritDamageLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=527562675]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Crit Damage Level: 0"
+
+[node name="StartingTimerLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1961650741]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Starting Timer Level: 0"
+
+[node name="DefenseLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1580785110]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Defense Level: 0"
+
+[node name="OreSpawnTimeLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=471269379]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Ore Spawn  Time Level: 0"
+
+[node name="ReloadSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1345498173]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Reload Speed Level: 0"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsUpgradePanel" unique_id=438359848]
+layout_mode = 0
+offset_left = 699.0
+offset_top = 67.0
+offset_right = 819.0
+offset_bottom = 535.0
+theme_override_constants/separation = 18
+
+[node name="AttackDamageUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=443263016]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="AttackSpeedUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=360649488]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="MovementSpeedUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1707279524]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="CritChanceUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1344903364]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="CritDamageUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1220339802]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="StartingTimerUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=384066890]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="DefenseLevelUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1165023370]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="OreSpawnTimeUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1889972485]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="ReloadSpeedUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1034033026]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Upgrade (1)"
+
+[node name="StatsPanel" type="Panel" parent="." unique_id=1204104529]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -268.0
+offset_right = -31.0
+offset_bottom = 316.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="StatsPanel" unique_id=1664983790]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Stats"
+
+[node name="Stats" type="Label" parent="StatsPanel" unique_id=152801871]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.5
+offset_top = -242.0
+offset_right = 134.5
+offset_bottom = 263.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+
+[node name="Button" type="Button" parent="." unique_id=616413708]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -46.0
+offset_top = 10.0
+offset_right = -7.0
+offset_bottom = 41.0
+grow_horizontal = 0
+text = "X"
+
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/AttackDamageUpgradeButton" to="." method="_on_attack_damage_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/AttackSpeedUpgradeButton" to="." method="_on_attack_speed_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/MovementSpeedUpgradeButton" to="." method="_on_movement_speed_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/CritChanceUpgradeButton" to="." method="_on_crit_chance_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/CritDamageUpgradeButton" to="." method="_on_crit_damage_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/StartingTimerUpgradeButton" to="." method="_on_starting_timer_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/DefenseLevelUpgradeButton" to="." method="_on_defense_level_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/OreSpawnTimeUpgradeButton" to="." method="_on_ore_spawn_time_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/ReloadSpeedUpgradeButton" to="." method="_on_reload_speed_upgrade_button_button_up"]

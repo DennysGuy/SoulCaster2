@@ -51,10 +51,11 @@ func _ready() -> void:
 	initial_fov = camera.fov
 	
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	if Input.is_action_pressed("shoot") and !shooting:
+	if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
 		shooting = true
 		play_shoot_animation()
 	
@@ -98,7 +99,6 @@ func move_player() -> void:
 		#play_reload_animation()
 		#SignalBus.reload_pistol.emit()
 	
-
 func rotate_camera_left() -> void:
 	target_index -= 1
 		
@@ -194,7 +194,7 @@ func hide_reticle() -> void:
 	cross_hair.hide()
 
 func play_shoot_animation() -> void:
-	#gun_animation_player.speed_scale = 3.5
+	gun_animation_player.speed_scale = PlayerStats.player_stats["Attack Speed"]
 	#GameManager.ammo_count -= 1
 	#SignalBus.update_ammo_count.emit()
 	gun_animation_player.play("SHOOT")
@@ -208,7 +208,7 @@ func play_shoot_animation() -> void:
 		#await get_tree().create_timer(0.15).timeout
 		#GameManager.can_shoot = true
 		
-	await get_tree().create_timer(0.583).timeout
+	await gun_animation_player.animation_finished
 	shooting = false
 	#GameManager.can_shoot = true
 

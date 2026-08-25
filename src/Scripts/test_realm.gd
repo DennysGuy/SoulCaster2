@@ -9,7 +9,7 @@ class_name TestRealm extends Node3D
 func _ready() -> void:
 	spawn_timer.start()
 	ore_spawn_timer.start()
-
+	GameManager.in_arena = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,7 +27,7 @@ func spawn_enemy() -> void:
 	
 	var chosen_spawn_point : EnemySpawnPoint = spawn_points.pick_random()
 	
-	var spawn_count : int = randi_range(1,3)
+	var spawn_count : int = randi_range(1,2)
 	
 	
 	for i in range(spawn_count):
@@ -41,7 +41,6 @@ func spawn_enemy() -> void:
 		enemy.rotation = chosen_spawn_point.rotation
 		add_child(enemy)
 	
-
 
 func _on_ore_spawn_timer_timeout() -> void:
 	spawn_ore()

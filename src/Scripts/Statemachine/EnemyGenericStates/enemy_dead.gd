@@ -11,7 +11,7 @@ func enter() -> void:
 	collision_shape_3d_body.disabled = true
 	parent_collider.disabled = true
 	#parent.animation_player.play(animation_name)
-	parent.animation_player.play("die")
+	parent.animation_player.play("kill")
 	
 	#if parent is WalkerEnemy and parent.is_greeter:
 		#AudioManager.play_sfx(AudioManager.CROWD_GASP)
