@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("start_round"):
-		start_round_timer -= 10*delta
+		start_round_timer -= 20*delta
 		print(start_round_timer)
 		if start_round_timer <= 0:
 			GameManager.in_arena = true
@@ -40,14 +40,17 @@ func _physics_process(delta: float) -> void:
 		
 		var result = space_state.intersect_ray(query)
 
-		#print(result)
+	
 		if result and result["collider"].get_parent() is MenuSelectable:
-			stored_selectable = result["collider"].get_parent()
+			if !stored_selectable:
+				print(result["collider"].get_parent())
+				stored_selectable = result["collider"].get_parent()
+		else:
+			if stored_selectable:
+				stored_selectable = null
 
 		#SignalBus.reset_combo_meter.emit()
 
-	
-	print(stored_selectable)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

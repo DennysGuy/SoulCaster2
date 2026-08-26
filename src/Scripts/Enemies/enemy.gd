@@ -9,6 +9,8 @@ var prev_state : State
 @export_group("Enemy Stats")
 @export var move_speed  : float = 40
 @export var health : int = 3
+@export var attack_damage : int = 0
+@export var xp : int = 0
 @export var base_score : int
 @export var grunt_death_pitch : float
 @export var consumable_spawn_point : Marker3D
@@ -62,14 +64,35 @@ func damage_enemy() -> void:
 	var chosen_state : State = hurt_states.pick_random()
 	state_machine.change_state(chosen_state)
 	var damage : int = randi_range(int(PlayerStats.player_stats["Attack Damage"]-2), int(PlayerStats.player_stats["Attack Damage"]+2))
-	spawn_damage_label(damage)
+	
+	var is_crit : bool = calculate_crit()
+	if is_crit:
+		damage *= PlayerStats.player_stats["Crit Damage"]
+	
+	spawn_damage_label(damage, is_crit)
 	health -= damage
 	if health <= 0:
 		kill_enemy()
 
 
-func spawn_damage_label(damage) -> void:
+func spawn_damage_label(damage : int, is_crit : bool) -> void:
 	var damage_label : DamageLabel = preload("uid://blcs0f2y7cia2").instantiate()
 	damage_label.label.text = str(damage)
 	damage_label.position = damage_label_position.position
+	if is_crit:
+		damage_label.set_bg_as_crit()
+	
 	add_child(damage_label)
+
+func calculate_crit() -> bool:
+	var rand_num : int = randi_range(0,100)
+	var crit_chance : int = int(PlayerStats.player_stats["Crit Chance"] * 100)
+	
+	if rand_num <= crit_chance:
+		return true
+	
+	
+	return false
+
+func attack_player() -> void:
+	SignalBus.player_hurt.emit(attack_damage)

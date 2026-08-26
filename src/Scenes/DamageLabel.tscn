@@ -122,9 +122,10 @@ _data = {
 &"RESET": SubResource("Animation_fwctq")
 }
 
-[node name="DamageLabel" type="Node3D" unique_id=1607967553 node_paths=PackedStringArray("label")]
+[node name="DamageLabel" type="Node3D" unique_id=1607967553 node_paths=PackedStringArray("label", "texture_rect")]
 script = ExtResource("1_ed8fy")
 label = NodePath("SubViewport/Label")
+texture_rect = NodePath("SubViewport/TextureRect")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064614463]
 transparent_bg = true

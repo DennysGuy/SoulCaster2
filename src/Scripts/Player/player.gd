@@ -15,7 +15,7 @@ var target_location : Marker3D
 @export var aim_box_size: Vector2 = Vector2(200, 200) # how far the reticle can drift from center
 @export var max_arm_offset: Vector2 = Vector2(600, 300) # how far the arm can move on screen
 
-var rotate_speed: float = 10.0  # higher = faster turn
+var rotate_speed: float = 5.0  # higher = faster turn
 var zoom_target: float = 60.0  # smaller FOV = zoom in
 var zoom_speed: float = 5.0    # how fast zoom eases
 
@@ -49,7 +49,7 @@ func _ready() -> void:
 	initial_player_rotation = rotation
 	initial_head_rotation = head.rotation
 	initial_fov = camera.fov
-	
+	rotate_speed = PlayerStats.player_stats["Movement Speed"]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
