@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdxtm3oao6svc" path="res://src/Scripts/Player/player.gd" id="1_6mi4a"]
 [ext_resource type="Script" uid="uid://37dd3k1rjoje" path="res://src/Scripts/Player/gun_arm.gd" id="2_4mdpm"]
+[ext_resource type="Script" uid="uid://cjqloe12rvu72" path="res://src/Scripts/camera.gd" id="2_8fvgu"]
 [ext_resource type="Texture2D" uid="uid://dksw1afr0d4f7" path="res://Assets/handgun/gun.png" id="3_4mdpm"]
 [ext_resource type="Texture2D" uid="uid://cv75wrw0gonpm" path="res://Assets/CrosshairTest.png" id="4_5dq0m"]
 [ext_resource type="Texture2D" uid="uid://c6dgqqc6lw060" path="res://Assets/Rifle/rifle.png" id="4_8fvgu"]
@@ -419,6 +420,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4291844, 0)
 [node name="Camera" type="Camera3D" parent="Head" unique_id=757378360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9865484)
 current = true
+script = ExtResource("2_8fvgu")
 
 [node name="Marker3D" type="Marker3D" parent="Head" unique_id=1365446704]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.1637569, -1.5, -0.9678489)

@@ -4,17 +4,24 @@ class_name TestRealm extends Node3D
 @onready var spawn_points: Node = $SpawnPoints
 @onready var ore_spawn_points: Node = $OreSpawnPoints
 @onready var ore_spawn_timer: Timer = $OreSpawnTimer
+@onready var round_timer: Timer = $RoundTimer
+@onready var timer_label: Label = $RoundTimerTitle/TimerLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawn_timer.start()
 	ore_spawn_timer.start()
 	GameManager.in_arena = true
-
+	round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
+	round_timer.start()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
+
+func _physics_process(delta: float) -> void:
+	timer_label.text = str(int(round_timer.time_left))
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
@@ -54,3 +61,7 @@ func spawn_ore() -> void:
 	
 	ore.global_position = spawn_point.global_position
 	add_child(ore)
+
+
+func _on_round_timer_timeout() -> void:
+	get_tree().change_scene_to_file("uid://jgsciuanachx")

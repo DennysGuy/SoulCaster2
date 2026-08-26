@@ -6,6 +6,7 @@ func enter() -> void:
 	var random_num : int = randi_range(0,100)
 	parent.animation_player.speed_scale = 1.0
 	parent.play_walk_animation("Run")
+	
 
 func exit() -> void:
 	pass

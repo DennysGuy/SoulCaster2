@@ -4,6 +4,7 @@ var player : Player
 var prev_state : State
 #var arena : Arena
 @export var animation_player : AnimationPlayer
+@export var damage_label_position : Marker3D
 
 @export_group("Enemy Stats")
 @export var move_speed  : float = 40
@@ -28,7 +29,7 @@ var prev_state : State
 @onready var hurt_states : Array[State] = [hurt_1_state, hurt_2_state]
 
 var alive : bool = true
-
+var can_hurt : bool = true
 func _ready() -> void:
 	pass
 
@@ -60,7 +61,15 @@ func damage_enemy() -> void:
 	
 	var chosen_state : State = hurt_states.pick_random()
 	state_machine.change_state(chosen_state)
-	
-	health -= 1
+	var damage : int = randi_range(int(PlayerStats.player_stats["Attack Damage"]-2), int(PlayerStats.player_stats["Attack Damage"]+2))
+	spawn_damage_label(damage)
+	health -= damage
 	if health <= 0:
 		kill_enemy()
+
+
+func spawn_damage_label(damage) -> void:
+	var damage_label : DamageLabel = preload("uid://blcs0f2y7cia2").instantiate()
+	damage_label.label.text = str(damage)
+	damage_label.position = damage_label_position.position
+	add_child(damage_label)

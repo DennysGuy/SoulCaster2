@@ -9,7 +9,7 @@ var player_stats : Dictionary = {
 	"Movement Speed": 1.0, #speed at which the camera shifts to a new side
 	"Crit Chance": 0.0,
 	"Crit Damage": 1.2,
-	"Starting Timer": 30,
+	"Starting Timer": 45,
 	"Defense": 0.0, #reduces the time taken off when taking damage
 	"Ore Spawn Time": 10,
 	"Reload Speed": 1.0, # influences the speed of reload animation

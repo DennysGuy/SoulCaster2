@@ -200,7 +200,7 @@ func play_shoot_animation() -> void:
 	gun_animation_player.play("SHOOT")
 	var body_part = shoot_ray()
 	shoot_enemy(body_part)
-	##SignalBus.shake_camera.emit(0.4)
+	SignalBus.shake_camera.emit(0.2)
 	#if GameManager.ammo_count <= 0 and GameManager.equipped_weapon == GameManager.WEAPONS.PISTOL:
 		#GameManager.can_shoot = false
 		##SignalBus.show_reload_notification.emit()
@@ -223,9 +223,9 @@ func shoot_enemy(enemy_body_part : Node3D):
 			#SignalBus.increment_hits_count.emit()
 		var seen_enemy = enemy_body_part.get_parent()
 
-		if enemy_body_part is EnemyBodyCollider:
+		if enemy_body_part is EnemyBodyCollider and seen_enemy.can_hurt:
 			seen_enemy.damage_enemy()
-		elif enemy_body_part is HeadCollider:
+		elif enemy_body_part is HeadCollider and seen_enemy.can_hurt:
 			seen_enemy.head_shot_kill()
 		elif enemy_body_part is OreCollider:
 			seen_enemy.damage_ore()

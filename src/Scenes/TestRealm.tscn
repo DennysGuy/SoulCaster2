@@ -34,6 +34,9 @@ albedo_color = Color(0.19518411, 0.6036107, 0.99999994, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss387"]
 albedo_color = Color(0.7061287, 0.55687857, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
+bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
+
 [node name="TestRealm" type="Node3D" unique_id=290320890 groups=["Arena"]]
 script = ExtResource("1_ca2mb")
 
@@ -173,5 +176,59 @@ process_callback = 0
 wait_time = 5.0
 one_shot = true
 
+[node name="RoundTimer" type="Timer" parent="." unique_id=1883125206]
+process_callback = 0
+wait_time = 30.0
+one_shot = true
+
+[node name="RoundTimerTitle" type="Control" parent="." unique_id=731567291]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TimerLabel" type="Label" parent="RoundTimerTitle" unique_id=450907481]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -89.0
+offset_right = 88.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 48
+text = "30"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1655924788]
+offset_left = 303.0
+offset_top = 685.0
+offset_right = 961.0
+offset_bottom = 712.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_rty5i")
+
+[node name="Level" type="Label" parent="ProgressBar" unique_id=1033264695]
+layout_mode = 0
+offset_top = -28.0
+offset_right = 123.0
+offset_bottom = -5.0
+text = "Level: 1"
+
+[node name="XP" type="Label" parent="ProgressBar" unique_id=1789367474]
+layout_mode = 0
+offset_left = 532.0
+offset_top = -28.0
+offset_right = 655.0
+offset_bottom = -5.0
+text = "[10/10]"
+horizontal_alignment = 2
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="OreSpawnTimer" to="." method="_on_ore_spawn_timer_timeout"]
+[connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

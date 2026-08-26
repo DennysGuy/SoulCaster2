@@ -226,3 +226,4 @@ text = "X"
 [connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/DefenseLevelUpgradeButton" to="." method="_on_defense_level_upgrade_button_button_up"]
 [connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/OreSpawnTimeUpgradeButton" to="." method="_on_ore_spawn_time_upgrade_button_button_up"]
 [connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/ReloadSpeedUpgradeButton" to="." method="_on_reload_speed_upgrade_button_button_up"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

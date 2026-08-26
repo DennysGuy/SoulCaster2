@@ -3,7 +3,7 @@ class_name EnemyAttack extends State
 
 func enter() -> void:
 	parent.animation_player.play("Atack")
-	pass
+	parent.can_hurt = false
 
 func exit() -> void:
 	pass

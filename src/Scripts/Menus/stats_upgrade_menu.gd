@@ -25,6 +25,7 @@ class_name StatsUpgradeMenu extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	init_upgrades()
 	update_stats_description()
 
@@ -32,41 +33,59 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_attack_damage_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
-
+	PlayerStats.player_stats["Attack Damage"] += PlayerStats.stat_levels["Attack Damage"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func _on_attack_speed_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
-
+	PlayerStats.player_stats["Attack Speed"] += PlayerStats.stat_levels["Attack Speed"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func _on_movement_speed_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
-
+	PlayerStats.player_stats["Movement Speed"] += PlayerStats.stat_levels["Movement Speed"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func _on_crit_chance_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
-
+	PlayerStats.player_stats["Crit Chance"] += PlayerStats.stat_levels["Crit Chance"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func _on_crit_damage_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
-
+	PlayerStats.player_stats["Crit Damage"] += PlayerStats.stat_levels["Crit Damage"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func _on_starting_timer_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
-
+	PlayerStats.player_stats["Starting Timer"] += PlayerStats.stat_levels["Starting Timer"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func _on_defense_level_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
-
+	PlayerStats.player_stats["Defense"] += PlayerStats.stat_levels["Defense"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func _on_ore_spawn_time_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
-
+	PlayerStats.player_stats["Ore Spawn Time"] += PlayerStats.stat_levels["Ore Spawn Time"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func _on_reload_speed_upgrade_button_button_up() -> void:
-	pass # Replace with function body.
+	PlayerStats.player_stats["Reload Speed"] += PlayerStats.stat_levels["Reload Speed"]["Interval"]
+	PlayerStats.player_stats["Ability Points"] -= 1
+	init_upgrades()
+	update_stats_description()
 
 func init_upgrades() -> void:
 	attack_damage_level.text = "Attack Damage Level: %s/%s" % [PlayerStats.stat_levels["Attack Damage"]["Level"], PlayerStats.stat_levels["Attack Damage"]["Max Level"]]
@@ -109,3 +128,9 @@ func update_stats_description() -> void:
 		PlayerStats.player_stats["Ore Spawn Time"],
 		int(PlayerStats.player_stats["Reload Speed"] * 100)
 	]
+
+
+func _on_button_button_up() -> void:
+	GameManager.in_menu = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	queue_free()
