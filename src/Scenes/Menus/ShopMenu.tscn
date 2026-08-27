@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://fm6y38l4gctm"]
 
 [ext_resource type="Script" uid="uid://cyfle3qq8i4ts" path="res://src/Scripts/Menus/shop_menu.gd" id="1_gllw4"]
+[ext_resource type="Texture2D" uid="uid://bcls56q7g0x0d" path="res://Assets/sider.png" id="2_p8ncc"]
+[ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_bt663"]
+[ext_resource type="Texture2D" uid="uid://cl1tt236f0oeq" path="res://Assets/Rifle/RifleImage.png" id="4_jdaip"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lek5s"]
 bg_color = Color(1.6364455e-06, 0.4858361, 0.668049, 1)
@@ -78,3 +81,127 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "Amulets"
 horizontal_alignment = 1
+
+[node name="AmuletTitle" type="Label" parent="Panel" unique_id=395112804]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 296.0
+offset_top = 165.0
+offset_right = 431.0
+offset_bottom = 199.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Radar"
+
+[node name="AmuletTitle2" type="Label" parent="Panel" unique_id=1768955398]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -536.0
+offset_top = 277.0
+offset_right = -463.0
+offset_bottom = 311.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "MR-16"
+
+[node name="Cost" type="Label" parent="Panel" unique_id=793261442]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 324.0
+offset_top = 194.0
+offset_right = 364.0
+offset_bottom = 222.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "x 30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost2" type="Label" parent="Panel" unique_id=1545838671]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -497.0
+offset_top = 323.0
+offset_right = -457.0
+offset_bottom = 351.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "x 50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RadarAmuletIcon" type="PanelContainer" parent="Panel" unique_id=338739865]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 203.0
+offset_top = -184.0
+offset_right = 288.0
+offset_bottom = -99.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Radar unveils an arrow indicator warning you when an Enemy has spawned in a particular direction."
+
+[node name="TextureRect" type="TextureRect" parent="Panel/RadarAmuletIcon" unique_id=429222152]
+layout_mode = 2
+texture = ExtResource("2_p8ncc")
+expand_mode = 1
+
+[node name="PurchaseRadarButton" type="Button" parent="Panel" unique_id=933534987]
+layout_mode = 0
+offset_left = 937.0
+offset_top = 230.0
+offset_right = 1017.0
+offset_bottom = 261.0
+text = "Purchase"
+
+[node name="PurchaseRifleButton" type="Button" parent="Panel" unique_id=1390619159]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 298.0
+offset_right = 292.0
+offset_bottom = 329.0
+text = "Purchase"
+
+[node name="OreIcon" type="TextureRect" parent="Panel" unique_id=1744008890]
+layout_mode = 0
+offset_left = 934.0
+offset_top = 198.0
+offset_right = 982.0
+offset_bottom = 246.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
+[node name="OreIcon2" type="TextureRect" parent="Panel" unique_id=808567126]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 327.0
+offset_right = 155.0
+offset_bottom = 375.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
+[node name="RifleImage" type="TextureRect" parent="Panel" unique_id=1702236874]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 109.00001
+offset_top = -192.0
+offset_right = 592.53687
+offset_bottom = -6.0884094
+grow_vertical = 2
+scale = Vector2(0.5325112, 0.5325112)
+texture = ExtResource("4_jdaip")
+expand_mode = 1
