@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btpxi4j4xjbqf"
-path.s3tc="res://.godot/imported/rat.png-72e4073f936b6b4616d210c2f33a0a04.s3tc.ctex"
+uid="uid://brc1sb572vnrb"
+path.s3tc="res://.godot/imported/rabied_rat.png-ee4cf419c505bfe9cf3905b4579ca1e4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/rat.png"
-dest_files=["res://.godot/imported/rat.png-72e4073f936b6b4616d210c2f33a0a04.s3tc.ctex"]
+source_file="res://Assets/RabiedRat/rabied_rat.png"
+dest_files=["res://.godot/imported/rabied_rat.png-ee4cf419c505bfe9cf3905b4579ca1e4.s3tc.ctex"]
 
 [params]
 

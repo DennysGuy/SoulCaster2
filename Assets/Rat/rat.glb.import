@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://8mdr0hl054nw"
-path="res://.godot/imported/rat.glb-d8123f30bc8f12268fef755e75a8c29d.scn"
+path="res://.godot/imported/rat.glb-8fe56f804f7a57cbfd0ac96ddfd693d4.scn"
 
 [deps]
 
-source_file="res://Assets/rat.glb"
-dest_files=["res://.godot/imported/rat.glb-d8123f30bc8f12268fef755e75a8c29d.scn"]
+source_file="res://Assets/Rat/rat.glb"
+dest_files=["res://.godot/imported/rat.glb-8fe56f804f7a57cbfd0ac96ddfd693d4.scn"]
 
 [params]
 
@@ -35,8 +35,8 @@ animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 materials/extract=0
-materials/extract_format=0
-materials/extract_path=""
+materials/extract_format=2
+materials/extract_path="res://Assets/Rat"
 _subresources={}
 gltf/naming_version=2
-gltf/embedded_image_handling=1
+gltf/embedded_image_handling=3

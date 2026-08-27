@@ -3,12 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dweoa2kadvcmv"
-valid=false
+uid="uid://cwcto5j5s6oct"
+path="res://.godot/imported/Scene Cart.glb-62192be39deb81a76f4129bcb6327374.scn"
 
 [deps]
 
-source_file="res://Assets/CharacterHub/Armory.gltf"
+source_file="res://Assets/ShopGuy/Scene Cart.glb"
+dest_files=["res://.godot/imported/Scene Cart.glb-62192be39deb81a76f4129bcb6327374.scn"]
 
 [params]
 
