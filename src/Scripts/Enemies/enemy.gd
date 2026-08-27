@@ -56,7 +56,6 @@ func head_shot_kill() -> void:
 	
 	state_machine.change_state(head_shot_dead)
 
-
 func damage_enemy() -> void:
 	if not alive:	
 		return
@@ -74,7 +73,6 @@ func damage_enemy() -> void:
 	if health <= 0:
 		kill_enemy()
 
-
 func spawn_damage_label(damage : int, is_crit : bool) -> void:
 	var damage_label : DamageLabel = preload("uid://blcs0f2y7cia2").instantiate()
 	damage_label.label.text = str(damage)
@@ -91,8 +89,9 @@ func calculate_crit() -> bool:
 	if rand_num <= crit_chance:
 		return true
 	
-	
 	return false
 
 func attack_player() -> void:
 	SignalBus.player_hurt.emit(attack_damage)
+	SignalBus.shake_camera.emit(1.0)
+	SignalBus.player_damaged.emit()

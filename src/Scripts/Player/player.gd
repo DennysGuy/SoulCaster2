@@ -31,6 +31,15 @@ var initial_fov: float
 
 var shooting : bool = false
 
+@export var alert_arrow: AlertArrow
+@export var alert_arrow_2: AlertArrow
+@export var alert_arrow_3: AlertArrow
+@export var alert_arrow_4: AlertArrow
+
+
+var enemy_alerts: Array = [] 
+var enemy_list : Array[Enemy] = []
+
 @onready var look_at_points : Dictionary[String,Marker3D] = {
 	"point 1" : look_at_point_1,
 	"point 2" : look_at_point_2,
@@ -43,6 +52,8 @@ const SENSITIVITY := 0.6
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalBus.enemy_spawned.connect(notify_enemy)
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	camera.make_current()
 	target_location = look_at_positions[target_index]
@@ -54,7 +65,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
+	_update_arrows()
 	if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
 		shooting = true
 		play_shoot_animation()
@@ -265,3 +276,100 @@ func shoot_ray() -> Node3D:
 func look_at_target(target : Marker3D, zoom : float) -> void:
 	zoom_target = zoom
 	target_location = target
+
+
+func _update_arrows() -> void:
+	# Hide all arrows at start
+	alert_arrow_4.visible = false
+	alert_arrow_3.visible = false
+	alert_arrow.visible = false
+	alert_arrow_2.visible = false
+
+	var dir_shown = {"front": false, "back": false, "left": false, "right": false}
+	var quadrant_counts = {"front": 0, "back": 0, "left": 0, "right": 0}
+	
+	#var facing = _get_facing_quadrant()
+	
+	# Count enemies per quadrant
+	for enemy in enemy_list:
+		if not is_instance_valid(enemy) or not enemy.alive:
+			enemy_alerts.erase(enemy)
+			continue
+
+		var q = _get_enemy_quadrant(enemy)
+		#print("Im facing here: " + facing + " Enemy is located here: " + q)
+		
+		# Remove enemies if player is facing that quadrant
+		if _is_facing_quadrant(q):
+			#print("but I dropped in here...")
+			enemy_alerts.erase(enemy)
+			#direction_teller.hide()
+			continue
+
+		quadrant_counts[q] += 1
+
+		# Show arrow once per quadrant
+		#print(q)
+		match q:
+			"front": 
+				alert_arrow_4.visible = true
+			"back": 
+				alert_arrow_3.visible = true
+			"left": 
+				alert_arrow.visible = true
+			"right": 
+				alert_arrow_2.visible = true
+	
+		dir_shown[q] = true
+
+
+func notify_enemy(enemy: Node3D) -> void:
+	#print("Enemy spawned in quadrant: ", _get_enemy_quadrant(enemy))
+	#if enemy not in enemy_alerts:
+	enemy_alerts.append(enemy)
+	enemy_list.append(enemy)
+
+
+func _get_enemy_quadrant(enemy: Node3D) -> String:
+	var to_enemy = (enemy.global_transform.origin - global_transform.origin).normalized()
+
+	# Transform into player's local space
+	var local_dir = global_transform.basis.inverse() * to_enemy
+
+	# Get angle of enemy in local XZ plane
+	var angle = atan2(local_dir.x, -local_dir.z) # radians, relative to forward (-Z)
+
+	# Snap to quadrant
+	if abs(angle) <= PI / 4:
+		return "front"
+	elif angle > PI / 4 and angle < 3 * PI / 4:
+		return "right"
+	elif angle < -PI / 4 and angle > -3 * PI / 4:
+		return "left"
+	else:
+		return "back"
+
+func _get_facing_quadrant() -> String:
+	var forward = -camera.global_transform.basis.z
+	if abs(forward.x) > abs(forward.z):
+		return "right" if forward.x > 0 else "left"
+	else:
+		return "front" if forward.z < 0 else "back"
+
+func _is_facing_quadrant(enemy_quadrant: String) -> bool:
+	var forward = -camera.global_transform.basis.z.normalized()
+
+	var local_dir := Vector3.ZERO
+	match enemy_quadrant:
+		"front": local_dir = Vector3.FORWARD
+		"right": local_dir = Vector3.RIGHT
+		"back": local_dir = Vector3.BACK
+		"left": local_dir = Vector3.LEFT
+
+	# convert local quadrant dir to world space
+	var world_dir = global_transform.basis * local_dir
+	world_dir = world_dir.normalized()
+
+	# dot product now makes sense: forward (world) vs quadrant (world)
+	var dot = forward.dot(world_dir)
+	return dot > cos(deg_to_rad(20))  # ~0.94

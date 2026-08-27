@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cv75wrw0gonpm" path="res://Assets/CrosshairTest.png" id="4_5dq0m"]
 [ext_resource type="Texture2D" uid="uid://c6dgqqc6lw060" path="res://Assets/Rifle/rifle.png" id="4_8fvgu"]
 [ext_resource type="Script" uid="uid://vg8ube71bjtu" path="res://src/Scripts/Player/cross_hair.gd" id="5_ma0cp"]
+[ext_resource type="PackedScene" uid="uid://b1mewat65poqd" path="res://src/Scenes/AlertArrow.tscn" id="8_0umxx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6mi4a"]
 
@@ -407,8 +408,12 @@ _data = {
 radius = 0.81640625
 height = 4.309082
 
-[node name="Player" type="CharacterBody3D" unique_id=1844450298 groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1844450298 node_paths=PackedStringArray("alert_arrow", "alert_arrow_2", "alert_arrow_3", "alert_arrow_4") groups=["Player"]]
 script = ExtResource("1_6mi4a")
+alert_arrow = NodePath("CanvasLayer/AlertArrow")
+alert_arrow_2 = NodePath("CanvasLayer/AlertArrow2")
+alert_arrow_3 = NodePath("CanvasLayer/AlertArrow3")
+alert_arrow_4 = NodePath("CanvasLayer/AlertArrow4")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1769006235]
 transform = Transform3D(1.6262206, 0, 0, 0, 2.2008412, 0, 0, 0, 1.337285, 0, 1.545491, 0)
@@ -551,6 +556,49 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_5dq0m")
 script = ExtResource("5_ma0cp")
+
+[node name="AlertArrow" parent="CanvasLayer" unique_id=755750845 instance=ExtResource("8_0umxx")]
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 17.0
+offset_right = 52.0
+grow_horizontal = 1
+
+[node name="AlertArrow2" parent="CanvasLayer" unique_id=1605928467 instance=ExtResource("8_0umxx")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_right = -17.0
+grow_horizontal = 0
+flip_h = true
+
+[node name="AlertArrow3" parent="CanvasLayer" unique_id=127481464 instance=ExtResource("8_0umxx")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -117.0
+offset_right = 36.0
+offset_bottom = 19.549316
+grow_vertical = 0
+rotation = 1.5707964
+pivot_offset = Vector2(-0.6376953, 67.221985)
+flip_h = true
+
+[node name="AlertArrow4" parent="CanvasLayer" unique_id=1550968864 instance=ExtResource("8_0umxx")]
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = -16.0
+offset_right = 35.0
+offset_bottom = 120.54932
+grow_vertical = 1
+rotation = -1.5707964
+pivot_offset = Vector2(-0.6376953, 67.221985)
+flip_h = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1951491715]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7551332, 0)

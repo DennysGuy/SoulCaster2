@@ -23,6 +23,8 @@ class_name StatsUpgradeMenu extends Control
 @onready var upgrade_buttons : Array[Button] = [attack_damage_upgrade_button, attack_speed_upgrade_button, movement_speed_upgrade_button, crit_chance_upgrade_button, crit_damage_upgrade_button, starting_timer_upgrade_button, defense_level_upgrade_button, ore_spawn_time_upgrade_button, reload_speed_upgrade_button]
 @onready var stats: Label = $StatsPanel/Stats
 
+@onready var ap_label: Label = $APLabel
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -97,6 +99,8 @@ func _on_reload_speed_upgrade_button_button_up() -> void:
 	update_stats_description()
 
 func init_upgrades() -> void:
+	
+	ap_label.text = "AP: %s" % int(PlayerStats.player_stats["Ability Points"])
 	attack_damage_level.text = "Attack Damage Level: %s/%s" % [PlayerStats.stat_levels["Attack Damage"]["Level"], PlayerStats.stat_levels["Attack Damage"]["Max Level"]]
 	attack_speed_level.text = "Attack Speed Level: %s/%s" % [PlayerStats.stat_levels["Attack Speed"]["Level"], PlayerStats.stat_levels["Attack Speed"]["Max Level"]]
 	movement_speed_level.text = "Movement Speed Level: %s/%s" % [PlayerStats.stat_levels["Movement Speed"]["Level"], PlayerStats.stat_levels["Movement Speed"]["Max Level"]]

@@ -8,7 +8,7 @@ var player_stats : Dictionary = {
 	"Attack Damage": 5.0,
 	"Movement Speed": 5.0, #speed at which the camera shifts to a new side
 	"Crit Chance": 0.0,
-	"Crit Damage": 1.2,
+	"Crit Damage": 1.5,
 	"Starting Timer": 45,
 	"Defense": 0.0, #reduces the time taken off when taking damage
 	"Ore Spawn Time": 10,
@@ -23,7 +23,7 @@ var stat_levels : Dictionary = {
 	"Attack Speed": {"Level": 0, "Max Level": 10, "Interval": 0.1},
 	"Movement Speed": {"Level": 0, "Max Level": 5, "Interval": 1.0},
 	"Crit Chance": {"Level": 0, "Max Level": 15, "Interval": 0.12},
-	"Crit Damage": {"Level": 0, "Max Level": 15, "Interval": 0.1},
+	"Crit Damage": {"Level": 0, "Max Level": 15, "Interval": 0.5},
 	"Starting Timer": {"Level": 0, "Max Level": 5, "Interval": 10},
 	"Defense": {"Level": 0, "Max Level": 5, "Interval": 0.1},
 	"Ore Spawn Time": {"Level": 0, "Max Level": 5, "Interval": 0.1},

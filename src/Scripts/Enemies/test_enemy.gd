@@ -7,7 +7,7 @@ var player_in_range : bool = false
 
 func _ready() -> void:
 	super()
-	
+	SignalBus.enemy_spawned.emit(self)
 	state_machine.init(self)
 
 func _process(delta: float) -> void:

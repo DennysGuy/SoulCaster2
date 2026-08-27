@@ -6,7 +6,7 @@ class_name Dead extends State
 
 
 func enter() -> void:
-	
+	parent.alive = false
 	collision_shape_3d.disabled = true
 	collision_shape_3d_body.disabled = true
 	parent_collider.disabled = true

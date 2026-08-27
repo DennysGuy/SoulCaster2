@@ -39,6 +39,13 @@ albedo_color = Color(0.7061287, 0.55687857, 0, 1)
 [node name="TestRealm" type="Node3D" unique_id=290320890 groups=["Arena"]]
 script = ExtResource("1_ca2mb")
 
+[node name="Player" parent="." unique_id=1844450298 node_paths=PackedStringArray("look_at_point_1", "look_at_point_2", "look_at_point_3", "look_at_point_4") instance=ExtResource("2_h01ol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22867131, 0)
+look_at_point_1 = NodePath("../CameraPoint1")
+look_at_point_2 = NodePath("../CameraPoint2")
+look_at_point_3 = NodePath("../CameraPoint4")
+look_at_point_4 = NodePath("../CameraPoint3")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=851416319]
 environment = SubResource("Environment_sfhgb")
 
@@ -46,12 +53,6 @@ environment = SubResource("Environment_sfhgb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.647583)
 material_override = SubResource("StandardMaterial3D_rty5i")
 size = Vector3(50, 0.05, 50)
-
-[node name="Player" parent="." unique_id=870613777 node_paths=PackedStringArray("look_at_point_1", "look_at_point_2", "look_at_point_3", "look_at_point_4") instance=ExtResource("2_h01ol")]
-look_at_point_1 = NodePath("../CameraPoint1")
-look_at_point_2 = NodePath("../CameraPoint2")
-look_at_point_3 = NodePath("../CameraPoint4")
-look_at_point_4 = NodePath("../CameraPoint3")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=712394984]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0255208, 1.119627, -24.03447)

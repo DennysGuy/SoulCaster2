@@ -9,6 +9,8 @@ func enter() -> void:
 
 func exit() -> void:
 	if parent.health <= 0:
+		PlayerStats.player_stats["Ore"] += 1
+		SignalBus.ore_gathered.emit()
 		parent.queue_free()
 
 func process_input(_event: InputEvent) -> State:

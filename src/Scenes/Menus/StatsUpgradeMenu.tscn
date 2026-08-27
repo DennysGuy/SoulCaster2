@@ -33,12 +33,39 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -157.0
-offset_top = 21.0
+offset_top = 5.0
 offset_right = 157.0
-offset_bottom = 66.0
+offset_bottom = 50.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "Stats Upgrade Menu"
+
+[node name="Label2" type="Label" parent="." unique_id=60897687]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -585.5
+offset_top = 58.0
+offset_right = -216.5
+offset_bottom = 89.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 22
+text = "*Hover over stat to learn about them"
+
+[node name="APLabel" type="Label" parent="." unique_id=651022476]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 506.0
+offset_top = 50.0
+offset_right = 604.0
+offset_bottom = 86.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 26
+text = "AP: 0"
+horizontal_alignment = 2
 
 [node name="StatsUpgradePanel" type="Panel" parent="." unique_id=1158240410]
 layout_mode = 1
@@ -68,46 +95,64 @@ theme_override_constants/v_separation = 10
 
 [node name="AttackDamageLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=2055826723]
 layout_mode = 2
+tooltip_text = "Upgrades Base Weapon Attack by +2 for each level."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Attack Damage: 0"
 
 [node name="AttackSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=360790909]
 layout_mode = 2
+tooltip_text = "Upgrades Base Weapon Attack Speed by 10% per level."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Attack Speed: 0"
 
 [node name="MovementSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1708522686]
 layout_mode = 2
+tooltip_text = "Increases camera shift speed."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Movement Speed: 0"
 
 [node name="CritChanceLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=465853052]
 layout_mode = 2
+tooltip_text = "Increases chance to deal critical damage to an enemy by 12% for each level."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Crit Chance Level: 0"
 
 [node name="CritDamageLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=527562675]
 layout_mode = 2
+tooltip_text = "Increases Critical damage by 50% per level."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Crit Damage Level: 0"
 
 [node name="StartingTimerLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1961650741]
 layout_mode = 2
+tooltip_text = "Increases Starting Timer by 10 for each level."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Starting Timer Level: 0"
 
 [node name="DefenseLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1580785110]
 layout_mode = 2
+tooltip_text = "Decrease the amount of time taken off when damaged by enemy."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Defense Level: 0"
 
 [node name="OreSpawnTimeLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=471269379]
 layout_mode = 2
+tooltip_text = "Decreases the wait time between ore spawning on field."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Ore Spawn  Time Level: 0"
 
 [node name="ReloadSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1345498173]
 layout_mode = 2
+tooltip_text = "Increases reload speed."
+mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Reload Speed Level: 0"
 

@@ -6,16 +6,20 @@ class_name HUD extends CanvasLayer
 @onready var level: Label = $ProgressBar/Level
 @onready var xp: Label = $ProgressBar/XP
 
+@onready var ore_count_label: Label = $OreCountLabel
+
 const XP_MULTIPLIER_FACTOR : float = 1.2
 const BASE_XP_AMOUNT : int = 50
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.xp_was_gained.connect(add_xp)
-	SignalBus.time_added.connect(add_time)
-	SignalBus.player_hurt.connect(reduce_time)
-	round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
-	round_timer.start()
+	SignalBus.player_damaged.connect(flash_screen_red)
+	SignalBus.ore_gathered.connect(update_ore_count_label)
+	update_ore_count_label()
+	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
+	#round_timer.start()
 	update_level()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,10 +27,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	timer_label.text = str(int(round_timer.time_left))
+	pass
 
-func _on_round_timer_timeout() -> void:
-	get_tree().change_scene_to_file("uid://jgsciuanachx")
 
 func update_level() -> void:
 	level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
@@ -50,11 +52,8 @@ func add_xp(amount : int) -> void:
 	if PlayerStats.player_stats["Current XP"] >= PlayerStats.player_stats["Needed XP"]:
 		level_up()
 	
-	
-func add_time(amount : int) -> void:
-	round_timer.wait_time += amount
-	round_timer.start()
+func flash_screen_red() -> void:
+	animation_player.play("HurtFlash")
 
-func reduce_time(amount) -> void:
-	round_timer.wait_time -= amount
-	round_timer.start()
+func update_ore_count_label() -> void:
+	ore_count_label.text = str(int(PlayerStats.player_stats["Ore"]))

@@ -58,5 +58,3 @@ func spawn_ore() -> void:
 	
 	ore.global_position = spawn_point.global_position
 	add_child(ore)
-
-	
