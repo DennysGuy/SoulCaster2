@@ -15,6 +15,9 @@ var target_location : Marker3D
 @export var aim_box_size: Vector2 = Vector2(200, 200) # how far the reticle can drift from center
 @export var max_arm_offset: Vector2 = Vector2(600, 300) # how far the arm can move on screen
 
+@onready var rifle: Node3D = $Head/Marker3D/GunArm/Rifle
+@onready var pistol: Node3D = $Head/Marker3D/GunArm/Pistol
+
 var rotate_speed: float = 5.0  # higher = faster turn
 var zoom_target: float = 60.0  # smaller FOV = zoom in
 var zoom_speed: float = 5.0    # how fast zoom eases
@@ -24,18 +27,21 @@ var zoom_speed: float = 5.0    # how fast zoom eases
 @onready var cross_hair: CrossHair = $CanvasLayer/CrossHair
 
 @onready var gun_animation_player: AnimationPlayer = $Head/Marker3D/GunArm/Pistol/AnimationPlayer
+@onready var rifle_animation_player: AnimationPlayer = $Head/Marker3D/GunArm/Rifle/AnimationPlayer
 
 var initial_player_rotation = Vector3.ZERO
 var initial_head_rotation = Vector3.ZERO
 var initial_fov: float
 
 var shooting : bool = false
+var can_shoot : bool = true
 
 @export var alert_arrow: AlertArrow
 @export var alert_arrow_2: AlertArrow
 @export var alert_arrow_3: AlertArrow
 @export var alert_arrow_4: AlertArrow
 
+var chosen_gun_animation_player : AnimationPlayer
 
 var enemy_alerts: Array = [] 
 var enemy_list : Array[Enemy] = []
@@ -61,14 +67,37 @@ func _ready() -> void:
 	initial_head_rotation = head.rotation
 	initial_fov = camera.fov
 	rotate_speed = PlayerStats.player_stats["Movement Speed"]
+	
+	if GameManager.rifle_owned:
+		rifle.show()
+		pistol.hide()
+		chosen_gun_animation_player = gun_animation_player
+	else:
+		pistol.show()
+		rifle.hide()
+		chosen_gun_animation_player = rifle_animation_player
+	
+	alert_arrow_4.visible = false
+	alert_arrow_3.visible = false
+	alert_arrow.visible = false
+	alert_arrow_2.visible = false
 
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	_update_arrows()
+	
+	if GameManager.amulet_owned:
+		_update_arrows()
+		
 	if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
-		shooting = true
-		play_shoot_animation()
+		if GameManager.bullets_in_clip <= 0:
+			play_reload_animation()
+		else:
+			shooting = true
+			GameManager.bullets_in_clip -= 1
+			SignalBus.bullet_fired.emit()
+			play_shoot_animation()
 	
 	move_arm()
 	move_player()
@@ -205,7 +234,11 @@ func hide_reticle() -> void:
 	cross_hair.hide()
 
 func play_shoot_animation() -> void:
-	gun_animation_player.speed_scale = PlayerStats.player_stats["Attack Speed"]
+	var attack_speed : float = PlayerStats.player_stats["Attack Speed"]
+	if GameManager.rifle_owned:
+		chosen_gun_animation_player.speed_scale = attack_speed+0.3
+	else:
+		chosen_gun_animation_player.speed_scale = attack_speed
 	#GameManager.ammo_count -= 1
 	#SignalBus.update_ammo_count.emit()
 	gun_animation_player.play("SHOOT")
@@ -373,3 +406,9 @@ func _is_facing_quadrant(enemy_quadrant: String) -> bool:
 	# dot product now makes sense: forward (world) vs quadrant (world)
 	var dot = forward.dot(world_dir)
 	return dot > cos(deg_to_rad(20))  # ~0.94
+
+func play_reload_animation() -> void:
+	chosen_gun_animation_player.play("RELOAD")
+	#await chosen_gun_animation_player.animation_finished
+	GameManager.bullets_in_clip = GameManager.magazine_size
+	SignalBus.bullet_fired.emit()

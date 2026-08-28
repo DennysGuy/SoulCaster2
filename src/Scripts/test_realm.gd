@@ -48,7 +48,7 @@ func spawn_enemy() -> void:
 
 func _on_ore_spawn_timer_timeout() -> void:
 	spawn_ore()
-	ore_spawn_timer.wait_time = randi_range(4,8)
+	ore_spawn_timer.wait_time = randi_range(PlayerStats.player_stats["Ore Spawn Time"]-2,PlayerStats.player_stats["Ore Spawn Time"]+2)
 	ore_spawn_timer.start()
 
 

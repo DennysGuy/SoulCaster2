@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cu1itwp0k17e1" path="res://src/Scripts/hub.gd" id="1_qnekn"]
 [ext_resource type="PackedScene" uid="uid://bb0fr4f76l8jb" path="res://Assets/ShopGuy/Cart.glb" id="3_5tnby"]
+[ext_resource type="Script" uid="uid://dy84mhivqky8c" path="res://src/Scripts/cart.gd" id="3_s5psd"]
 [ext_resource type="PackedScene" uid="uid://bdsl5acdaedkf" path="res://Assets/ShopGuy/merchant.glb" id="4_5tnby"]
+[ext_resource type="PackedScene" uid="uid://fm6y38l4gctm" path="res://src/Scenes/Menus/ShopMenu.tscn" id="4_jjwho"]
 [ext_resource type="PackedScene" uid="uid://q4afxy36pwwo" path="res://Assets/CharacterHub/Armory.glb" id="5_bjfpp"]
 [ext_resource type="PackedScene" uid="uid://jri2wscsvt6x" path="res://Assets/CharacterHub/chest.gltf" id="6_gpfey"]
 [ext_resource type="PackedScene" uid="uid://dj6aposwf3hl3" path="res://Assets/fireplace.gltf" id="7_gdcv1"]
@@ -26,6 +28,9 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bjfpp"]
 albedo_color = Color(1.6845763e-06, 0.6023572, 0.424801, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s5psd"]
+size = Vector3(8.868225, 8.021973, 5.447754)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tnby"]
 albedo_color = Color(0.60784316, 0, 0.60784316, 1)
@@ -54,74 +59,88 @@ look_at_point_2 = NodePath("../LookAtPoint2")
 look_at_point_3 = NodePath("../LookAtPoint4")
 look_at_point_4 = NodePath("../LookAtPoint3")
 
-[node name="Cart" parent="." unique_id=53609992 instance=ExtResource("3_5tnby")]
+[node name="Cart" type="Node3D" parent="." unique_id=1701203635 node_paths=PackedStringArray("canvas_layer")]
+script = ExtResource("3_s5psd")
+menu = ExtResource("4_jjwho")
+canvas_layer = NodePath("../CanvasLayer")
+
+[node name="Cart" parent="Cart" unique_id=53609992 instance=ExtResource("3_5tnby")]
 transform = Transform3D(-1.0927847e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.0927847e-08, 0, 0.8519902, -12.229239)
 
-[node name="Cube" parent="Cart" index="0" unique_id=1251137206]
+[node name="Cube" parent="Cart/Cart" index="0" unique_id=1251137206]
 transform = Transform3D(7.5482473, 0, 0, 0, 9.378312, 0, 0, 0, 13.05332, 0.6597579, 10.804229, -0.640501)
 
-[node name="Cube_001" parent="Cart" index="1" unique_id=521926750]
+[node name="Cube_001" parent="Cart/Cart" index="1" unique_id=521926750]
 transform = Transform3D(9.157507, 0, 0, 0, 0.8080676, 0, 0, 0, 1.0408361, 0.6523455, 19.725266, 12.03656)
 
-[node name="Cube_002" parent="Cart" index="2" unique_id=943245405]
+[node name="Cube_002" parent="Cart/Cart" index="2" unique_id=943245405]
 transform = Transform3D(9.157507, 0, 0, 0, 0.8080676, 0, 0, 0, 1.0408361, 0.6523455, 19.725266, 3.7698326)
 
-[node name="Cube_003" parent="Cart" index="3" unique_id=426829699]
+[node name="Cube_003" parent="Cart/Cart" index="3" unique_id=426829699]
 transform = Transform3D(9.157507, 0, 0, 0, 0.8080676, 0, 0, 0, 1.0408361, 0.6523455, 19.725266, -4.630516)
 
-[node name="Cube_004" parent="Cart" index="4" unique_id=148218841]
+[node name="Cube_004" parent="Cart/Cart" index="4" unique_id=148218841]
 transform = Transform3D(9.157507, 0, 0, 0, 0.8080676, 0, 0, 0, 1.0408361, 0.6523455, 19.725266, -13.473881)
 
-[node name="Cube_005" parent="Cart" index="5" unique_id=1679638868]
+[node name="Cube_005" parent="Cart/Cart" index="5" unique_id=1679638868]
 transform = Transform3D(6.0967755, -0.0046575414, -0.00026590476, 0.056613326, 0.4996546, -0.23614173, 0.003719186, 0.029274285, 4.030433, 0.6597579, 6.4764156, 15.58487)
 
-[node name="Cylinder_001" parent="Cart" index="6" unique_id=352051443]
+[node name="Cylinder_001" parent="Cart/Cart" index="6" unique_id=352051443]
 transform = Transform3D(4.095511e-08, 0.68711275, 0, -0.68711275, 4.095511e-08, 0, 0, 0, 0.68711275, 9.30194, 0.16771984, 11.262741)
 
-[node name="Plane_002" parent="Cart" index="7" unique_id=1891858958]
+[node name="Plane_002" parent="Cart/Cart" index="7" unique_id=1891858958]
 transform = Transform3D(0, 4.0373454, 0, 0, 0, -0.22022101, -2.1841764, 0, 0, 9.52952, 0.13127327, 13.266297)
 
-[node name="Plane_001" parent="Cart" index="8" unique_id=778814630]
+[node name="Plane_001" parent="Cart/Cart" index="8" unique_id=778814630]
 transform = Transform3D(0, 4.0373454, 0, 0, 0, -0.22022101, -2.1841764, 0, 0, -7.4534264, 0.13127327, 13.266297)
 
-[node name="Cylinder" parent="Cart" index="9" unique_id=991391951]
+[node name="Cylinder" parent="Cart/Cart" index="9" unique_id=991391951]
 transform = Transform3D(0, 0.6521206, 0, -5.856473, 0, 0, 0, 0, 5.856473, 9.709115, 1.6893272, -10.292599)
 
-[node name="Cube_006" parent="Cart" index="10" unique_id=1310782857]
+[node name="Cube_006" parent="Cart/Cart" index="10" unique_id=1310782857]
 transform = Transform3D(2.1816876, 0, 0, 0, 3.045843, 0, 0, 0, 5.615294, 10.560362, 10.804469, -8.791962)
 
-[node name="Cylinder_002" parent="Cart" index="11" unique_id=1567368783]
+[node name="Cylinder_002" parent="Cart/Cart" index="11" unique_id=1567368783]
 transform = Transform3D(0, 0.9143549, 0, -0.9143549, 0, 0, 0, 0, 0.9143549, 9.803827, 17.265854, -10.002632)
 
-[node name="Cylinder_003" parent="Cart" index="12" unique_id=1991337846]
+[node name="Cylinder_003" parent="Cart/Cart" index="12" unique_id=1991337846]
 transform = Transform3D(0, 0.6521206, 0, -5.856473, 0, 0, 0, 0, 5.856473, -8.147123, 1.6893272, -10.292599)
 
-[node name="Plane_003" parent="Cart" index="13" unique_id=1955168397]
+[node name="Plane_003" parent="Cart/Cart" index="13" unique_id=1955168397]
 transform = Transform3D(0, 3.100286, 0, -2.352341, 0, 0, 0, 0, 0.27253598, 8.79604, 6.1564403, 9.379438)
 
-[node name="Plane_004" parent="Cart" index="14" unique_id=89312846]
+[node name="Plane_004" parent="Cart/Cart" index="14" unique_id=89312846]
 transform = Transform3D(0, 3.100286, 0, -2.352341, 0, 0, 0, 0, 0.27253598, 8.79604, 6.1564403, -0.83055496)
 
-[node name="Cube_007" parent="Cart" index="15" unique_id=1729383614]
+[node name="Cube_007" parent="Cart/Cart" index="15" unique_id=1729383614]
 transform = Transform3D(1.1835879, 0, 0, 0, 1.1835879, 0, 0, 0, 0.23165803, 5.0013394, 2.9931612, 12.547003)
 
-[node name="Cube_008" parent="Cart" index="16" unique_id=1370386831]
+[node name="Cube_008" parent="Cart/Cart" index="16" unique_id=1370386831]
 transform = Transform3D(-1.1835879, 0, 0, 0, 1.1835879, 0, 0, 0, 0.23165803, -3.002529, 2.9931612, 12.547003)
 
-[node name="Cube_009" parent="Cart" index="17" unique_id=613101896]
+[node name="Cube_009" parent="Cart/Cart" index="17" unique_id=613101896]
 transform = Transform3D(-0.27707088, -0.36958525, 0, -0.08027707, 1.2755986, 0, 0, 0, 2.423558, 9.4370365, 24.124517, -1.0356464)
 
-[node name="Cube_010" parent="Cart" index="18" unique_id=1757414302]
+[node name="Cube_010" parent="Cart/Cart" index="18" unique_id=1757414302]
 transform = Transform3D(0.29256222, -0.008209305, 0.010475628, 0.0034560629, 0.7920228, -0.15263715, -0.0026528076, 0.12648803, 0.95643926, 13.150097, 10.395101, -8.786442)
 
-[node name="Cylinder_004" parent="Cart" index="19" unique_id=638879893]
+[node name="Cylinder_004" parent="Cart/Cart" index="19" unique_id=638879893]
 transform = Transform3D(0.38385642, 0, 0, 0, 0.38385642, 0, 0, 0, 0.38385642, 13.0306015, 12.098076, -8.478443)
 
-[node name="Cube_011" parent="Cart" index="20" unique_id=1363033054]
+[node name="Cube_011" parent="Cart/Cart" index="20" unique_id=1363033054]
 transform = Transform3D(-0.4657969, 0, -7.548377e-08, 0, 1.1835879, 0, 1.517759e-07, 0, -0.23165803, 5.0013394, 14.623031, -14.404137)
 
-[node name="Cylinder_005" parent="Cart" index="21" unique_id=653754429]
+[node name="Cylinder_005" parent="Cart/Cart" index="21" unique_id=653754429]
 transform = Transform3D(0.96390414, 0, 0, 0, 1.4458015, 0, 0, 0, 0.96390414, 6.243137, 15.78322, -18.296165)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cart" unique_id=546191940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.70586)
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cart/StaticBody3D" unique_id=2006223147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52090454, 3.5109863, 2.223877)
+shape = SubResource("BoxShape3D_s5psd")
 
 [node name="merchant" parent="." unique_id=30515948 instance=ExtResource("4_5tnby")]
 transform = Transform3D(0.17986579, 0, 0.08745455, 0, 0.2, 0, -0.08745455, 0, 0.17986579, -2.7824457, 4.042576, -8.020174)
@@ -185,4 +204,4 @@ text = "Hold 'R' to Start Battle"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=719552097]
 
-[editable path="Cart"]
+[editable path="Cart/Cart"]

@@ -85,7 +85,7 @@ func _on_defense_level_upgrade_button_button_up() -> void:
 	update_stats_description()
 
 func _on_ore_spawn_time_upgrade_button_button_up() -> void:
-	PlayerStats.player_stats["Ore Spawn Time"] += PlayerStats.stat_levels["Ore Spawn Time"]["Interval"]
+	PlayerStats.player_stats["Ore Spawn Time"] -= int(PlayerStats.player_stats["Ore Spawn Time"] * PlayerStats.stat_levels["Ore Spawn Time"]["Interval"])
 	PlayerStats.player_stats["Ability Points"] -= 1
 	PlayerStats.stat_levels["Ore Spawn Time"]["Level"] += 1
 	init_upgrades()

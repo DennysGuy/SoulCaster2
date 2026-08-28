@@ -15,7 +15,7 @@ var player_stats : Dictionary = {
 	"Reload Speed": 1.0, # influences the speed of reload animation
 	"Ability Points": 0.0,
 	"Currency": 0.0,
-	"Ore": 0.0
+	"Ore": 0.0,
 }
 
 var stat_levels : Dictionary = {

@@ -7,8 +7,10 @@ var prev_state : State
 @export var damage_label_position : Marker3D
 
 @export_group("Enemy Stats")
+@export var enemy_name : String
 @export var move_speed  : float = 40
 @export var health : int = 3
+@export var max_enemy_health : int
 @export var attack_damage : int = 0
 @export var xp : int = 0
 @export var base_score : int
@@ -67,9 +69,13 @@ func damage_enemy() -> void:
 	var is_crit : bool = calculate_crit()
 	if is_crit:
 		damage *= PlayerStats.player_stats["Crit Damage"]
+		
+	if GameManager.rifle_owned:
+		damage += 7
 	
 	spawn_damage_label(damage, is_crit)
 	health -= damage
+	SignalBus.enemy_found.emit(enemy_name, health, max_enemy_health)
 	if health <= 0:
 		kill_enemy()
 

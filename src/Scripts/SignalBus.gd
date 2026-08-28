@@ -18,3 +18,7 @@ signal ore_gathered
 signal alarms_silenced
 
 signal enemy_spawned(enemy : Enemy)
+
+signal enemy_found(enemy_name : String, enemy_hp : int, enemy_max_hp : int)
+
+signal bullet_fired

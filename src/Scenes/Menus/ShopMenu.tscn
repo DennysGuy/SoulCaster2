@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cyfle3qq8i4ts" path="res://src/Scripts/Menus/shop_menu.gd" id="1_gllw4"]
 [ext_resource type="Texture2D" uid="uid://bcls56q7g0x0d" path="res://Assets/sider.png" id="2_p8ncc"]
+[ext_resource type="Texture2D" uid="uid://dp24xadavvam7" path="res://Assets/TrackerTestIcon-sheet.png" id="3_4qwru"]
 [ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_bt663"]
 [ext_resource type="Texture2D" uid="uid://cl1tt236f0oeq" path="res://Assets/Rifle/RifleImage.png" id="4_jdaip"]
 
@@ -55,6 +56,32 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "Weapons"
 
+[node name="WeaponsTitle2" type="Label" parent="Panel" unique_id=2062508773]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -163.0
+offset_top = 92.0
+offset_right = 177.0
+offset_bottom = 126.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Hover over Icon to read more"
+
+[node name="OreCount" type="Label" parent="Panel" unique_id=1821467376]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -550.0
+offset_top = 19.0
+offset_right = -407.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "x0"
+
 [node name="WeaponsUpgradesTitle" type="Label" parent="Panel" unique_id=488267414]
 layout_mode = 1
 anchors_preset = 5
@@ -100,10 +127,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -536.0
-offset_top = 277.0
-offset_right = -463.0
-offset_bottom = 311.0
+offset_left = -446.0
+offset_top = 164.0
+offset_right = -373.0
+offset_bottom = 198.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
 text = "MR-16"
@@ -128,10 +155,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -497.0
-offset_top = 323.0
-offset_right = -457.0
-offset_bottom = 351.0
+offset_left = -408.0
+offset_top = 316.0
+offset_right = -368.0
+offset_bottom = 344.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
 text = "x 50"
@@ -155,7 +182,29 @@ tooltip_text = "Radar unveils an arrow indicator warning you when an Enemy has s
 
 [node name="TextureRect" type="TextureRect" parent="Panel/RadarAmuletIcon" unique_id=429222152]
 layout_mode = 2
+tooltip_text = "Radar reveals an arrow in the direction an enemy spawned."
 texture = ExtResource("2_p8ncc")
+expand_mode = 1
+
+[node name="TrackerAmuletIcon" type="PanelContainer" parent="Panel" unique_id=1563480427]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 203.0
+offset_top = -74.0
+offset_right = 288.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Radar unveils an arrow indicator warning you when an Enemy has spawned in a particular direction."
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TrackerAmuletIcon" unique_id=1144203388]
+layout_mode = 2
+tooltip_text = "Visibly shows and tracks remaining HP of the most recent enemy fired upon."
+texture = ExtResource("3_4qwru")
 expand_mode = 1
 
 [node name="PurchaseRadarButton" type="Button" parent="Panel" unique_id=933534987]
@@ -166,13 +215,36 @@ offset_right = 1017.0
 offset_bottom = 261.0
 text = "Purchase"
 
-[node name="PurchaseRifleButton" type="Button" parent="Panel" unique_id=1390619159]
+[node name="PurchaseTrackerButton" type="Button" parent="Panel" unique_id=1410266911]
 layout_mode = 0
-offset_left = 212.0
-offset_top = 298.0
-offset_right = 292.0
-offset_bottom = 329.0
+offset_left = 937.0
+offset_top = 340.0
+offset_right = 1017.0
+offset_bottom = 371.0
 text = "Purchase"
+
+[node name="PurchaseRifleButton" type="Button" parent="Panel" unique_id=1390619159]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 177.0
+offset_right = 257.0
+offset_bottom = 31.0
+grow_vertical = 2
+text = "Purchase"
+
+[node name="CloseMenu" type="Button" parent="Panel" unique_id=500307679]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 14.0
+offset_right = -12.0
+offset_bottom = 45.0
+grow_horizontal = 0
+text = "X"
 
 [node name="OreIcon" type="TextureRect" parent="Panel" unique_id=1744008890]
 layout_mode = 0
@@ -183,25 +255,75 @@ offset_bottom = 246.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_bt663")
 
+[node name="AmuletTitle3" type="Label" parent="Panel" unique_id=872725149]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 295.0
+offset_top = 278.0
+offset_right = 467.0
+offset_bottom = 312.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Enemy Tracker"
+
+[node name="Cost3" type="Label" parent="Panel" unique_id=754909820]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 324.0
+offset_top = 307.0
+offset_right = 364.0
+offset_bottom = 335.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "x 15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OreIcon4" type="TextureRect" parent="Panel" unique_id=52753538]
+layout_mode = 0
+offset_left = 934.0
+offset_top = 311.0
+offset_right = 982.0
+offset_bottom = 359.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
+[node name="OreIcon3" type="TextureRect" parent="Panel" unique_id=211753227]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 17.0
+offset_right = 124.0
+offset_bottom = 113.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
 [node name="OreIcon2" type="TextureRect" parent="Panel" unique_id=808567126]
 layout_mode = 0
-offset_left = 107.0
-offset_top = 327.0
-offset_right = 155.0
-offset_bottom = 375.0
+offset_left = 199.0
+offset_top = 318.0
+offset_right = 247.0
+offset_bottom = 366.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_bt663")
 
 [node name="RifleImage" type="TextureRect" parent="Panel" unique_id=1702236874]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 109.00001
-offset_top = -192.0
-offset_right = 592.53687
-offset_bottom = -6.0884094
-grow_vertical = 2
+offset_left = 100.0
+offset_top = 204.0
+offset_right = 583.53687
+offset_bottom = 389.9116
 scale = Vector2(0.5325112, 0.5325112)
+tooltip_text = "- +7 attack damage bonus
+- +30% fire rate
+- Doubles Magazine Size"
 texture = ExtResource("4_jdaip")
 expand_mode = 1
+
+[connection signal="button_up" from="Panel/PurchaseRadarButton" to="." method="_on_purchase_radar_button_button_up"]
+[connection signal="button_up" from="Panel/PurchaseTrackerButton" to="." method="_on_purchase_tracker_button_button_up"]
+[connection signal="button_up" from="Panel/PurchaseRifleButton" to="." method="_on_purchase_rifle_button_button_up"]
+[connection signal="button_up" from="Panel/CloseMenu" to="." method="_on_close_menu_button_up"]
