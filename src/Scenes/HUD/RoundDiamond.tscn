@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c87ouqp84eqp7"]
+
+[ext_resource type="Texture2D" uid="uid://dam4v5p51n5b4" path="res://Assets/WaveDiamondEmpty.png" id="1_gmt8s"]
+[ext_resource type="Script" uid="uid://4cl0jdonnoim" path="res://src/Scripts/HUD/round_diamond.gd" id="2_mk7f1"]
+
+[node name="RoundDiamond" type="TextureRect" unique_id=1550612314]
+texture = ExtResource("1_gmt8s")
+stretch_mode = 2
+script = ExtResource("2_mk7f1")

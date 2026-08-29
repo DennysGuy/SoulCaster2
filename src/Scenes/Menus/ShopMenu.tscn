@@ -95,7 +95,37 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "Weapon Upgrades"
 
-[node name="WeaponsUpgradesTitle2" type="Label" parent="Panel" unique_id=1072883399]
+[node name="PistolMagSize" type="Label" parent="Panel" unique_id=1013566203]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -552.0
+offset_top = 476.0
+offset_right = -269.0
+offset_bottom = 510.0
+grow_horizontal = 2
+tooltip_text = "Increase Pistol Magazine by 2"
+mouse_filter = 0
+theme_override_font_sizes/font_size = 24
+text = "Pistol Magazine Size: 6"
+
+[node name="RifleMagSize" type="Label" parent="Panel" unique_id=1935764449]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -267.0
+offset_top = 476.0
+offset_right = 16.0
+offset_bottom = 510.0
+grow_horizontal = 2
+tooltip_text = "Increases Rifle Mag Size by 4 (Requires Rifle)"
+mouse_filter = 0
+theme_override_font_sizes/font_size = 24
+text = "Rifle Mag Size: 12"
+
+[node name="Amuelts" type="Label" parent="Panel" unique_id=1072883399]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -146,7 +176,7 @@ offset_right = 364.0
 offset_bottom = 222.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
-text = "x 30"
+text = "x 20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -161,7 +191,37 @@ offset_right = -368.0
 offset_bottom = 344.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
-text = "x 50"
+text = "x 40"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PistolMagazineCost" type="Label" parent="Panel" unique_id=1623602739]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -361.0
+offset_top = 521.0
+offset_right = -321.0
+offset_bottom = 549.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "x 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RifleMagazineCost" type="Label" parent="Panel" unique_id=1383329020]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 521.0
+offset_right = -37.0
+offset_bottom = 549.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "x 10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -310,6 +370,15 @@ offset_bottom = 366.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_bt663")
 
+[node name="OreIcon5" type="TextureRect" parent="Panel" unique_id=936006156]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 524.0
+offset_right = 293.0
+offset_bottom = 572.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
 [node name="RifleImage" type="TextureRect" parent="Panel" unique_id=1702236874]
 layout_mode = 1
 offset_left = 100.0
@@ -323,7 +392,42 @@ tooltip_text = "- +7 attack damage bonus
 texture = ExtResource("4_jdaip")
 expand_mode = 1
 
+[node name="PurchasePistolMagButton" type="Button" parent="Panel" unique_id=1288156406]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = 162.0
+offset_right = 165.0
+offset_bottom = 193.0
+grow_vertical = 2
+text = "Purchase"
+
+[node name="PurchaseRifleMagButton" type="Button" parent="Panel" unique_id=1225690785]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 375.0
+offset_top = 162.0
+offset_right = 490.0
+offset_bottom = 193.0
+grow_vertical = 2
+text = "Requires Rifle"
+
+[node name="OreIcon6" type="TextureRect" parent="Panel" unique_id=1135685582]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 524.0
+offset_right = 577.0
+offset_bottom = 572.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
 [connection signal="button_up" from="Panel/PurchaseRadarButton" to="." method="_on_purchase_radar_button_button_up"]
 [connection signal="button_up" from="Panel/PurchaseTrackerButton" to="." method="_on_purchase_tracker_button_button_up"]
 [connection signal="button_up" from="Panel/PurchaseRifleButton" to="." method="_on_purchase_rifle_button_button_up"]
 [connection signal="button_up" from="Panel/CloseMenu" to="." method="_on_close_menu_button_up"]
+[connection signal="button_up" from="Panel/PurchasePistolMagButton" to="." method="_on_purchase_pistol_mag_button_button_up"]
+[connection signal="button_up" from="Panel/PurchaseRifleMagButton" to="." method="_on_purchase_rifle_mag_button_button_up"]

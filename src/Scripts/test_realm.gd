@@ -7,11 +7,12 @@ class_name TestRealm extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_timer.start()
+	#spawn_timer.start()
 	ore_spawn_timer.start()
 	GameManager.in_arena = true
+	SignalBus.round_started.connect(start_spawn_timer)
+	SignalBus.round_ended.connect(stop_spawn_timer)
 
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -22,9 +23,15 @@ func _physics_process(delta: float) -> void:
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
-	spawn_timer.wait_time = randi_range(3,7)
+	spawn_timer.wait_time = randi_range(GameManager.round_timers[GameManager.round_number]-2,GameManager.round_timers[GameManager.round_number]+2)
 	spawn_timer.start()
 
+func start_spawn_timer() -> void:
+	spawn_timer.wait_time = randi_range(GameManager.round_timers[GameManager.round_number]-2,GameManager.round_timers[GameManager.round_number]+2)
+	spawn_timer.start()
+
+func stop_spawn_timer() -> void:
+	spawn_timer.stop()
 
 func spawn_enemy() -> void:
 	var spawn_points : Array = spawn_points.get_children()
@@ -33,9 +40,21 @@ func spawn_enemy() -> void:
 	
 	var spawn_count : int = randi_range(1,2)
 	
-	
 	for i in range(spawn_count):
-		var enemy : Enemy = preload("uid://be7m7tct4a7cq").instantiate()
+		
+		var chance_to_bulk : int = 0
+		if GameManager.round_number == 1:
+			chance_to_bulk = 20
+		elif GameManager.round_number == 2:
+			chance_to_bulk = 40
+		
+		var enemy : Enemy
+		
+		var rand_num : int = randi_range(1,100)
+		if rand_num < chance_to_bulk:
+			enemy = preload("uid://belgdl70endw6").instantiate()
+		else:
+			enemy = preload("uid://be7m7tct4a7cq").instantiate()
 		
 		if chosen_spawn_point.index == 1 or chosen_spawn_point.index == 3:
 			enemy.global_position = chosen_spawn_point.global_position + Vector3(randf_range(-10.0, 10.0), 0.0, 0.0)

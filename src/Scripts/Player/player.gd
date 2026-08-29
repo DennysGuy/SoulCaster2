@@ -71,12 +71,15 @@ func _ready() -> void:
 	if GameManager.rifle_owned:
 		rifle.show()
 		pistol.hide()
-		chosen_gun_animation_player = gun_animation_player
+		chosen_gun_animation_player = rifle_animation_player 
+		GameManager.magazine = GameManager.rifle_magazine_size
 	else:
 		pistol.show()
 		rifle.hide()
-		chosen_gun_animation_player = rifle_animation_player
-	
+		chosen_gun_animation_player = gun_animation_player
+		GameManager.magazine = GameManager.pistol_magazine_size
+		
+	GameManager.bullets_in_clip = GameManager.magazine
 	alert_arrow_4.visible = false
 	alert_arrow_3.visible = false
 	alert_arrow.visible = false
@@ -92,12 +95,17 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
 		if GameManager.bullets_in_clip <= 0:
+			shooting = true
 			play_reload_animation()
 		else:
 			shooting = true
 			GameManager.bullets_in_clip -= 1
 			SignalBus.bullet_fired.emit()
 			play_shoot_animation()
+	
+	if Input.is_action_just_pressed("reload") and GameManager.in_arena:
+		shooting = true
+		play_reload_animation()
 	
 	move_arm()
 	move_player()
@@ -408,7 +416,9 @@ func _is_facing_quadrant(enemy_quadrant: String) -> bool:
 	return dot > cos(deg_to_rad(20))  # ~0.94
 
 func play_reload_animation() -> void:
+	chosen_gun_animation_player.speed_scale = PlayerStats.player_stats["Reload Speed"]
 	chosen_gun_animation_player.play("RELOAD")
-	#await chosen_gun_animation_player.animation_finished
-	GameManager.bullets_in_clip = GameManager.magazine_size
+	await chosen_gun_animation_player.animation_finished
+	GameManager.bullets_in_clip = GameManager.magazine
 	SignalBus.bullet_fired.emit()
+	shooting = false

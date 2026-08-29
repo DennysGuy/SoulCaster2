@@ -17,7 +17,7 @@ func _ready() -> void:
 	SignalBus.player_hurt.connect(decrement_wait_time)
 	SignalBus.time_added.connect(increment_wait_time)
 	seconds = PlayerStats.player_stats["Starting Timer"]
-	timer_started = true
+	#timer_started = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
@@ -66,8 +66,12 @@ func stop_timer() -> void:
 		
 	timer_started = false
 	#temporary
+	GameManager.round_number = -1
 	get_tree().change_scene_to_file("uid://jgsciuanachx")
 
+func reset_timer() -> void:
+	timer_started = false
+	set_timer()
 
 func decrement_wait_time(value : int) -> void:
 
@@ -92,3 +96,8 @@ func increment_wait_time(value : int) -> void:
 func set_label() -> void:
 	text = ""
 	append_text("[font_size=64]%s[/font_size][font_size=24].%s[/font_size]" % [seconds,milliseconds])
+
+func set_timer() -> void:
+	seconds = PlayerStats.player_stats["Starting Timer"]
+	milliseconds = 0
+	set_label()

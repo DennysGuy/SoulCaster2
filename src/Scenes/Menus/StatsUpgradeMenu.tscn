@@ -144,7 +144,7 @@ text = "Defense Level: 0"
 
 [node name="OreSpawnTimeLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=471269379]
 layout_mode = 2
-tooltip_text = "Decreases the wait time between ore spawning on field."
+tooltip_text = "Decreases the wait time between ore spawn by 1 second per level (max 5); more ore spawned on field."
 mouse_filter = 0
 theme_override_font_sizes/font_size = 30
 text = "Ore Spawn  Time Level: 0"

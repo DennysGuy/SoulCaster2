@@ -22,3 +22,7 @@ signal enemy_spawned(enemy : Enemy)
 signal enemy_found(enemy_name : String, enemy_hp : int, enemy_max_hp : int)
 
 signal bullet_fired
+
+signal round_ended
+
+signal round_started

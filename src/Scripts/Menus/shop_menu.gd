@@ -5,6 +5,14 @@ class_name ShopMenu extends Control
 @onready var purchase_tracker_button: Button = $Panel/PurchaseTrackerButton
 @onready var ore_count: Label = $Panel/OreCount
 
+@onready var pistol_mag_size: Label = $Panel/PistolMagSize
+@onready var rifle_mag_size: Label = $Panel/RifleMagSize
+
+@onready var purchase_pistol_mag_button: Button = $Panel/PurchasePistolMagButton
+@onready var purchase_rifle_mag_button: Button = $Panel/PurchaseRifleMagButton
+
+@onready var pistol_magazine_cost: Label = $Panel/PistolMagazineCost
+@onready var rifle_magazine_cost: Label = $Panel/RifleMagazineCost
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,14 +24,14 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_purchase_rifle_button_button_up() -> void:
-	PlayerStats.player_stats["Ore"] -= 50
+	PlayerStats.player_stats["Ore"] -= 40
 	GameManager.rifle_owned = true
 	update_menu()
 
 func update_menu() -> void:
 	ore_count.text = "x %s" % int(PlayerStats.player_stats["Ore"])
 	if !GameManager.rifle_owned:
-		if PlayerStats.player_stats["Ore"] >= 50:
+		if PlayerStats.player_stats["Ore"] >= 40:
 			purchase_rifle_button.disabled = false
 			purchase_rifle_button.text = "Purchase!"
 		else:
@@ -34,7 +42,7 @@ func update_menu() -> void:
 		purchase_rifle_button.text = "Owned"
 	
 	if !GameManager.amulet_owned:
-		if PlayerStats.player_stats["Ore"] >= 30:
+		if PlayerStats.player_stats["Ore"] >= 20:
 			purchase_radar_button.disabled = false
 			purchase_radar_button.text = "Purchase!"
 		else:
@@ -55,8 +63,26 @@ func update_menu() -> void:
 		purchase_tracker_button.disabled = true
 		purchase_tracker_button.text = "Owned"
 
+	if PlayerStats.player_stats["Ore"] < GameManager.pistol_mag_cost:
+		purchase_pistol_mag_button.disabled = true
+		purchase_pistol_mag_button.text = "Insufficient Ore"
+	else:
+		purchase_pistol_mag_button.disabled = false
+		purchase_pistol_mag_button.text = "Purchase!"
+		
+		
+	if PlayerStats.player_stats["Ore"] < GameManager.rifle_mag_cost:
+		purchase_rifle_mag_button.disabled = true
+		purchase_rifle_mag_button.text = "Insufficient Ore"
+	else:
+		purchase_rifle_mag_button.disabled = false
+		purchase_rifle_mag_button.text = "Purchase!"	
+	
+	pistol_magazine_cost.text = "x %s" % GameManager.pistol_mag_cost
+	rifle_magazine_cost.text = "x %s" % GameManager.rifle_mag_cost
+
 func _on_purchase_radar_button_button_up() -> void:
-	PlayerStats.player_stats["Ore"] -= 30
+	PlayerStats.player_stats["Ore"] -= 20
 	GameManager.amulet_owned = true
 	update_menu()
 
@@ -68,4 +94,18 @@ func _on_close_menu_button_up() -> void:
 func _on_purchase_tracker_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 15
 	GameManager.enemy_tracker_owned = true
+	update_menu()
+
+
+func _on_purchase_pistol_mag_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.pistol_mag_cost
+	GameManager.pistol_magazine_size += 2
+	GameManager.pistol_mag_cost *= 2
+	update_menu()
+
+
+func _on_purchase_rifle_mag_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.rifle_mag_cost
+	GameManager.rifle_magazine_size += 4
+	GameManager.rifle_mag_cost *= 2
 	update_menu()

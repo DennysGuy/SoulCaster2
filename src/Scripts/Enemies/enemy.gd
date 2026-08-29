@@ -35,7 +35,7 @@ var prev_state : State
 var alive : bool = true
 var can_hurt : bool = true
 func _ready() -> void:
-	pass
+	SignalBus.round_ended.connect(kill_enemy)
 
 func _process(delta: float) -> void:
 	if !player:
