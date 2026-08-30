@@ -23,5 +23,8 @@ var rifle_mag_cost: int = 10
 var round_number : int = -1
 const MAX_ROUND : int = 2
 
-var round_timers : Array[int] = [8, 6, 4]
-var round_time : int = 100
+var round_timers : Array[int] = [8, 7, 6]
+var round_times : Array[int] = [100, 150, 200]
+
+var minimum_spawn : Array[int] = [1,1,1]
+var maximum_spawn : Array[int] = [2,2,3]

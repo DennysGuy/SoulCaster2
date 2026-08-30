@@ -63,6 +63,8 @@ func _physics_process(delta: float) -> void:
 				
 			else:
 				GameManager.round_number = -1
+				GameManager.minimum_spawn = 1
+				GameManager.maximum_spawn = 2
 				get_tree().change_scene_to_file("res://src/Scenes/Hub.tscn")
 
 
@@ -106,7 +108,7 @@ func start_round() -> void:
 	round_started = true
 	round_timer_label.timer_started = true
 	round_progress_bar.value = 0
-	round_progress_bar.max_value = GameManager.round_time
+	round_progress_bar.max_value = GameManager.round_times[GameManager.round_number]
 	SignalBus.round_started.emit()
 
 func load_timer() -> void:
@@ -122,6 +124,8 @@ func end_round() -> void:
 		round_diamond.fill_diamond()
 	if GameManager.round_number < GameManager.MAX_ROUND:
 		GameManager.round_number += 1
+		GameManager.minimum_spawn += 1
+		GameManager.maximum_spawn += 1
 		animation_player.play("RoundCountDown")
 	
 func kill_all_enemies() -> void:

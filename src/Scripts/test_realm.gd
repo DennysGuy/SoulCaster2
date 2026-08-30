@@ -38,7 +38,7 @@ func spawn_enemy() -> void:
 	
 	var chosen_spawn_point : EnemySpawnPoint = spawn_points.pick_random()
 	
-	var spawn_count : int = randi_range(1,2)
+	var spawn_count : int = randi_range(GameManager.minimum_spawn,GameManager.maximum_spawn)
 	
 	for i in range(spawn_count):
 		
