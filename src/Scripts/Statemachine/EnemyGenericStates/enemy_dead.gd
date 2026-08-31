@@ -12,9 +12,11 @@ func enter() -> void:
 	parent_collider.disabled = true
 	#parent.animation_player.play(animation_name)
 	parent.animation_player.play("kill")
-	SignalBus.xp_was_gained.emit(parent.xp)
-	SignalBus.time_added.emit(1)
-	
+	var gained_xp : int = int(parent.xp * PlayerStats.player_stats["XP Bonus"])
+	SignalBus.xp_was_gained.emit(gained_xp)
+	var added_time : int = PlayerStats.player_stats["Life Steal"]
+	SignalBus.time_added.emit(added_time)
+	SignalBus.progress_added.emit()
 	#if parent is WalkerEnemy and parent.is_greeter:
 		#AudioManager.play_sfx(AudioManager.CROWD_GASP)
 		#AudioManager.stop_music_player()

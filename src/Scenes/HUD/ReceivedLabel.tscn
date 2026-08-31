@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ca2bgl0v774sj"]
+
+[ext_resource type="Script" uid="uid://dokf885n4e3ma" path="res://src/Scripts/HUD/received_label.gd" id="1_i4vkx"]
+
+[node name="ReceivedLabel" type="Control" unique_id=419050528 node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 65.0
+offset_bottom = 40.0
+script = ExtResource("1_i4vkx")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="." unique_id=126054091]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "+1 sec."
+
+[node name="Timer" type="Timer" parent="." unique_id=1315054332]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -67,8 +67,6 @@ func stop_timer() -> void:
 	timer_started = false
 	#temporary
 	GameManager.round_number = -1
-	GameManager.minimum_spawn = 1
-	GameManager.maximum_spawn = 2
 	get_tree().change_scene_to_file("uid://jgsciuanachx")
 
 func reset_timer() -> void:

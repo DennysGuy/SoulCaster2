@@ -14,6 +14,9 @@ class_name ShopMenu extends Control
 @onready var pistol_magazine_cost: Label = $Panel/PistolMagazineCost
 @onready var rifle_magazine_cost: Label = $Panel/RifleMagazineCost
 
+@onready var fortified_pistol_bullets_button: Button = $Panel/FortifiedPistolBulletsButton
+@onready var fortified_rfiel_bullets_button: Button = $Panel/FortifiedRfielBulletsButton
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -77,7 +80,29 @@ func update_menu() -> void:
 	else:
 		purchase_rifle_mag_button.disabled = false
 		purchase_rifle_mag_button.text = "Purchase!"	
-	
+
+	if !GameManager.fortified_pistol_bullets:
+		if PlayerStats.player_stats["Ore"] >= GameManager.fortified_pistol_bullets_cost:
+			fortified_pistol_bullets_button.disabled = false
+			fortified_pistol_bullets_button.text = "Purchase!"
+		else:
+			fortified_pistol_bullets_button.disabled = true
+			fortified_pistol_bullets_button.text = "Insufficient Ore"
+	else:
+		fortified_pistol_bullets_button.disabled = true
+		fortified_pistol_bullets_button.text = "Owned"
+
+	if !GameManager.fortified_rifle_bullets:
+		if PlayerStats.player_stats["Ore"] >= GameManager.fortified_pistol_rifle_cost:
+			fortified_rfiel_bullets_button.disabled = false
+			fortified_rfiel_bullets_button.text = "Purchase!"
+		else:
+			fortified_rfiel_bullets_button.disabled = true
+			fortified_rfiel_bullets_button.text = "Insufficient Ore"
+	else:
+		fortified_rfiel_bullets_button.disabled = true
+		fortified_rfiel_bullets_button.text = "Owned"
+
 	pistol_magazine_cost.text = "x %s" % GameManager.pistol_mag_cost
 	rifle_magazine_cost.text = "x %s" % GameManager.rifle_mag_cost
 
@@ -108,4 +133,16 @@ func _on_purchase_rifle_mag_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.rifle_mag_cost
 	GameManager.rifle_magazine_size += 4
 	GameManager.rifle_mag_cost *= 2
+	update_menu()
+
+
+func _on_fortified_pistol_bullets_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_bullets_cost
+	GameManager.fortified_pistol_bullets = true
+	update_menu()
+
+
+func _on_fortified_rfiel_bullets_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_rifle_cost
+	GameManager.fortified_rifle_bullets = true
 	update_menu()

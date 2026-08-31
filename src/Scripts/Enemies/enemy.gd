@@ -62,8 +62,10 @@ func damage_enemy() -> void:
 	if not alive:	
 		return
 	
-	var chosen_state : State = hurt_states.pick_random()
-	state_machine.change_state(chosen_state)
+	if hurt_1_state and hurt_2_state:
+		var chosen_state : State = hurt_states.pick_random()
+		state_machine.change_state(chosen_state)
+		
 	var damage : int = randi_range(int(PlayerStats.player_stats["Attack Damage"]-2), int(PlayerStats.player_stats["Attack Damage"]+2))
 	
 	var is_crit : bool = calculate_crit()
@@ -71,7 +73,7 @@ func damage_enemy() -> void:
 		damage *= PlayerStats.player_stats["Crit Damage"]
 		
 	if GameManager.rifle_owned:
-		damage += 7
+		damage += 8
 	
 	spawn_damage_label(damage, is_crit)
 	health -= damage

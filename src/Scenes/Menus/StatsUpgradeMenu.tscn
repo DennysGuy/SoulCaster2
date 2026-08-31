@@ -86,9 +86,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -321.5
-offset_top = -204.0
+offset_top = -277.0
 offset_right = 39.5
-offset_bottom = 206.0
+offset_bottom = 285.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/v_separation = 10
@@ -97,116 +97,164 @@ theme_override_constants/v_separation = 10
 layout_mode = 2
 tooltip_text = "Upgrades Base Weapon Attack by +2 for each level."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Attack Damage: 0"
 
 [node name="AttackSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=360790909]
 layout_mode = 2
 tooltip_text = "Upgrades Base Weapon Attack Speed by 10% per level."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Attack Speed: 0"
 
 [node name="MovementSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1708522686]
 layout_mode = 2
 tooltip_text = "Increases camera shift speed."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Movement Speed: 0"
 
 [node name="CritChanceLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=465853052]
 layout_mode = 2
 tooltip_text = "Increases chance to deal critical damage to an enemy by 12% for each level."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Crit Chance Level: 0"
 
 [node name="CritDamageLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=527562675]
 layout_mode = 2
 tooltip_text = "Increases Critical damage by 50% per level."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Crit Damage Level: 0"
 
 [node name="StartingTimerLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1961650741]
 layout_mode = 2
 tooltip_text = "Increases Starting Timer by 10 for each level."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Starting Timer Level: 0"
 
 [node name="DefenseLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1580785110]
 layout_mode = 2
 tooltip_text = "Decrease the amount of time taken off when damaged by enemy."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Defense Level: 0"
 
 [node name="OreSpawnTimeLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=471269379]
 layout_mode = 2
 tooltip_text = "Decreases the wait time between ore spawn by 1 second per level (max 5); more ore spawned on field."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Ore Spawn  Time Level: 0"
 
 [node name="ReloadSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1345498173]
 layout_mode = 2
 tooltip_text = "Increases reload speed."
 mouse_filter = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 23
 text = "Reload Speed Level: 0"
+
+[node name="ProgressSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=175114969]
+layout_mode = 2
+tooltip_text = "Increases amount of round progress gained when killing an enemy."
+mouse_filter = 0
+theme_override_font_sizes/font_size = 23
+text = "Progress Speed Level: 0"
+
+[node name="LifeStealLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=934066534]
+layout_mode = 2
+tooltip_text = "Increases time retrieved from killing an enemy by 1 second per level."
+mouse_filter = 0
+theme_override_font_sizes/font_size = 23
+text = "Life Steal Level: 0"
+
+[node name="APAmountLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=1149620916]
+layout_mode = 2
+tooltip_text = "Increases amount AP received upon leveling up."
+mouse_filter = 0
+theme_override_font_sizes/font_size = 23
+text = "AP Amount Level"
+
+[node name="XPBonusLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=881279557]
+layout_mode = 2
+tooltip_text = "Increases amount of XP gained from killing an enemy."
+mouse_filter = 0
+theme_override_font_sizes/font_size = 23
+text = "XP Bonus Level: 0"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StatsUpgradePanel" unique_id=438359848]
 layout_mode = 0
 offset_left = 699.0
-offset_top = 67.0
+offset_top = 18.0
 offset_right = 819.0
-offset_bottom = 535.0
-theme_override_constants/separation = 18
+offset_bottom = 574.0
+theme_override_constants/separation = 15
 
 [node name="AttackDamageUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=443263016]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="AttackSpeedUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=360649488]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="MovementSpeedUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1707279524]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="CritChanceUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1344903364]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="CritDamageUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1220339802]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="StartingTimerUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=384066890]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="DefenseLevelUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1165023370]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="OreSpawnTimeUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1889972485]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="ReloadSpeedUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1034033026]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
+text = "Upgrade (1)"
+
+[node name="ProgressSpeedUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=1354686077]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Upgrade (1)"
+
+[node name="LifeStealUpgradeButton2" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=981240596]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Upgrade (1)"
+
+[node name="APAmountupgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=459463447]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Upgrade (1)"
+
+[node name="XPBonusUpgradeButton" type="Button" parent="StatsUpgradePanel/VBoxContainer" unique_id=352310981]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
 text = "Upgrade (1)"
 
 [node name="StatsPanel" type="Panel" parent="." unique_id=1204104529]
@@ -271,4 +319,8 @@ text = "X"
 [connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/DefenseLevelUpgradeButton" to="." method="_on_defense_level_upgrade_button_button_up"]
 [connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/OreSpawnTimeUpgradeButton" to="." method="_on_ore_spawn_time_upgrade_button_button_up"]
 [connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/ReloadSpeedUpgradeButton" to="." method="_on_reload_speed_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/ProgressSpeedUpgradeButton" to="." method="_on_progress_speed_upgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/LifeStealUpgradeButton2" to="." method="_on_life_steal_upgrade_button_2_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/APAmountupgradeButton" to="." method="_on_ap_amountupgrade_button_button_up"]
+[connection signal="button_up" from="StatsUpgradePanel/VBoxContainer/XPBonusUpgradeButton" to="." method="_on_xp_bonus_upgrade_button_button_up"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

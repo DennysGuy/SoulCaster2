@@ -95,21 +95,6 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "Weapon Upgrades"
 
-[node name="PistolMagSize" type="Label" parent="Panel" unique_id=1013566203]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -552.0
-offset_top = 476.0
-offset_right = -269.0
-offset_bottom = 510.0
-grow_horizontal = 2
-tooltip_text = "Increase Pistol Magazine by 2"
-mouse_filter = 0
-theme_override_font_sizes/font_size = 24
-text = "Pistol Magazine Size: 6"
-
 [node name="RifleMagSize" type="Label" parent="Panel" unique_id=1935764449]
 layout_mode = 1
 anchors_preset = 5
@@ -209,6 +194,148 @@ theme_override_font_sizes/font_size = 20
 text = "x 5"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PistolMagSize" type="Label" parent="Panel" unique_id=1013566203]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -552.0
+offset_top = 476.0
+offset_right = -269.0
+offset_bottom = 510.0
+grow_horizontal = 2
+tooltip_text = "Increase Pistol Magazine by 2"
+mouse_filter = 0
+theme_override_font_sizes/font_size = 24
+text = "Pistol Magazine Size: 6"
+
+[node name="PurchasePistolMagButton" type="Button" parent="Panel" unique_id=1288156406]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = 162.0
+offset_right = 170.0
+offset_bottom = 193.0
+grow_vertical = 2
+text = "Purchase"
+
+[node name="OreIcon5" type="TextureRect" parent="Panel" unique_id=936006156]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 524.0
+offset_right = 293.0
+offset_bottom = 572.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
+[node name="FortifiedPistolBulletsCost" type="Label" parent="Panel" unique_id=91486863]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -361.0
+offset_top = 625.0
+offset_right = -321.0
+offset_bottom = 653.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "x 15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ForfiedPistolBulletsTitle" type="Label" parent="Panel" unique_id=140078754]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -552.0
+offset_top = 580.0
+offset_right = -269.0
+offset_bottom = 614.0
+grow_horizontal = 2
+tooltip_text = "Upgrades Standard Pistol Bullets to Fortified Pistol Bullets.
+- Doubles damage to ore rocks
+- Doubles received ore rocks"
+mouse_filter = 0
+theme_override_font_sizes/font_size = 24
+text = "Fortified Pistol Bullets"
+
+[node name="FortifiedPistolBulletsButton" type="Button" parent="Panel" unique_id=860205881]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = 266.0
+offset_right = 170.0
+offset_bottom = 297.0
+grow_vertical = 2
+text = "Purchase"
+
+[node name="OreIcon7" type="TextureRect" parent="Panel" unique_id=1972077592]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 628.0
+offset_right = 293.0
+offset_bottom = 676.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
+[node name="FortifiedRifleBulletsCost" type="Label" parent="Panel" unique_id=238941482]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -78.0
+offset_top = 625.0
+offset_right = -38.0
+offset_bottom = 653.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "x 20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ForfiedRifleBulletsTitle" type="Label" parent="Panel" unique_id=477333265]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -269.0
+offset_top = 580.0
+offset_right = 14.0
+offset_bottom = 614.0
+grow_horizontal = 2
+tooltip_text = "Upgrades Standard Rifle Bullets to Fortified Pistol Bullets.
+- Doubles damage to ore rocks
+- Doubles received ore rocks"
+mouse_filter = 0
+theme_override_font_sizes/font_size = 24
+text = "Fortified Rifle Bullets"
+
+[node name="FortifiedRfielBulletsButton" type="Button" parent="Panel" unique_id=2138491045]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 373.0
+offset_top = 266.0
+offset_right = 453.0
+offset_bottom = 297.0
+grow_vertical = 2
+text = "Purchase"
+
+[node name="OreIcon8" type="TextureRect" parent="Panel" unique_id=967298675]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 628.0
+offset_right = 576.0
+offset_bottom = 676.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
 
 [node name="RifleMagazineCost" type="Label" parent="Panel" unique_id=1383329020]
 layout_mode = 1
@@ -370,15 +497,6 @@ offset_bottom = 366.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_bt663")
 
-[node name="OreIcon5" type="TextureRect" parent="Panel" unique_id=936006156]
-layout_mode = 0
-offset_left = 245.0
-offset_top = 524.0
-offset_right = 293.0
-offset_bottom = 572.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
-
 [node name="RifleImage" type="TextureRect" parent="Panel" unique_id=1702236874]
 layout_mode = 1
 offset_left = 100.0
@@ -391,18 +509,6 @@ tooltip_text = "- +7 attack damage bonus
 - Doubles Magazine Size"
 texture = ExtResource("4_jdaip")
 expand_mode = 1
-
-[node name="PurchasePistolMagButton" type="Button" parent="Panel" unique_id=1288156406]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 90.0
-offset_top = 162.0
-offset_right = 165.0
-offset_bottom = 193.0
-grow_vertical = 2
-text = "Purchase"
 
 [node name="PurchaseRifleMagButton" type="Button" parent="Panel" unique_id=1225690785]
 layout_mode = 1
@@ -425,9 +531,11 @@ offset_bottom = 572.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_bt663")
 
+[connection signal="button_up" from="Panel/PurchasePistolMagButton" to="." method="_on_purchase_pistol_mag_button_button_up"]
+[connection signal="button_up" from="Panel/FortifiedPistolBulletsButton" to="." method="_on_fortified_pistol_bullets_button_button_up"]
+[connection signal="button_up" from="Panel/FortifiedRfielBulletsButton" to="." method="_on_fortified_rfiel_bullets_button_button_up"]
 [connection signal="button_up" from="Panel/PurchaseRadarButton" to="." method="_on_purchase_radar_button_button_up"]
 [connection signal="button_up" from="Panel/PurchaseTrackerButton" to="." method="_on_purchase_tracker_button_button_up"]
 [connection signal="button_up" from="Panel/PurchaseRifleButton" to="." method="_on_purchase_rifle_button_button_up"]
 [connection signal="button_up" from="Panel/CloseMenu" to="." method="_on_close_menu_button_up"]
-[connection signal="button_up" from="Panel/PurchasePistolMagButton" to="." method="_on_purchase_pistol_mag_button_button_up"]
 [connection signal="button_up" from="Panel/PurchaseRifleMagButton" to="." method="_on_purchase_rifle_mag_button_button_up"]

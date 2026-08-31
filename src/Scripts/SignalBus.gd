@@ -13,7 +13,7 @@ signal time_decremented(value : int)
 
 signal player_damaged
 
-signal ore_gathered
+signal ore_gathered(amount : int)
 
 signal alarms_silenced
 
@@ -26,3 +26,8 @@ signal bullet_fired
 signal round_ended
 
 signal round_started
+
+signal time_received(message : int)
+signal xp_received(message : int)
+
+signal progress_added(value : float)

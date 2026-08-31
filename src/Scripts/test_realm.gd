@@ -23,7 +23,22 @@ func _physics_process(delta: float) -> void:
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
-	spawn_timer.wait_time = randi_range(GameManager.round_timers[GameManager.round_number]-2,GameManager.round_timers[GameManager.round_number]+2)
+	var spawn_time : int = GameManager.round_timers[GameManager.round_number]
+	
+	match GameManager.current_round_point:
+		GameManager.ROUND_POINT.HALF_WAY:
+			print("Im at the half way point")
+			spawn_time -= 1
+			print("This is spawn time %s" % spawn_time) 
+		GameManager.ROUND_POINT.THREE_QUARTER:
+			print("I'm three quarters there")
+			spawn_time -= 2
+			print("This is spawn time %s" % spawn_time) 
+		_:
+			print("Im at the beginning")
+			print("This is spawn time %s" % spawn_time) 
+	
+	spawn_timer.wait_time = randi_range(spawn_time-2,spawn_time+2)
 	spawn_timer.start()
 
 func start_spawn_timer() -> void:
@@ -38,7 +53,7 @@ func spawn_enemy() -> void:
 	
 	var chosen_spawn_point : EnemySpawnPoint = spawn_points.pick_random()
 	
-	var spawn_count : int = randi_range(GameManager.minimum_spawn,GameManager.maximum_spawn)
+	var spawn_count : int = randi_range(GameManager.minimum_spawn[GameManager.round_number],GameManager.maximum_spawn[GameManager.round_number])
 	
 	for i in range(spawn_count):
 		

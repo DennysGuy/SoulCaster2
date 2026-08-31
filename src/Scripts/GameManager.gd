@@ -26,5 +26,17 @@ const MAX_ROUND : int = 2
 var round_timers : Array[int] = [8, 7, 6]
 var round_times : Array[int] = [100, 150, 200]
 
-var minimum_spawn : Array[int] = [1,1,1]
+var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,2,3]
+
+enum ROUND_POINT {BEGINNING, HALF_WAY, THREE_QUARTER}
+var current_round_point : ROUND_POINT = ROUND_POINT.BEGINNING
+
+var half_way_point : bool = false
+var three_quarter_way_point : bool = false
+
+var fortified_pistol_bullets_cost : int = 15
+var fortified_pistol_bullets : bool = false
+
+var fortified_pistol_rifle_cost : int = 15
+var fortified_rifle_bullets : bool = false
