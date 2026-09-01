@@ -1,6 +1,6 @@
 extends Node
 
-var can_move : bool = false
+var can_move : bool = true
 var can_shoot : bool = false
 
 var in_arena : bool = false
@@ -21,7 +21,7 @@ var pistol_mag_cost : int = 5
 var rifle_mag_cost: int = 10
 
 var round_number : int = -1
-const MAX_ROUND : int = 2
+const MAX_ROUND : int = 3
 
 var round_timers : Array[int] = [8, 7, 6]
 var round_times : Array[int] = [100, 150, 200]

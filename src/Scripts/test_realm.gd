@@ -4,6 +4,7 @@ class_name TestRealm extends Node3D
 @onready var spawn_points: Node = $SpawnPoints
 @onready var ore_spawn_points: Node = $OreSpawnPoints
 @onready var ore_spawn_timer: Timer = $OreSpawnTimer
+@onready var boss_spawn_point: Marker3D = $BossSpawnPoint
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +13,7 @@ func _ready() -> void:
 	GameManager.in_arena = true
 	SignalBus.round_started.connect(start_spawn_timer)
 	SignalBus.round_ended.connect(stop_spawn_timer)
+	SignalBus.boss_fight_started.connect(spawn_boss)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -92,3 +94,9 @@ func spawn_ore() -> void:
 	
 	ore.global_position = spawn_point.global_position
 	add_child(ore)
+
+func spawn_boss() -> void:
+	var boss : BroodMother = preload("uid://d4gg3flbxkfb5").instantiate()
+	boss.global_position = boss_spawn_point.global_position
+	boss.rotation = boss_spawn_point.rotation
+	add_child(boss)

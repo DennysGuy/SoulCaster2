@@ -31,3 +31,7 @@ signal time_received(message : int)
 signal xp_received(message : int)
 
 signal progress_added(value : float)
+
+signal boss_fight_started
+signal face_boss_area
+signal combat_engaged

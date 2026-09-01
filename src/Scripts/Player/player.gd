@@ -59,6 +59,7 @@ const SENSITIVITY := 0.6
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.enemy_spawned.connect(notify_enemy)
+	SignalBus.face_boss_area.connect(face_boss_spawn_area)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	camera.make_current()
@@ -92,23 +93,26 @@ func _process(delta: float) -> void:
 	
 	if GameManager.amulet_owned:
 		_update_arrows()
+	
+	if GameManager.can_move:
+		if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
+			if GameManager.bullets_in_clip <= 0:
+				shooting = true
+				play_reload_animation()
+			else:
+				shooting = true
+				GameManager.bullets_in_clip -= 1
+				SignalBus.bullet_fired.emit()
+				play_shoot_animation()
 		
-	if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
-		if GameManager.bullets_in_clip <= 0:
+		if Input.is_action_just_pressed("reload") and GameManager.in_arena:
 			shooting = true
 			play_reload_animation()
-		else:
-			shooting = true
-			GameManager.bullets_in_clip -= 1
-			SignalBus.bullet_fired.emit()
-			play_shoot_animation()
-	
-	if Input.is_action_just_pressed("reload") and GameManager.in_arena:
-		shooting = true
-		play_reload_animation()
+		
+		move_player()
 	
 	move_arm()
-	move_player()
+
 
 func _physics_process(delta: float) -> void:
 	move_camera(delta)
@@ -269,18 +273,20 @@ func shoot_enemy(enemy_body_part : Node3D):
 	print("BANG!")
 	if enemy_body_part:
 		enemy = enemy_body_part.get_parent()
-	if enemy_body_part and enemy is Enemy or enemy_body_part and enemy is TestOre:
+	if enemy_body_part and enemy is Enemy or enemy_body_part and enemy is TestOre or enemy_body_part and enemy is BabyBullet:
 		#if not enemy.is_boss:
 			#GameManager.total_shots_hit += 1
 			#SignalBus.increment_hits_count.emit()
 		var seen_enemy = enemy_body_part.get_parent()
 
-		if enemy_body_part is EnemyBodyCollider and seen_enemy.can_hurt:
+		if enemy_body_part is EnemyBodyCollider and enemy is Enemy and seen_enemy.can_hurt:
 			seen_enemy.damage_enemy()
-		elif enemy_body_part is HeadCollider and seen_enemy.can_hurt:
+		elif enemy_body_part is HeadCollider and enemy is Enemy and seen_enemy.can_hurt:
 			seen_enemy.head_shot_kill()
 		elif enemy_body_part is OreCollider:
 			seen_enemy.damage_ore()
+		elif enemy_body_part is EnemyBodyCollider and enemy is BabyBullet:
+			enemy.queue_free()
 	#else:
 		#SignalBus.reset_hits_count.emit()
 	
@@ -422,3 +428,8 @@ func play_reload_animation() -> void:
 	GameManager.bullets_in_clip = GameManager.magazine
 	SignalBus.bullet_fired.emit()
 	shooting = false
+
+
+func face_boss_spawn_area() -> void:
+	target_location = look_at_point_1
+	GameManager.can_move = false

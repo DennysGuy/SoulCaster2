@@ -22,6 +22,10 @@ class_name HUD extends CanvasLayer
 
 @onready var round_timer_label: WaveTimerLabel = $RoundTimerLabel
 
+const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
+const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
+
+
 const XP_MULTIPLIER_FACTOR : float = 1.2
 const BASE_XP_AMOUNT : int = 50
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -60,6 +64,9 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if round_started:
+		if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
+			round_progress_bar.value = round_progress_bar.max_value - 2
+		
 		if round_progress_bar.value < round_progress_bar.max_value:
 			round_progress_bar.value += delta
 			
@@ -74,12 +81,8 @@ func _physics_process(delta: float) -> void:
 			if GameManager.round_number < GameManager.MAX_ROUND and !round_ended:
 				SignalBus.round_ended.emit()
 				end_round()
+
 				
-			else:
-				GameManager.round_number = -1
-				GameManager.half_way_point = false
-				GameManager.three_quarter_way_point = false
-				get_tree().change_scene_to_file("res://src/Scenes/Hub.tscn")
 
 func update_level() -> void:
 	level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
@@ -147,9 +150,12 @@ func end_round() -> void:
 	if GameManager.round_number > -1:
 		var round_diamond : RoundDiamond = round_diamond_container.get_child(GameManager.round_number)
 		round_diamond.fill_diamond()
+	
+	GameManager.round_number += 1	
 	if GameManager.round_number < GameManager.MAX_ROUND:
-		GameManager.round_number += 1
 		animation_player.play("RoundCountDown")
+	else:
+		start_boss_fight()
 	
 func kill_all_enemies() -> void:
 	SignalBus.round_ended.emit()
@@ -171,3 +177,24 @@ func decrease_time_label(amount : int) -> void:
 	
 func add_progress() -> void:
 	progress_bar.value += PlayerStats.player_stats["Progress Speed"]
+
+func start_boss_fight() -> void:
+	round_timer_label.zero_out_timer()
+	SignalBus.face_boss_area.emit()
+	await get_tree().create_timer(2.0).timeout
+	SignalBus.boss_fight_started.emit()
+	await get_tree().create_timer(2.0).timeout
+	fill_boss_bar()
+	round_timer_label.set_time(90,0)
+	animation_player.play("BossCountDown")
+	
+func fill_boss_bar() -> void:
+	round_progress_bar.add_theme_stylebox_override("fill", BOSS_STYLE)
+	round_progress_bar.max_value = 800
+	var tween : Tween = create_tween()
+	await tween.tween_property(round_progress_bar, "value", round_progress_bar.max_value, 3.0).finished
+
+func start_fight() -> void:
+	GameManager.can_move = true
+	round_timer_label.start_timer()
+	SignalBus.combat_engaged.emit()

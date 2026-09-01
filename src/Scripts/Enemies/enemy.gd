@@ -28,7 +28,6 @@ var prev_state : State
 @export var head_shot_dead : State
 @export var reflect_state : State
 
-
 @onready var state_machine : StateMachine = $StateMachine
 @onready var hurt_states : Array[State] = [hurt_1_state, hurt_2_state]
 
@@ -41,7 +40,6 @@ func _process(delta: float) -> void:
 	if !player:
 		player = get_tree().get_first_node_in_group("Player")
 
-		
 func kill_enemy(killed_by_grenade : bool = false) -> void:
 	if not alive:
 		return

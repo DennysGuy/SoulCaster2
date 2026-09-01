@@ -101,3 +101,8 @@ func set_timer() -> void:
 	seconds = PlayerStats.player_stats["Starting Timer"]
 	milliseconds = 0
 	set_label()
+
+func zero_out_timer() -> void:
+	seconds = 0
+	milliseconds = 0
+	set_label()
