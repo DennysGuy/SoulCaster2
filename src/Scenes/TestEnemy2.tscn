@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://daevnrr3byn22" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_pursue_state.gd" id="4_16i0a"]
 [ext_resource type="AudioStream" uid="uid://dco3s2di2bx06" path="res://Assets/Audio/RabidRatHurt3.wav" id="4_niopx"]
 [ext_resource type="Script" uid="uid://db3c7w8r75xoq" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_hurt_1.gd" id="5_45i6o"]
+[ext_resource type="Shader" uid="uid://dckiap2vdruhu" path="res://src/Scenes/hitflash.gdshader" id="6_45i6o"]
 [ext_resource type="Script" uid="uid://c23yhki7863by" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_hurt_2.gd" id="6_niopx"]
 [ext_resource type="Script" uid="uid://bfjj6wufm7403" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_dead.gd" id="7_e4k35"]
 [ext_resource type="Script" uid="uid://b577hi4520t0u" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_attack.gd" id="8_nbx1m"]
@@ -145,9 +146,17 @@ bind/22/name = &"paw.l"
 bind/22/bone = -1
 bind/22/pose = Transform3D(0.99969655, 0.007469254, -0.023474785, 0.024372593, -0.16131213, 0.9866023, 0.0035824156, -0.98687536, -0.16144517, 0.7923577, 1.2948723, -0.119438596)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_niopx"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_45i6o")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wraaa"]
 resource_local_to_scene = true
 resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_niopx")
 cull_mode = 2
 albedo_texture = ExtResource("2_60yqc")
 roughness = 0.5
@@ -176,6 +185,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_32dmx"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Plane_003"
 _surfaces = [{
 "aabb": AABB(0.5366428, 0.4561156, -2.198357, 0.5311588, 1.7975463, 1.4407896),
@@ -196,6 +206,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bltor"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Cube"
 _surfaces = [{
 "aabb": AABB(-1.1111013, 0.44685796, -2.3872528, 2.2599287, 2.194689, 3.7973108),
@@ -216,6 +227,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2xuxc"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Cylinder_001"
 _surfaces = [{
 "aabb": AABB(-1.2092597, 2.4947164, 1.3916783, 0.67487526, 0.64049006, 0.12700474),
@@ -236,6 +248,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_14hr3"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Cylinder"
 _surfaces = [{
 "aabb": AABB(0.42082208, 2.4947164, 1.3809032, 0.6292841, 0.64049006, 0.13777983),
@@ -255,6 +268,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_uhkl3"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Cube_001"
 _surfaces = [{
 "aabb": AABB(-0.959272, 0.60038185, -0.13230196, 1.9203331, 2.339868, 3.5752678),
@@ -275,6 +289,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fu37b"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Cube_006"
 _surfaces = [{
 "aabb": AABB(0.6285502, -0.05394739, -2.1582363, 0.62705564, 0.9917774, 1.4820485),
@@ -295,6 +310,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ow72x"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Cube_004"
 _surfaces = [{
 "aabb": AABB(-1.1758232, -0.0916952, 0.18519063, 0.38921702, 0.61274827, 1.3873913),
@@ -315,6 +331,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_sx7rr"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Cube_003"
 _surfaces = [{
 "aabb": AABB(0.76204866, -0.08555375, 0.2028707, 0.39966422, 0.6082215, 1.3761061),
@@ -335,6 +352,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_o7nlp"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Cylinder_002"
 _surfaces = [{
 "aabb": AABB(-0.08622328, 0.48882625, -5.8884125, 0.32324576, 1.8027847, 4.136974),
@@ -355,6 +373,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ppdgk"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Plane"
 _surfaces = [{
 "aabb": AABB(0.70976216, 0.2620234, 0.20545253, 0.39232105, 1.5489299, 0.87934434),
@@ -375,6 +394,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7ooq6"]
+resource_local_to_scene = true
 resource_name = "rabied rat_Plane_001"
 _surfaces = [{
 "aabb": AABB(-1.1307831, 0.2823582, -0.03755749, 0.4441002, 1.5473998, 0.9232951),

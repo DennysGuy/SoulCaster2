@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://jri2wscsvt6x" path="res://Assets/CharacterHub/chest.gltf" id="6_gpfey"]
 [ext_resource type="PackedScene" uid="uid://dj6aposwf3hl3" path="res://Assets/fireplace.gltf" id="7_gdcv1"]
 [ext_resource type="PackedScene" uid="uid://b661qq3np83p6" path="res://src/Scenes/Player.tscn" id="9_ulcxc"]
+[ext_resource type="AudioStream" uid="uid://djpctdm7ekscx" path="res://Assets/Audio/HubAmbience.wav" id="12_eysaa"]
 [ext_resource type="Script" uid="uid://v8t52da5rcq" path="res://src/Scripts/fire_place.gd" id="13_4dycr"]
 [ext_resource type="PackedScene" uid="uid://xjwhti5n3ar8" path="res://src/Scenes/Menus/StatsUpgradeMenu.tscn" id="14_m0qss"]
 
@@ -203,5 +204,10 @@ theme_override_font_sizes/font_size = 32
 text = "Hold 'R' to Start Battle"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=719552097]
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=795027345]
+stream = ExtResource("12_eysaa")
+autoplay = true
+bus = &"Ambience"
 
 [editable path="Cart/Cart"]
