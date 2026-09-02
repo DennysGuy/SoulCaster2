@@ -40,3 +40,14 @@ var fortified_pistol_bullets : bool = false
 
 var fortified_pistol_rifle_cost : int = 15
 var fortified_rifle_bullets : bool = false
+
+
+func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0):
+	var player := AudioStreamPlayer.new()
+	player.stream = sound
+	player.volume_db = volume
+	player.bus = &"SFX"
+	player.pitch_scale = pitch_scale
+	add_child(player)
+	player.play()
+	player.finished.connect(player.queue_free)

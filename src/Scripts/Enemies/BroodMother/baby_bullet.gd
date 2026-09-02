@@ -4,7 +4,7 @@ class_name BabyBullet extends CharacterBody3D
 
 @onready var animation_player: AnimationPlayer = $bulletrat2/AnimationPlayer
 var attack_damage: int = 3
-var move_speed : float = 200
+var move_speed : float = 350
 var player : Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	bulletrat_2.rotation.z += 0.1
 
 	if player:
-		var direction : Vector3 = (player.global_transform.origin - global_transform.origin).normalized()
+		var direction : Vector3 = (player.point_at_marker.global_transform.origin - global_transform.origin).normalized()
 		velocity = direction * move_speed * delta
 		look_at(player.global_transform.origin, Vector3.UP)
 		move_and_slide()

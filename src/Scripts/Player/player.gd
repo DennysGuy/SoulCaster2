@@ -8,6 +8,7 @@ class_name Player extends CharacterBody3D
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera
+@onready var point_at_marker: Marker3D = $Head/PointAtMarker
 
 var target_index : int = 1
 var target_location : Marker3D
@@ -40,6 +41,24 @@ var can_shoot : bool = true
 @export var alert_arrow_2: AlertArrow
 @export var alert_arrow_3: AlertArrow
 @export var alert_arrow_4: AlertArrow
+
+const LOOKLEFT = preload("uid://b6dm6bij87ov0")
+const LOOKRIGHT = preload("uid://bp6hlgrojy4g6")
+
+const PISTOL_1 = preload("uid://d3bilne8hioau")
+const PISTOL_2 = preload("uid://d0vf5y2x0n20t")
+const PISTOL_3 = preload("uid://srtq7jkoqrnk")
+
+const RIFLE_1 = preload("uid://cu7votcgtdpnw")
+const RIFLE_2 = preload("uid://gliv55qaccva")
+const RIFLE_3 = preload("uid://canubute4csy8")
+const RIFLE_4 = preload("uid://cqfjqpj2kkt8v")
+
+const PISTOLRELOAD = preload("uid://lhw7fod3087e")
+
+
+@onready var pistol_sfx : Array[AudioStream] = [PISTOL_1,PISTOL_2,PISTOL_3]
+@onready var rifle_sfx : Array[AudioStream] = [RIFLE_1,RIFLE_2,RIFLE_3,RIFLE_4]
 
 var chosen_gun_animation_player : AnimationPlayer
 
@@ -98,6 +117,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
 			if GameManager.bullets_in_clip <= 0:
 				shooting = true
+				GameManager.play_sfx(PISTOLRELOAD)
 				play_reload_animation()
 			else:
 				shooting = true
@@ -107,6 +127,7 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("reload") and GameManager.in_arena:
 			shooting = true
+			GameManager.play_sfx(PISTOLRELOAD)
 			play_reload_animation()
 		
 		move_player()
@@ -121,11 +142,13 @@ func move_player() -> void:
 	if Input.is_action_just_pressed("rotate_left"):
 		#AudioManager.play_sfx(AudioManager.LOOKLEFT,-2)
 		print("Rotate Left")
+		GameManager.play_sfx(LOOKLEFT,-2)
 		rotate_camera_left()
 
 	if Input.is_action_just_pressed("rotate_right"):
 		#AudioManager.play_sfx(AudioManager.LOOKRIGHT,-2)
 		print("Rotate Right")
+		GameManager.play_sfx(LOOKRIGHT,-2)
 		rotate_camera_right()
 		
 	if Input.is_action_just_pressed("rotate_opposite"):
@@ -249,7 +272,9 @@ func play_shoot_animation() -> void:
 	var attack_speed : float = PlayerStats.player_stats["Attack Speed"]
 	if GameManager.rifle_owned:
 		chosen_gun_animation_player.speed_scale = attack_speed+0.3
+		GameManager.play_sfx(rifle_sfx.pick_random())
 	else:
+		GameManager.play_sfx(pistol_sfx.pick_random())
 		chosen_gun_animation_player.speed_scale = attack_speed
 	#GameManager.ammo_count -= 1
 	#SignalBus.update_ammo_count.emit()

@@ -16,7 +16,6 @@ func process_input(_event: InputEvent) -> State:
 func process_frame(_delta: float) -> State:
 	
 	timer -= 20 * _delta
-	print(timer)
 	if timer <= 0:
 		return attack_state
 	

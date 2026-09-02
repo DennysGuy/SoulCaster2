@@ -43,6 +43,8 @@ func _ready() -> void:
 	SignalBus.enemy_found.connect(update_enemy_tracker)
 	SignalBus.bullet_fired.connect(update_bullets_tracker)
 	SignalBus.player_hurt.connect(decrease_time_label)
+	SignalBus.boss_damaged.connect(update_boss_bar)
+	SignalBus.boss_defeated.connect(end_fight)
 	update_ore_count_label(0)
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
 	#round_timer.start()
@@ -197,4 +199,16 @@ func fill_boss_bar() -> void:
 func start_fight() -> void:
 	GameManager.can_move = true
 	round_timer_label.start_timer()
+
 	SignalBus.combat_engaged.emit()
+
+func update_boss_bar(value : int, max_value : int) -> void:
+	round_progress_bar.value = value
+	round_progress_bar.max_value = max_value
+
+func end_fight() -> void:
+	round_timer_label.pause_timer()
+	animation_player.play("YouWin")
+
+func go_to_hub() -> void:
+	get_tree().change_scene_to_file("uid://jgsciuanachx")

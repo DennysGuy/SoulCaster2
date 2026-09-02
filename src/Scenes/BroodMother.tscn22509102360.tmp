@@ -4583,8 +4583,6 @@ attack_state = NodePath("../Attack")
 
 [node name="Dead" type="Node" parent="StateMachine" unique_id=1871075078]
 script = ExtResource("8_r8vr8")
-animation_name = null
-move_speed = null
 
 [node name="BodyCollider" parent="." unique_id=1117758394 instance=ExtResource("5_ddb4o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.482088)

@@ -102,6 +102,9 @@ func set_timer() -> void:
 	milliseconds = 0
 	set_label()
 
+func pause_timer() -> void:
+	timer_started = false
+
 func zero_out_timer() -> void:
 	seconds = 0
 	milliseconds = 0

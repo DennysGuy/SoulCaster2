@@ -601,6 +601,9 @@ skeleton = NodePath("..")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Marker3D/GunArm/Rifle" unique_id=968461939]
 libraries/ = SubResource("AnimationLibrary_ljyij")
 
+[node name="PointAtMarker" type="Marker3D" parent="Head" unique_id=450974283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4970857)
+
 [node name="Timer" type="Timer" parent="." unique_id=1518696669]
 process_callback = 0
 one_shot = true

@@ -35,3 +35,5 @@ signal progress_added(value : float)
 signal boss_fight_started
 signal face_boss_area
 signal combat_engaged
+signal boss_damaged(health: int,max_health : int)
+signal boss_defeated

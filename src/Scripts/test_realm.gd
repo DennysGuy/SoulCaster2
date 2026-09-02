@@ -70,9 +70,11 @@ func spawn_enemy() -> void:
 		var rand_num : int = randi_range(1,100)
 		if rand_num < chance_to_bulk:
 			enemy = preload("uid://belgdl70endw6").instantiate()
+			
 		else:
 			enemy = preload("uid://be7m7tct4a7cq").instantiate()
-		
+			
+		enemy = enemy.duplicate()
 		if chosen_spawn_point.index == 1 or chosen_spawn_point.index == 3:
 			enemy.global_position = chosen_spawn_point.global_position + Vector3(randf_range(-10.0, 10.0), 0.0, 0.0)
 		else:

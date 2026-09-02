@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://drj12q7k6l4cw" path="res://src/Scripts/Enemies/BroodMother/baby_bullet.gd" id="1_if62f"]
 [ext_resource type="Texture2D" uid="uid://bi2j70pxle3n6" path="res://Assets/Broodmother/bulletrat_bullet rat.png" id="2_if62f"]
 [ext_resource type="PackedScene" uid="uid://ri2g3xgvuq8y" path="res://src/Scenes/BodyCollider.tscn" id="3_ibhuf"]
+[ext_resource type="Texture2D" uid="uid://bctaatojttowq" path="res://Assets/TestBlood.png" id="4_g4xyi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1aq1l"]
 resource_name = "ratbullet"
@@ -590,6 +591,24 @@ size = Vector3(1, 1.5008545, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_if62f"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_stb5w"]
+lifetime_randomness = 0.05
+emission_shape = 1
+emission_sphere_radius = 1.2
+gravity = Vector3(0, 0, -30)
+scale_min = 0.29999998
+scale_max = 0.59999996
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3o7r"]
+transparency = 2
+alpha_scissor_threshold = 0.543
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.37
+albedo_texture = ExtResource("4_g4xyi")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sv71e"]
+material = SubResource("StandardMaterial3D_c3o7r")
+
 [node name="BabyBullet" type="CharacterBody3D" unique_id=489923489]
 collision_layer = 16
 collision_mask = 128
@@ -759,5 +778,14 @@ shape = SubResource("BoxShape3D_g4xyi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=961045470]
 shape = SubResource("BoxShape3D_if62f")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=486778165]
+transform = Transform3D(1, 0, 0, 0, -0.94112885, 0.33804807, 0, -0.33804807, -0.94112885, 0, 0, -1.7244041)
+amount = 15
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_stb5w")
+draw_passes = 2
+draw_pass_1 = SubResource("QuadMesh_sv71e")
+draw_pass_2 = null
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

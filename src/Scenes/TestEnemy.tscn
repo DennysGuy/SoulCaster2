@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ds2ittnu83gyj" path="res://src/Scripts/Enemies/test_enemy.gd" id="1_3gpk3"]
 [ext_resource type="Script" uid="uid://cthjv8ulf3hq6" path="res://src/Scripts/Statemachine/state_machine.gd" id="2_bltgf"]
+[ext_resource type="Shader" uid="uid://dckiap2vdruhu" path="res://src/Scenes/hitflash.gdshader" id="2_ciqlr"]
+[ext_resource type="AudioStream" uid="uid://dphvxrlt6lwy0" path="res://Assets/Audio/RatHurt1.wav" id="2_ki4ie"]
 [ext_resource type="Texture2D" uid="uid://ubh07qhwxrwd" path="res://Assets/Rat/rat(2)_rat.png" id="2_t0wus"]
 [ext_resource type="Script" uid="uid://daevnrr3byn22" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_pursue_state.gd" id="3_mlvyd"]
+[ext_resource type="AudioStream" uid="uid://87vr7i0tryph" path="res://Assets/Audio/RatHurt2.wav" id="3_povfk"]
 [ext_resource type="Script" uid="uid://db3c7w8r75xoq" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_hurt_1.gd" id="4_26ton"]
+[ext_resource type="AudioStream" uid="uid://btibuqih2ed0j" path="res://Assets/Audio/RatHurt3.wav" id="4_vxdn8"]
 [ext_resource type="Script" uid="uid://c23yhki7863by" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_hurt_2.gd" id="5_6c4ay"]
 [ext_resource type="Script" uid="uid://bfjj6wufm7403" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_dead.gd" id="6_0opyq"]
 [ext_resource type="Script" uid="uid://b577hi4520t0u" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_attack.gd" id="7_nlc7f"]
@@ -15,14 +19,45 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1qra"]
 size = Vector3(1.704895, 1.7050629, 1.5903931)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7yi0"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t0wus"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_n8flt"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n8flt"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_n8flt")
+shader_parameter/flash = 1.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0wus"]
+resource_local_to_scene = true
 resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_n8flt")
 cull_mode = 2
-albedo_texture = ExtResource("2_t0wus")
+albedo_texture = SubResource("CompressedTexture2D_t0wus")
 roughness = 0.5
+emission_enabled = true
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pdvc1"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cube_005"
 _surfaces = [{
 "aabb": AABB(-1.0784012, -0.053947434, -2.1582363, 0.6270557, 0.9917775, 1.4820485),
@@ -32,13 +67,144 @@ _surfaces = [{
 "index_count": 120,
 "index_data": PackedByteArray("LgABAAIALgAAAAEALgAvAAAALgADAC8AAgADAC4AAgAEAAMABQAGAAcABQAIAAYACQAKAAsACQAwAAoAMAAMAAoAMAANAAwACQANADAACQAxAA0ADgAPABAADgARAA8AEgAyABQAEgAzADIAMwATADIAMwAVABMANAAXADUANAAZABcAFgA0ADUAFgA1ABgAGgAbABwAGgAdABsAHgA2ACAAHgA3ADYANwAfADYANwAhAB8AIgA4ACQAIgA5ADgAOQAjADgAOQAlACMAJgA6ACgAJgA7ADoAOwAnADoAOwApACcAKgArACwAKgAtACsA"),
 "lods": [0.38492686, PackedByteArray("AAABAAIAAgADAAAAAgAEAAMABQAGAAcABQAIAAYACQAKAAsACQAMAAoACQANAAwADgAPABAADgARAA8AEgATABQAEgAVABMAFgAXABgAFgAZABcAGgAbABwAGgAdABsAHgAfACAAHgAhAB8AIgAjACQAIgAlACMAJgAnACgAJgApACcAKgArACwAKgAtACsA")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_t0wus"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("FQAAAAAAAAD//wAAAAAAABUAAAAAAAAA//8AAAAAAAAVAAAAAAAAAP//AAAAAAAAFQAWAAAAAAD/f/9/AAAAABUAFgAAAAAA/3//fwAAAAAVAAAAAAAAAP//AAAAAAAAFQAAAAAAAAD//wAAAAAAABUAAAAAAAAA//8AAAAAAAAVAAAAAAAAAP//AAAAAAAAFQAAAAAAAAD//wAAAAAAABUAAAAAAAAA//8AAAAAAAAVAAAAAAAAAP//AAAAAAAAFQAWAAAAAAD/f/9/AAAAABUAFgAAAAAA/3//fwAAAAAVAAAAAAAAAP//AAAAAAAAFQAAAAAAAAD//wAAAAAAABUAAAAAAAAA//8AAAAAAAAVAAAAAAAAAP//AAAAAAAAFQAWAAAAAAD/f/9/AAAAABYAAAAAAAAA//8AAAAAAAAVABYAAAAAAP9//38AAAAAFgAAAAAAAAD//wAAAAAAABUAAAAAAAAA//8AAAAAAAAVABYAAAAAAP9//38AAAAAFQAAAAAAAAD//wAAAAAAABUAFgAAAAAA/3//fwAAAAAVAAAAAAAAAP//AAAAAAAAFQAWAAAAAAD/f/9/AAAAABUAAAAAAAAA//8AAAAAAAAVABYAAAAAAP9//38AAAAAFQAWAAAAAAD/f/9/AAAAABYAAAAAAAAA//8AAAAAAAAVABYAAAAAAP9//38AAAAAFgAAAAAAAAD//wAAAAAAABUAFgAAAAAA/3//fwAAAAAWAAAAAAAAAP//AAAAAAAAFQAWAAAAAAD/f/9/AAAAABYAAAAAAAAA//8AAAAAAAAVABYAAAAAAP9//38AAAAAFgAAAAAAAAD//wAAAAAAABUAFgAAAAAA/3//fwAAAAAWAAAAAAAAAP//AAAAAAAAFgAAAAAAAAD//wAAAAAAABYAAAAAAAAA//8AAAAAAAAWAAAAAAAAAP//AAAAAAAAFgAAAAAAAAD//wAAAAAAABUAAAAAAAAA//8AAAAAAAAVAAAAAAAAAP//AAAAAAAAFQAAAAAAAAD//wAAAAAAABUAAAAAAAAA//8AAAAAAAAWAAAAAAAAAP//AAAAAAAAFgAAAAAAAAD//wAAAAAAABUAAAAAAAAA//8AAAAAAAAVAAAAAAAAAP//AAAAAAAAFgAAAAAAAAD//wAAAAAAABYAAAAAAAAA//8AAAAAAAAWAAAAAAAAAP//AAAAAAAAFgAAAAAAAAD//wAAAAAAABYAAAAAAAAA//8AAAAAAAAWAAAAAAAAAP//AAAAAAAA"),
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 60,
 "vertex_data": PackedByteArray("sxL2vggn7D4rnAbAwhbnvnqHYz8uyfq/KdkEv2kQQD9aYsS/o0Y3vyZQB72R1aC/b6czvwl7PT6jZ6C/sxL2vggn7D4rnAbAhrxlv6EVcD/36ADAwhbnvnqHYz8uyfq/fzptv6uhAj+LIArAfzptv6uhAj+LIArATgp3v5CeTD8aa8u/hrxlv6EVcD/36ADAH4GAv4S0RT5UoKS/uVCCv3HUzLxCDqW/hrxlv6EVcD/36ADAKdkEv2kQQD9aYsS/whbnvnqHYz8uyfq/Tgp3v5CeTD8aa8u/H4GAv4S0RT5UoKS/Ctw1v7BIRT2kGi2/b6czvwl7PT6jZ6C/+S+JvxKtmD0U/12/sxL2vggn7D4rnAbAuVCCv3HUzLxCDqW/fzptv6uhAj+LIArAo0Y3vyZQB72R1aC/Tgp3v5CeTD8aa8u/b6czvwl7PT6jZ6C/KdkEv2kQQD9aYsS/H4GAv4S0RT5UoKS/uVCCv3HUzLxCDqW/+S+JvxKtmD0U/12/H4GAv4S0RT5UoKS/DQmKvwnN4bwGZl6/o0Y3vyZQB72R1aC/DQmKvwnN4bwGZl6/uVCCv3HUzLxCDqW/M443v/z3XL2XgS2/b6czvwl7PT6jZ6C/M443v/z3XL2XgS2/o0Y3vyZQB72R1aC/Ctw1v7BIRT2kGi2/DQmKvwnN4bwGZl6/Ctw1v7BIRT2kGi2/+S+JvxKtmD0U/12/M443v/z3XL2XgS2/IlcMv+U4pT6C0da/cnFEv+w6Cj08psC/R4h+vzNVvj5C2t2/kqV7v+ZXaz3FDMS/Fn8svxKCKT49b2O/ZzOHv/66Qz6CrnC/cnFEv+w6Cj08psC/kqV7v+ZXaz3FDMS/ZzOHv/66Qz6CrnC/AQOJv6qg3LxfinG/AQOJv6qg3LxfinG/SR4wvwo0V70aS2S/SR4wvwo0V70aS2S/Fn8svxKCKT49b2O/mebKMZA8JWeIzPXJIdCHdUquZ6WtyrtiNrytNGEfSmiLvGSgzspFaZnmyjG4VmpqjTye3aEtD3GIzPXJ1st+cNYPeytaldJw1g97K2FX7BfUUA6wt7sQLY08nt0/kEcp3jxNqayofigNOXg3F1DyLo08nt1J29smSq5npTPVVGKIzPXJCrcCV9RQDrA4uvow3jxNqQUxaGt6oCqZJi2hOou8ZKBhUlUoGkKPm4kr0WmZ5soxHwlGYA05eDdZPsUf1g97KzQ8xDQ2vK00Xi1KYdRQDrDNunQvi7xkoJnNO2lKrmelPNktYt48Tal+qNkoDTl4N+NPxi4aQo+b4qqBI948TamoqIYo+0YqVfFwjiM2vK00bC1DYftGKlWQKbwYDTl4N8g9QR8/mi5Spis/S4u8ZKCyykVpP5ouUldG9n82vK00DR70aHqgKplXqr1m+0YqVWYbhBd6oCqZajjOLRpCj5v1CftnP5ouUhAuD1VP16xbETvgdKS3WBlADsRXrAL2b1p4zxwZNEws60DiLe+1/rNyRJIjhU4qv/groGCkt1gZbBPPVRk0TCw5PQsnhU4qv+extzKjNz4/tlZuLKM3Pj9FQKobob0RPgw2JWOhvRE+GyTgbO+1/rM53ZJm")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="Skin" id="Skin_q6ed3"]
+resource_name = "Skin"
+bind_count = 23
+bind/0/name = &"pelvis"
+bind/0/bone = -1
+bind/0/pose = Transform3D(0.99996823, 0.00091859227, -0.007919223, 0.007954668, -0.18102738, 0.9834459, -0.0005302105, -0.98347765, -0.18102902, -0.0047697052, 2.2004325, 1.7390991)
+bind/1/name = &"chest"
+bind/1/bone = -1
+bind/1/pose = Transform3D(1, -2.2839745e-07, -6.800363e-08, -2.354582e-09, -0.2797096, 0.9600845, -2.3805035e-07, -0.9600846, -0.2797097, 3.9285138e-07, 0.88798964, 1.6576838)
+bind/2/name = &"head_2"
+bind/2/bone = -1
+bind/2/pose = Transform3D(1, -1.9837624e-07, 1.3225082e-07, -2.6122038e-09, 0.5547003, 0.8320502, -2.4113308e-07, -0.8320503, 0.5547001, 2.0865204e-07, -1.4211378, 0.8856823)
+bind/3/name = &"jaw"
+bind/3/bone = -1
+bind/3/pose = Transform3D(1, -2.3691557e-07, -2.6728934e-08, -3.7468086e-09, -0.11210914, 0.99369574, -2.3881063e-07, -0.9936959, -0.11210927, 3.773157e-07, -0.5158196, 1.5931087)
+bind/4/name = &"upperfront.l"
+bind/4/bone = -1
+bind/4/pose = Transform3D(0.9988897, -0.04665757, -0.0065184277, -0.04711038, -0.98875815, -0.14190875, 0.00017598085, 0.14205825, -0.9898582, 0.99224836, 1.7018733, 0.29531652)
+bind/5/name = &"lowerfront.l"
+bind/5/bone = -1
+bind/5/pose = Transform3D(1, 2.1036176e-07, 1.2480012e-07, -9.341406e-09, -0.51012766, 0.86009866, 2.5157283e-07, -0.8600988, -0.5101276, 0.97027713, -0.084978886, 0.56597656)
+bind/6/name = &"paw.l.001"
+bind/6/bone = -1
+bind/6/pose = Transform3D(1, 2.3726102e-07, 2.3465363e-08, -1.1389397e-08, -0.098420836, 0.9951449, 2.4080146e-07, -0.99514496, -0.09842088, 0.97027725, -1.0682135, 0.12594563)
+bind/7/name = &"upperfront.r"
+bind/7/bone = -1
+bind/7/pose = Transform3D(0.9988896, 0.046657585, 0.0065184184, 0.04711039, -0.9887581, -0.14190876, -0.00017597804, 0.14205821, -0.9898581, -0.99224824, 1.7018733, 0.29531655)
+bind/8/name = &"lowerfront.r"
+bind/8/bone = -1
+bind/8/pose = Transform3D(1, -2.0802015e-07, -1.2270071e-07, -3.769557e-09, -0.5101276, 0.86009866, -2.4189484e-07, -0.86009884, -0.5101276, -0.97027695, -0.08497884, 0.5659766)
+bind/9/name = &"paw.r.001"
+bind/9/bone = -1
+bind/9/pose = Transform3D(1, -2.3726103e-07, -2.3465356e-08, -2.7258604e-09, -0.0984208, 0.99514484, -2.401148e-07, -0.99514496, -0.09842087, -0.97027713, -1.0682133, 0.12594575)
+bind/10/name = &"ear.r"
+bind/10/bone = -1
+bind/10/pose = Transform3D(0.550489, -0.834335, -0.02910589, 0.8347428, 0.5506277, 0.0037398261, 0.012906302, -0.026354384, 0.99956924, 1.9514238, -1.9160165, -1.3767009)
+bind/11/name = &"ear.l"
+bind/11/bone = -1
+bind/11/pose = Transform3D(0.5504889, 0.834335, 0.029105844, -0.83474267, 0.5506274, 0.0037395884, -0.012906412, -0.026354477, 0.9995692, -1.8649151, -1.9721289, -1.3790097)
+bind/12/name = &"nose"
+bind/12/bone = -1
+bind/12/pose = Transform3D(0.9997448, 0.0059470236, 0.021799032, -0.021436803, -0.055365026, 0.99823606, 0.0071434365, -0.9984485, -0.055223506, -0.08947049, -2.4288774, 1.8320664)
+bind/13/name = &"tail1"
+bind/13/bone = -1
+bind/13/pose = Transform3D(-0.99999994, -3.6367396e-07, 1.01686e-07, 4.7833026e-10, -0.26801756, -0.963414, 3.7365922e-07, -0.96341425, 0.26801747, -0.011811116, -1.2163905, 2.5271819)
+bind/14/name = &"tail2"
+bind/14/bone = -1
+bind/14/pose = Transform3D(-0.9999999, -3.3412744e-07, 2.0000587e-07, -1.11228346e-10, -0.51360714, -0.85802543, 3.8533508e-07, -0.85802567, 0.51360697, -0.011810876, -1.6357262, 3.070037)
+bind/15/name = &"tail3"
+bind/15/bone = -1
+bind/15/pose = Transform3D(-0.9999999, -3.580964e-07, 1.5300479e-07, 4.4119014e-10, -0.39291018, -0.91957676, 3.8535748e-07, -0.919577, 0.39291006, -0.011811048, -3.4302132, 2.6305034)
+bind/16/name = &"tail4"
+bind/16/bone = -1
+bind/16/pose = Transform3D(-0.99999994, -3.8264787e-07, 7.227791e-08, 1.3046346e-09, -0.18560676, -0.98262405, 3.8554774e-07, -0.98262435, 0.18560673, -0.011811445, -4.9097137, 1.6107473)
+bind/17/name = &"upperbackleg.r"
+bind/17/bone = -1
+bind/17/pose = Transform3D(0.9997874, 0.012682653, -0.016257988, 0.007954668, -0.964667, -0.2633514, -0.019023543, 0.26316586, -0.9645629, -0.9598535, 1.4978731, -1.9500566)
+bind/18/name = &"lowerbackleg.r"
+bind/18/bone = -1
+bind/18/pose = Transform3D(0.9844103, 0.093794495, -0.14879204, 0.17544354, -0.5837063, 0.7927837, -0.0124921035, -0.80652905, -0.5910623, -1.2402018, 1.6529678, -0.67364943)
+bind/19/name = &"paw.r"
+bind/19/bone = -1
+bind/19/pose = Transform3D(0.9996966, -0.007469234, 0.023474783, -0.02437258, -0.16131185, 0.98660237, -0.0035824156, -0.98687494, -0.16144517, -1.0275738, 1.300607, -0.11859576)
+bind/20/name = &"upperbackleg.l"
+bind/20/bone = -1
+bind/20/pose = Transform3D(0.99978733, -0.012682609, 0.016257975, -0.007954632, -0.9646672, -0.2633512, 0.01902352, 0.26316583, -0.96456295, 0.7246159, 1.4997451, -1.9545326)
+bind/21/name = &"lowerbackleg.l"
+bind/21/bone = -1
+bind/21/pose = Transform3D(0.9844103, -0.093794525, 0.14879206, -0.17544352, -0.5837066, 0.79278374, 0.012492137, -0.8065292, -0.5910623, 1.0085822, 1.6942477, -0.6765888)
+bind/22/name = &"paw.l"
+bind/22/bone = -1
+bind/22/pose = Transform3D(0.99969655, 0.007469254, -0.023474785, 0.024372593, -0.16131213, 0.9866023, 0.0035824156, -0.98687536, -0.16144517, 0.7923577, 1.2948723, -0.119438596)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ki4ie"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_q6ed3"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ciqlr"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_q6ed3")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_povfk"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_ciqlr")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_ki4ie")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_t0wus"]
+resource_local_to_scene = true
+resource_name = "rat(2)_Plane_002"
+_surfaces = [{
+"aabb": AABB(-0.9701247, 0.4561156, -2.198357, 0.61068654, 1.7975463, 1.3380575),
+"attribute_data": PackedByteArray("xaJQPxxNPD/hejY/oIJNP8mSOT/iHyc/2WpcP9D3LT+PZlo/YDZNPy7WUT+uZkE/BMJRP5BETz/wCFQ/glQiPws0QT+CGAI/B3BLPy6pBD83lD4/mjsbPwdwSz8ioiM/EOUwP95tKj8+gB0/Y25FP7wrFj/k9CQ/lWITP5BETz9PBDI/SpL7PnF8Oj+iACY/TwQyP26MIz9+mjw/3g75PpZmQj/waxs/vc1JPzA/Ej9PBDI/Vg09P2pMRj+QRE8/87kyPxSnDj/4dD0/CtEQP8BaPD8iGSE/BcJRP16tLD8r5lc/JmkiPxGpDT8IoTc/EOUwPzUuPT9NYQs/ROlHP0DpQj8KFxE/agZFP9hIAj/hFj8/tOYQPxthST8i1ho/XuBEP6IAJj8wHU4/fbBLPyDaQT/I8TI/TwQyP5QVLD/rnjk/9N8QP3HEOD+uLPk++JEzP5x4Hz+ZZzk/lFkgP0uJNz8WQSU/P59VPwLCLD+de1w/njI/P2mzVT9Se0E/dLVUP3yCTj93TSg/NqwkPw=="),
+"bone_aabbs": [AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(-0.9701247, 0.4561156, -2.198357, 0.61068654, 1.7975463, 1.3380575)],
+"format": 34359745559,
+"index_count": 132,
+"index_data": PackedByteArray("IAAIACEAIAAiAAgAIQAVACAAIQAJABUAIAAVACMAFAAiACAAIAAjABQAFAAKACIAFAAjAAsAFAALACQAFwAAACUAAAAXABYAFgAXAAEAAAAWACYAFgACACYAFgAnAAIAKAAQACkAKAAYABAAKAAqABgAKQAZACgAKQATABkAGQArACgAKAArACoAGQAaACsAKwAaABEAKwARACwALAAqACsALAASACoALQAuAC8ALQADAC4ALgAwAC8ALgAEADAALwAwAAYALwAGAAUALwAFABsALwAbAC0ALQAbAAcALQAHABwAHgAxAAwAMQAeAB0AMQAdAA4AHQAeAA0ADQAfAB0ADQAPAB8A"),
+"lods": [0.4136174, PackedByteArray("FAAKAAgACAAVABQAFAAVAAsACAAJABUAAAAWAAIAAAAXABYAFgAXAAEAGAAQABMAEwAZABgAGQAaABgAGAAaABIAEQASABoAAwAEAAUABAAGAAUABQAbAAMAAwAbAAcAAwAHABwADAAdAA4ADAAeAB0AHQAeAA0ADQAfAB0ADQAPAB8A"), 0.6204261, PackedByteArray("AAABAAIAAwAEAAUABAAGAAUAAwAFAAcACAAJAAoACgAJAAsADAANAA4ADQAPAA4AEAARABIAEwARABAA")],
+"material": SubResource("StandardMaterial3D_povfk"),
+"name": "rat",
+"primitive": 3,
+"skin_data": PackedByteArray("FAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAA="),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 50,
+"vertex_data": PackedByteArray("uahDv7fb5z/qngnAGFp4v9f1zT+yRIG/2KBRv9CHIz8QpQTAuahDv7fb5z/qngnA2KBRv9CHIz8QpQTA3uTovrVhhj+ne/6/PSsBv4LdBj+Y0wPAIcHbvu1/D0Aw0c6/vboZv5MUyT+ZPFy/GFp4v9f1zT+yRIG/IcHbvu1/D0Aw0c6/uahDv7fb5z/qngnAIcHbvu1/D0Aw0c6/3uTovrVhhj+ne/6/vboZv5MUyT+ZPFy/PSsBv4LdBj+Y0wPAGFp4v9f1zT+yRIG/PSsBv4LdBj+Y0wPA2KBRv9CHIz8QpQTAvboZv5MUyT+ZPFy/o6ASv/87EEBcQdK/+/Viv3QaBECdxbG/Y1h1v/e1hT/TLai/+/Viv3QaBECdxbG/Y1h1v/e1hT/TLai/7xwWv4BbZD+I65y/0nwTv/yH6T4r+tS/SQi4vvw66D/M+QrAo6ASv/87EEBcQdK/7xwWv4BbZD+I65y/SQi4vvw66D/M+QrA0nwTv/yH6T4r+tS/jWomv99NCEBGJ6S/z3o+v7iMyj/xHGO/eqoBv8yRB0Aat6C/NYJSv0qyCkDNGdi/N8QAvyGz6T/isQzANYJSv0qyCkDNGdi/gfhXv+aBlj/buv+/u9tgv4l7FD9wKN+/At06v8tLZz+0W6C/z3o+v7iMyj/xHGO/u9tgv4l7FD9wKN+/Yc4uv6L1/T7eh9a/zHwcv1UUET9ymgTAN8QAvyGz6T/isQzAgfhXv+aBlj/buv+/gjIZv9rZhz/q9QDAzHwcv1UUET9ymgTAeqoBv8yRB0Aat6C/ca+paj/NhBpY9dNGQUI7CX6sUpz9wXUJca+pasw5NkF+rFKcPUH3MNI21In5AegXvlcwregTy16bQpI+8TXmHCwBViuJLtc9WPXTRuUcCmubQpI+ajYkHXGvqWo7TZNcm0KSPpoe6xDSNtSJ6U1KBiwBViuKs5wQvlcwrV3CfghY9dNGpqlUSb5XMK0YsFdIfqxSnEGppmcsAVYrEfVpWZGIYxrfC19Rt9I4QE0zYWms5mi2ni5GEbfSOEBJzXkJrOZottCiqVNkJSrZ7eRsImJGD94ivY4sOkSWbmAWBxqRiGMaBgvhS2QlKtnMy20gOkSWbvhHiRJiRg/eI/C6IB++rxHoDP1PWvjVH7kKh1RqKgcsa0GJKti19EjDOn1kQ370XkEl8FnYtfRIPuPXF2/BhoJ5x4cQCsqkuqkg6w580w/k29K3SFr41R810nZHCsqkunynlFeatZ7fY8dvSpeLh62VuU1YQ370XuwJhjtvwYaCYEnGOJp5c4TXC9s2l4uHrTYY4jVqKgcsK8M8AQ==")
 }]
 blend_shape_mode = 0
 
@@ -115,27 +281,45 @@ bind/22/name = &"paw.l"
 bind/22/bone = -1
 bind/22/pose = Transform3D(0.99969655, 0.007469254, -0.023474785, 0.024372593, -0.16131213, 0.9866023, 0.0035824156, -0.98687536, -0.16144517, 0.7923577, 1.2948723, -0.119438596)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_hoe60"]
-resource_name = "rat(2)_Plane_002"
-_surfaces = [{
-"aabb": AABB(-0.9701247, 0.4561156, -2.198357, 0.61068654, 1.7975463, 1.3380575),
-"attribute_data": PackedByteArray("xaJQPxxNPD/hejY/oIJNP8mSOT/iHyc/2WpcP9D3LT+PZlo/YDZNPy7WUT+uZkE/BMJRP5BETz/wCFQ/glQiPws0QT+CGAI/B3BLPy6pBD83lD4/mjsbPwdwSz8ioiM/EOUwP95tKj8+gB0/Y25FP7wrFj/k9CQ/lWITP5BETz9PBDI/SpL7PnF8Oj+iACY/TwQyP26MIz9+mjw/3g75PpZmQj/waxs/vc1JPzA/Ej9PBDI/Vg09P2pMRj+QRE8/87kyPxSnDj/4dD0/CtEQP8BaPD8iGSE/BcJRP16tLD8r5lc/JmkiPxGpDT8IoTc/EOUwPzUuPT9NYQs/ROlHP0DpQj8KFxE/agZFP9hIAj/hFj8/tOYQPxthST8i1ho/XuBEP6IAJj8wHU4/fbBLPyDaQT/I8TI/TwQyP5QVLD/rnjk/9N8QP3HEOD+uLPk++JEzP5x4Hz+ZZzk/lFkgP0uJNz8WQSU/P59VPwLCLD+de1w/njI/P2mzVT9Se0E/dLVUP3yCTj93TSg/NqwkPw=="),
-"bone_aabbs": [AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(-0.9701247, 0.4561156, -2.198357, 0.61068654, 1.7975463, 1.3380575)],
-"format": 34359745559,
-"index_count": 132,
-"index_data": PackedByteArray("IAAIACEAIAAiAAgAIQAVACAAIQAJABUAIAAVACMAFAAiACAAIAAjABQAFAAKACIAFAAjAAsAFAALACQAFwAAACUAAAAXABYAFgAXAAEAAAAWACYAFgACACYAFgAnAAIAKAAQACkAKAAYABAAKAAqABgAKQAZACgAKQATABkAGQArACgAKAArACoAGQAaACsAKwAaABEAKwARACwALAAqACsALAASACoALQAuAC8ALQADAC4ALgAwAC8ALgAEADAALwAwAAYALwAGAAUALwAFABsALwAbAC0ALQAbAAcALQAHABwAHgAxAAwAMQAeAB0AMQAdAA4AHQAeAA0ADQAfAB0ADQAPAB8A"),
-"lods": [0.4136174, PackedByteArray("FAAKAAgACAAVABQAFAAVAAsACAAJABUAAAAWAAIAAAAXABYAFgAXAAEAGAAQABMAEwAZABgAGQAaABgAGAAaABIAEQASABoAAwAEAAUABAAGAAUABQAbAAMAAwAbAAcAAwAHABwADAAdAA4ADAAeAB0AHQAeAA0ADQAfAB0ADQAPAB8A"), 0.6204261, PackedByteArray("AAABAAIAAwAEAAUABAAGAAUAAwAFAAcACAAJAAoACgAJAAsADAANAA4ADQAPAA4AEAARABIAEwARABAA")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
-"name": "rat",
-"primitive": 3,
-"skin_data": PackedByteArray("FAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAAUAAAAAAAAAP//AAAAAAAAFAAAAAAAAAD//wAAAAAAABQAAAAAAAAA//8AAAAAAAA="),
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 50,
-"vertex_data": PackedByteArray("uahDv7fb5z/qngnAGFp4v9f1zT+yRIG/2KBRv9CHIz8QpQTAuahDv7fb5z/qngnA2KBRv9CHIz8QpQTA3uTovrVhhj+ne/6/PSsBv4LdBj+Y0wPAIcHbvu1/D0Aw0c6/vboZv5MUyT+ZPFy/GFp4v9f1zT+yRIG/IcHbvu1/D0Aw0c6/uahDv7fb5z/qngnAIcHbvu1/D0Aw0c6/3uTovrVhhj+ne/6/vboZv5MUyT+ZPFy/PSsBv4LdBj+Y0wPAGFp4v9f1zT+yRIG/PSsBv4LdBj+Y0wPA2KBRv9CHIz8QpQTAvboZv5MUyT+ZPFy/o6ASv/87EEBcQdK/+/Viv3QaBECdxbG/Y1h1v/e1hT/TLai/+/Viv3QaBECdxbG/Y1h1v/e1hT/TLai/7xwWv4BbZD+I65y/0nwTv/yH6T4r+tS/SQi4vvw66D/M+QrAo6ASv/87EEBcQdK/7xwWv4BbZD+I65y/SQi4vvw66D/M+QrA0nwTv/yH6T4r+tS/jWomv99NCEBGJ6S/z3o+v7iMyj/xHGO/eqoBv8yRB0Aat6C/NYJSv0qyCkDNGdi/N8QAvyGz6T/isQzANYJSv0qyCkDNGdi/gfhXv+aBlj/buv+/u9tgv4l7FD9wKN+/At06v8tLZz+0W6C/z3o+v7iMyj/xHGO/u9tgv4l7FD9wKN+/Yc4uv6L1/T7eh9a/zHwcv1UUET9ymgTAN8QAvyGz6T/isQzAgfhXv+aBlj/buv+/gjIZv9rZhz/q9QDAzHwcv1UUET9ymgTAeqoBv8yRB0Aat6C/ca+paj/NhBpY9dNGQUI7CX6sUpz9wXUJca+pasw5NkF+rFKcPUH3MNI21In5AegXvlcwregTy16bQpI+8TXmHCwBViuJLtc9WPXTRuUcCmubQpI+ajYkHXGvqWo7TZNcm0KSPpoe6xDSNtSJ6U1KBiwBViuKs5wQvlcwrV3CfghY9dNGpqlUSb5XMK0YsFdIfqxSnEGppmcsAVYrEfVpWZGIYxrfC19Rt9I4QE0zYWms5mi2ni5GEbfSOEBJzXkJrOZottCiqVNkJSrZ7eRsImJGD94ivY4sOkSWbmAWBxqRiGMaBgvhS2QlKtnMy20gOkSWbvhHiRJiRg/eI/C6IB++rxHoDP1PWvjVH7kKh1RqKgcsa0GJKti19EjDOn1kQ370XkEl8FnYtfRIPuPXF2/BhoJ5x4cQCsqkuqkg6w580w/k29K3SFr41R810nZHCsqkunynlFeatZ7fY8dvSpeLh62VuU1YQ370XuwJhjtvwYaCYEnGOJp5c4TXC9s2l4uHrTYY4jVqKgcsK8M8AQ==")
-}]
-blend_shape_mode = 0
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ciqlr"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_te7gt"]
+[sub_resource type="Shader" id="Shader_ki4ie"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q6ed3"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_ki4ie")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n8flt"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_q6ed3")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_ciqlr")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ciqlr"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Plane_003"
 _surfaces = [{
 "aabb": AABB(0.5366428, 0.4561156, -2.198357, 0.5311588, 1.7975463, 1.4407896),
@@ -145,7 +329,7 @@ _surfaces = [{
 "index_count": 132,
 "index_data": PackedByteArray("IAAIACEAIAAiAAgAIQAVACAAIQAJABUAIAAVACMAFAAiACAAIAAjABQAFAAKACIAFAAjAAsAFAALACQAFwAAACUAAAAXABYAFgAXAAEAAAAWACYAFgACACYAFgAnAAIAKAAQACkAKAAYABAAKAAqABgAKQAZACgAKQATABkAGQArACgAKAArACoAGQAaACsAKwAaABEAKwARACwALAAqACsALAASACoALQAuAC8ALQADAC4ALgAwAC8ALgAEADAALwAwAAYALwAGAAUALwAFABsALwAbAC0ALQAbAAcALQAHABwAHgAxAAwAMQAeAB0AMQAdAA4AHQAeAA0ADQAfAB0ADQAPAB8A"),
 "lods": [0.3971768, PackedByteArray("FAAKAAgACAAVABQAFAAVAAsACAAJABUAAAAWAAIAAAAXABYAFgAXAAEAGAAQABMAEwAZABgAGQAaABgAGAAaABIAEQASABoAAwAEAAUABAAGAAUABQAbAAMAAwAbAAcAAwAHABwADAAdAA4ADAAeAB0AHQAeAA0ADQAfAB0ADQAPAB8A"), 0.63096213, PackedByteArray("AAABAAIAAwAEAAUABAAGAAUAAwAFAAcACAAJAAoACgAJAAsADAANAA4ADQAPAA4AEAARABIAEwARABAA")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_n8flt"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("EQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAARAAAAAAAAAP//AAAAAAAAEQAAAAAAAAD//wAAAAAAABEAAAAAAAAA//8AAAAAAAA="),
@@ -155,7 +339,45 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q6ed3"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_povfk"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ki4ie"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_povfk")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ki4ie"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_ki4ie")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_q6ed3")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_mkwaa"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cube"
 _surfaces = [{
 "aabb": AABB(-1.1111013, 0.44685796, -2.3872528, 2.2599287, 2.194689, 3.7973108),
@@ -165,7 +387,7 @@ _surfaces = [{
 "index_count": 288,
 "index_data": PackedByteArray("AAAwAEUAAABGADAARQAwAEcARQBHAAIAMAABAEcAMABIAAEARgBIADAARgADAEgAMQBJAA4AMQBKAEkASgAPAEkASgAyAA8ASwAyAEoAMwBKADEASwBKADMAMwAxAEwANABLADMATQAzAEwANAAzAE0ATQBMADUATQA1AAwATQAMADYANABNADYANAA2AA0ABABOAAYABABPAE4ATwAFAE4ATwAHAAUANwBQAAgANwBRAFAACABQAFIACABSAAoAUAAJAFIAUAALAAkAUQALAFAAUQA4AAsAOQBTABAAOQBUAFMAEABTAFUAEABVABIAUwARAFUAUwATABEAVAATAFMAVAA6ABMAFABWABYAFAA7AFYAOwAVAFYAOwAXABUAPABXAFgAPgA8AFgAPgAYADwAPABZAFcAWABXAFoAWABaABoAVwAZAFoAVwA9ABkAWQA9AFcAWQAbAD0AHAA/AFsAHABcAD8AWwA/AEAAWwBAAB8APwAeAEAAPwBdAB4AXABdAD8AXAAdAF0AIABeAF8AIABgAF4AXwBeAGEAXwBhACIAXgAjAGEAXgBBACMAYABBAF4AYAAhAEEAJwBiAGMAJwBkAGIAYwBiAGUAYwBlACQAYgAmAGUAYgBmACYAZABmAGIAZAAlAGYAKwBnACgAKwBoAGcAKABnAGkAKABpAEIAZwAqAGkAZwBqACoAaABqAGcAaAApAGoALABDAEQALABrAEMARABDAGwARABsAC8AawAuAEMAawAtAC4A"),
 "lods": [0.73297185, PackedByteArray("AAAwAAIAAgAwAAEAAAADADAAMAADAAEAMQAyAA4AMgAPAA4AMwAyADEANAAyADMANQAzADEANAAzADUANAA1ADYANQAMADYANAA2AA0ABAAFAAYABAAHAAUANwA4AAgAOAALAAgACAALAAkACAAJAAoAOQA6ABAAOgATABAAEAATABEAEAARABIAFAA7ABYAOwAVABYAOwAXABUAPAA9ABoAGgA9ABkAPAAbAD0APgA8ABoAPgAYADwAHAAdAD8APwAdAB4APwAeAEAAHAA/AEAAHABAAB8AIAAhAEEAIABBACIAQQAjACIAJAAlACYAJwAlACQAKAAqAEIAKAApACoAKwApACgALABDAEQARABDAC8ALAAtAEMALQAuAEMA"), 1.8677888, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADQAPAA4AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAeAB8AIAAhACIAIQAjACIAJAAlACYAJwAlACQAKAApACoAKwApACgALAAtAC4ALAAuAC8A")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_ki4ie"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("AQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD/f/9/AAAAAAAAAAAAAAAA//8AAAAAAAABAAAAAAAAAP9//38AAAAAAQAAAAAAAAD/f/9/AAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA/3//fwAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD/f/9/AAAAAAEAAAAAAAAA/3//fwAAAAABAAAAAAAAAP9//38AAAAAAAAAAAAAAAD//wAAAAAAAAEAAAAAAAAA/3//fwAAAAABAAAAAAAAAP9//38AAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA/3//fwAAAAABAAAAAAAAAP9//38AAAAAAQAAAAAAAAD/f/9/AAAAAAEAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAA=="),
@@ -175,7 +397,45 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xgh2c"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_vxdn8"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_povfk"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_vxdn8")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ocgvo"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_povfk")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_xgh2c")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_fklym"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cylinder_001"
 _surfaces = [{
 "aabb": AABB(-1.2092597, 2.4947164, 1.3916783, 0.67487526, 0.64049006, 0.12700474),
@@ -185,7 +445,7 @@ _surfaces = [{
 "index_count": 84,
 "index_data": PackedByteArray("DgAPAAIADgAQAA8ADwAQAAgAEAAOAAAAAAAOAAkAEAAAAAEABAALABEABgARAAsAEgARAAYAEgAEABEABgALABMACgAEABIAEwALABQAEwAUAAwACwANABQADAAUAA0ABAANAAsADAANAAcACgAVAAQAFgAVAAoAFwAEABUAFgAXABUADQAEABcABQAXABYABwANAAMABwADAAUADQAXAAMABQADABcA"),
 "lods": [0.1954669, PackedByteArray("CAAAAAEACAAJAAAACQAIAAIAAwAEAAoABQADAAoACgAEAAYABwADAAUABgAEAAsABgALAAwADQAEAAMABwANAAMABAANAAsADAANAAcADAALAA0A"), 0.5724368, PackedByteArray("AAABAAIAAwAEAAUABQAEAAYABAADAAYABwADAAUABwAGAAMA")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_ocgvo"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("CwAAAAAAAAD//wAAAAAAAAsAAAAAAAAA//8AAAAAAAALAAAAAAAAAP//AAAAAAAACwAAAAAAAAD//wAAAAAAAAsAAAAAAAAA//8AAAAAAAALAAAAAAAAAP//AAAAAAAACwAAAAAAAAD//wAAAAAAAAsAAAAAAAAA//8AAAAAAAALAAAAAAAAAP//AAAAAAAACwAAAAAAAAD//wAAAAAAAAsAAAAAAAAA//8AAAAAAAALAAAAAAAAAP//AAAAAAAACwAAAAAAAAD//wAAAAAAAAsAAAAAAAAA//8AAAAAAAALAAAAAAAAAP//AAAAAAAACwAAAAAAAAD//wAAAAAAAAsAAAAAAAAA//8AAAAAAAALAAAAAAAAAP//AAAAAAAACwAAAAAAAAD//wAAAAAAAAsAAAAAAAAA//8AAAAAAAALAAAAAAAAAP//AAAAAAAACwAAAAAAAAD//wAAAAAAAAsAAAAAAAAA//8AAAAAAAALAAAAAAAAAP//AAAAAAAA"),
@@ -195,7 +455,45 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vxdn8"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_xgh2c"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vxdn8"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_xgh2c")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgh2c"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_vxdn8")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_vxdn8")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_04y75"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cylinder"
 _surfaces = [{
 "aabb": AABB(0.42082208, 2.4947164, 1.3799723, 0.6748753, 0.64049006, 0.13871074),
@@ -204,7 +502,7 @@ _surfaces = [{
 "format": 34359745559,
 "index_count": 84,
 "index_data": PackedByteArray("AAABAAIAAAADAAEAAQADAAQAAwAAAAUABQAAAAYAAwAFAAcACAAJAAoACAALAAkACQALAAwACwAIAA0ADQAIAA4ACwANAA8AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A"),
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_xgh2c"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("CgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAACgAAAAAAAAD//wAAAAAAAAoAAAAAAAAA//8AAAAAAAAKAAAAAAAAAP//AAAAAAAA"),
@@ -214,7 +512,45 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_womb6"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n8flt"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_pnynp"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xgh2c"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_pnynp")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6ed3"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_xgh2c")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_n8flt")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ki4ie"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cube_001"
 _surfaces = [{
 "aabb": AABB(-0.959272, 0.60038185, -0.13230196, 1.9203331, 2.339868, 3.4088895),
@@ -224,7 +560,7 @@ _surfaces = [{
 "index_count": 312,
 "index_data": PackedByteArray("AABOAAIAAAAEAAMAAAADAE8AAABPAE4AAgAIAAAAAgAJAAgACQAKAAgACQALAAoATgBQAAIATwAFAE4ATwABAAUATgAFAFEATgBRAAYAUABOAAYAUAAGAAcADABSAA4ADABTAFIAUwAPAFIAUwANAA8AEABUAFUAVAASAFUAEABWAFQAVABXABIAVgBYAFQAWABXAFQAVgATAFgAWAARAFcAFABZABYAFgBZABUAFgAVAFoAFAAXAFkAFwAYAFkAFwAZABgAGQBbABgAFwAaABkAFwBcABoAGQAcAFsAHAAbAFsAHAAdABsALwAxAF0AMQAvAF4AMQBeAF8AXwBgADEAYABfAGEAYABhAGIAYgAuAGAALgBiAGMALgBjADAALwBkAGUALwBmAGQAZgAyADMAZgAzAGcAZgBnAGQAZABnADQANABoAGQANAA1AGgAHwBpAGoAHwBrAGkAagBpACAAagAgAB4AaQBsACAAawBtAGkAaQBtAGwAbQAiAGwAawAhAG0AbQBuACIAIQBuAG0AIQAjAG4AbwAlACYAbwBwACUAJABwAG8AJAAnAHAAKABxACYAcQAoACoAcQAqACsAKwApAHEAKQArACwAKQAsAC0ANgA3ADgANwA2AHIANwByADoAcgA7ADoAOwByADkAOwA5ADwAPQA+AD8APQBzAD4AcwBAAD4AcwBBAEAAdABDAEQAdABCAEMARQBGAEcARQBIAEYARQBIAEkARQBJAEoATAB1AHYAdwB1AEwAdQB3AHgAdQB4AHkAeAB3AHoAewB4AHoAfAB4AHsAfAB7AE0AeAB8AH0AfQB8AEsA"),
 "lods": [0.9207056, PackedByteArray("AAABAAIAAAADAAEAAAAEAAMAAQAFAAIAAgAFAAYABwACAAYAAgAIAAAAAgAJAAgACQAKAAgACQALAAoADAANAA4ADQAPAA4AEAARABIAEAATABEAFAAVABYAFAAXABUAFwAYABUAFwAZABgAFwAaABkAGQAbABgAGQAcABsAHAAdABsAHgAfACAAHwAhACAAIQAiACAAIQAjACIAJAAlACYAJAAnACUAKAApACYAKQAoACoAKQAqACsAKQArACwAKQAsAC0ALgAvADAALwAuADEAMgAzAC8ALwAzADQANAA1AC8ANgA3ADgANwA2ADkANwA5ADoAOQA7ADoAOwA5ADwAPQA+AD8APQBAAD4APQBBAEAAQgBDAEQARQBGAEcARQBIAEYARQBIAEkARQBJAEoASwBMAE0A")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_q6ed3"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("DAADAAAAAAD/f/9/AAAAAAIAAAAAAAAA//8AAAAAAAACAAwAAAAAAP9//38AAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAADAAIAAAAAAP9//38AAAAAAgAMAAAAAAD/f/9/AAAAAAwAAwACAAAAVVVVVVVVAAADAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAADAAIAAAAAAP9//38AAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAADAADAAIAAABVVVVVVVUAAAMAAAAAAAAA//8AAAAAAAAMAAMAAAAAAP9//38AAAAAAwAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAMAAgAAAFVVVVVVVQAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAwAAAAAAP9//38AAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAACAAwAAAAAAP9//38AAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIADAAAAAAA/3//fwAAAAACAAwAAAAAAP9//38AAAAAAgAAAAAAAAD//wAAAAAAAAMAAgAAAAAA/3//fwAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIADAAAAAAA/3//fwAAAAACAAwAAAAAAP9//38AAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAACAAwAAAAAAP9//38AAAAAAgADAAAAAAD/f/9/AAAAAAIAAAAAAAAA//8AAAAAAAADAAIAAAAAAP9//38AAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAMAAAAAAD/f/9/AAAAAAMAAAAAAAAA//8AAAAAAAADAAwAAAAAAP9//38AAAAADAAAAAAAAAD//wAAAAAAAAwAAAAAAAAA//8AAAAAAAAMAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAwAAAAAAP9//38AAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAwAAAAAAP9//38AAAAAAgAMAAAAAAD/f/9/AAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAA"),
@@ -234,7 +570,45 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_povfk"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_ocgvo"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnynp"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_ocgvo")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxdn8"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_pnynp")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_povfk")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_smv5o"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cube_006"
 _surfaces = [{
 "aabb": AABB(0.6285502, -0.05394739, -2.1582363, 0.62705564, 0.9917774, 1.4820485),
@@ -244,7 +618,7 @@ _surfaces = [{
 "index_count": 120,
 "index_data": PackedByteArray("LgABAAIALgAAAAEALgAvAAAALgADAC8AAgADAC4AAgAEAAMABQAGAAcABQAIAAYACQAKAAsACQAwAAoAMAAMAAoAMAANAAwACQANADAACQAxAA0ADgAPABAADgARAA8AEgAyABQAEgAzADIAMwATADIAMwAVABMANAAXADUANAAZABcAFgA0ADUAFgA1ABgAGgAbABwAGgAdABsAHgA2ACAAHgA3ADYANwAfADYANwAhAB8AIgA4ACQAIgA5ADgAOQAjADgAOQAlACMAJgA6ACgAJgA7ADoAOwAnADoAOwApACcAKgArACwAKgAtACsA"),
 "lods": [0.38492665, PackedByteArray("AAABAAIAAgADAAAAAgAEAAMABQAGAAcABQAIAAYACQAKAAsACQAMAAoACQANAAwADgAPABAADgARAA8AEgATABQAEgAVABMAFgAXABgAFgAZABcAGgAbABwAGgAdABsAHgAfACAAHgAhAB8AIgAjACQAIgAlACMAJgAnACgAJgApACcAKgArACwAKgAtACsA")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_vxdn8"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("EgAAAAAAAAD//wAAAAAAABIAAAAAAAAA//8AAAAAAAASAAAAAAAAAP//AAAAAAAAEgATAAAAAAD/f/9/AAAAABIAEwAAAAAA/3//fwAAAAASAAAAAAAAAP//AAAAAAAAEgAAAAAAAAD//wAAAAAAABIAAAAAAAAA//8AAAAAAAASAAAAAAAAAP//AAAAAAAAEgAAAAAAAAD//wAAAAAAABIAAAAAAAAA//8AAAAAAAASAAAAAAAAAP//AAAAAAAAEgATAAAAAAD/f/9/AAAAABIAEwAAAAAA/3//fwAAAAASAAAAAAAAAP//AAAAAAAAEgAAAAAAAAD//wAAAAAAABIAAAAAAAAA//8AAAAAAAASAAAAAAAAAP//AAAAAAAAEgATAAAAAAD/f/9/AAAAABMAAAAAAAAA//8AAAAAAAASABMAAAAAAP9//38AAAAAEwAAAAAAAAD//wAAAAAAABIAAAAAAAAA//8AAAAAAAASABMAAAAAAP9//38AAAAAEgAAAAAAAAD//wAAAAAAABIAEwAAAAAA/3//fwAAAAASAAAAAAAAAP//AAAAAAAAEgATAAAAAAD/f/9/AAAAABIAAAAAAAAA//8AAAAAAAASABMAAAAAAP9//38AAAAAEgATAAAAAAD/f/9/AAAAABMAAAAAAAAA//8AAAAAAAASABMAAAAAAP9//38AAAAAEwAAAAAAAAD//wAAAAAAABIAEwAAAAAA/3//fwAAAAATAAAAAAAAAP//AAAAAAAAEgATAAAAAAD/f/9/AAAAABMAAAAAAAAA//8AAAAAAAASABMAAAAAAP9//38AAAAAEwAAAAAAAAD//wAAAAAAABIAEwAAAAAA/3//fwAAAAATAAAAAAAAAP//AAAAAAAAEwAAAAAAAAD//wAAAAAAABMAAAAAAAAA//8AAAAAAAATAAAAAAAAAP//AAAAAAAAEwAAAAAAAAD//wAAAAAAABIAAAAAAAAA//8AAAAAAAASAAAAAAAAAP//AAAAAAAAEgAAAAAAAAD//wAAAAAAABIAAAAAAAAA//8AAAAAAAATAAAAAAAAAP//AAAAAAAAEwAAAAAAAAD//wAAAAAAABIAAAAAAAAA//8AAAAAAAASAAAAAAAAAP//AAAAAAAAEwAAAAAAAAD//wAAAAAAABMAAAAAAAAA//8AAAAAAAATAAAAAAAAAP//AAAAAAAAEwAAAAAAAAD//wAAAAAAABMAAAAAAAAA//8AAAAAAAATAAAAAAAAAP//AAAAAAAA"),
@@ -254,7 +628,25 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_am16d"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lxjgp"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_ciqlr")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7yi0"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_lxjgp")
+cull_mode = 2
+albedo_texture = ExtResource("2_t0wus")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xgh2c"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cube_004"
 _surfaces = [{
 "aabb": AABB(-1.1758232, -0.0916952, 0.18519063, 0.38921702, 0.61274827, 1.3873913),
@@ -274,7 +666,8 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_fa8pt"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ocgvo"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cube_003"
 _surfaces = [{
 "aabb": AABB(0.76204866, -0.08555375, 0.2028707, 0.39966422, 0.6082215, 1.3761061),
@@ -294,7 +687,44 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_w444w"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ocgvo"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_ns0wp"]
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7vqy"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_ns0wp")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pnynp"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_g7vqy")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_ocgvo")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ns0wp"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Cylinder_002"
 _surfaces = [{
 "aabb": AABB(-0.08622328, 0.48882625, -5.8884125, 0.32324576, 1.8027847, 4.136974),
@@ -304,7 +734,7 @@ _surfaces = [{
 "index_count": 204,
 "index_data": PackedByteArray("NAANADUANAA2AA0ADAA0ADUADAA1AA4ADQA3ADUADQA4ADcAOAA5ADcAOAA6ADkAOgAPADkAOgAQAA8AEAARAA8AEAASABEAOwA8ABYAPAA9ABYAOwA+ADwAPAA/AD0APwBAAD0APwBBAEAAQQAXAEAAQQAYABcAGAAZABcAGAAaABkAOwATAD4AOwAUABMAEwAUABUAFAA7AEIAQwAkAEQAQwAmACQAJABFAEQAJABGAEUARgBHAEUARgBIAEcASAAlAEcASAAnACUAJwAoACUAJwApACgAAAABAAIAAAADAAEABQBJAAYABAAFAAYABAAHAAUABQBKAEkASgBLAEkASgBMAEsATAAIAEsATAAJAAgACQAKAAgACQALAAoATQBOAE8AUABNAE8AUABPAB0ATQBRAE4AUQAcAE4AUQAbABwAHgBSACAAHgBTAFIAUwBUAFIAUwBVAFQAVQAfAFQAVQAhAB8AIQAiAB8AIQAjACIAKgArACwAKgAtACsALgAvADAALwAuADEAMQAuADIALwAxADMA"),
 "lods": [0.9739745, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUABQAIAAYABQAJAAgACQAKAAgACQALAAoADAANAA4ADQAPAA4ADQAQAA8AEAARAA8AEAASABEAEwAUABUAFgAUABMAEwAXABYAEwAYABcAGAAZABcAGAAaABkAGwAcAB0AHgAfACAAHgAhAB8AIQAiAB8AIQAjACIAJAAlACYAJAAnACUAJwAoACUAJwApACgAKgArACwAKgAtACsALgAvADAALwAuADEAMQAuADIALwAxADMA")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_pnynp"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("DQAAAAAAAAD//wAAAAAAAA0AAAAAAAAA//8AAAAAAAANAAAAAAAAAP//AAAAAAAADQAAAAAAAAD//wAAAAAAAA0AAAAAAAAA//8AAAAAAAANAAAAAAAAAP//AAAAAAAADQAAAAAAAAD//wAAAAAAAA0AAAAAAAAA//8AAAAAAAAPABAAAAAAAP9//38AAAAADwAQAAAAAAD/f/9/AAAAABAAAAAAAAAA//8AAAAAAAAQAAAAAAAAAP//AAAAAAAADQAAAAAAAAD//wAAAAAAAA0AAAAAAAAA//8AAAAAAAANAAAAAAAAAP//AAAAAAAADwAQAAAAAAD/f/9/AAAAAA8AEAAAAAAA/3//fwAAAAAQAAAAAAAAAP//AAAAAAAAEAAAAAAAAAD//wAAAAAAAA0AAAAAAAAA//8AAAAAAAANAAAAAAAAAP//AAAAAAAADQAAAAAAAAD//wAAAAAAAA0AAAAAAAAA//8AAAAAAAAPABAAAAAAAP9//38AAAAADwAQAAAAAAD/f/9/AAAAABAAAAAAAAAA//8AAAAAAAAQAAAAAAAAAP//AAAAAAAADwAQAAAAAAD/f/9/AAAAAA8AEAAAAAAA/3//fwAAAAANAAAAAAAAAP//AAAAAAAADQAAAAAAAAD//wAAAAAAAA8AEAAAAAAA/3//fwAAAAANAAAAAAAAAP//AAAAAAAADwAQAAAAAAD/f/9/AAAAABAAAAAAAAAA//8AAAAAAAAQAAAAAAAAAP//AAAAAAAADQAAAAAAAAD//wAAAAAAAA8AEAAAAAAA/3//fwAAAAANAAAAAAAAAP//AAAAAAAADwAQAAAAAAD/f/9/AAAAABAAAAAAAAAA//8AAAAAAAAQAAAAAAAAAP//AAAAAAAADwAQAAAAAAD/f/9/AAAAABAAAAAAAAAA//8AAAAAAAAPABAAAAAAAP9//38AAAAAEAAAAAAAAAD//wAAAAAAABAAAAAAAAAA//8AAAAAAAAQAAAAAAAAAP//AAAAAAAAEAAAAAAAAAD//wAAAAAAABAAAAAAAAAA//8AAAAAAAAQAAAAAAAAAP//AAAAAAAAEAAAAAAAAAD//wAAAAAAAA0AAAAAAAAA//8AAAAAAAANAAAAAAAAAP//AAAAAAAADQAAAAAAAAD//wAAAAAAAA0ADgAAAAAA/3//fwAAAAANAA4AAAAAAP9//38AAAAADgAPAAAAAAD/f/9/AAAAAA4ADwAAAAAA/3//fwAAAAANAAAAAAAAAP//AAAAAAAADQAAAAAAAAD//wAAAAAAAA0ADgAAAAAA/3//fwAAAAANAAAAAAAAAP//AAAAAAAADQAOAAAAAAD/f/9/AAAAAA4ADwAAAAAA/3//fwAAAAAOAA8AAAAAAP9//38AAAAADQAAAAAAAAD//wAAAAAAAA0AAAAAAAAA//8AAAAAAAANAAAAAAAAAP//AAAAAAAADQAOAAAAAAD/f/9/AAAAAA0ADgAAAAAA/3//fwAAAAAOAA8AAAAAAP9//38AAAAADgAPAAAAAAD/f/9/AAAAAA0ADgAAAAAA/3//fwAAAAANAA4AAAAAAP9//38AAAAADgAPAAAAAAD/f/9/AAAAAA4ADwAAAAAA/3//fwAAAAANAA4AAAAAAP9//38AAAAADgAPAAAAAAD/f/9/AAAAAA0ADgAAAAAA/3//fwAAAAANAAAAAAAAAP//AAAAAAAADgAPAAAAAAD/f/9/AAAAAA0ADgAAAAAA/3//fwAAAAANAA4AAAAAAP9//38AAAAADgAPAAAAAAD/f/9/AAAAAA4ADwAAAAAA/3//fwAAAAA="),
@@ -314,7 +744,44 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_f7g8u"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g7vqy"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_ciqlr"]
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ocgvo"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_ciqlr")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrkbl"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_ocgvo")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_g7vqy")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lxjgp"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Plane"
 _surfaces = [{
 "aabb": AABB(0.70976216, 0.2620234, 0.20545253, 0.39232105, 1.5489299, 0.87934434),
@@ -324,7 +791,7 @@ _surfaces = [{
 "index_count": 132,
 "index_data": PackedByteArray("IQAiABsAIQARACIAGwAQACEAGwAiAB0AGwAjABAAJAAjABsAGwAdACQAJAAcACMAJAATABwAJAAlABMAHQAlACQAHQASACUAAwAAACYAAAADABgAGAADACcAAAAYACgAGAACACgAGAABAAIAKQAqACsAKQAFACoAKwAqAAcAKwAHACwAKwAEACkAKwAGAAQALQAuAC8ALQAIAC4ALgAwAC8ALgAJADAALwAwAAoALwAKABkALwAZABoALwAaAC0ALQAaAAsALQALADEAHgAPAA0ADwAeAB8ADwAfADIAHwAeACAAIAAMAB8AIAAOAAwAMwAVADQAMwAXABUANAAUADMANAAWABQA"),
 "lods": [0.37950677, PackedByteArray("AAAYAAIAGAABAAIAAAADABgABAAFAAYABgAFAAcACAAJABkACQAKABkAGQAaAAgACAAaAAsAGwAQABEAGwAcABAAGwARAB0AGwATABwAHQASABsAGwASABMAHgAPAA0ADwAeAB8AHwAeACAAIAAMAB8AIAAOAAwAFAAVABYAFAAXABUA"), 0.65954006, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABgAFAAcACAAJAAoACgALAAgADAANAA4ADwANAAwAEAARABIAEAASABMAFAAVABYAFAAXABUA")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_xrkbl"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("BwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAAHAAAAAAAAAP//AAAAAAAABwAAAAAAAAD//wAAAAAAAAcAAAAAAAAA//8AAAAAAAA="),
@@ -334,7 +801,44 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4n4ta"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ns0wp"]
+load_path = "res://.godot/imported/rat(2)_rat.png-8f7545b434b03c94b8a9d5d265932bf4.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_lxjgp"]
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, depth_draw_never;
+
+uniform float flash : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 custom_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D custom_texture;
+
+void fragment() {
+    vec3 tex_color = texture(custom_texture, UV).rgb; // sample texture
+    vec3 final_color = mix(vec3(0.0), custom_color * tex_color, flash);
+    ALBEDO = final_color;
+    ALPHA = flash;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ns0wp"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_lxjgp")
+shader_parameter/flash = 0.0
+shader_parameter/custom_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7vqy"]
+resource_local_to_scene = true
+resource_name = "rat"
+next_pass = SubResource("ShaderMaterial_ns0wp")
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_ns0wp")
+roughness = 0.5
+emission_enabled = true
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xrkbl"]
+resource_local_to_scene = true
 resource_name = "rat(2)_Plane_001"
 _surfaces = [{
 "aabb": AABB(-1.1307831, 0.2823582, -0.03755749, 0.4441002, 1.5473998, 0.9232951),
@@ -344,7 +848,7 @@ _surfaces = [{
 "index_count": 132,
 "index_data": PackedByteArray("IQAiABwAIQATACIAHAAQACEAHAAiAB0AHAAjABAAJAAjABwAHAAdACQAJAAlACMAJAASACUAJAAmABIAHQAmACQAHQARACYAAwAAACcAAAADACgAKAADACkAAAAoACoAKAACACoAKAABAAIAKwAsAC0AKwAFACwALQAsAAcALQAHABgALQAEACsALQAGAAQAGQAuAC8AGQAIAC4ALgAwAC8ALgAJADAALwAwAAoALwAKABoALwAaABsALwAbABkAGQAbAAsAGQALADEAHgAPAA0ADwAeAB8ADwAfADIAHwAeACAAIAAMAB8AIAAOAAwAMwAVADQAMwAXABUANAAUADMANAAWABQA"),
 "lods": [0.3776795, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABgAFAAcABgAHABgAGQAJABoACQAKABoAGQAIAAkAGgAbABkAGQAbAAsAHAAQABMAHAASABAAHAATAB0AHAAdABIAHQARABIAHgAPAA0ADwAeAB8AHwAeACAAIAAMAB8AIAAOAAwAFAAVABYAFAAXABUA"), 0.5834316, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABgAFAAcACAAJAAoACgALAAgADAANAA4ADwANAAwAEAARABIAEAATABEAFAAVABYAFAAXABUA")],
-"material": SubResource("StandardMaterial3D_l7yi0"),
+"material": SubResource("StandardMaterial3D_g7vqy"),
 "name": "rat",
 "primitive": 3,
 "skin_data": PackedByteArray("BAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAAEAAAAAAAAAP//AAAAAAAABAAAAAAAAAD//wAAAAAAAAQAAAAAAAAA//8AAAAAAAA="),
@@ -812,6 +1316,488 @@ tracks/30/path = NodePath("rat/Skeleton3D:paw.l")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/keys = PackedFloat32Array(0, 1, -0.2302106, 0.011012581, -0.09758722, 0.9681728, 0.033333335, 1, -0.22501582, 0.0059580347, -0.09388828, 0.96980274, 0.06666667, 1, -0.21804655, -0.00080020714, -0.08893297, 0.9718776, 0.1, 1, -0.20975223, -0.008809494, -0.083046086, 0.97418165, 0.13333334, 1, -0.20059015, -0.017614584, -0.07655642, 0.9765206, 0.16666667, 1, -0.19102742, -0.026758105, -0.0697975, 0.9787343, 0.2, 1, -0.18190193, -0.035439786, -0.06336122, 0.980633, 0.23333333, 1, -0.17382188, -0.04309163, -0.057673268, 0.98214203, 0.26666668, 1, -0.16727835, -0.04926437, -0.053074457, 0.9832468, 0.3, 1, -0.16276275, -0.053511668, -0.049904738, 0.9839484, 0.33333334, 1, -0.1607634, -0.055389, -0.04850231, 0.9842432, 0.36666667, 1, -0.1632684, -0.05303657, -0.050259523, 0.9838723, 0.4, 1, -0.16884309, -0.047790222, -0.054173566, 0.98299205, 0.43333334, 1, -0.17679106, -0.04028361, -0.05976224, 0.9816061, 0.46666667, 1, -0.1864124, -0.031154003, -0.06654081, 0.9797205, 0.53333336, 1, -0.2075519, -0.010928137, -0.081486285, 0.9747629, 0.56666666, 1, -0.21703053, -0.0017832858, -0.088211246, 0.9721694, 0.6, 1, -0.2247945, 0.005742988, -0.093730785, 0.9698707, 0.6333333, 1, -0.23020476, 0.011006868, -0.097583026, 0.9681747, 0.6666667, 1, -0.23262642, 0.01336819, -0.09930893, 0.9673903)
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("rat/Skeleton3D/backpawlow_l:scale")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("rat/Skeleton3D/backpawup_l:scale")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("rat/Skeleton3D/backpawup_r:scale")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("rat/Skeleton3D/body:scale")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("rat/Skeleton3D/ear_l:scale")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("rat/Skeleton3D/ear_r:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("rat/Skeleton3D/head:scale")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("rat/Skeleton3D/lowerpawback_r:scale")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("rat/Skeleton3D/lowerpawfront_l:scale")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("rat/Skeleton3D/lowerpawfront_r:scale")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("rat/Skeleton3D/tail:scale")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("rat/Skeleton3D/upperpawfrojnt_r:scale")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("rat/Skeleton3D/upperpawfront_l:scale")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13524213, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1)]
+}
+tracks/44/type = "method"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("..")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_t0wus"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rat/Skeleton3D/backpawlow_l:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rat/Skeleton3D/backpawup_l:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("rat/Skeleton3D/backpawup_r:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("rat/Skeleton3D/body:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("rat/Skeleton3D/ear_l:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("rat/Skeleton3D/ear_r:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("rat/Skeleton3D/head:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("rat/Skeleton3D/lowerpawback_r:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("rat/Skeleton3D/lowerpawfront_l:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("rat/Skeleton3D/lowerpawfront_r:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("rat/Skeleton3D/tail:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("rat/Skeleton3D/upperpawfrojnt_r:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("rat/Skeleton3D/upperpawfront_l:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("rat/Skeleton3D/backpawlow_l:mesh:surface_0/material:emission")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("rat/Skeleton3D/backpawup_l:mesh:surface_0/material:emission")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("rat/Skeleton3D/backpawup_r:mesh:surface_0/material:emission")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("rat/Skeleton3D/body:mesh:surface_0/material:emission")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("rat/Skeleton3D/ear_l:mesh:surface_0/material:emission")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("rat/Skeleton3D/ear_r:mesh:surface_0/material:emission")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("rat/Skeleton3D/head:mesh:surface_0/material:emission")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("rat/Skeleton3D/lowerpawback_r:mesh:surface_0/material:emission")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("rat/Skeleton3D/lowerpawfront_l:mesh:surface_0/material:emission")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("rat/Skeleton3D/lowerpawfront_r:mesh:surface_0/material:emission")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("rat/Skeleton3D/tail:mesh:surface_0/material:emission")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("rat/Skeleton3D/upperpawfrojnt_r:mesh:surface_0/material:emission")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("rat/Skeleton3D/upperpawfront_l:mesh:surface_0/material:emission")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_q2yk7"]
 resource_name = "Run"
@@ -1255,6 +2241,329 @@ tracks/30/path = NodePath("rat/Skeleton3D:paw.l")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/keys = PackedFloat32Array(0, 1, -0.23262642, 0.01336819, -0.09930893, 0.9673903)
+tracks/31/type = "method"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("..")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("rat/Skeleton3D/backpawlow_l:scale")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.12852126),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("rat/Skeleton3D/backpawup_l:scale")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.12852126),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("rat/Skeleton3D/backpawup_r:scale")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("rat/Skeleton3D/body:scale")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("rat/Skeleton3D/ear_l:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("rat/Skeleton3D/ear_r:scale")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("rat/Skeleton3D/head:scale")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("rat/Skeleton3D/lowerpawback_r:scale")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("rat/Skeleton3D/lowerpawfront_l:scale")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("rat/Skeleton3D/lowerpawfront_r:scale")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("rat/Skeleton3D/tail:scale")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("rat/Skeleton3D/upperpawfrojnt_r:scale")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("rat/Skeleton3D/upperpawfront_l:scale")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("rat/Skeleton3D/backpawlow_l:mesh:surface_0/material:emission")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("rat/Skeleton3D/backpawup_l:mesh:surface_0/material:emission")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("rat/Skeleton3D/backpawup_r:mesh:surface_0/material:emission")
+tracks/47/interp = 1
+tracks/47/loop_wrap = true
+tracks/47/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("rat/Skeleton3D/body:mesh:surface_0/material:emission")
+tracks/48/interp = 1
+tracks/48/loop_wrap = true
+tracks/48/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("rat/Skeleton3D/ear_l:mesh:surface_0/material:emission")
+tracks/49/interp = 1
+tracks/49/loop_wrap = true
+tracks/49/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("rat/Skeleton3D/ear_r:mesh:surface_0/material:emission")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("rat/Skeleton3D/head:mesh:surface_0/material:emission")
+tracks/51/interp = 1
+tracks/51/loop_wrap = true
+tracks/51/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("rat/Skeleton3D/lowerpawback_r:mesh:surface_0/material:emission")
+tracks/52/interp = 1
+tracks/52/loop_wrap = true
+tracks/52/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("rat/Skeleton3D/lowerpawfront_l:mesh:surface_0/material:emission")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("rat/Skeleton3D/lowerpawfront_r:mesh:surface_0/material:emission")
+tracks/54/interp = 1
+tracks/54/loop_wrap = true
+tracks/54/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("rat/Skeleton3D/tail:mesh:surface_0/material:emission")
+tracks/55/interp = 1
+tracks/55/loop_wrap = true
+tracks/55/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("rat/Skeleton3D/upperpawfrojnt_r:mesh:surface_0/material:emission")
+tracks/56/interp = 1
+tracks/56/loop_wrap = true
+tracks/56/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("rat/Skeleton3D/upperpawfront_l:mesh:surface_0/material:emission")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_lwipu"]
 resource_name = "kill 2"
@@ -1481,6 +2790,7 @@ tracks/30/keys = PackedFloat32Array(0, 1, -0.23262642, 0.01336819, -0.09930893, 
 _data = {
 &"Atack": SubResource("Animation_4e3ur"),
 &"Hurt": SubResource("Animation_jb4px"),
+&"RESET": SubResource("Animation_t0wus"),
 &"Run": SubResource("Animation_q2yk7"),
 &"kill": SubResource("Animation_r5d70"),
 &"kill 2": SubResource("Animation_lwipu")
@@ -1495,10 +2805,12 @@ size = Vector3(0.79959106, 0.5251465, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_b3u6r"]
 size = Vector3(1.1426239, 1.9212418, 1)
 
-[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
+[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
 script = ExtResource("1_3gpk3")
 animation_player = NodePath("rat(2)/AnimationPlayer")
 damage_label_position = NodePath("DamageLabelPosition")
+blood_spout = NodePath("BloodSpout")
+skeleton = NodePath("rat(2)/rat/Skeleton3D")
 enemy_name = "Rat Cronie"
 move_speed = 50.0
 health = 30
@@ -1510,6 +2822,9 @@ attack_state = NodePath("StateMachine/Attack")
 hurt_1_state = NodePath("StateMachine/Hurt1")
 hurt_2_state = NodePath("StateMachine/Hurt2")
 head_shot_dead = NodePath("StateMachine/HeadShotDead")
+hurt_1 = ExtResource("2_ki4ie")
+hurt_2 = ExtResource("3_povfk")
+hurt_3 = ExtResource("4_vxdn8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=752249226]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011016846, 0.8334274, 0.29519653)
@@ -1526,176 +2841,176 @@ bones/0/name = "pelvis"
 bones/0/parent = -1
 bones/0/rest = Transform3D(0.99996823, 0.007954671, -0.0005302104, -0.007965188, 0.99404866, -0.108645394, -0.00033718336, 0.10864617, 0.9940804, -0.011812073, 0.015843078, -0.19739124)
 bones/0/enabled = true
-bones/0/position = Vector3(-0.011672422, 0.042693783, -0.23585382)
-bones/0/rotation = Quaternion(-0.037903376, -0.00041567345, -0.0039644595, 0.99927354)
+bones/0/position = Vector3(-0.011561942, 0.0045709014, -0.21261364)
+bones/0/rotation = Quaternion(-0.041401092, -0.00015663952, -0.0066044773, 0.99912083)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "chest"
 bones/1/parent = 0
 bones/1/rest = Transform3D(0.99996823, -0.0078600645, 0.0013329186, 0.007954647, 0.9948265, -0.10127769, -0.00052997353, 0.101285085, 0.9948573, -2.3285956e-10, 1.4849232, 8.195589e-08)
 bones/1/enabled = true
 bones/1/position = Vector3(-2.3285956e-10, 1.4849232, 8.195589e-08)
-bones/1/rotation = Quaternion(-0.042190585, -0.0027966907, 0.025248088, 0.9987866)
+bones/1/rotation = Quaternion(-0.038579043, 0.004224501, 0.014117254, 0.9991469)
 bones/1/scale = Vector3(1, 1.0000001, 1)
 bones/2/name = "head_2"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, -1.8327451e-07, -8.6102034e-08, 1.83864e-07, 0.6436836, 0.7652915, -8.483599e-08, -0.7652916, 0.64368355, -2.2870594e-14, 1.1249477, -1.1920929e-07)
 bones/2/enabled = true
 bones/2/position = Vector3(-2.2870594e-14, 1.1249477, -1.1920929e-07)
-bones/2/rotation = Quaternion(-0.34790927, 0.006383656, -0.0139431255, 0.9374028)
+bones/2/rotation = Quaternion(-0.33466384, -0.00032035724, -0.022172825, 0.9420766)
 bones/2/scale = Vector3(1, 0.9999999, 0.9999998)
 bones/3/name = "jaw"
 bones/3/parent = 1
 bones/3/rest = Transform3D(1, -4.1969464e-08, -3.83713e-09, 4.200981e-08, 0.9853902, 0.170312, -3.366834e-09, -0.17031202, 0.9853901, -2.2870594e-14, 1.1249477, -1.1920929e-07)
 bones/3/enabled = true
 bones/3/position = Vector3(-2.2870594e-14, 1.1249477, -1.1920929e-07)
-bones/3/rotation = Quaternion(0.023915585, 0.010559359, -0.017662028, 0.9995022)
+bones/3/rotation = Quaternion(0.015562922, -0.006187786, -0.018395862, 0.99969053)
 bones/3/scale = Vector3(1, 1, 0.99999994)
 bones/4/name = "upperfront.l"
 bones/4/parent = 1
 bones/4/rest = Transform3D(0.9988897, -0.04711014, 0.00017600946, 0.0067923386, 0.14032078, -0.99008274, 0.04661825, 0.9889846, 0.14048496, -0.9110228, 0.9348296, -0.11318717)
 bones/4/enabled = true
-bones/4/position = Vector3(-0.9110228, 0.93482995, -0.113187276)
-bones/4/rotation = Quaternion(0.652283, -0.10985421, -0.038311258, 0.7489935)
+bones/4/position = Vector3(-0.9110228, 0.9348297, -0.11318726)
+bones/4/rotation = Quaternion(0.6423132, -0.10958162, -0.035905585, 0.75771797)
 bones/4/scale = Vector3(1, 0.9999999, 0.99999994)
 bones/5/name = "lowerfront.l"
 bones/5/parent = 4
 bones/5/rest = Transform3D(0.9988897, 0.018194828, 0.043455593, -0.047110606, 0.38233727, 0.92282116, 0.00017587654, -0.92384374, 0.38276988, 1.6298145e-09, 1.2577791, -1.3192766e-07)
 bones/5/enabled = true
 bones/5/position = Vector3(1.6298145e-09, 1.2577791, -1.3192766e-07)
-bones/5/rotation = Quaternion(-0.39990932, -0.020981671, 0.07821181, 0.9129706)
+bones/5/rotation = Quaternion(-0.4262259, -0.039707735, 0.08103333, 0.90010464)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "paw.l.001"
 bones/6/parent = 5
 bones/6/rest = Transform3D(1, 1.0349024e-07, 1.679517e-08, -1.0087996e-07, 0.90613, 0.42299932, 2.8557686e-08, -0.42299932, 0.90613, 1.925279e-08, 0.8296865, 1.48122865e-08)
 bones/6/enabled = true
 bones/6/position = Vector3(1.925279e-08, 0.8296865, 1.48122865e-08)
-bones/6/rotation = Quaternion(-0.21664487, 6.8799344e-09, -4.8329838e-08, 0.9762506)
+bones/6/rotation = Quaternion(-0.21664487, -7.50837e-09, -4.8952774e-08, 0.9762506)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "upperfront.r"
 bones/7/parent = 1
 bones/7/rest = Transform3D(0.9988897, 0.047110625, -0.00017594732, -0.006792344, 0.14032076, -0.9900828, -0.046618737, 0.9889846, 0.14048496, 0.91102266, 0.93482953, -0.11318772)
 bones/7/enabled = true
-bones/7/position = Vector3(0.9110228, 0.93482995, -0.11318755)
-bones/7/rotation = Quaternion(0.6510842, 0.09377118, 0.04846175, 0.7516301)
+bones/7/position = Vector3(0.9158734, 0.9348363, -0.10953613)
+bones/7/rotation = Quaternion(0.65107775, 0.09233964, 0.048142333, 0.75183344)
 bones/7/scale = Vector3(1, 0.99999994, 1)
 bones/8/name = "lowerfront.r"
 bones/8/parent = 7
 bones/8/rest = Transform3D(0.9988897, -0.018194836, -0.04345559, 0.047110613, 0.38233715, 0.9228211, -0.00017589144, -0.9238436, 0.3827698, 6.0535967e-09, 1.2577791, -7.702329e-08)
 bones/8/enabled = true
 bones/8/position = Vector3(6.0535967e-09, 1.2577791, -7.702329e-08)
-bones/8/rotation = Quaternion(-0.4016186, 0.004588747, -0.00029952612, 0.91579545)
+bones/8/rotation = Quaternion(-0.44585294, 0.017858017, -0.0152114285, 0.8947988)
 bones/8/scale = Vector3(1, 0.9999999, 0.99999994)
 bones/9/name = "paw.r.001"
 bones/9/parent = 8
 bones/9/rest = Transform3D(1, -1.01631485e-07, -1.9332084e-08, 1.002688e-07, 0.90613, 0.42299932, -2.5472664e-08, -0.42299926, 0.90613014, -1.6947752e-08, 0.8296865, -2.0500835e-08)
 bones/9/enabled = true
 bones/9/position = Vector3(-1.6947752e-08, 0.8296865, -2.0500835e-08)
-bones/9/rotation = Quaternion(-0.21664484, 1.1564188e-09, 4.9559436e-08, 0.9762505)
+bones/9/rotation = Quaternion(-0.21664482, 1.0462131e-08, 5.092272e-08, 0.9762505)
 bones/9/scale = Vector3(1, 1, 1.0000001)
 bones/10/name = "ear.r"
 bones/10/parent = 1
 bones/10/rest = Transform3D(0.550489, 0.8347424, 0.012906157, 0.20542753, -0.1504253, 0.96704274, 0.8091731, -0.5296951, -0.25428662, 0.54291093, 1.5302247, -1.2863364)
 bones/10/enabled = true
-bones/10/position = Vector3(0.56115997, 1.5914607, -1.336197)
-bones/10/rotation = Quaternion(-0.7679749, -0.4064069, -0.23572461, 0.43529534)
+bones/10/position = Vector3(0.5758899, 1.6042049, -1.3341134)
+bones/10/rotation = Quaternion(-0.77238286, -0.4076864, -0.23362002, 0.4273622)
 bones/10/scale = Vector3(0.9999999, 0.99999976, 0.99999994)
 bones/11/name = "ear.l"
 bones/11/parent = 1
 bones/11/rest = Transform3D(0.55048853, -0.83474296, -0.012906613, -0.20542751, -0.15042566, 0.9670428, -0.8091735, -0.5296946, -0.2542868, -0.63740367, 1.5417879, -1.246646)
 bones/11/enabled = true
-bones/11/position = Vector3(-0.62850714, 1.6227273, -1.288778)
-bones/11/rotation = Quaternion(-0.7650491, 0.4117208, 0.24350756, 0.4311495)
+bones/11/position = Vector3(-0.5966759, 1.6366088, -1.290073)
+bones/11/rotation = Quaternion(-0.75958025, 0.40757743, 0.2503252, 0.44074464)
 bones/11/scale = Vector3(0.99999994, 1, 1)
 bones/12/name = "nose"
 bones/12/parent = 1
 bones/12/rest = Transform3D(0.99974465, -0.021436851, 0.0071436693, 0.01926548, 0.9738771, 0.22625652, -0.011807283, -0.22606108, 0.9740416, 0.024292883, 2.8406243, -0.67695594)
 bones/12/enabled = true
-bones/12/position = Vector3(0.024292907, 2.8406243, -0.6769561)
-bones/12/rotation = Quaternion(0.02818625, 0.0033412308, -0.020364236, 0.99938965)
+bones/12/position = Vector3(0.030483413, 2.8381865, -0.66897714)
+bones/12/rotation = Quaternion(0.041954048, -0.0035815425, -0.020328706, 0.9989064)
 bones/12/scale = Vector3(0.99999994, 0.9999998, 1)
 bones/13/name = "tail1"
 bones/13/parent = 0
 bones/13/rest = Transform3D(-0.99996835, 0.007383293, -0.0030070995, -0.007954507, -0.8989472, 0.43798503, 0.00053054804, 0.43799517, 0.8989771, 1.5133992e-09, -5.399488e-08, 4.396952e-09)
 bones/13/enabled = true
 bones/13/position = Vector3(1.5133992e-09, -5.399488e-08, 4.396952e-09)
-bones/13/rotation = Quaternion(0.00024969495, 0.2083996, 0.97804266, -0.0015041928)
+bones/13/rotation = Quaternion(0.0014869929, 0.2222297, 0.97498715, -0.0034572026)
 bones/13/scale = Vector3(1.0000001, 1.0000001, 0.9999999)
 bones/14/name = "tail2"
 bones/14/parent = 13
 bones/14/rest = Transform3D(1, 9.9536315e-08, -2.5146125e-08, -1.0264177e-07, 0.96428967, -0.26485047, -2.1140902e-09, 0.26485047, 0.96428967, 3.439027e-11, 1.1740239, -6.401834e-08)
 bones/14/enabled = true
 bones/14/position = Vector3(3.439027e-11, 1.1740239, -6.401834e-08)
-bones/14/rotation = Quaternion(0.12131977, -0.0013300405, -0.0014941847, 0.9926115)
+bones/14/rotation = Quaternion(0.124544665, 0.00058692053, 8.859172e-05, 0.9922139)
 bones/14/scale = Vector3(1, 1.0000001, 1.0000001)
 bones/15/name = "tail3"
 bones/15/parent = 14
 bones/15/rest = Transform3D(1, -5.263878e-08, -3.5741015e-09, 5.263878e-08, 0.99082184, 0.13517424, -3.5741086e-09, -0.13517424, 0.99082184, -6.291998e-10, 1.4074275, 5.505304e-08)
 bones/15/enabled = true
 bones/15/position = Vector3(-6.291998e-10, 1.4074275, 5.505304e-08)
-bones/15/rotation = Quaternion(-0.21053979, -0.026931493, -0.02083436, 0.9769922)
+bones/15/rotation = Quaternion(-0.21366721, -0.026901575, -0.020339044, 0.9763243)
 bones/15/scale = Vector3(1, 1, 1)
 bones/16/name = "tail4"
 bones/16/parent = 15
 bones/16/rest = Transform3D(1, -8.38811e-08, -9.141379e-09, 8.388108e-08, 0.9765252, 0.21540327, -9.141476e-09, -0.21540329, 0.9765251, -8.321308e-10, 1.0172857, -2.4297046e-07)
 bones/16/enabled = true
 bones/16/position = Vector3(-8.321308e-10, 1.0172857, -2.4297046e-07)
-bones/16/rotation = Quaternion(-0.10833935, 6.1873684e-10, 4.1418826e-08, 0.994114)
+bones/16/rotation = Quaternion(-0.116160624, -0.0005357675, 0.0013362828, 0.9932294)
 bones/16/scale = Vector3(1, 1, 0.99999994)
 bones/17/name = "upperbackleg.r"
 bones/17/parent = 0
 bones/17/rest = Transform3D(0.999896, 0.0091538215, -0.0111426115, -0.010331785, -0.084297314, -0.9963871, -0.010060038, 0.99639875, -0.08419397, 0.9195441, 0.37377048, 0.072781056)
 bones/17/enabled = true
-bones/17/position = Vector3(0.9216353, 0.3638072, 0.09299173)
-bones/17/rotation = Quaternion(0.76079524, -0.039631803, 0.08246503, 0.6425103)
+bones/17/position = Vector3(0.919544, 0.37377062, 0.07278105)
+bones/17/rotation = Quaternion(0.7450472, -0.03334488, 0.084658764, 0.6607767)
 bones/17/scale = Vector3(0.99999994, 1.0000001, 1)
 bones/18/name = "lowerbackleg.r"
 bones/18/parent = 17
 bones/18/rest = Transform3D(0.9878095, 0.1551142, -0.013108891, -0.043465253, 0.35569736, 0.9335898, 0.14947587, -0.92163914, 0.35810333, 9.452924e-08, 1.4849234, 9.49949e-08)
 bones/18/enabled = true
 bones/18/position = Vector3(9.452924e-08, 1.4849234, 9.49949e-08)
-bones/18/rotation = Quaternion(-0.4876666, -0.049442958, -0.107006446, 0.8650355)
+bones/18/rotation = Quaternion(-0.4871638, -0.06836921, -0.10466559, 0.864316)
 bones/18/scale = Vector3(0.9999999, 0.9999999, 0.9999999)
 bones/19/name = "paw.r"
 bones/19/parent = 18
 bones/19/rest = Transform3D(0.979918, -0.1859214, -0.072068304, 0.19836058, 0.8720453, 0.44742593, -0.02033922, -0.4527362, 0.8914125, -1.0244548e-08, 0.7756725, 1.7788261e-07)
 bones/19/enabled = true
 bones/19/position = Vector3(-1.0244548e-08, 0.7756725, 1.7788261e-07)
-bones/19/rotation = Quaternion(-0.25610033, -0.01662864, 0.101838894, 0.961127)
+bones/19/rotation = Quaternion(-0.23508812, -0.013860778, 0.09989154, 0.9667281)
 bones/19/scale = Vector3(0.99999994, 0.9999999, 1)
 bones/20/name = "upperbackleg.l"
 bones/20/parent = 0
 bones/20/rest = Transform3D(0.9996152, -0.006754977, 0.026903253, 0.026237726, -0.08442377, -0.99608445, 0.008999802, 0.996407, -0.084214054, -0.66639274, 0.36115447, 0.07362196)
 bones/20/enabled = true
-bones/20/position = Vector3(-0.667982, 0.35888028, 0.091618806)
-bones/20/rotation = Quaternion(0.7670399, -0.0013357764, 0.033217218, 0.6407376)
+bones/20/position = Vector3(-0.6661504, 0.3530442, 0.06868713)
+bones/20/rotation = Quaternion(0.7568296, -0.0048979, 0.037036985, 0.65254366)
 bones/20/scale = Vector3(0.99999994, 0.99999994, 1)
 bones/21/name = "lowerbackleg.l"
 bones/21/parent = 20
 bones/21/rest = Transform3D(0.9878095, -0.15511422, 0.013108915, 0.04346528, 0.35569763, 0.9335897, -0.14947587, -0.9216391, 0.3581036, -4.5169145e-08, 1.4849234, 1.1827797e-07)
 bones/21/enabled = true
 bones/21/position = Vector3(-4.5169145e-08, 1.4849234, 1.1827797e-07)
-bones/21/rotation = Quaternion(-0.47873262, 0.036077, 0.046145257, 0.87600464)
+bones/21/rotation = Quaternion(-0.49009764, 0.036987603, 0.039899983, 0.8699679)
 bones/21/scale = Vector3(0.9999999, 0.9999999, 0.9999999)
 bones/22/name = "paw.l"
 bones/22/parent = 21
 bones/22/rest = Transform3D(0.97991806, 0.1859214, 0.07206826, -0.19836058, 0.8720454, 0.4474258, 0.020339241, -0.45273617, 0.89141244, 7.450581e-09, 0.7756727, -9.033829e-08)
 bones/22/enabled = true
 bones/22/position = Vector3(7.450581e-09, 0.7756727, -9.033829e-08)
-bones/22/rotation = Quaternion(-0.26392418, 0.018916238, -0.10155618, 0.95899564)
+bones/22/rotation = Quaternion(-0.23021063, 0.011012582, -0.09758723, 0.9681728)
 bones/22/scale = Vector3(1, 1, 0.9999999)
 
 [node name="backpawlow_l" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=1949534907]
 mesh = SubResource("ArrayMesh_pdvc1")
-skin = SubResource("Skin_0kt6j")
+skin = SubResource("Skin_q6ed3")
 skeleton = NodePath("..")
 
 [node name="backpawup_l" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=806355741]
-mesh = SubResource("ArrayMesh_hoe60")
+mesh = SubResource("ArrayMesh_t0wus")
 skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
 [node name="backpawup_r" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=1373567776]
-mesh = SubResource("ArrayMesh_te7gt")
+mesh = SubResource("ArrayMesh_ciqlr")
 skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
@@ -1715,7 +3030,7 @@ skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
 [node name="head" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=986798544]
-mesh = SubResource("ArrayMesh_womb6")
+mesh = SubResource("ArrayMesh_ki4ie")
 skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
@@ -1725,27 +3040,27 @@ skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
 [node name="lowerpawfront_l" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=1829247002]
-mesh = SubResource("ArrayMesh_am16d")
+mesh = SubResource("ArrayMesh_xgh2c")
 skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
 [node name="lowerpawfront_r" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=894101438]
-mesh = SubResource("ArrayMesh_fa8pt")
+mesh = SubResource("ArrayMesh_ocgvo")
 skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
 [node name="tail" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=1206828587]
-mesh = SubResource("ArrayMesh_w444w")
+mesh = SubResource("ArrayMesh_ns0wp")
 skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
 [node name="upperpawfrojnt_r" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=2084546671]
-mesh = SubResource("ArrayMesh_f7g8u")
+mesh = SubResource("ArrayMesh_lxjgp")
 skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
 [node name="upperpawfront_l" type="MeshInstance3D" parent="rat(2)/rat/Skeleton3D" unique_id=846991238]
-mesh = SubResource("ArrayMesh_4n4ta")
+mesh = SubResource("ArrayMesh_xrkbl")
 skin = SubResource("Skin_0kt6j")
 skeleton = NodePath("..")
 
@@ -1805,5 +3120,8 @@ shape = SubResource("BoxShape3D_b3u6r")
 
 [node name="DamageLabelPosition" type="Marker3D" parent="." unique_id=2120924916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06169325, 2.096908, -0.8718689)
+
+[node name="BloodSpout" type="Marker3D" parent="." unique_id=1730996955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1907835, -0.4438188)
 
 [connection signal="body_entered" from="PlayerSensor" to="." method="_on_player_sensor_body_entered"]
