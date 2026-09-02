@@ -25,6 +25,8 @@ class_name HUD extends CanvasLayer
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
 
+const GONG_HIT_ROUND_END = preload("uid://cl80qmb3yld4f")
+const ROUND_START = preload("uid://b68fxjxw701up")
 
 const XP_MULTIPLIER_FACTOR : float = 1.2
 const BASE_XP_AMOUNT : int = 50
@@ -58,6 +60,7 @@ func _ready() -> void:
 		GameManager.magazine = GameManager.pistol_magazine_size
 	
 	GameManager.round_number += 1
+	GameManager.play_sfx(GONG_HIT_ROUND_END)
 	animation_player.play("RoundCountDown")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -152,7 +155,7 @@ func end_round() -> void:
 	if GameManager.round_number > -1:
 		var round_diamond : RoundDiamond = round_diamond_container.get_child(GameManager.round_number)
 		round_diamond.fill_diamond()
-	
+	GameManager.play_sfx(GONG_HIT_ROUND_END)
 	GameManager.round_number += 1	
 	if GameManager.round_number < GameManager.MAX_ROUND:
 		animation_player.play("RoundCountDown")
@@ -207,8 +210,12 @@ func update_boss_bar(value : int, max_value : int) -> void:
 	round_progress_bar.max_value = max_value
 
 func end_fight() -> void:
+	GameManager.round_number = -1
 	round_timer_label.pause_timer()
 	animation_player.play("YouWin")
 
 func go_to_hub() -> void:
 	get_tree().change_scene_to_file("uid://jgsciuanachx")
+
+func play_round_start_sfx() -> void:
+	GameManager.play_sfx(ROUND_START)

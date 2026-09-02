@@ -11,6 +11,7 @@ const ROCK_DEATH_1 = preload("uid://dex116hwebgp")
 func enter() -> void:
 	parent.animation_player.play(animation_name)
 	parent.timer.wait_time = 0.4
+	parent.spawn_ore_chunks()
 	GameManager.play_sfx(rock_hits.pick_random())
 	var damage : int = 1
 	

@@ -1,6 +1,8 @@
 class_name BabyBullet extends CharacterBody3D
 
 @onready var bulletrat_2: Node3D = $bulletrat2
+@onready var grow_player: AnimationPlayer = $GrowPlayer
+const RAT_DEATH_1 = preload("uid://d3ghyfjmncx5c")
 
 @onready var animation_player: AnimationPlayer = $bulletrat2/AnimationPlayer
 var attack_damage: int = 3
@@ -10,6 +12,7 @@ var player : Player
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	animation_player.play("fly")
+	grow_player.play("grow")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,4 +36,8 @@ func attack_player() -> void:
 	SignalBus.player_hurt.emit(attack_damage)
 	SignalBus.shake_camera.emit(1.0)
 	SignalBus.player_damaged.emit()
+	queue_free()
+
+func die() -> void:
+	GameManager.play_sfx(RAT_DEATH_1)
 	queue_free()

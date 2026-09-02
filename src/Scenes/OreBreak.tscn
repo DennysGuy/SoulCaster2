@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://btse4bogvqwv3"]
+
+[ext_resource type="Texture2D" uid="uid://f5p8008lrnj1" path="res://Assets/OreChunk.png" id="1_o5mob"]
+[ext_resource type="Script" uid="uid://mmjaoi542bdw" path="res://src/Scripts/blood_spirt.gd" id="2_7trcq"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_60yqc"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 81.0
+flatness = 0.133
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 4.9999776
+gravity = Vector3(0, -10, 0)
+scale_min = 0.29999998
+scale_max = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llbjw"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_o5mob")
+
+[sub_resource type="QuadMesh" id="QuadMesh_16i0a"]
+material = SubResource("StandardMaterial3D_llbjw")
+
+[node name="OreBreak" type="GPUParticles3D" unique_id=1145804608]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
+emitting = false
+amount = 10
+amount_ratio = 0.7857
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_60yqc")
+draw_pass_1 = SubResource("QuadMesh_16i0a")
+script = ExtResource("2_7trcq")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

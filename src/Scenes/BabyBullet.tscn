@@ -583,6 +583,67 @@ _data = {
 &"hitplayer": SubResource("Animation_2lrkb")
 }
 
+[sub_resource type="Animation" id="Animation_g4xyi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../BodyCollider/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_stb5w"]
+resource_name = "grow"
+length = 0.93333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.2, 0.2, 0.2), Vector3(0.6, 0.6, 0.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../BodyCollider/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c3o7r"]
+_data = {
+&"RESET": SubResource("Animation_g4xyi"),
+&"grow": SubResource("Animation_stb5w")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ibhuf"]
 size = Vector3(1, 1.8800049, 1.7706299)
 
@@ -615,7 +676,7 @@ collision_mask = 128
 script = ExtResource("1_if62f")
 
 [node name="bulletrat2" type="Node3D" parent="." unique_id=1094547237]
-transform = Transform3D(-0.6, 0, -5.2453668e-08, 0, 0.6, 0, 5.2453668e-08, 0, -0.6, 0, 0, -1.8447838)
+transform = Transform3D(-0.6, 0, -9.059749e-08, 0, 0.6, 0, 9.059749e-08, 0, -0.6, 0, 0, -1.8447838)
 
 [node name="bulletrat" type="Node3D" parent="bulletrat2" unique_id=477976841]
 transform = Transform3D(2.105801, 0, 0, 0, 0, -2.105801, 0, 2.105801, 0, 0, 0.015183622, -3.2635968)
@@ -762,6 +823,10 @@ skeleton = NodePath("..")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="bulletrat2" unique_id=1696730789]
 libraries/ = SubResource("AnimationLibrary_xxv6x")
 
+[node name="GrowPlayer" type="AnimationPlayer" parent="." unique_id=1499847454]
+root_node = NodePath("../bulletrat2/AnimationPlayer")
+libraries/ = SubResource("AnimationLibrary_c3o7r")
+
 [node name="Area3D" type="Area3D" parent="." unique_id=1122259698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0618286)
 
@@ -775,6 +840,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8484578)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyCollider" unique_id=212982962]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25042725, 0)
 shape = SubResource("BoxShape3D_g4xyi")
+disabled = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=961045470]
 shape = SubResource("BoxShape3D_if62f")

@@ -311,7 +311,7 @@ func shoot_enemy(enemy_body_part : Node3D):
 		elif enemy_body_part is OreCollider:
 			seen_enemy.damage_ore()
 		elif enemy_body_part is EnemyBodyCollider and enemy is BabyBullet:
-			enemy.queue_free()
+			enemy.die()
 	#else:
 		#SignalBus.reset_hits_count.emit()
 	
