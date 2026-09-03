@@ -23,15 +23,16 @@ var rifle_mag_cost: int = 10
 var round_number : int = -1
 const MAX_ROUND : int = 3
 
-var round_timers : Array[int] = [8, 7, 6]
+var round_timers : Array[int] = [9, 8, 7]
 var round_times : Array[int] = [100, 150, 200]
 
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,2,3]
 
-enum ROUND_POINT {BEGINNING, HALF_WAY, THREE_QUARTER}
+enum ROUND_POINT {BEGINNING, FIRST_QUARTER, HALF_WAY, THREE_QUARTER}
 var current_round_point : ROUND_POINT = ROUND_POINT.BEGINNING
 
+var first_quarter_point : bool = false
 var half_way_point : bool = false
 var three_quarter_way_point : bool = false
 

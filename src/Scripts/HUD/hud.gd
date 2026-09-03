@@ -44,31 +44,12 @@ var hub_context_showing : bool = false
 var arena_context_showing : bool = false
 
 var context_pos : int = 0
-var hub_text : Array[String] = [
-	"You were once a researcher for the
-mages army. Your job was to discover new
-magic tech capable of turning the tides of 
-the demon war. Your test subject was a 
-captive by the name of Beelzebub, one
-of the highest ranking officers of the Demon
-Army. Little did you know, applying magic
-to the general only made him more powerful.
-Powerful enough to break his shackles and reign
-terror once more on humanity. He destroys your
-research facility and makes his escape.",
-"You emerge from the rubble, frustrated with 
-your self and the military's  shortsightedness. 
-You vow to hunt down Beelzebub and repay
-humanity for the suffering you've unleashed 
-onto the world. As you begin your trek, you
-stumble upon a nest of dangerous mutated rats.
-Before you succumb to their blows, you are 
-rescued by a mysterious merchant man. He
-decides to assist you on one condition. That
-you aid him in his black market weapon business
-once these rats are put down for good."
-]
 
+const GRUN_1 = preload("uid://bsofvgd2ah7px")
+const GRUNT_2 = preload("uid://2gj05mllf3ho")
+const GRUNT_3 = preload("uid://bsg37rag4j8qx")
+
+@onready var grunts : Array[AudioStream] = [GRUNT_2, GRUN_1, GRUNT_3]
 
 func _ready() -> void:
 	SignalBus.xp_was_gained.connect(add_xp)
@@ -113,6 +94,9 @@ func _physics_process(delta: float) -> void:
 		if round_progress_bar.value < round_progress_bar.max_value:
 			round_progress_bar.value += delta
 			
+			if !GameManager.first_quarter_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.25):
+				GameManager.current_round_point = GameManager.ROUND_POINT.FIRST_QUARTER
+				GameManager.first_quarter_point = true
 			if !GameManager.half_way_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.5):
 				GameManager.current_round_point = GameManager.ROUND_POINT.HALF_WAY
 				GameManager.half_way_point = true
@@ -150,6 +134,7 @@ func add_xp(amount : int) -> void:
 		level_up()
 	
 func flash_screen_red() -> void:
+	GameManager.play_sfx(grunts.pick_random())
 	animation_player.play("HurtFlash")
 	
 
@@ -173,6 +158,7 @@ func start_round() -> void:
 	round_ended = false
 	round_started = true
 	
+	GameManager.first_quarter_point = false
 	GameManager.half_way_point = false
 	GameManager.three_quarter_way_point = false
 	GameManager.current_round_point = GameManager.ROUND_POINT.BEGINNING
@@ -268,7 +254,6 @@ func show_arena_context() -> void:
 func show_hub_context() -> void:
 	context_panel.show()
 	context_pos = 0
-	context_label.text = hub_text[context_pos]
 	arena_context_showing = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	await get_tree().process_frame

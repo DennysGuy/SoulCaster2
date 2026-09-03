@@ -66,6 +66,7 @@ func stop_timer() -> void:
 		
 	timer_started = false
 	#temporary
+	
 	GameManager.round_number = -1
 	get_tree().change_scene_to_file("uid://jgsciuanachx")
 
