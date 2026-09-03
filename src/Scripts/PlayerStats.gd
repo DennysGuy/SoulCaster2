@@ -23,7 +23,7 @@ var player_stats : Dictionary = {
 }
 
 var stat_levels : Dictionary = {
-	"Attack Damage": {"Level": 0, "Max Level": 20, "Interval": 2, "Cost":1}, 
+	"Attack Damage": {"Level": 0, "Max Level": 10, "Interval": 3, "Cost":1}, 
 	"Attack Speed": {"Level": 0, "Max Level": 10, "Interval": 0.1, "Cost":1},
 	"Movement Speed": {"Level": 0, "Max Level": 5, "Interval": 1.0, "Cost":1},
 	"Crit Chance": {"Level": 0, "Max Level": 15, "Interval": 0.12, "Cost":1},

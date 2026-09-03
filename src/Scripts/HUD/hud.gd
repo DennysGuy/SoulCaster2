@@ -36,6 +36,40 @@ var round_started : bool = false
 var round_ended : bool = false
 @onready var round_progress_bar: ProgressBar = $RoundProgressBar
 # Called when the node enters the scene tree for the first time.
+
+@onready var context_panel: Panel = $ContextPanel
+@onready var context_label: Label = $ContextPanel/ContextLabel
+
+var hub_context_showing : bool = false
+var arena_context_showing : bool = false
+
+var context_pos : int = 0
+var hub_text : Array[String] = [
+	"You were once a researcher for the
+mages army. Your job was to discover new
+magic tech capable of turning the tides of 
+the demon war. Your test subject was a 
+captive by the name of Beelzebub, one
+of the highest ranking officers of the Demon
+Army. Little did you know, applying magic
+to the general only made him more powerful.
+Powerful enough to break his shackles and reign
+terror once more on humanity. He destroys your
+research facility and makes his escape.",
+"You emerge from the rubble, frustrated with 
+your self and the military's  shortsightedness. 
+You vow to hunt down Beelzebub and repay
+humanity for the suffering you've unleashed 
+onto the world. As you begin your trek, you
+stumble upon a nest of dangerous mutated rats.
+Before you succumb to their blows, you are 
+rescued by a mysterious merchant man. He
+decides to assist you on one condition. That
+you aid him in his black market weapon business
+once these rats are put down for good."
+]
+
+
 func _ready() -> void:
 	SignalBus.xp_was_gained.connect(add_xp)
 	SignalBus.time_added.connect(add_time_label)
@@ -47,6 +81,7 @@ func _ready() -> void:
 	SignalBus.player_hurt.connect(decrease_time_label)
 	SignalBus.boss_damaged.connect(update_boss_bar)
 	SignalBus.boss_defeated.connect(end_fight)
+	SignalBus.arena_context_button_closed.connect(close_context_panel)
 	update_ore_count_label(0)
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
 	#round_timer.start()
@@ -69,8 +104,11 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if round_started:
-		if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
-			round_progress_bar.value = round_progress_bar.max_value - 2
+		#if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
+			#round_progress_bar.value = round_progress_bar.max_value - 2
+		
+		if Input.is_action_just_pressed("jump") and arena_context_showing:
+			close_context_panel()
 		
 		if round_progress_bar.value < round_progress_bar.max_value:
 			round_progress_bar.value += delta
@@ -143,6 +181,8 @@ func start_round() -> void:
 	round_progress_bar.value = 0
 	round_progress_bar.max_value = GameManager.round_times[GameManager.round_number]
 	SignalBus.round_started.emit()
+	if !GameManager.arena_instructions_shown:
+		show_arena_context()
 
 func load_timer() -> void:
 	round_timer_label.reset_timer()
@@ -181,7 +221,7 @@ func decrease_time_label(amount : int) -> void:
 	time_gained_position.add_child(time_label)
 	
 func add_progress() -> void:
-	progress_bar.value += PlayerStats.player_stats["Progress Speed"]
+	round_progress_bar.value += PlayerStats.player_stats["Progress Speed"]
 
 func start_boss_fight() -> void:
 	round_timer_label.zero_out_timer()
@@ -219,3 +259,31 @@ func go_to_hub() -> void:
 
 func play_round_start_sfx() -> void:
 	GameManager.play_sfx(ROUND_START)
+
+func show_arena_context() -> void:
+	context_panel.show()
+	get_tree().paused = true
+	
+
+func show_hub_context() -> void:
+	context_panel.show()
+	context_pos = 0
+	context_label.text = hub_text[context_pos]
+	arena_context_showing = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	await get_tree().process_frame
+	get_tree().paused = true
+	
+	
+@onready var next: Button = $ContextPanel/Next
+
+func _on_next_button_up() -> void:
+	close_context_panel()
+
+func close_context_panel() -> void:
+	if arena_context_showing:
+		get_tree().paused = false
+		context_panel.hide()
+		GameManager.arena_instructions_shown = true
+		arena_context_showing = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="SoulCaster2"
-run/main_scene="uid://jgsciuanachx"
+run/main_scene="uid://d5xympptasoc"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://cgwv53wqlc6v"
 
 [autoload]
 

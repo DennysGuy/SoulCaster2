@@ -41,6 +41,8 @@ var fortified_pistol_bullets : bool = false
 var fortified_pistol_rifle_cost : int = 15
 var fortified_rifle_bullets : bool = false
 
+var hub_instructions_shown : bool = false
+var arena_instructions_shown : bool = false
 
 func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0):
 	var player := AudioStreamPlayer.new()

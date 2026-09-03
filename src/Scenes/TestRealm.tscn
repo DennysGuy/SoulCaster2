@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://p4x3roh1nej4" path="res://src/Scenes/HUD/HUD.tscn" id="4_mocxq"]
 [ext_resource type="PackedScene" uid="uid://dp4t3anradmae" path="res://src/Scenes/EnemySpawnPoint.tscn" id="4_sfhgb"]
 [ext_resource type="AudioStream" uid="uid://bfetq4bsx7id7" path="res://Assets/Audio/CombatAmbience.wav" id="5_mocxq"]
+[ext_resource type="AudioStream" uid="uid://cnwclyjj16wto" path="res://Assets/Audio/AmbientUpbeatTheme.wav" id="6_ss387"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h01ol"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -15,12 +16,9 @@ sky_material = SubResource("ProceduralSkyMaterial_h01ol")
 
 [sub_resource type="Environment" id="Environment_sfhgb"]
 background_mode = 1
-background_energy_multiplier = 1.5
 sky = SubResource("Sky_rty5i")
-ambient_light_source = 3
-ambient_light_energy = 1.46
+ambient_light_source = 2
 tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rty5i"]
 albedo_color = Color(0, 0.52535284, 0.3643165, 1)
@@ -49,6 +47,19 @@ look_at_point_4 = NodePath("../CameraPoint3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=851416319]
 environment = SubResource("Environment_sfhgb")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=221524160]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 22.392227, 0)
+light_energy = 5.5
+light_specular = 1.579
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_shadow = 698.18
+distance_fade_length = 0.0
+spot_range = 42.091354
+spot_attenuation = 0.7
+spot_angle = 60.20009
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1859460658]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.647583)
@@ -182,10 +193,15 @@ one_shot = true
 
 [node name="HUD" parent="." unique_id=1895423373 instance=ExtResource("4_mocxq")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1172639727]
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="." unique_id=1172639727]
 stream = ExtResource("5_mocxq")
 autoplay = true
 bus = &"Ambience"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=907528117]
+stream = ExtResource("6_ss387")
+autoplay = true
+bus = &"Music"
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="OreSpawnTimer" to="." method="_on_ore_spawn_timer_timeout"]

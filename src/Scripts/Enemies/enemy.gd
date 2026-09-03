@@ -87,7 +87,7 @@ func damage_enemy() -> void:
 		damage *= PlayerStats.player_stats["Crit Damage"]
 		
 	if GameManager.rifle_owned:
-		damage += 8
+		damage += 10
 	
 	if blood_spout:
 		spawn_blood_spirt()

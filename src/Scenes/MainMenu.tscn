@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://d5xympptasoc"]
+
+[ext_resource type="Script" uid="uid://bnnqvq4k4wjid" path="res://src/Scripts/main_menu.gd" id="1_814sq"]
+
+[node name="MainMenu" type="Control" unique_id=1734805055]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_814sq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1856662108]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=383122590]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.5
+offset_top = -264.0
+offset_right = 50.5
+offset_bottom = -241.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Soul Caster 2"
+
+[node name="Button" type="Button" parent="." unique_id=1036980298]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 123.0
+offset_right = 40.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Play"
+
+[node name="Label2" type="Label" parent="." unique_id=1812189221]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 492.0
+offset_right = 188.0
+offset_bottom = 515.0
+text = "Controls"
+
+[node name="Label4" type="Label" parent="." unique_id=1197174869]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 323.0
+offset_right = 853.0
+offset_bottom = 368.0
+theme_override_font_sizes/font_size = 32
+text = "** NO SAVE FEATURE YET!**"
+
+[node name="Label3" type="Label" parent="." unique_id=2080987697]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 536.0
+offset_right = 323.0
+offset_bottom = 611.0
+text = "WASD - Move Camera
+Left Click - Shoot Enemy/Select Menu
+R - Reload Weapon"
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

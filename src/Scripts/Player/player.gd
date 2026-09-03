@@ -142,18 +142,19 @@ func move_player() -> void:
 	if Input.is_action_just_pressed("rotate_left"):
 		#AudioManager.play_sfx(AudioManager.LOOKLEFT,-2)
 		print("Rotate Left")
-		GameManager.play_sfx(LOOKLEFT,-2)
+		GameManager.play_sfx(LOOKLEFT,-4)
 		rotate_camera_left()
 
 	if Input.is_action_just_pressed("rotate_right"):
 		#AudioManager.play_sfx(AudioManager.LOOKRIGHT,-2)
 		print("Rotate Right")
-		GameManager.play_sfx(LOOKRIGHT,-2)
+		GameManager.play_sfx(LOOKRIGHT,-4)
 		rotate_camera_right()
 		
 	if Input.is_action_just_pressed("rotate_opposite"):
 		#AudioManager.play_sfx(AudioManager.LOOKLEFT, -2)
 		print("Rotate Behind")
+		GameManager.play_sfx(LOOKRIGHT,-4)
 		rotate_camera_opposite()
 		
 	#if GameManager.can_move:
@@ -271,7 +272,7 @@ func hide_reticle() -> void:
 func play_shoot_animation() -> void:
 	var attack_speed : float = PlayerStats.player_stats["Attack Speed"]
 	if GameManager.rifle_owned:
-		chosen_gun_animation_player.speed_scale = attack_speed+0.3
+		chosen_gun_animation_player.speed_scale = attack_speed+0.5
 		GameManager.play_sfx(rifle_sfx.pick_random())
 	else:
 		GameManager.play_sfx(pistol_sfx.pick_random())

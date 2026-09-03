@@ -7,11 +7,19 @@ var start_round_timer_wait_time : float = 15
 
 var stored_selectable : MenuSelectable
 @onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var start_battle_label: Label = $StartBattleLabel
+@onready var controls_label: Label = $ControlsLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalBus.hub_context_menu_closed.connect(show_start_combat_label)
 	GameManager.in_arena = false
 	player.gun_arm.hide()
+	if !GameManager.hub_instructions_shown:
+		start_battle_label.hide()
+		controls_label.hide()
+		spawn_hub_context()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -51,9 +59,16 @@ func _physics_process(delta: float) -> void:
 
 		#SignalBus.reset_combo_meter.emit()
 
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if stored_selectable and !GameManager.in_menu:
 				stored_selectable.open_menu()
+
+func spawn_hub_context() -> void:
+	var hub_context_panel : HubContextPanel = preload("uid://cnv6x8tgahuc1").instantiate()
+	canvas_layer.add_child(hub_context_panel)
+
+func show_start_combat_label() -> void:
+	start_battle_label.show()
+	controls_label.show()

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_t1brt"]
 [ext_resource type="PackedScene" uid="uid://c87ouqp84eqp7" path="res://src/Scenes/HUD/RoundDiamond.tscn" id="4_7pn66"]
 [ext_resource type="StyleBox" uid="uid://5eyxyvcgpq2q" path="res://src/RoundStyle.tres" id="4_wwnsm"]
+[ext_resource type="Script" uid="uid://dxg6uh4s7j7ab" path="res://src/Scripts/arena_context_panel.gd" id="6_7pn66"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
 bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
@@ -436,3 +437,63 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "3"
 horizontal_alignment = 1
+
+[node name="ContextPanel" type="Panel" parent="." unique_id=751790954]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -365.0
+offset_top = -197.5
+offset_right = 365.0
+offset_bottom = 263.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_7pn66")
+
+[node name="ContextLabel" type="Label" parent="ContextPanel" unique_id=1440265021]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 602.0
+offset_bottom = 394.0
+theme_override_font_sizes/font_size = 14
+text = "** ATTENTION! READ THOROUGHLY TO UNDERSTAND RULES! ***
+Survive the Rat Barrage; Defeat the Mother Rat! 
+
+Directions:
+1. Your Health is the Timer (the big number towards the top of the screen)! Kill enemies to regain time!
+2. The purple Progress Bar at the top represents the current round's progress. 
+3. The bar will fill automatically while you fight rats. 
+4. Once the progress bar fills completely, you will be moved to the next round. 
+5. If the timer runs out before the end of the round, you will be sent back to the hub.
+
+Controls:
+
+WASD - Move Camera
+Mouse - Aim Weapon
+Left Click - Fire Weapon
+R - Reload
+
+*Shoot and destroy the rocks to acquire ore
+to spend at shop*"
+
+[node name="Next" type="Button" parent="ContextPanel" unique_id=2125296690]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 88.5
+offset_top = -42.0
+offset_right = 282.5
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press Space to Continue"
+
+[connection signal="button_up" from="ContextPanel/Next" to="." method="_on_next_button_up"]

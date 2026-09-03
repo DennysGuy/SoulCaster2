@@ -61,13 +61,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -163.0
+offset_left = -236.0
 offset_top = 92.0
-offset_right = 177.0
+offset_right = 218.0
 offset_bottom = 126.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
-text = "Hover over Icon to read more"
+text = "Hover over Icons and text to read more"
 
 [node name="OreCount" type="Label" parent="Panel" unique_id=1821467376]
 layout_mode = 1
@@ -504,8 +504,8 @@ offset_top = 204.0
 offset_right = 583.53687
 offset_bottom = 389.9116
 scale = Vector2(0.5325112, 0.5325112)
-tooltip_text = "- +7 attack damage bonus
-- +30% fire rate
+tooltip_text = "- +10 attack damage bonus
+- +50% fire rate
 - Doubles Magazine Size"
 texture = ExtResource("4_jdaip")
 expand_mode = 1
