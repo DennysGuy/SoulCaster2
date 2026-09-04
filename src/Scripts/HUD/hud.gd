@@ -51,6 +51,9 @@ const GRUNT_3 = preload("uid://bsg37rag4j8qx")
 
 @onready var grunts : Array[AudioStream] = [GRUNT_2, GRUN_1, GRUNT_3]
 
+var quit_time_left : float = 12
+var quit_time : float = 12
+
 func _ready() -> void:
 	SignalBus.xp_was_gained.connect(add_xp)
 	SignalBus.time_added.connect(add_time_label)
@@ -75,13 +78,23 @@ func _ready() -> void:
 	else:
 		GameManager.magazine = GameManager.pistol_magazine_size
 	
-	GameManager.round_number += 1
+	GameManager.round_number = GameManager.current_round_selected
+	
+	for i in range(GameManager.round_number):
+		var round_diamond : RoundDiamond = round_diamond_container.get_child(i)
+		round_diamond.fill_diamond()
+	
 	GameManager.play_sfx(GONG_HIT_ROUND_END)
 	animation_player.play("RoundCountDown")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_pressed("quit_battle"):
+		quit_time_left -= 15 * delta
+		if quit_time_left <= 0:
+			go_to_hub()
+	if Input.is_action_just_released("quit_battle"):
+		quit_time_left = quit_time
 
 func _physics_process(delta: float) -> void:
 	if round_started:
@@ -182,7 +195,9 @@ func end_round() -> void:
 		var round_diamond : RoundDiamond = round_diamond_container.get_child(GameManager.round_number)
 		round_diamond.fill_diamond()
 	GameManager.play_sfx(GONG_HIT_ROUND_END)
-	GameManager.round_number += 1	
+	GameManager.round_number += 1
+	if GameManager.round_number > GameManager.furtherest_round_unlocked:
+		GameManager.furtherest_round_unlocked = GameManager.round_number
 	if GameManager.round_number < GameManager.MAX_ROUND:
 		animation_player.play("RoundCountDown")
 	else:

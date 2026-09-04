@@ -15,6 +15,7 @@ var stored_selectable : MenuSelectable
 func _ready() -> void:
 	SignalBus.hub_context_menu_closed.connect(show_start_combat_label)
 	GameManager.in_arena = false
+	GameManager.in_menu = false
 	player.gun_arm.hide()
 	if !GameManager.hub_instructions_shown:
 		start_battle_label.hide()
@@ -26,12 +27,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("start_round"):
-		start_round_timer -= 20*delta
-		print(start_round_timer)
-		if start_round_timer <= 0:
-			GameManager.in_arena = true
-			get_tree().change_scene_to_file("uid://c8ok5h5m1ggwb")
+	if Input.is_action_just_pressed("start_round"):
+		spawn_round_select_menu()
 	else:
 		start_round_timer = start_round_timer_wait_time
 
@@ -72,3 +69,8 @@ func spawn_hub_context() -> void:
 func show_start_combat_label() -> void:
 	start_battle_label.show()
 	controls_label.show()
+
+func spawn_round_select_menu() -> void:
+	GameManager.in_menu = true
+	var round_select_menu : StartRoundPanel =preload("uid://noxi046h5l3k").instantiate()
+	canvas_layer.add_child(round_select_menu)

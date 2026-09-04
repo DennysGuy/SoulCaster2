@@ -261,7 +261,7 @@ tooltip_text = "Upgrades Standard Pistol Bullets to Fortified Pistol Bullets.
 - Doubles received ore rocks"
 mouse_filter = 0
 theme_override_font_sizes/font_size = 24
-text = "Fortified Pistol Bullets"
+text = "Pistol Mining Bullets"
 
 [node name="FortifiedPistolBulletsButton" type="Button" parent="Panel" unique_id=860205881]
 layout_mode = 1
@@ -314,7 +314,7 @@ tooltip_text = "Upgrades Standard Rifle Bullets to Fortified Pistol Bullets.
 - Doubles received ore rocks"
 mouse_filter = 0
 theme_override_font_sizes/font_size = 24
-text = "Fortified Rifle Bullets"
+text = "Rifle Mining Bullets"
 
 [node name="FortifiedRfielBulletsButton" type="Button" parent="Panel" unique_id=2138491045]
 layout_mode = 1

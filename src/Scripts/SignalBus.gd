@@ -39,3 +39,4 @@ signal boss_damaged(health: int,max_health : int)
 signal boss_defeated
 signal arena_context_button_closed
 signal hub_context_menu_closed
+signal shot_fired

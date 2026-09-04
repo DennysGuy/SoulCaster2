@@ -23,8 +23,8 @@ var rifle_mag_cost: int = 10
 var round_number : int = -1
 const MAX_ROUND : int = 3
 
-var round_timers : Array[int] = [9, 8, 7]
-var round_times : Array[int] = [100, 150, 200]
+var round_timers : Array[int] = [8, 7, 6]
+var round_times : Array[int] = [120, 160, 200]
 
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,2,3]
@@ -44,6 +44,9 @@ var fortified_rifle_bullets : bool = false
 
 var hub_instructions_shown : bool = false
 var arena_instructions_shown : bool = false
+
+var furtherest_round_unlocked : int = 0
+var current_round_selected : int = 0
 
 func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0):
 	var player := AudioStreamPlayer.new()

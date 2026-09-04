@@ -26,18 +26,18 @@ func enter() -> void:
 func exit() -> void:
 	
 	if parent.health <= 0:
-		var ore_received : int = 1
+		var ore_received : int = calculate_ore_amount()
 		
 		if GameManager.fortified_pistol_bullets and !GameManager.rifle_owned:
-			ore_received = 2
+			ore_received *= 2
 		
 		if GameManager.fortified_rifle_bullets and GameManager.rifle_owned:
-			ore_received = 2
+			ore_received *=2
 			
 		PlayerStats.player_stats["Ore"] += ore_received
 			
 		GameManager.play_sfx(ROCK_DEATH_1)
-		SignalBus.ore_gathered.emit(1)
+		SignalBus.ore_gathered.emit(ore_received)
 		parent.queue_free()
 
 func process_input(_event: InputEvent) -> State:
@@ -52,3 +52,14 @@ func process_physics(_delta: float) -> State:
 		return idle_state
 	
 	return null
+
+
+func calculate_ore_amount() -> int:
+	var chance : int = randi_range(0,100)
+	
+	if chance <= 25:
+		return 3
+	elif chance <= 45:
+		return 2
+	else:
+		return 1

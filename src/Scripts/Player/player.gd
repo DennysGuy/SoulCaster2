@@ -282,7 +282,8 @@ func play_shoot_animation() -> void:
 	gun_animation_player.play("SHOOT")
 	var body_part = shoot_ray()
 	shoot_enemy(body_part)
-	SignalBus.shake_camera.emit(0.2)
+	SignalBus.shot_fired.emit()
+	SignalBus.shake_camera.emit(0.5)
 	#if GameManager.ammo_count <= 0 and GameManager.equipped_weapon == GameManager.WEAPONS.PISTOL:
 		#GameManager.can_shoot = false
 		##SignalBus.show_reload_notification.emit()

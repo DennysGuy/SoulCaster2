@@ -18,6 +18,7 @@ var prev_state : State
 @export var base_score : int
 @export var grunt_death_pitch : float
 @export var consumable_spawn_point : Marker3D
+@export var hit_stop_time : float = 0.2
 
 @export var body_flash_point : Marker3D
 @export var head_flash_point : Marker3D

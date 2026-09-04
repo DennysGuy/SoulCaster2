@@ -1,17 +1,18 @@
 class_name Dead extends State
 
-@onready var collision_shape_3d: CollisionShape3D = $"../../HeadCollider/CollisionShape3D"
+
 @onready var collision_shape_3d_body: CollisionShape3D = $"../../BodyCollider/CollisionShape3D"
 @onready var parent_collider: CollisionShape3D = $"../../CollisionShape3D"
 
+@export var kill_animations : Array[String]
 
 func enter() -> void:
 	parent.alive = false
-	collision_shape_3d.disabled = true
 	collision_shape_3d_body.disabled = true
 	parent_collider.disabled = true
 	#parent.animation_player.play(animation_name)
-	parent.animation_player.play("kill")
+	HitStopManager.freeze(parent.hit_stop_time)
+	parent.animation_player.play(kill_animations.pick_random())
 	var gained_xp : int = int(parent.xp * PlayerStats.player_stats["XP Bonus"])
 	SignalBus.xp_was_gained.emit(gained_xp)
 	var added_time : int = PlayerStats.player_stats["Life Steal"]

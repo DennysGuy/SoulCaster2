@@ -43,11 +43,11 @@ func _on_spawn_timer_timeout() -> void:
 			print("Im at the beginning")
 			print("This is spawn time %s" % spawn_time) 
 	
-	spawn_timer.wait_time = randi_range(spawn_time-2,spawn_time)
+	spawn_timer.wait_time = randi_range(spawn_time-2,spawn_time+1)
 	spawn_timer.start()
 
 func start_spawn_timer() -> void:
-	spawn_timer.wait_time = randi_range(GameManager.round_timers[GameManager.round_number]-2,GameManager.round_timers[GameManager.round_number])
+	spawn_timer.wait_time = randi_range(GameManager.round_timers[GameManager.round_number]-2,GameManager.round_timers[GameManager.round_number]+1)
 	spawn_timer.start()
 
 func stop_spawn_timer() -> void:

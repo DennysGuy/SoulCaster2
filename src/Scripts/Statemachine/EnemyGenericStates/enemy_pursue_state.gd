@@ -4,12 +4,12 @@ const CHANCE_TO_BE_SASSY : int = 30
 
 func enter() -> void:
 	var random_num : int = randi_range(0,100)
-	parent.animation_player.speed_scale = 1.0
+	parent.animation_player.speed_scale = 0.7
 	parent.play_walk_animation("Run")
 	
 
 func exit() -> void:
-	pass
+	parent.animation_player.speed_scale = 1.0
 
 
 func process_frame(_delta: float) -> State:
