@@ -50,7 +50,7 @@ func start_spawn_timer() -> void:
 	spawn_timer.wait_time = randi_range(GameManager.round_timers[GameManager.round_number]-2,GameManager.round_timers[GameManager.round_number]+1)
 	spawn_timer.start()
 
-func stop_spawn_timer() -> void:
+func stop_spawn_timer(kill : bool) -> void:
 	spawn_timer.stop()
 
 func spawn_enemy() -> void:

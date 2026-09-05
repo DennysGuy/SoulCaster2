@@ -104,25 +104,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and arena_context_showing:
 			close_context_panel()
 		
-		if round_progress_bar.value < round_progress_bar.max_value:
-			round_progress_bar.value += delta
-			
-			if !GameManager.first_quarter_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.25):
-				GameManager.current_round_point = GameManager.ROUND_POINT.FIRST_QUARTER
-				GameManager.first_quarter_point = true
-			if !GameManager.half_way_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.5):
-				GameManager.current_round_point = GameManager.ROUND_POINT.HALF_WAY
-				GameManager.half_way_point = true
-			
-			elif !GameManager.three_quarter_way_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.75):
-				GameManager.current_round_point = GameManager.ROUND_POINT.THREE_QUARTER
-				GameManager.three_quarter_way_point = true
-		else:
-			if GameManager.round_number < GameManager.MAX_ROUND and !round_ended:
-				SignalBus.round_ended.emit()
-				end_round()
 
-				
 
 func update_level() -> void:
 	level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
@@ -143,7 +125,7 @@ func add_xp(amount : int) -> void:
 	progress_bar.value = PlayerStats.player_stats["Current XP"]
 	update_level()
 	
-	if PlayerStats.player_stats["Current XP"] >= PlayerStats.player_stats["Needed XP"]:
+	if PlayerStats.player_stats["Current XP"] >= PlayerStats.player_stats["Needed XP"] and !round_ended:
 		level_up()
 	
 func flash_screen_red() -> void:
@@ -191,6 +173,7 @@ func end_round() -> void:
 	round_started = false
 	round_timer_label.timer_started = false
 	round_progress_bar.value = 0
+	SignalBus.round_ended.emit(true)
 	if GameManager.round_number > -1:
 		var round_diamond : RoundDiamond = round_diamond_container.get_child(GameManager.round_number)
 		round_diamond.fill_diamond()
@@ -204,7 +187,7 @@ func end_round() -> void:
 		start_boss_fight()
 	
 func kill_all_enemies() -> void:
-	SignalBus.round_ended.emit()
+	SignalBus.round_ended.emit(true)
 
 func add_xp_label(amount : int) -> void:
 	var xp_label : ReceivedLabel = preload("uid://ca2bgl0v774sj").instantiate()
@@ -221,8 +204,23 @@ func decrease_time_label(amount : int) -> void:
 	time_label.label.text = "-%ssec." % amount
 	time_gained_position.add_child(time_label)
 	
-func add_progress() -> void:
-	round_progress_bar.value += PlayerStats.player_stats["Progress Speed"]
+func add_progress(amount : float) -> void:
+	round_progress_bar.value += amount * PlayerStats.player_stats["Progress Speed"]
+
+	if !GameManager.first_quarter_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.25):
+		GameManager.current_round_point = GameManager.ROUND_POINT.FIRST_QUARTER
+		GameManager.first_quarter_point = true
+	if !GameManager.half_way_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.5):
+		GameManager.current_round_point = GameManager.ROUND_POINT.HALF_WAY
+		GameManager.half_way_point = true
+	if !GameManager.three_quarter_way_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.75):
+		GameManager.current_round_point = GameManager.ROUND_POINT.THREE_QUARTER
+		GameManager.three_quarter_way_point = true
+
+	if round_progress_bar.value >= round_progress_bar.max_value:
+		if GameManager.round_number < GameManager.MAX_ROUND and !round_ended:
+			#SignalBus.round_ended.emit(true)
+			end_round()
 
 func start_boss_fight() -> void:
 	round_timer_label.zero_out_timer()

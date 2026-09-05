@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://b577hi4520t0u" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_attack.gd" id="7_nlc7f"]
 [ext_resource type="Script" uid="uid://bexjwrt4l1qrd" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_head_shot.gd" id="8_oqn32"]
 [ext_resource type="PackedScene" uid="uid://ri2g3xgvuq8y" path="res://src/Scenes/BodyCollider.tscn" id="10_b3u6r"]
-[ext_resource type="PackedScene" uid="uid://48l3ev7cmnv4" path="res://src/Scenes/HeadCollider.tscn" id="11_t0wus"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1qra"]
 size = Vector3(1.704895, 1.7050629, 1.5903931)
@@ -2799,11 +2798,8 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_n8flt"]
 size = Vector3(1, 1.7495728, 3.078125)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_t0wus"]
-size = Vector3(0.79959106, 0.5251465, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_b3u6r"]
-size = Vector3(1.1426239, 1.9212418, 1)
+size = Vector3(1.1426239, 2.0260506, 1)
 
 [node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
 collision_layer = 2
@@ -2817,6 +2813,7 @@ move_speed = 50.0
 health = 30
 max_enemy_health = 30
 attack_damage = 3
+progress_amount = 6.0
 xp = 5
 hit_stop_time = 0.04
 dead_state = NodePath("StateMachine/Dead")
@@ -3107,18 +3104,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4708087, -3.3702366)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10873413, -1.0390623)
 shape = SubResource("BoxShape3D_n8flt")
 
-[node name="HeadCollider" parent="." unique_id=924364867 instance=ExtResource("11_t0wus")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14675498, 2.5532758, -1.4650133)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadCollider" unique_id=1135532109]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13374329, -0.19396973, 0)
-shape = SubResource("BoxShape3D_t0wus")
-
 [node name="BodyCollider" parent="." unique_id=15815332 instance=ExtResource("10_b3u6r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19861507, 0, -1.456553)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyCollider" unique_id=1255078498]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18256378, 0.953495, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18256378, 1.0058994, 0)
 shape = SubResource("BoxShape3D_b3u6r")
 
 [node name="DamageLabelPosition" type="Marker3D" parent="." unique_id=2120924916]

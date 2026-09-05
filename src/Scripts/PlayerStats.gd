@@ -16,7 +16,7 @@ var player_stats : Dictionary = {
 	"Ability Points": 0.0,
 	"Currency": 0.0,
 	"Ore": 0.0,
-	"Progress Speed": 0.0,
+	"Progress Speed": 1.0,
 	"Life Steal": 1.0,
 	"AP Amount": 1.0,
 	"XP Bonus": 1.0
@@ -32,7 +32,7 @@ var stat_levels : Dictionary = {
 	"Defense": {"Level": 0, "Max Level": 5, "Interval": 0.1, "Cost":1},
 	"Ore Spawn Time": {"Level": 0, "Max Level": 3, "Interval": 0.1, "Cost":1},
 	"Reload Speed": {"Level": 0, "Max Level": 5, "Interval": 0.2, "Cost":1},
-	"Progress Speed" : {"Level": 0, "Max Level": 3, "Interval": 1, "Cost":1},
+	"Progress Speed" : {"Level": 0, "Max Level": 3, "Interval": 0.2, "Cost":1},
 	"AP Amount" : {"Level": 0, "Max Level": 2, "Interval": 1, "Cost":1},
 	"XP Bonus":  {"Level": 0, "Max Level": 3, "Interval": 0.5, "Cost":1},
 	"Life Steal":  {"Level": 0, "Max Level": 2, "Interval": 1.0, "Cost":1},

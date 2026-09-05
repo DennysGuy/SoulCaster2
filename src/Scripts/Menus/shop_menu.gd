@@ -27,14 +27,14 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_purchase_rifle_button_button_up() -> void:
-	PlayerStats.player_stats["Ore"] -= 40
+	PlayerStats.player_stats["Ore"] -= 100
 	GameManager.rifle_owned = true
 	update_menu()
 
 func update_menu() -> void:
 	ore_count.text = "x %s" % int(PlayerStats.player_stats["Ore"])
 	if !GameManager.rifle_owned:
-		if PlayerStats.player_stats["Ore"] >= 40:
+		if PlayerStats.player_stats["Ore"] >= 100:
 			purchase_rifle_button.disabled = false
 			purchase_rifle_button.text = "Purchase!"
 		else:
@@ -45,7 +45,7 @@ func update_menu() -> void:
 		purchase_rifle_button.text = "Owned"
 	
 	if !GameManager.amulet_owned:
-		if PlayerStats.player_stats["Ore"] >= 20:
+		if PlayerStats.player_stats["Ore"] >= 30:
 			purchase_radar_button.disabled = false
 			purchase_radar_button.text = "Purchase!"
 		else:
@@ -56,7 +56,7 @@ func update_menu() -> void:
 		purchase_radar_button.text = "Owned"
 
 	if !GameManager.enemy_tracker_owned:
-		if PlayerStats.player_stats["Ore"] >= 15:
+		if PlayerStats.player_stats["Ore"] >= 20:
 			purchase_tracker_button.disabled = false
 			purchase_tracker_button.text = "Purchase!"
 		else:

@@ -24,7 +24,7 @@ var round_number : int = -1
 const MAX_ROUND : int = 3
 
 var round_timers : Array[int] = [8, 7, 6]
-var round_times : Array[int] = [120, 160, 200]
+var round_times : Array[int] = [125, 230, 340]
 
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,2,3]

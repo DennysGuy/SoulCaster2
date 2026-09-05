@@ -279,7 +279,7 @@ func play_shoot_animation() -> void:
 		chosen_gun_animation_player.speed_scale = attack_speed
 	#GameManager.ammo_count -= 1
 	#SignalBus.update_ammo_count.emit()
-	gun_animation_player.play("SHOOT")
+	chosen_gun_animation_player.play("SHOOT")
 	var body_part = shoot_ray()
 	shoot_enemy(body_part)
 	SignalBus.shot_fired.emit()
@@ -291,7 +291,7 @@ func play_shoot_animation() -> void:
 		#await get_tree().create_timer(0.15).timeout
 		#GameManager.can_shoot = true
 		
-	await gun_animation_player.animation_finished
+	await chosen_gun_animation_player.animation_finished
 	shooting = false
 	#GameManager.can_shoot = true
 

@@ -5,7 +5,7 @@ signal shake_camera(shake_time : float)
 
 signal xp_was_gained(xp_amount : float)
 
-signal time_added(amount : int)
+signal time_added(amount : float)
 
 signal player_hurt(damage : int)
 
@@ -23,7 +23,7 @@ signal enemy_found(enemy_name : String, enemy_hp : int, enemy_max_hp : int)
 
 signal bullet_fired
 
-signal round_ended
+signal round_ended(kill_all : bool)
 
 signal round_started
 

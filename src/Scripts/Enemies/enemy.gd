@@ -14,6 +14,7 @@ var prev_state : State
 @export var health : int = 3
 @export var max_enemy_health : int
 @export var attack_damage : int = 0
+@export var progress_amount : float
 @export var xp : int = 0
 @export var base_score : int
 @export var grunt_death_pitch : float
@@ -42,6 +43,8 @@ const RAT_DEATH_1 = preload("uid://d3ghyfjmncx5c")
 
 @onready var hurts : Array[AudioStream] = [hurt_1,hurt_2,hurt_3]
 
+var round_ended : bool = false
+
 var alive : bool = true
 var can_hurt : bool = true
 func _ready() -> void:
@@ -58,12 +61,15 @@ func _process(delta: float) -> void:
 	if !player:
 		player = get_tree().get_first_node_in_group("Player")
 
-func kill_enemy(killed_by_grenade : bool = false) -> void:
+func kill_enemy(ended_round : bool = false) -> void:
 	if not alive:
 		return
 		
 	alive = false
-
+	
+	if ended_round:
+		round_ended = true
+	
 	state_machine.change_state(dead_state)
 
 func head_shot_kill() -> void:

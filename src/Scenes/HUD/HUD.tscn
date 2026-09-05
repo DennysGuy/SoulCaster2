@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://c87ouqp84eqp7" path="res://src/Scenes/HUD/RoundDiamond.tscn" id="4_7pn66"]
 [ext_resource type="StyleBox" uid="uid://5eyxyvcgpq2q" path="res://src/RoundStyle.tres" id="4_wwnsm"]
 [ext_resource type="Script" uid="uid://dxg6uh4s7j7ab" path="res://src/Scripts/arena_context_panel.gd" id="6_7pn66"]
+[ext_resource type="Texture2D" uid="uid://dam4v5p51n5b4" path="res://Assets/WaveDiamondEmpty.png" id="6_lkjxp"]
+[ext_resource type="Texture2D" uid="uid://d3apwcm4ylvd2" path="res://Assets/WaveDiamondFilled.png" id="7_761it"]
+[ext_resource type="Texture2D" uid="uid://dk6iunojkq143" path="res://Assets/BossWaveEmpty.png" id="8_2c58t"]
+[ext_resource type="Texture2D" uid="uid://dyrx0x1hwcsdd" path="res://Assets/BossWaveFilled.png" id="9_veicy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
 bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
@@ -238,6 +242,13 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pn66"]
+bg_color = Color(0.46229059, 0.46229064, 0.4622904, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="HUD" type="CanvasLayer" unique_id=1895423373]
 script = ExtResource("1_ippal")
 
@@ -389,8 +400,8 @@ offset_right = 464.0
 offset_bottom = 33.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_7pn66")
 theme_override_styles/fill = ExtResource("4_wwnsm")
-value = 50.0
 
 [node name="RoundDiamondContainer" type="HBoxContainer" parent="." unique_id=1636156031]
 anchors_preset = 5
@@ -405,12 +416,23 @@ theme_override_constants/separation = 100
 
 [node name="RoundDiamond" parent="RoundDiamondContainer" unique_id=1550612314 instance=ExtResource("4_7pn66")]
 layout_mode = 2
+wave_graphic_unfilled = ExtResource("6_lkjxp")
+wave_graphic_filled = ExtResource("7_761it")
 
 [node name="RoundDiamond2" parent="RoundDiamondContainer" unique_id=793161586 instance=ExtResource("4_7pn66")]
 layout_mode = 2
+wave_graphic_unfilled = ExtResource("6_lkjxp")
+wave_graphic_filled = ExtResource("7_761it")
 
 [node name="RoundDiamond3" parent="RoundDiamondContainer" unique_id=1610435108 instance=ExtResource("4_7pn66")]
 layout_mode = 2
+wave_graphic_unfilled = ExtResource("6_lkjxp")
+wave_graphic_filled = ExtResource("7_761it")
+
+[node name="RoundDiamond4" parent="RoundDiamondContainer" unique_id=279467700 instance=ExtResource("4_7pn66")]
+layout_mode = 2
+wave_graphic_unfilled = ExtResource("8_2c58t")
+wave_graphic_filled = ExtResource("9_veicy")
 
 [node name="HurtRect" type="ColorRect" parent="." unique_id=295245294]
 modulate = Color(1, 1, 1, 0)
@@ -466,9 +488,9 @@ Survive the Rat Barrage; Defeat the Mother Rat!
 
 Directions:
 1. Your Health is the Timer (the big number towards the top of the screen)! Kill enemies to regain time!
-2. The purple Progress Bar at the top represents the current round's progress. 
-3. The bar will fill automatically while you fight rats. 
-4. Once the progress bar fills completely, you will be moved to the next round. 
+2. The Progress Bar at the top represents the current round's progress. 
+3. The Progress Bar will fill up when you successfuly kill enemies. 
+4. Once the progress bar fills up completely, you will be moved to the next round. 
 5. If the timer runs out before the end of the round, you will be sent back to the hub.
 
 Controls:

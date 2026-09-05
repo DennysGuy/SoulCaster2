@@ -17,7 +17,8 @@ func enter() -> void:
 	SignalBus.xp_was_gained.emit(gained_xp)
 	var added_time : int = PlayerStats.player_stats["Life Steal"]
 	SignalBus.time_added.emit(added_time)
-	SignalBus.progress_added.emit()
+	if !parent.round_ended:
+		SignalBus.progress_added.emit(parent.progress_amount)
 	#if parent is WalkerEnemy and parent.is_greeter:
 		#AudioManager.play_sfx(AudioManager.CROWD_GASP)
 		#AudioManager.stop_music_player()
