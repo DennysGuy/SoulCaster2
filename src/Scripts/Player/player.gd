@@ -300,6 +300,8 @@ func shoot_enemy(enemy_body_part : Node3D):
 	print("BANG!")
 	if enemy_body_part:
 		enemy = enemy_body_part.get_parent()
+	if !enemy:
+		GameManager.misses += 1
 	if enemy_body_part and enemy is Enemy or enemy_body_part and enemy is TestOre or enemy_body_part and enemy is BabyBullet:
 		#if not enemy.is_boss:
 			#GameManager.total_shots_hit += 1
@@ -307,17 +309,17 @@ func shoot_enemy(enemy_body_part : Node3D):
 		var seen_enemy = enemy_body_part.get_parent()
 
 		if enemy_body_part is EnemyBodyCollider and enemy is Enemy and seen_enemy.can_hurt:
+			GameManager.hits += 1
 			seen_enemy.damage_enemy()
 		elif enemy_body_part is HeadCollider and enemy is Enemy and seen_enemy.can_hurt:
+			GameManager.hits += 1
 			seen_enemy.head_shot_kill()
 		elif enemy_body_part is OreCollider:
+			GameManager.hits += 1
 			seen_enemy.damage_ore()
 		elif enemy_body_part is EnemyBodyCollider and enemy is BabyBullet:
 			enemy.die()
-	#else:
-		#SignalBus.reset_hits_count.emit()
-	
-	#GameManager.total_shots += 1	
+	GameManager.shots_fired += 1
 
 func get_aim_ray() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -395,7 +397,6 @@ func _update_arrows() -> void:
 				alert_arrow_2.visible = true
 	
 		dir_shown[q] = true
-
 
 func notify_enemy(enemy: Node3D) -> void:
 	#print("Enemy spawned in quadrant: ", _get_enemy_quadrant(enemy))

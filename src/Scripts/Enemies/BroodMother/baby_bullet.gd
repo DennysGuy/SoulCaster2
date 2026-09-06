@@ -36,6 +36,7 @@ func attack_player() -> void:
 	SignalBus.player_hurt.emit(attack_damage)
 	SignalBus.shake_camera.emit(1.0)
 	SignalBus.player_damaged.emit()
+	GameManager.hits_taken += 1
 	queue_free()
 
 func die() -> void:

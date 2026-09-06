@@ -23,11 +23,20 @@ var rifle_mag_cost: int = 10
 var round_number : int = -1
 const MAX_ROUND : int = 3
 
+var shots_fired : int = 0
+var misses : int = 0
+var hits : int = 0
+var hits_taken : int = 0
+var xp_gained : int = 0
+var levels_gained : int = 0
+var rounds_beaten : int = 0
+var enemies_killed : int = 0
+var ore_acquired : int = 0
 var round_timers : Array[int] = [8, 7, 6]
 var round_times : Array[int] = [125, 230, 340]
 
 var minimum_spawn : Array[int] = [1,1,2]
-var maximum_spawn : Array[int] = [2,2,3]
+var maximum_spawn : Array[int] = [2,3,3]
 
 enum ROUND_POINT {BEGINNING, FIRST_QUARTER, HALF_WAY, THREE_QUARTER}
 var current_round_point : ROUND_POINT = ROUND_POINT.BEGINNING

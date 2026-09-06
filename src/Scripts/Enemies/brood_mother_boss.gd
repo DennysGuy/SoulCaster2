@@ -3,6 +3,11 @@ class_name BroodMother extends Enemy
 @onready var timer: Timer = $Timer
 @onready var birth_area: Marker3D = $BirthArea
 @export var true_idle_state : State
+
+
+const BOSSFALL = preload("uid://dblm77efdm7xg")
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
@@ -31,3 +36,6 @@ func spawn_baby() -> void:
 
 func start_combat() -> void:
 	state_machine.change_state(true_idle_state)
+
+func play_ground_slam() -> void:
+	GameManager.play_sfx(BOSSFALL)

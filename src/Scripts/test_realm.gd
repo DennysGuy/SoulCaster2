@@ -5,15 +5,26 @@ class_name TestRealm extends Node3D
 @onready var ore_spawn_points: Node = $OreSpawnPoints
 @onready var ore_spawn_timer: Timer = $OreSpawnTimer
 @onready var boss_spawn_point: Marker3D = $BossSpawnPoint
+const BOSS_THEME = preload("uid://c4n1b2qik86oq")
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#spawn_timer.start()
 	ore_spawn_timer.start()
+	GameManager.hits_taken = 0
+	GameManager.xp_gained = 0
+	GameManager.misses = 0
+	GameManager.shots_fired = 0
+	GameManager.levels_gained = 0
+	GameManager.enemies_killed = 0
+	GameManager.ore_acquired = 0
+	GameManager.rounds_beaten = 0
 	GameManager.in_arena = true
 	SignalBus.round_started.connect(start_spawn_timer)
 	SignalBus.round_ended.connect(stop_spawn_timer)
 	SignalBus.boss_fight_started.connect(spawn_boss)
+	SignalBus.combat_engaged.connect(start_boss_music)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -101,7 +112,16 @@ func spawn_ore() -> void:
 	add_child(ore)
 
 func spawn_boss() -> void:
+	stop_music()
 	var boss : BroodMother = preload("uid://d4gg3flbxkfb5").instantiate()
 	boss.global_position = boss_spawn_point.global_position
 	boss.rotation = boss_spawn_point.rotation
 	add_child(boss)
+
+func stop_music() -> void:
+	music_player.stop()
+
+func start_boss_music() -> void:
+	music_player.stream = BOSS_THEME
+	music_player.volume_db = -4.0
+	music_player.play()

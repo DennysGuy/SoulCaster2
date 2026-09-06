@@ -35,7 +35,7 @@ func exit() -> void:
 			ore_received *=2
 			
 		PlayerStats.player_stats["Ore"] += ore_received
-			
+		GameManager.ore_acquired += ore_received
 		GameManager.play_sfx(ROCK_DEATH_1)
 		SignalBus.ore_gathered.emit(ore_received)
 		parent.queue_free()

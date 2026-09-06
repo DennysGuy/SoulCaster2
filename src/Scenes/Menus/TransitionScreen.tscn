@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://b54wn7lrvkbdi"]
+
+[ext_resource type="Script" uid="uid://q2773pwdxr1x" path="res://src/Scripts/Menus/transition_screen.gd" id="1_ke1q0"]
+
+[node name="TransitionScreen" type="Control" unique_id=275674621]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ke1q0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=213028476]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DefeatedTitle" type="Label" parent="." unique_id=470539202]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.0
+offset_top = 33.0
+offset_right = 201.0
+offset_bottom = 91.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 42
+text = "You Were Defeated!"
+
+[node name="StatsTitle" type="Label" parent="." unique_id=150363255]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -556.0
+offset_top = 154.0
+offset_right = -154.0
+offset_bottom = 204.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "Stats"
+
+[node name="ShotsFiredLabel" type="Label" parent="." unique_id=997799647]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -556.0
+offset_top = 233.0
+offset_right = -154.0
+offset_bottom = 272.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "Shots  Fired: 100"
+
+[node name="Accuracy" type="Label" parent="." unique_id=121171600]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -556.0
+offset_top = 285.0
+offset_right = -154.0
+offset_bottom = 324.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "Accuracy: 80%"
+
+[node name="EnemiesKilledLabel" type="Label" parent="." unique_id=202519104]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -556.0
+offset_top = 346.0
+offset_right = -154.0
+offset_bottom = 385.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "Enemys Killed: 10"
+
+[node name="LevelsGainedLabel" type="Label" parent="." unique_id=1869855746]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 233.0
+offset_right = 194.0
+offset_bottom = 272.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "Levels Gained: 1"
+
+[node name="XPGainedLabel" type="Label" parent="." unique_id=304787194]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 285.0
+offset_right = 194.0
+offset_bottom = 324.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "XP Gained : 400"
+
+[node name="OreAcquiredLabel" type="Label" parent="." unique_id=359577801]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 346.0
+offset_right = 194.0
+offset_bottom = 385.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "Ore Acquired: 25"
+
+[node name="RoundsCompletedLabel" type="Label" parent="." unique_id=1308366625]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 129.0
+offset_top = 229.0
+offset_right = 531.0
+offset_bottom = 268.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "Rounds Completed: 0"
+
+[node name="GoToHubButton" type="Button" parent="." unique_id=721752995]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 567.0
+offset_right = 548.0
+offset_bottom = 630.0
+theme_override_font_sizes/font_size = 40
+text = "Go to Hub"
+
+[node name="TryAgainButton" type="Button" parent="." unique_id=175229081]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 567.0
+offset_right = 823.0
+offset_bottom = 630.0
+theme_override_font_sizes/font_size = 40
+text = "Try Again"
+
+[connection signal="button_up" from="GoToHubButton" to="." method="_on_go_to_hub_button_button_up"]
+[connection signal="button_up" from="TryAgainButton" to="." method="_on_try_again_button_button_up"]

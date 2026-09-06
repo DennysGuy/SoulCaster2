@@ -8,6 +8,7 @@ class_name Dead extends State
 
 func enter() -> void:
 	parent.alive = false
+	GameManager.enemies_killed += 1
 	collision_shape_3d_body.disabled = true
 	parent_collider.disabled = true
 	#parent.animation_player.play(animation_name)

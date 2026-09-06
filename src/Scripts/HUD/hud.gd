@@ -70,6 +70,7 @@ func _ready() -> void:
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
 	#round_timer.start()
 	update_level()
+	update_bullets_tracker()
 	if GameManager.enemy_tracker_owned:
 		enemy_tracker.show()
 		
@@ -113,6 +114,7 @@ func update_level() -> void:
 	progress_bar.max_value = int(PlayerStats.player_stats["Needed XP"])
 
 func level_up() -> void:
+	GameManager.levels_gained += 1
 	PlayerStats.player_stats["Level"] += 1
 	PlayerStats.player_stats["Current XP"] = abs(int(PlayerStats.player_stats["Current XP"] - PlayerStats.player_stats["Needed XP"]))
 	PlayerStats.player_stats["Needed XP"] = int(BASE_XP_AMOUNT * pow(XP_MULTIPLIER_FACTOR, PlayerStats.player_stats["Level"]))
@@ -120,6 +122,7 @@ func level_up() -> void:
 	update_level()
 
 func add_xp(amount : int) -> void:
+	GameManager.xp_gained += amount
 	PlayerStats.player_stats["Current XP"] += amount
 	add_xp_label(amount)
 	progress_bar.value = PlayerStats.player_stats["Current XP"]
@@ -179,6 +182,7 @@ func end_round() -> void:
 		round_diamond.fill_diamond()
 	GameManager.play_sfx(GONG_HIT_ROUND_END)
 	GameManager.round_number += 1
+	GameManager.rounds_beaten += 1
 	if GameManager.round_number > GameManager.furtherest_round_unlocked:
 		GameManager.furtherest_round_unlocked = GameManager.round_number
 	if GameManager.round_number < GameManager.MAX_ROUND:
@@ -254,7 +258,7 @@ func end_fight() -> void:
 	animation_player.play("YouWin")
 
 func go_to_hub() -> void:
-	get_tree().change_scene_to_file("uid://jgsciuanachx")
+	get_tree().change_scene_to_file("uid://b54wn7lrvkbdi")
 
 func play_round_start_sfx() -> void:
 	GameManager.play_sfx(ROUND_START)

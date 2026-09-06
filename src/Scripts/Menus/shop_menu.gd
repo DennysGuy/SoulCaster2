@@ -107,7 +107,7 @@ func update_menu() -> void:
 	rifle_magazine_cost.text = "x %s" % GameManager.rifle_mag_cost
 
 func _on_purchase_radar_button_button_up() -> void:
-	PlayerStats.player_stats["Ore"] -= 20
+	PlayerStats.player_stats["Ore"] -= 30
 	GameManager.amulet_owned = true
 	update_menu()
 
@@ -117,7 +117,7 @@ func _on_close_menu_button_up() -> void:
 	queue_free()
 
 func _on_purchase_tracker_button_button_up() -> void:
-	PlayerStats.player_stats["Ore"] -= 15
+	PlayerStats.player_stats["Ore"] -= 20
 	GameManager.enemy_tracker_owned = true
 	update_menu()
 
