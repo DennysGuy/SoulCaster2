@@ -19,7 +19,7 @@ var target_location : Marker3D
 @onready var rifle: Node3D = $Head/Marker3D/GunArm/Rifle
 @onready var pistol: Node3D = $Head/Marker3D/GunArm/Pistol
 
-var rotate_speed: float = 5.0  # higher = faster turn
+var rotate_speed: float = 10.0  # higher = faster turn
 var zoom_target: float = 60.0  # smaller FOV = zoom in
 var zoom_speed: float = 5.0    # how fast zoom eases
 
@@ -27,8 +27,9 @@ var zoom_speed: float = 5.0    # how fast zoom eases
 
 @onready var cross_hair: CrossHair = $CanvasLayer/CrossHair
 
-@onready var gun_animation_player: AnimationPlayer = $Head/Marker3D/GunArm/Pistol/AnimationPlayer
-@onready var rifle_animation_player: AnimationPlayer = $Head/Marker3D/GunArm/Rifle/AnimationPlayer
+@onready var cross_bow_animation_player: AnimationPlayer = $Head/Marker3D/GunArm/CrossBow/AnimationPlayer
+@onready var super_bow_animation_player: AnimationPlayer = $Head/Marker3D/GunArm/UltraBow/AnimationPlayer
+
 
 var initial_player_rotation = Vector3.ZERO
 var initial_head_rotation = Vector3.ZERO
@@ -45,20 +46,25 @@ var can_shoot : bool = true
 const LOOKLEFT = preload("uid://b6dm6bij87ov0")
 const LOOKRIGHT = preload("uid://bp6hlgrojy4g6")
 
-const PISTOL_1 = preload("uid://d3bilne8hioau")
-const PISTOL_2 = preload("uid://d0vf5y2x0n20t")
-const PISTOL_3 = preload("uid://srtq7jkoqrnk")
-
-const RIFLE_1 = preload("uid://cu7votcgtdpnw")
-const RIFLE_2 = preload("uid://gliv55qaccva")
-const RIFLE_3 = preload("uid://canubute4csy8")
-const RIFLE_4 = preload("uid://cqfjqpj2kkt8v")
-
-const PISTOLRELOAD = preload("uid://lhw7fod3087e")
+const CROSS_BOW_SHOT_1 = preload("uid://cxw1dlmuqs4oq")
+const CROSS_BOW_SHOT_2 = preload("uid://bve1c0nfa8pew")
+const CROSS_BOW_SHOT_3 = preload("uid://x1crmsqbxpml")
 
 
-@onready var pistol_sfx : Array[AudioStream] = [PISTOL_1,PISTOL_2,PISTOL_3]
-@onready var rifle_sfx : Array[AudioStream] = [RIFLE_1,RIFLE_2,RIFLE_3,RIFLE_4]
+const SUPER_CROSS_BOW_SHOT_1 = preload("uid://ex8ckfx8irr0")
+const SUPER_CROSS_BOW_SHOT_2 = preload("uid://dhi8n2be1t1bd")
+const SUPER_CROSS_BOW_SHOT_3 = preload("uid://cw13y1sukqnuf")
+
+const SUPER_CROSS_BOW_RELOAD = preload("uid://ykylqyg4mlqr")
+
+
+const CROSS_BOW_RELOAD = preload("uid://02x3x6xyebhq")
+
+@onready var cross_bow: Node3D = $Head/Marker3D/GunArm/CrossBow
+@onready var ultra_bow: Node3D = $Head/Marker3D/GunArm/UltraBow
+
+@onready var pistol_sfx : Array[AudioStream] = [CROSS_BOW_SHOT_1,CROSS_BOW_SHOT_2,CROSS_BOW_SHOT_3]
+@onready var rifle_sfx : Array[AudioStream] = [SUPER_CROSS_BOW_SHOT_1,SUPER_CROSS_BOW_SHOT_2,SUPER_CROSS_BOW_SHOT_3]
 
 var chosen_gun_animation_player : AnimationPlayer
 
@@ -89,14 +95,16 @@ func _ready() -> void:
 	rotate_speed = PlayerStats.player_stats["Movement Speed"]
 	
 	if GameManager.rifle_owned:
-		rifle.show()
-		pistol.hide()
-		chosen_gun_animation_player = rifle_animation_player 
+		ultra_bow.show()
+		cross_bow.hide()
+		#pistol.hide()
+		chosen_gun_animation_player = super_bow_animation_player 
 		GameManager.magazine = GameManager.rifle_magazine_size
 	else:
-		pistol.show()
-		rifle.hide()
-		chosen_gun_animation_player = gun_animation_player
+		#pistol.show()
+		cross_bow.show()
+		ultra_bow.hide()
+		chosen_gun_animation_player = cross_bow_animation_player
 		GameManager.magazine = GameManager.pistol_magazine_size
 		
 	GameManager.bullets_in_clip = GameManager.magazine
@@ -117,7 +125,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
 			if GameManager.bullets_in_clip <= 0:
 				shooting = true
-				GameManager.play_sfx(PISTOLRELOAD)
+				GameManager.play_sfx(CROSS_BOW_RELOAD)
 				play_reload_animation()
 			else:
 				shooting = true
@@ -127,7 +135,10 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("reload") and GameManager.in_arena:
 			shooting = true
-			GameManager.play_sfx(PISTOLRELOAD)
+			if GameManager.rifle_owned:
+				GameManager.play_sfx(SUPER_CROSS_BOW_RELOAD)
+			else:
+				GameManager.play_sfx(CROSS_BOW_RELOAD)
 			play_reload_animation()
 		
 		move_player()

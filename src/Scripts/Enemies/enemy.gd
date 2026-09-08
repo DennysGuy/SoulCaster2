@@ -47,15 +47,21 @@ var round_ended : bool = false
 
 var alive : bool = true
 var can_hurt : bool = true
+
+var selected_move_speed : float = 0
+var selected_speed_scale : float = 0.7
+var move_speeds : Dictionary = {
+	0 : [move_speed, 0.7],
+	1 : [selected_move_speed+30,1.0],
+	2 : [selected_move_speed+60,1.3]
+}
+
 func _ready() -> void:
-	#if skeleton:
-		#for child in skeleton.get_children():
-			#var mesh: MeshInstance3D = child
-			#var base_mat: Material = mesh.get_active_material(0)
-#
-			#if base_mat and base_mat.next_pass:
-				#base_mat.next_pass = base_mat.next_pass.duplicate()
 	SignalBus.round_ended.connect(kill_enemy)
+	var rand_num : int = randi_range(0,100)
+	var selected_value : int = select_speed(rand_num)
+	selected_move_speed = move_speeds[selected_value][0]
+	selected_speed_scale = move_speeds[selected_value][1]
 
 func _process(delta: float) -> void:
 	if !player:
@@ -171,3 +177,12 @@ func make_materials_unique(node: Node):
 
 	for child in node.get_children():
 		make_materials_unique(child)
+
+
+func select_speed(value : int) -> int:
+	if value <= 15:
+		return 2
+	elif value <= 30:
+		return 1
+	else:
+		return 0

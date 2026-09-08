@@ -123,5 +123,5 @@ func stop_music() -> void:
 
 func start_boss_music() -> void:
 	music_player.stream = BOSS_THEME
-	music_player.volume_db = -4.0
+	music_player.volume_db = -12.0
 	music_player.play()

@@ -67,7 +67,7 @@ func stop_timer() -> void:
 	timer_started = false
 	#temporary
 	
-	GameManager.round_number = -1
+	#GameManager.round_number = -1
 	get_tree().change_scene_to_file("uid://b54wn7lrvkbdi")
 
 func reset_timer() -> void:

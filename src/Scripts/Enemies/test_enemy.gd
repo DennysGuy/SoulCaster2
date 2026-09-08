@@ -8,7 +8,7 @@ var player_in_range : bool = false
 
 func _ready() -> void:
 	super()
-	max_enemy_health = randi_range(max_enemy_health-20,max_enemy_health+10)
+	max_enemy_health = randi_range(max_enemy_health-10,max_enemy_health)
 	health = max_enemy_health
 	SignalBus.enemy_spawned.emit(self)
 	state_machine.init(self)

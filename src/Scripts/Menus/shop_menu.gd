@@ -27,14 +27,14 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_purchase_rifle_button_button_up() -> void:
-	PlayerStats.player_stats["Ore"] -= 100
+	PlayerStats.player_stats["Ore"] -= 0
 	GameManager.rifle_owned = true
 	update_menu()
 
 func update_menu() -> void:
 	ore_count.text = "x %s" % int(PlayerStats.player_stats["Ore"])
 	if !GameManager.rifle_owned:
-		if PlayerStats.player_stats["Ore"] >= 100:
+		if PlayerStats.player_stats["Ore"] >= 0:
 			purchase_rifle_button.disabled = false
 			purchase_rifle_button.text = "Purchase!"
 		else:

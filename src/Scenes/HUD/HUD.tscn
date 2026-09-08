@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d3apwcm4ylvd2" path="res://Assets/WaveDiamondFilled.png" id="7_761it"]
 [ext_resource type="Texture2D" uid="uid://dk6iunojkq143" path="res://Assets/BossWaveEmpty.png" id="8_2c58t"]
 [ext_resource type="Texture2D" uid="uid://dyrx0x1hwcsdd" path="res://Assets/BossWaveFilled.png" id="9_veicy"]
+[ext_resource type="PackedScene" uid="uid://hgkgq320bg8e" path="res://src/Scenes/HUD/BoltPreview.tscn" id="11_veicy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
 bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
@@ -335,21 +336,6 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "6/32"
 
-[node name="BulletsTitle" type="Label" parent="." unique_id=946687540]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -214.0
-offset_top = -51.0
-offset_right = -108.0
-offset_bottom = -6.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "Bullets"
-
 [node name="EnemyTracker" type="Panel" parent="." unique_id=1205098400]
 visible = false
 anchors_preset = 2
@@ -435,6 +421,7 @@ wave_graphic_unfilled = ExtResource("8_2c58t")
 wave_graphic_filled = ExtResource("9_veicy")
 
 [node name="HurtRect" type="ColorRect" parent="." unique_id=295245294]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -524,5 +511,21 @@ offset_top = 39.0
 offset_right = 358.0
 offset_bottom = 62.0
 text = "Hold 'Q' to Exit Combat"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1016456887]
+offset_left = 1044.0
+offset_top = 612.0
+offset_right = 1556.0
+offset_bottom = 1124.0
+scale = Vector2(0.33493993, 0.26871854)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1188942008]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="BoltPreview" parent="SubViewportContainer/SubViewport" unique_id=1336283887 instance=ExtResource("11_veicy")]
 
 [connection signal="button_up" from="ContextPanel/Next" to="." method="_on_next_button_up"]

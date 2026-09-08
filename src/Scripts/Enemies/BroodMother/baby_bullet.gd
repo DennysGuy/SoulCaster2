@@ -3,6 +3,12 @@ class_name BabyBullet extends CharacterBody3D
 @onready var bulletrat_2: Node3D = $bulletrat2
 @onready var grow_player: AnimationPlayer = $GrowPlayer
 const RAT_DEATH_1 = preload("uid://d3ghyfjmncx5c")
+const BABY_SPLAT_1 = preload("uid://csuh2qfmiek87")
+const BABY_SPLAT_2 = preload("uid://tiujpr158j0")
+
+const SHOOT_WHISTLE = preload("uid://dq3uc67np1niw")
+
+@onready var splats : Array[AudioStream] = [BABY_SPLAT_1,BABY_SPLAT_2]
 
 @onready var animation_player: AnimationPlayer = $bulletrat2/AnimationPlayer
 var attack_damage: int = 3
@@ -10,6 +16,7 @@ var move_speed : float = 350
 var player : Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	player = get_tree().get_first_node_in_group("Player")
 	animation_player.play("fly")
 	grow_player.play("grow")
@@ -37,8 +44,10 @@ func attack_player() -> void:
 	SignalBus.shake_camera.emit(1.0)
 	SignalBus.player_damaged.emit()
 	GameManager.hits_taken += 1
+	GameManager.play_sfx(splats.pick_random())
 	queue_free()
 
 func die() -> void:
+	
 	GameManager.play_sfx(RAT_DEATH_1)
 	queue_free()

@@ -1,12 +1,14 @@
 class_name BroodMotherAttack extends State
 
 @export var idle_state : State
+const BOSS_PREP = preload("uid://cimkiq3bm7ncq")
 
 var number_of_times: int = 0
 var timer : float = 75
 var wait_time : float = 30
 func enter() -> void:
 	timer = wait_time
+	GameManager.play_sfx(BOSS_PREP)
 	parent.animation_player.play("AttackPrep")
 	number_of_times = randi_range(6,14)
 	

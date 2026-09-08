@@ -10,11 +10,11 @@ class_name TransitionScreen extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	shots_fired_label.text = "Total Shots Fired: %s" % GameManager.shots_fired
-	
-	var the_accuracy : int = (GameManager.hits/GameManager.shots_fired) * 100
-	print("THIS IS HITS %s " % GameManager.hits)
-	accuracy.text = "Accuracy: %s" % the_accuracy
+	#var the_accuracy : int = (GameManager.hits/GameManager.shots_fired) * 100
+	#print("THIS IS HITS %s " % GameManager.hits)
+	#accuracy.text = "Accuracy: %s" % the_accuracy
 	enemies_killed_label.text = "Enemies Slain: %s" % GameManager.enemies_killed
 	levels_gained_label.text = "Levels Gained: %s/%s" % [GameManager.levels_gained,int(PlayerStats.player_stats["Level"])]
 	xp_gained_label.text = "XP Gained: %s" % GameManager.xp_gained

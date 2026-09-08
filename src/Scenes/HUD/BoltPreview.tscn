@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://hgkgq320bg8e"]
+
+[ext_resource type="Script" uid="uid://fi0sakwgy1lu" path="res://src/Scripts/HUD/bolt_preview.gd" id="1_0qhbb"]
+[ext_resource type="PackedScene" uid="uid://cf7o01i3nvskd" path="res://Assets/Weapons/Bolt.glb" id="1_hded2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hded2"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0qhbb"]
+sky_material = SubResource("ProceduralSkyMaterial_hded2")
+
+[sub_resource type="Environment" id="Environment_57xve"]
+background_mode = 1
+sky = SubResource("Sky_0qhbb")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="BoltPreview" type="Node3D" unique_id=1336283887]
+script = ExtResource("1_0qhbb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1531019230]
+environment = SubResource("Environment_57xve")
+
+[node name="Bolt" parent="." unique_id=621196264 instance=ExtResource("1_hded2")]
+transform = Transform3D(0.9240331, -1.6711411e-08, -0.38231254, -0.38231254, -4.039077e-08, -0.9240331, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="Cube" parent="Bolt" index="0" unique_id=1318056539]
+transform = Transform3D(-0.026996737, 0.00041240908, -0.00075437676, -0.0004125552, -0.026995962, 0.007345129, 1.7790671e-05, -0.00020381517, -0.97441185, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=626976122]
+transform = Transform3D(1, 0, 0, 0, 0.9598641, 0.2804657, 0, -0.2804657, 0.9598641, 0, 1.1308706, 2.6436422)
+
+[editable path="Bolt"]

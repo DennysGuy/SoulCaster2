@@ -90,17 +90,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	if Input.is_action_pressed("quit_battle"):
 		quit_time_left -= 15 * delta
 		if quit_time_left <= 0:
 			go_to_hub()
+			
 	if Input.is_action_just_released("quit_battle"):
 		quit_time_left = quit_time
 
 func _physics_process(delta: float) -> void:
 	if round_started:
 		#if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
-			#round_progress_bar.value = round_progress_bar.max_value - 2
+			#add_progress(50)
 		
 		if Input.is_action_just_pressed("jump") and arena_context_showing:
 			close_context_panel()

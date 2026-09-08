@@ -126,7 +126,7 @@ func init_upgrades() -> void:
 	starting_timer_level.text = "Starting Timer Level: %s/%s" % [PlayerStats.stat_levels["Starting Timer"]["Level"], PlayerStats.stat_levels["Starting Timer"]["Max Level"]]
 	ore_spawn_time_level.text = "Ore Spawn Time Level: %s/%s" % [PlayerStats.stat_levels["Ore Spawn Time"]["Level"], PlayerStats.stat_levels["Ore Spawn Time"]["Max Level"]]
 	reload_speed_level.text = "Reload Speed Level: %s/%s" % [PlayerStats.stat_levels["Reload Speed"]["Level"], PlayerStats.stat_levels["Reload Speed"]["Max Level"]]
-	progress_speed_level.text = "Progress Speed Level : %s/%s" % [PlayerStats.stat_levels["Progress Speed"]["Level"], PlayerStats.stat_levels["Progress Speed"]["Max Level"]]
+	progress_speed_level.text = "Progress Gained Level : %s/%s" % [PlayerStats.stat_levels["Progress Speed"]["Level"], PlayerStats.stat_levels["Progress Speed"]["Max Level"]]
 	life_steal_level.text = "Life Steal Level : %s/%s" % [PlayerStats.stat_levels["Life Steal"]["Level"], PlayerStats.stat_levels["Life Steal"]["Max Level"]]
 	ap_amount_level.text =  "AP Amount Level : %s/%s" % [PlayerStats.stat_levels["AP Amount"]["Level"], PlayerStats.stat_levels["AP Amount"]["Max Level"]]
 	xp_bonus_level.text =  "XP Bonus Level : %s/%s" % [PlayerStats.stat_levels["XP Bonus"]["Level"], PlayerStats.stat_levels["XP Bonus"]["Max Level"]]
@@ -165,7 +165,7 @@ func update_stats_description() -> void:
 	Starting Timer: %s
 	Ore Spawn Time: %s
 	Reload Speed: %s %%
-	Progress Speed: %s seconds
+	Progress Gain: %s seconds
 	Life Steal %s seconds
 	AP Amount: %s
 	XP Bonus: %s %%
@@ -178,7 +178,7 @@ func update_stats_description() -> void:
 		PlayerStats.player_stats["Starting Timer"],
 		PlayerStats.player_stats["Ore Spawn Time"],
 		int(PlayerStats.player_stats["Reload Speed"] * 100),
-		int(PlayerStats.player_stats["Progress Speed"]),
+		PlayerStats.player_stats["Progress Speed"],
 		PlayerStats.player_stats["Life Steal"],
 		int(PlayerStats.player_stats["AP Amount"]),
 		int(PlayerStats.player_stats["XP Bonus"] * 100)

@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bt6e41c4pdrfi" path="res://src/Scripts/Enemies/BroodMother/brood_mother_attack.gd" id="6_drvek"]
 [ext_resource type="Script" uid="uid://dkia0puwg8t2u" path="res://src/Scripts/Enemies/BroodMother/brood_mother_true_idle.gd" id="7_j7kl6"]
 [ext_resource type="Script" uid="uid://bxamekcpwp50" path="res://src/Scripts/Enemies/BroodMother/brood_mother_dead_state.gd" id="8_r8vr8"]
+[ext_resource type="Script" uid="uid://dh4d2d20kf3ce" path="res://src/Scripts/Enemies/BroodMother/back_to_idle.gd" id="10_8wx8k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjmqo"]
 size = Vector3(6.1140137, 7.529297, 7.5285645)
@@ -621,9 +622,12 @@ tracks/34/path = NodePath("..")
 tracks/34/interp = 1
 tracks/34/loop_wrap = true
 tracks/34/keys = {
-"times": PackedFloat32Array(0.46666667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.46666667),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"play_boss_birth_moan"
+}, {
 "args": [],
 "method": &"spawn_baby"
 }]
@@ -2610,6 +2614,20 @@ tracks/33/path = NodePath("Brood/Skeleton3D:stomach")
 tracks/33/interp = 1
 tracks/33/loop_wrap = true
 tracks/33/keys = PackedFloat32Array(0, 1, 0.6935429, 8.588026e-08, 8.267679e-08, 0.72041535)
+tracks/34/type = "method"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("..")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_boss_death"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qlf2b"]
 resource_name = "hurt"
@@ -4600,7 +4618,7 @@ animation_name = "SpawnIn"
 
 [node name="Attack" type="Node" parent="StateMachine" unique_id=1401660238 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("6_drvek")
-idle_state = NodePath("../TrueIdle")
+idle_state = NodePath("../BackToIdle")
 
 [node name="TrueIdle" type="Node" parent="StateMachine" unique_id=1854862715 node_paths=PackedStringArray("attack_state")]
 script = ExtResource("7_j7kl6")
@@ -4610,6 +4628,10 @@ attack_state = NodePath("../Attack")
 script = ExtResource("8_r8vr8")
 animation_name = null
 move_speed = null
+
+[node name="BackToIdle" type="Node" parent="StateMachine" unique_id=1255983977 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("10_8wx8k")
+idle_state = NodePath("../TrueIdle")
 
 [node name="BodyCollider" parent="." unique_id=1117758394 instance=ExtResource("5_ddb4o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.482088)

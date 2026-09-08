@@ -144,7 +144,7 @@ text = "Reload Speed Level: 0"
 
 [node name="ProgressSpeedLevel" type="Label" parent="StatsUpgradePanel/GridContainer" unique_id=175114969]
 layout_mode = 2
-tooltip_text = "Increases round progress gained from enemy kills. (Increases by 1 unit per level)."
+tooltip_text = "Increases the amount of progress gained when killing an enemy"
 mouse_filter = 0
 theme_override_font_sizes/font_size = 23
 text = "Progress Increase Level: 0"
