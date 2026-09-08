@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4fbiijalt5gd"
-path.s3tc="res://.godot/imported/Hands ShootArbalet_skinmage.png-e8f061c2a9a2481607cfafec2ca99bfb.s3tc.ctex"
+uid="uid://bjbs5hdvldmud"
+path.s3tc="res://.godot/imported/arbalet(2)_skinmage.png-41bc7b223a57c140c5cbcca50119d0c1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/Weapons/Hands ShootArbalet_skinmage.png"
-dest_files=["res://.godot/imported/Hands ShootArbalet_skinmage.png-e8f061c2a9a2481607cfafec2ca99bfb.s3tc.ctex"]
+source_file="res://Assets/Weapons/arbalet(2)_skinmage.png"
+dest_files=["res://.godot/imported/arbalet(2)_skinmage.png-41bc7b223a57c140c5cbcca50119d0c1.s3tc.ctex"]
 
 [params]
 

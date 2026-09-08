@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw4qhstf3ox0g"
-path.s3tc="res://.godot/imported/arbalet(1)_mageskinpalm.png-f9067cf03622babf1f86561755687f08.s3tc.ctex"
+uid="uid://dm5rmt5rnvsv"
+path.s3tc="res://.godot/imported/UltraBow(2)_mageskinpalm.png-ee64906efce85c5ed62fe981dc212539.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/Weapons/arbalet(1)_mageskinpalm.png"
-dest_files=["res://.godot/imported/arbalet(1)_mageskinpalm.png-f9067cf03622babf1f86561755687f08.s3tc.ctex"]
+source_file="res://Assets/Weapons/UltraBow(2)_mageskinpalm.png"
+dest_files=["res://.godot/imported/UltraBow(2)_mageskinpalm.png-ee64906efce85c5ed62fe981dc212539.s3tc.ctex"]
 
 [params]
 

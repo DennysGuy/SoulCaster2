@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://btwffnacsevrb"
-path="res://.godot/imported/arbalet.glb-73711dcbb705ae05f788905476dc7c1f.scn"
+uid="uid://d2ot5blvw1w55"
+path="res://.godot/imported/UltraBow(2).glb-a1720c9a9f52f28c4a75cd4efad5f0cd.scn"
 
 [deps]
 
-source_file="res://Assets/Weapons/arbalet.glb"
-dest_files=["res://.godot/imported/arbalet.glb-73711dcbb705ae05f788905476dc7c1f.scn"]
+source_file="res://Assets/Weapons/UltraBow(2).glb"
+dest_files=["res://.godot/imported/UltraBow(2).glb-a1720c9a9f52f28c4a75cd4efad5f0cd.scn"]
 
 [params]
 

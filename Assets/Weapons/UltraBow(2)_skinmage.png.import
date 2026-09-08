@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bakjm5s3lol6b"
-path.s3tc="res://.godot/imported/UltraBow_skinmage.png-c533c3f5127b4e958d7d88e7cfa7e15c.s3tc.ctex"
+uid="uid://dnc7c6f8obthc"
+path.s3tc="res://.godot/imported/UltraBow(2)_skinmage.png-e8b797270ceb8b46bb690d474cbb7aa7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/Weapons/UltraBow_skinmage.png"
-dest_files=["res://.godot/imported/UltraBow_skinmage.png-c533c3f5127b4e958d7d88e7cfa7e15c.s3tc.ctex"]
+source_file="res://Assets/Weapons/UltraBow(2)_skinmage.png"
+dest_files=["res://.godot/imported/UltraBow(2)_skinmage.png-e8b797270ceb8b46bb690d474cbb7aa7.s3tc.ctex"]
 
 [params]
 

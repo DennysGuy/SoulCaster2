@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bora0va5bad72"
-path.s3tc="res://.godot/imported/Hands ShootArbalet_mageskinpalm.png-263f6ab4ab2c58539cc221641f6766cb.s3tc.ctex"
+uid="uid://k8ni44q2ol2w"
+path.s3tc="res://.godot/imported/UltraBow(2)_SuperBow.png-2c990ac8aa6ddae01f3af8321545ffeb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "ba83c7a2b59a941787bcb3c15d16bc13"
+"md5": "e8840ea5efb560222e26bf8e5a0b435b"
 }
 
 [deps]
 
-source_file="res://Assets/Weapons/Hands ShootArbalet_mageskinpalm.png"
-dest_files=["res://.godot/imported/Hands ShootArbalet_mageskinpalm.png-263f6ab4ab2c58539cc221641f6766cb.s3tc.ctex"]
+source_file="res://Assets/Weapons/UltraBow(2)_SuperBow.png"
+dest_files=["res://.godot/imported/UltraBow(2)_SuperBow.png-2c990ac8aa6ddae01f3af8321545ffeb.s3tc.ctex"]
 
 [params]
 

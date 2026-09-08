@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ij2sgkh8umvs"
-path="res://.godot/imported/bow lvl1.glb-eb64a7fd3f8ed1b6ea8f7fc4f0a19bd1.scn"
+uid="uid://b8trrbn6n1ftf"
+path="res://.godot/imported/arbalet(2).glb-167e7f8580882db2d815b745451f5240.scn"
 
 [deps]
 
-source_file="res://Assets/Weapons/bow lvl1.glb"
-dest_files=["res://.godot/imported/bow lvl1.glb-eb64a7fd3f8ed1b6ea8f7fc4f0a19bd1.scn"]
+source_file="res://Assets/Weapons/arbalet(2).glb"
+dest_files=["res://.godot/imported/arbalet(2).glb-167e7f8580882db2d815b745451f5240.scn"]
 
 [params]
 

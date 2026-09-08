@@ -12,8 +12,8 @@ var amulet_owned : bool = false
 var enemy_tracker_owned : bool = false
 
 var bullets_left : int = 32
-var pistol_magazine_size : int = 6
-var rifle_magazine_size : int = 12
+var pistol_magazine_size : int = 1
+var rifle_magazine_size : int = 6
 var bullets_in_clip : int = 6
 var magazine : int = 0
 

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4l426qm4s7s"
-path.s3tc="res://.godot/imported/arbalet_mageskinpalm.png-224f02c1109b7cbab4becccfc77deb70.s3tc.ctex"
+uid="uid://cbagad4ccswo0"
+path.s3tc="res://.godot/imported/arbalet(2)_bow1.png-744afe01da34e12be32fcc2b83a9fa5d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "ba83c7a2b59a941787bcb3c15d16bc13"
+"md5": "92436d65f70767f469c5e63c5b689ab4"
 }
 
 [deps]
 
-source_file="res://Assets/Weapons/arbalet_mageskinpalm.png"
-dest_files=["res://.godot/imported/arbalet_mageskinpalm.png-224f02c1109b7cbab4becccfc77deb70.s3tc.ctex"]
+source_file="res://Assets/Weapons/arbalet(2)_bow1.png"
+dest_files=["res://.godot/imported/arbalet(2)_bow1.png-744afe01da34e12be32fcc2b83a9fa5d.s3tc.ctex"]
 
 [params]
 

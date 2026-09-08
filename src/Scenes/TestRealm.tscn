@@ -17,7 +17,8 @@ sky_material = SubResource("ProceduralSkyMaterial_h01ol")
 [sub_resource type="Environment" id="Environment_sfhgb"]
 background_mode = 1
 sky = SubResource("Sky_rty5i")
-ambient_light_source = 2
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rty5i"]
@@ -47,19 +48,6 @@ look_at_point_4 = NodePath("../CameraPoint3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=851416319]
 environment = SubResource("Environment_sfhgb")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=221524160]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 22.392227, 0)
-light_energy = 5.5
-light_specular = 1.579
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_shadow = 698.18
-distance_fade_length = 0.0
-spot_range = 42.091354
-spot_attenuation = 0.7
-spot_angle = 60.20009
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1859460658]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.647583)

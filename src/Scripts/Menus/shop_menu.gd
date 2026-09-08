@@ -124,14 +124,14 @@ func _on_purchase_tracker_button_button_up() -> void:
 
 func _on_purchase_pistol_mag_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.pistol_mag_cost
-	GameManager.pistol_magazine_size += 2
+	GameManager.pistol_magazine_size += 1
 	GameManager.pistol_mag_cost *= 2
 	update_menu()
 
 
 func _on_purchase_rifle_mag_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.rifle_mag_cost
-	GameManager.rifle_magazine_size += 4
+	GameManager.rifle_magazine_size += 2
 	GameManager.rifle_mag_cost *= 2
 	update_menu()
 
