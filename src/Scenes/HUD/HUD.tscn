@@ -421,7 +421,6 @@ wave_graphic_unfilled = ExtResource("8_2c58t")
 wave_graphic_filled = ExtResource("9_veicy")
 
 [node name="HurtRect" type="ColorRect" parent="." unique_id=295245294]
-visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0

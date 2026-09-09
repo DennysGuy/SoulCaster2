@@ -12,6 +12,7 @@ visible = false
 size = Vector3(21.863098, 0.001, 6.290222)
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1226883220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="TestEnemy" parent="Node3D" unique_id=486612471 instance=ExtResource("2_faosj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)

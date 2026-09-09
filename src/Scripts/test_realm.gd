@@ -76,13 +76,15 @@ func spawn_enemy() -> void:
 		var chosen_configuration : EnemyConfiguration = random_config.instantiate()
 		
 		chosen_spawn_point.add_child(chosen_configuration)
+	
+		chosen_spawn_point = choose_new_spawn_point(chosen_spawn_point)
 		
 		var stagger_time : float
 		if config_amount >= 2:
 			if config_amount >= 3:
-				stagger_time = 2.2
+				stagger_time = 2.5
 			elif config_amount >= 4:
-				stagger_time = 2.4
+				stagger_time = 2.6
 			else:
 				stagger_time = 1.8
 			await get_tree().create_timer(randf_range(stagger_time-0.2,stagger_time+0.2)).timeout
@@ -114,3 +116,12 @@ func start_boss_music() -> void:
 	music_player.stream = BOSS_THEME
 	music_player.volume_db = -12.0
 	music_player.play()
+
+func choose_new_spawn_point(chosen_spawn_point : EnemySpawnPoint) -> EnemySpawnPoint:
+	var new_spawn_point : EnemySpawnPoint = chosen_spawn_point
+	
+	while new_spawn_point == chosen_spawn_point:
+		new_spawn_point = spawn_points.get_children().pick_random()
+	
+	return new_spawn_point
+	

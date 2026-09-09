@@ -32,7 +32,7 @@ var levels_gained : int = 0
 var rounds_beaten : int = 0
 var enemies_killed : int = 0
 var ore_acquired : int = 0
-var round_timers : Array[int] = [8, 7, 6]
+var round_timers : Array[int] = [8, 7, 7]
 var round_times : Array[int] = [125, 230, 340]
 
 var minimum_spawn : Array[int] = [1,1,2]
@@ -41,20 +41,20 @@ var maximum_spawn : Array[int] = [2,3,3]
 var max_configurations : Dictionary = {
 	0: {
 		ROUND_POINT.BEGINNING:1,
-		ROUND_POINT.FIRST_QUARTER:2,
+		ROUND_POINT.FIRST_QUARTER:1,
 		ROUND_POINT.HALF_WAY:2,
-		ROUND_POINT.THREE_QUARTER:3
+		ROUND_POINT.THREE_QUARTER:2
 	},
 	1: {
-		ROUND_POINT.BEGINNING:2,
+		ROUND_POINT.BEGINNING:1,
 		ROUND_POINT.FIRST_QUARTER:2,
 		ROUND_POINT.HALF_WAY:3,
 		ROUND_POINT.THREE_QUARTER:4
 	},
 	2: {
-		ROUND_POINT.BEGINNING:3,
+		ROUND_POINT.BEGINNING:2,
 		ROUND_POINT.FIRST_QUARTER:3,
-		ROUND_POINT.HALF_WAY:4,
+		ROUND_POINT.HALF_WAY:3,
 		ROUND_POINT.THREE_QUARTER:4
 	},
 }
@@ -189,10 +189,10 @@ func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0
 	},
 	1:
 		{ROUND_POINT.BEGINNING:[
-				{"scene": R_2P_1_ENEMY_CONFIGURATION_1, "weight": 4},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_2, "weight":5},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_3, "weight":2},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_4, "weight":3},
+				{"scene": R_2P_1_ENEMY_CONFIGURATION_1, "weight": 5},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_2, "weight":4},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_3, "weight":3},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_4, "weight":2},
 				{"scene":R_2P_1_ENEMY_CONFIGURATION_5, "weight":1}
 			],
 		ROUND_POINT.FIRST_QUARTER:[
@@ -203,26 +203,26 @@ func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0
 				{"scene":R_2P_1_ENEMY_CONFIGURATION_5, "weight":4}
 		],
 		ROUND_POINT.HALF_WAY:[
-				{"scene": R_2P_2_ENEMY_CONFIGURATION_1, "weight": 1},
-				{"scene":R_2P_2_ENEMY_CONFIGURATION_2, "weight":5},
+				{"scene": R_2P_2_ENEMY_CONFIGURATION_1, "weight": 2},
+				{"scene":R_2P_2_ENEMY_CONFIGURATION_2, "weight":4},
 				{"scene":R_2P_2_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_2P_2_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_2P_2_ENEMY_CONFIGURATION_5, "weight":4}
+				{"scene":R_2P_2_ENEMY_CONFIGURATION_4, "weight":5},
+				{"scene":R_2P_2_ENEMY_CONFIGURATION_5, "weight":1}
 		],
 		ROUND_POINT.THREE_QUARTER:[
 				{"scene": R_2P_3_ENEMY_CONFIGURATION_1, "weight": 1},
-				{"scene":R_2P_3_ENEMY_CONFIGURATION_2, "weight":5},
+				{"scene":R_2P_3_ENEMY_CONFIGURATION_2, "weight":4},
 				{"scene":R_2P_3_ENEMY_CONFIGURATION_3, "weight":3},
 				{"scene":R_2P_3_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_2P_3_ENEMY_CONFIGURATION_5, "weight":4}
+				{"scene":R_2P_3_ENEMY_CONFIGURATION_5, "weight":1}
 		],
 	},
 	2:
 		{ROUND_POINT.BEGINNING:[
-				{"scene": R_3P_1_ENEMY_CONFIGURATION_1, "weight": 4},
+				{"scene": R_3P_1_ENEMY_CONFIGURATION_1, "weight": 3},
 				{"scene":R_3P_1_ENEMY_CONFIGURATION_2, "weight":5},
 				{"scene":R_3P_1_ENEMY_CONFIGURATION_3, "weight":2},
-				{"scene":R_3P_1_ENEMY_CONFIGURATION_4, "weight":3},
+				{"scene":R_3P_1_ENEMY_CONFIGURATION_4, "weight":4},
 				{"scene":R_3P_1_ENEMY_CONFIGURATION_5, "weight":1}
 			],
 		ROUND_POINT.FIRST_QUARTER:[
@@ -234,17 +234,17 @@ func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0
 		],
 		ROUND_POINT.HALF_WAY:[
 				{"scene": R_3P_2_ENEMY_CONFIGURATION_1, "weight": 1},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_2, "weight":5},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_2, "weight":4},
 				{"scene":R_3P_2_ENEMY_CONFIGURATION_3, "weight":3},
 				{"scene":R_3P_2_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_5, "weight":4}
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_5, "weight":5}
 		],
 		ROUND_POINT.THREE_QUARTER:[
 				{"scene": R_3P_3_ENEMY_CONFIGURATION_1, "weight": 3},
 				{"scene":R_3P_3_ENEMY_CONFIGURATION_2, "weight":5},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_3, "weight":4},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_5, "weight":1}
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_3, "weight":2},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_4, "weight":1},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_5, "weight":3}
 		],
 	},
 }
