@@ -65,38 +65,27 @@ func stop_spawn_timer(kill : bool) -> void:
 	spawn_timer.stop()
 
 func spawn_enemy() -> void:
+	spawn_timer.stop()
 	var spawn_points : Array = spawn_points.get_children()
 	
 	var chosen_spawn_point : EnemySpawnPoint = spawn_points.pick_random()
-	
-	var spawn_count : int = randi_range(GameManager.minimum_spawn[GameManager.round_number],GameManager.maximum_spawn[GameManager.round_number])
-	
-	for i in range(spawn_count):
+	var config_amount : int = randi_range(1,GameManager.get_max_configs())
+	for i in range(config_amount):
+		var config_list : Array = GameManager.wave_configurations[GameManager.round_number][GameManager.current_round_point]
+		var random_config : PackedScene = GameManager.pick_weighted_config(config_list)
+		var chosen_configuration : EnemyConfiguration = random_config.instantiate()
 		
-		var chance_to_bulk : int = 0
-		if GameManager.round_number == 1:
-			chance_to_bulk = 20
-		elif GameManager.round_number == 2:
-			chance_to_bulk = 40
+		chosen_spawn_point.add_child(chosen_configuration)
 		
-		var enemy : Enemy
-		
-		var rand_num : int = randi_range(1,100)
-		if rand_num < chance_to_bulk:
-			enemy = preload("uid://belgdl70endw6").instantiate()
-			
-		else:
-			enemy = preload("uid://be7m7tct4a7cq").instantiate()
-			
-		enemy = enemy.duplicate()
-		if chosen_spawn_point.index == 1 or chosen_spawn_point.index == 3:
-			enemy.global_position = chosen_spawn_point.global_position + Vector3(randf_range(-10.0, 10.0), 0.0, 0.0)
-		else:
-			enemy.global_position = chosen_spawn_point.global_position + Vector3(0.0, 0.0, randf_range(-10.0, 10.0))
-	
-		enemy.rotation = chosen_spawn_point.rotation
-		add_child(enemy)
-	
+		var stagger_time : float
+		if config_amount >= 2:
+			if config_amount >= 3:
+				stagger_time = 2.2
+			elif config_amount >= 4:
+				stagger_time = 2.4
+			else:
+				stagger_time = 1.8
+			await get_tree().create_timer(randf_range(stagger_time-0.2,stagger_time+0.2)).timeout
 
 func _on_ore_spawn_timer_timeout() -> void:
 	spawn_ore()
