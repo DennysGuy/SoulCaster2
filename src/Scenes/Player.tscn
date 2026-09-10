@@ -2351,6 +2351,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4291844, 0)
 [node name="Camera" type="Camera3D" parent="Head" unique_id=757378360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9865484)
 current = true
+fov = 50.0
 script = ExtResource("2_8fvgu")
 
 [node name="Marker3D" type="Marker3D" parent="Head" unique_id=1365446704]
@@ -2361,8 +2362,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5517621, 1.1643828, 0)
 script = ExtResource("2_4mdpm")
 
 [node name="CrossBow" type="Node3D" parent="Head/Marker3D/GunArm" unique_id=515295009]
-transform = Transform3D(0.9999995, 0, 0, 0, 1, 0, 0, 0, 0.9999995, 1.150893, -1.6168222, -5.105671)
-visible = false
+transform = Transform3D(0.99999946, 0, 0, 0, 1, 0, 0, 0, 0.99999946, 1.1508929, -1.6168222, -6.307252)
 
 [node name="handsbow_001" type="Node3D" parent="Head/Marker3D/GunArm/CrossBow" unique_id=318929711]
 transform = Transform3D(0.3431072, 0.04906469, 0.5850333, -0.58708715, 0.028674504, 0.34190688, 2.0265444e-08, -0.67761666, 0.05682932, -0.01948142, 0.24201256, 5.7002735)
@@ -2642,7 +2642,7 @@ skeleton = NodePath("..")
 libraries/ = SubResource("AnimationLibrary_qdhp6")
 
 [node name="UltraBow" type="Node3D" parent="Head/Marker3D/GunArm" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986716, -0.051094152, -0.051126, 0.99676466, 0.062018573, 0.04795278, 0.06447826, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.04798671, -0.051094152, -0.051125992, 0.99676466, 0.062018562, 0.04795278, 0.064478256, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="UltraBow" type="Node3D" parent="Head/Marker3D/GunArm/UltraBow" unique_id=2105935698]
 transform = Transform3D(1.2999996, -1.8626451e-08, -2.4680048e-08, 4.656613e-10, 0.01987569, -1.2998476, -3.7252903e-09, 1.299848, 0.019875757, -0.013769388, 0.9215592, -3.6773963)

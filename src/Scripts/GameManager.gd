@@ -2,6 +2,7 @@ extends Node
 
 var can_move : bool = true
 var can_shoot : bool = false
+var can_hurt_player : bool = true
 
 var in_arena : bool = false
 var in_menu : bool = false
@@ -43,7 +44,7 @@ var max_configurations : Dictionary = {
 		ROUND_POINT.BEGINNING:1,
 		ROUND_POINT.FIRST_QUARTER:1,
 		ROUND_POINT.HALF_WAY:2,
-		ROUND_POINT.THREE_QUARTER:2
+		ROUND_POINT.THREE_QUARTER:3
 	},
 	1: {
 		ROUND_POINT.BEGINNING:1,
@@ -53,9 +54,9 @@ var max_configurations : Dictionary = {
 	},
 	2: {
 		ROUND_POINT.BEGINNING:2,
-		ROUND_POINT.FIRST_QUARTER:3,
-		ROUND_POINT.HALF_WAY:3,
-		ROUND_POINT.THREE_QUARTER:4
+		ROUND_POINT.FIRST_QUARTER:2,
+		ROUND_POINT.HALF_WAY:2,
+		ROUND_POINT.THREE_QUARTER:3
 	},
 }
 

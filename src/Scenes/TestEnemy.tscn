@@ -50,6 +50,7 @@ resource_local_to_scene = true
 resource_name = "rat"
 next_pass = SubResource("ShaderMaterial_n8flt")
 cull_mode = 2
+vertex_color_use_as_albedo = true
 albedo_texture = SubResource("CompressedTexture2D_t0wus")
 roughness = 0.5
 emission_enabled = true
@@ -370,6 +371,7 @@ resource_local_to_scene = true
 resource_name = "rat"
 next_pass = SubResource("ShaderMaterial_ki4ie")
 cull_mode = 2
+albedo_color = Color(1, 1, 1, 0.99607843)
 albedo_texture = SubResource("CompressedTexture2D_q6ed3")
 roughness = 0.5
 emission_enabled = true
@@ -2801,6 +2803,14 @@ size = Vector3(1, 1.7495728, 3.078125)
 [sub_resource type="BoxShape3D" id="BoxShape3D_b3u6r"]
 size = Vector3(1.1426239, 2.0260506, 1)
 
+[sub_resource type="Animation" id="Animation_q6ed3"]
+resource_name = "SpawnIn"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ki4ie"]
+_data = {
+&"SpawnIn": SubResource("Animation_q6ed3")
+}
+
 [node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_3gpk3")
@@ -3116,5 +3126,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06169325, 2.096908, -0.871
 
 [node name="BloodSpout" type="Marker3D" parent="." unique_id=1730996955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1907835, -0.4438188)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=243823829]
+libraries/ = SubResource("AnimationLibrary_ki4ie")
 
 [connection signal="body_entered" from="PlayerSensor" to="." method="_on_player_sensor_body_entered"]

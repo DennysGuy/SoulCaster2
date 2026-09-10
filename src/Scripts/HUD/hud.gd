@@ -157,7 +157,7 @@ func update_bullets_tracker() -> void:
 func start_round() -> void:		
 	round_ended = false
 	round_started = true
-	
+	GameManager.can_hurt_player = true
 	GameManager.first_quarter_point = false
 	GameManager.half_way_point = false
 	GameManager.three_quarter_way_point = false
@@ -291,3 +291,9 @@ func close_context_panel() -> void:
 		GameManager.arena_instructions_shown = true
 		arena_context_showing = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+func disable_hurt_ability() -> void:
+	GameManager.can_hurt_player = false
+
+func enable_hurt_ability() -> void:
+	GameManager.can_hurt_player = true

@@ -12,6 +12,7 @@ const BOSS_THEME = preload("uid://c4n1b2qik86oq")
 func _ready() -> void:
 	#spawn_timer.start()
 	ore_spawn_timer.start()
+	
 	GameManager.hits_taken = 0
 	GameManager.xp_gained = 0
 	GameManager.misses = 0
@@ -48,13 +49,13 @@ func _on_spawn_timer_timeout() -> void:
 			print("This is spawn time %s" % spawn_time) 
 		GameManager.ROUND_POINT.THREE_QUARTER:
 			print("I'm three quarters there")
-			spawn_time -= 3
+			#spawn_time -= 3
 			print("This is spawn time %s" % spawn_time) 
 		_:
 			print("Im at the beginning")
 			print("This is spawn time %s" % spawn_time) 
 	
-	spawn_timer.wait_time = randi_range(spawn_time-2,spawn_time+1)
+	spawn_timer.wait_time = randi_range(spawn_time-2,spawn_time)
 	spawn_timer.start()
 
 func start_spawn_timer() -> void:
@@ -91,7 +92,7 @@ func spawn_enemy() -> void:
 
 func _on_ore_spawn_timer_timeout() -> void:
 	spawn_ore()
-	ore_spawn_timer.wait_time = randi_range(PlayerStats.player_stats["Ore Spawn Time"]-2,PlayerStats.player_stats["Ore Spawn Time"]+2)
+	ore_spawn_timer.wait_time = randi_range(PlayerStats.player_stats["Ore Spawn Time"]-2,PlayerStats.player_stats["Ore Spawn Time"])
 	ore_spawn_timer.start()
 
 

@@ -19,7 +19,7 @@ var target_location : Marker3D
 @onready var rifle: Node3D = $Head/Marker3D/GunArm/Rifle
 @onready var pistol: Node3D = $Head/Marker3D/GunArm/Pistol
 
-var rotate_speed: float = 10.0  # higher = faster turn
+var rotate_speed: float = 60.0  # higher = faster turn
 var zoom_target: float = 60.0  # smaller FOV = zoom in
 var zoom_speed: float = 5.0    # how fast zoom eases
 
@@ -70,6 +70,8 @@ var chosen_gun_animation_player : AnimationPlayer
 
 var enemy_alerts: Array = [] 
 var enemy_list : Array[Enemy] = []
+
+var can_hurt : bool = true
 
 @onready var look_at_points : Dictionary[String,Marker3D] = {
 	"point 1" : look_at_point_1,

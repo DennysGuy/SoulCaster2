@@ -76,13 +76,14 @@ func reset_timer() -> void:
 
 func decrement_wait_time(value : int) -> void:
 
+	
 	seconds -= value
 	seconds_tracker += value
 	if seconds < 0:
 		seconds = 0
 	
 	milliseconds = 0
-	
+	GameManager.hits_taken += 1
 	#var label : TimeDecrementLabel = preload("uid://c1srx6v31xvtu").instantiate()
 	#label.time = value
 	#label.position = get_parent().marker_2d.position

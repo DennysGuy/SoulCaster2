@@ -139,10 +139,13 @@ func calculate_crit() -> bool:
 	return false
 
 func attack_player() -> void:
+	if !GameManager.can_hurt_player:
+		return
+	
 	SignalBus.player_hurt.emit(attack_damage)
 	SignalBus.shake_camera.emit(1.0)
 	SignalBus.player_damaged.emit()
-	GameManager.hits_taken += 1
+
 
 func spawn_blood_spirt() -> void:
 	var blood_spirt : BloodSpirt = preload("uid://e2pwh1u4lv32").instantiate()
