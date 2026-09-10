@@ -33,7 +33,7 @@ var levels_gained : int = 0
 var rounds_beaten : int = 0
 var enemies_killed : int = 0
 var ore_acquired : int = 0
-var round_timers : Array[int] = [8, 7, 7]
+var round_timers : Array[int] = [3, 2, 1]
 var round_times : Array[int] = [125, 230, 340]
 
 var minimum_spawn : Array[int] = [1,1,2]
@@ -47,16 +47,16 @@ var max_configurations : Dictionary = {
 		ROUND_POINT.THREE_QUARTER:3
 	},
 	1: {
-		ROUND_POINT.BEGINNING:1,
+		ROUND_POINT.BEGINNING:2,
 		ROUND_POINT.FIRST_QUARTER:2,
 		ROUND_POINT.HALF_WAY:3,
 		ROUND_POINT.THREE_QUARTER:4
 	},
 	2: {
 		ROUND_POINT.BEGINNING:2,
-		ROUND_POINT.FIRST_QUARTER:2,
-		ROUND_POINT.HALF_WAY:2,
-		ROUND_POINT.THREE_QUARTER:3
+		ROUND_POINT.FIRST_QUARTER:3,
+		ROUND_POINT.HALF_WAY:3,
+		ROUND_POINT.THREE_QUARTER:4
 	},
 }
 

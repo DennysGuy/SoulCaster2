@@ -8,6 +8,20 @@ class_name TestRealm extends Node3D
 const BOSS_THEME = preload("uid://c4n1b2qik86oq")
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 
+@onready var spawn_point_1: EnemySpawnPoint = $SpawnPoints/SpawnPoint1
+@onready var spawn_point_2: EnemySpawnPoint = $SpawnPoints/SpawnPoint2
+@onready var spawn_point_3: EnemySpawnPoint = $SpawnPoints/SpawnPoint3
+@onready var spawn_point_4: EnemySpawnPoint = $SpawnPoints/SpawnPoint4
+
+@onready var available_spawn_points : Array = [
+	{"spawn point": spawn_point_1, "occupied": false },
+	{"spawn point": spawn_point_2, "occupied": false},
+	{"spawn point": spawn_point_3, "occupied": false},
+	{"spawn point": spawn_point_4, "occupied": false}
+]
+
+var configs_to_beat : int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#spawn_timer.start()
@@ -26,6 +40,7 @@ func _ready() -> void:
 	SignalBus.round_ended.connect(stop_spawn_timer)
 	SignalBus.boss_fight_started.connect(spawn_boss)
 	SignalBus.combat_engaged.connect(start_boss_music)
+	SignalBus.config_beat.connect(deduct_configs_to_kill)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -37,48 +52,38 @@ func _physics_process(delta: float) -> void:
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
-	var spawn_time : int = GameManager.round_timers[GameManager.round_number]
-	
-	match GameManager.current_round_point:
-		GameManager.ROUND_POINT.FIRST_QUARTER:
-			print("Im at first quarter")
-			spawn_time -= 1
-		GameManager.ROUND_POINT.HALF_WAY:
-			print("Im at the half way point")
-			spawn_time -= 2
-			print("This is spawn time %s" % spawn_time) 
-		GameManager.ROUND_POINT.THREE_QUARTER:
-			print("I'm three quarters there")
-			#spawn_time -= 3
-			print("This is spawn time %s" % spawn_time) 
-		_:
-			print("Im at the beginning")
-			print("This is spawn time %s" % spawn_time) 
-	
-	spawn_timer.wait_time = randi_range(spawn_time-2,spawn_time)
-	spawn_timer.start()
 
 func start_spawn_timer() -> void:
-	spawn_timer.wait_time = randi_range(GameManager.round_timers[GameManager.round_number]-2,GameManager.round_timers[GameManager.round_number]+1)
-	spawn_timer.start()
+	spawn_enemy()
+	#spawn_timer.start()
 
 func stop_spawn_timer(kill : bool) -> void:
+	spawn_timer.wait_time = 0
 	spawn_timer.stop()
 
 func spawn_enemy() -> void:
 	spawn_timer.stop()
 	var spawn_points : Array = spawn_points.get_children()
 	
-	var chosen_spawn_point : EnemySpawnPoint = spawn_points.pick_random()
 	var config_amount : int = randi_range(1,GameManager.get_max_configs())
+	configs_to_beat = config_amount
+	print("THIS IS THE SET CONFIG AMOUNT %s" % configs_to_beat)
 	for i in range(config_amount):
 		var config_list : Array = GameManager.wave_configurations[GameManager.round_number][GameManager.current_round_point]
 		var random_config : PackedScene = GameManager.pick_weighted_config(config_list)
 		var chosen_configuration : EnemyConfiguration = random_config.instantiate()
 		
-		chosen_spawn_point.add_child(chosen_configuration)
-	
-		chosen_spawn_point = choose_new_spawn_point(chosen_spawn_point)
+		var chosen_spawn_point : Dictionary = {}
+		while true:
+			var candidate = available_spawn_points.pick_random()
+			if not candidate["occupied"]:
+				chosen_spawn_point = candidate
+				break
+				
+			# Mark spawn point as occupied
+			chosen_spawn_point["occupied"] = true
+		
+		chosen_spawn_point["spawn point"].add_child(chosen_configuration)
 		
 		var stagger_time : float
 		if config_amount >= 2:
@@ -89,7 +94,10 @@ func spawn_enemy() -> void:
 			else:
 				stagger_time = 1.8
 			await get_tree().create_timer(randf_range(stagger_time-0.2,stagger_time+0.2)).timeout
-
+		var spawn_time : float = GameManager.round_timers[GameManager.round_number]
+		var random_time : float = max(1,randf_range(spawn_time - 0.6, spawn_time + 0.5))
+		spawn_timer.wait_time = random_time
+	
 func _on_ore_spawn_timer_timeout() -> void:
 	spawn_ore()
 	ore_spawn_timer.wait_time = randi_range(PlayerStats.player_stats["Ore Spawn Time"]-2,PlayerStats.player_stats["Ore Spawn Time"])
@@ -126,3 +134,12 @@ func choose_new_spawn_point(chosen_spawn_point : EnemySpawnPoint) -> EnemySpawnP
 	
 	return new_spawn_point
 	
+func reset_spawn_point_availability() -> void:
+	for point in available_spawn_points:
+		point["occupied"] = false
+
+func deduct_configs_to_kill() -> void:
+	configs_to_beat -= 1
+	print("REMAINING CONFIGS %s" % configs_to_beat)
+	if configs_to_beat <= 0:
+		start_spawn_timer()
