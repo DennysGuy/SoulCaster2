@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bcls56q7g0x0d" path="res://Assets/sider.png" id="2_p8ncc"]
 [ext_resource type="Texture2D" uid="uid://dp24xadavvam7" path="res://Assets/TrackerTestIcon-sheet.png" id="3_4qwru"]
 [ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_bt663"]
-[ext_resource type="Texture2D" uid="uid://cl1tt236f0oeq" path="res://Assets/Rifle/RifleImage.png" id="4_jdaip"]
+[ext_resource type="Texture2D" uid="uid://bgdy5qa35if2m" path="res://Assets/BoltOMatic8000.png" id="5_4qwru"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lek5s"]
 bg_color = Color(1.6364455e-06, 0.4858361, 0.668049, 1)
@@ -148,7 +148,7 @@ offset_right = -373.0
 offset_bottom = 198.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
-text = "MR-16"
+text = "Bolt-O-Matic 8000"
 
 [node name="Cost" type="Label" parent="Panel" unique_id=793261442]
 layout_mode = 1
@@ -170,10 +170,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -408.0
-offset_top = 316.0
-offset_right = -368.0
-offset_bottom = 344.0
+offset_left = -434.5
+offset_top = 338.0
+offset_right = -383.5
+offset_bottom = 366.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
 text = "x 100"
@@ -416,8 +416,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 177.0
+offset_top = 16.0
 offset_right = 257.0
-offset_bottom = 31.0
+offset_bottom = 47.0
 grow_vertical = 2
 text = "Purchase"
 
@@ -490,24 +491,24 @@ texture = ExtResource("3_bt663")
 
 [node name="OreIcon2" type="TextureRect" parent="Panel" unique_id=808567126]
 layout_mode = 0
-offset_left = 199.0
-offset_top = 318.0
-offset_right = 247.0
-offset_bottom = 366.0
+offset_left = 178.0
+offset_top = 340.0
+offset_right = 226.0
+offset_bottom = 388.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_bt663")
 
 [node name="RifleImage" type="TextureRect" parent="Panel" unique_id=1702236874]
 layout_mode = 1
-offset_left = 100.0
-offset_top = 204.0
-offset_right = 583.53687
-offset_bottom = 389.9116
+offset_left = 106.0
+offset_top = 198.0
+offset_right = 589.53687
+offset_bottom = 453.3937
 scale = Vector2(0.5325112, 0.5325112)
 tooltip_text = "- +10 attack damage bonus
 - +50% fire rate
 - Doubles Magazine Size"
-texture = ExtResource("4_jdaip")
+texture = ExtResource("5_4qwru")
 expand_mode = 1
 
 [node name="PurchaseRifleMagButton" type="Button" parent="Panel" unique_id=1225690785]

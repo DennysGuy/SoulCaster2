@@ -86,7 +86,10 @@ func _ready() -> void:
 		round_diamond.fill_diamond()
 	
 	GameManager.play_sfx(GONG_HIT_ROUND_END)
-	animation_player.play("RoundCountDown")
+	if GameManager.round_number >= 3:
+		start_boss_fight()
+	else:
+		animation_player.play("RoundCountDown")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -157,6 +160,7 @@ func update_bullets_tracker() -> void:
 func start_round() -> void:		
 	round_ended = false
 	round_started = true
+	GameManager.round_started = true
 	GameManager.can_hurt_player = true
 	GameManager.first_quarter_point = false
 	GameManager.half_way_point = false
@@ -174,6 +178,7 @@ func load_timer() -> void:
 	round_timer_label.reset_timer()
 
 func end_round() -> void:
+	GameManager.round_started = false
 	round_ended = true
 	round_started = false
 	round_timer_label.timer_started = false

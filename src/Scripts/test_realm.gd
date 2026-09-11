@@ -58,14 +58,26 @@ func start_spawn_timer() -> void:
 	#spawn_timer.start()
 
 func stop_spawn_timer(kill : bool) -> void:
+	configs_to_beat = 0
 	spawn_timer.wait_time = 0
 	spawn_timer.stop()
 
 func spawn_enemy() -> void:
-	spawn_timer.stop()
-	var spawn_points : Array = spawn_points.get_children()
 	
-	var config_amount : int = randi_range(1,GameManager.get_max_configs())
+
+	
+	spawn_timer.stop()
+	
+	if !GameManager.round_started:
+		return
+	
+	
+	var min_config : int = 1
+	
+	if GameManager.round_number >= 1:
+		min_config = 2
+	
+	var config_amount : int = randi_range(min_config,GameManager.get_max_configs())
 	configs_to_beat = config_amount
 	print("THIS IS THE SET CONFIG AMOUNT %s" % configs_to_beat)
 	for i in range(config_amount):
@@ -88,12 +100,16 @@ func spawn_enemy() -> void:
 		var stagger_time : float
 		if config_amount >= 2:
 			if config_amount >= 3:
-				stagger_time = 2.5
+				stagger_time = 2.1
 			elif config_amount >= 4:
-				stagger_time = 2.6
+				stagger_time = 2.3
 			else:
-				stagger_time = 1.8
+				stagger_time = 1.5
 			await get_tree().create_timer(randf_range(stagger_time-0.2,stagger_time+0.2)).timeout
+		
+		if !GameManager.round_started:
+			return
+			
 		var spawn_time : float = GameManager.round_timers[GameManager.round_number]
 		var random_time : float = max(1,randf_range(spawn_time - 0.6, spawn_time + 0.5))
 		spawn_timer.wait_time = random_time

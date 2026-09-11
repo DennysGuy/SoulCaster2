@@ -25,3 +25,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3)
 
 [node name="TestEnemy2" parent="Node3D" unique_id=1307868314 instance=ExtResource("3_uvnah")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
+
+[node name="TestEnemy3" parent="Node3D" unique_id=867372556 instance=ExtResource("3_uvnah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3)

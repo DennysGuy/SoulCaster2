@@ -14,3 +14,12 @@ size = Vector3(21.863098, 0.001, 6.290222)
 [node name="Node3D" type="Node3D" parent="." unique_id=546945556]
 
 [node name="TestEnemy" parent="Node3D" unique_id=486612471 instance=ExtResource("2_qwy6j")]
+
+[node name="TestEnemy3" parent="Node3D" unique_id=126160830 instance=ExtResource("2_qwy6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
+
+[node name="TestEnemy2" parent="Node3D" unique_id=1278579303 instance=ExtResource("2_qwy6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="TestEnemy4" parent="Node3D" unique_id=222109278 instance=ExtResource("2_qwy6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)

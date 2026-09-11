@@ -19,5 +19,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8999999, 0, -1)
 [node name="TestEnemy6" parent="Node3D" unique_id=176806227 instance=ExtResource("2_u7dep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2000003, 0, -3)
 
+[node name="TestEnemy7" parent="Node3D" unique_id=667474365 instance=ExtResource("2_u7dep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7999997, 0, -3)
+
 [node name="TestEnemy3" parent="Node3D" unique_id=1244467448 instance=ExtResource("2_u7dep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)

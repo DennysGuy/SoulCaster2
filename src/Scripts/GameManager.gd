@@ -6,7 +6,7 @@ var can_hurt_player : bool = true
 
 var in_arena : bool = false
 var in_menu : bool = false
-
+var round_started : bool = false
 
 var rifle_owned : bool = false
 var amulet_owned : bool = false
@@ -42,25 +42,28 @@ var maximum_spawn : Array[int] = [2,3,3]
 var max_configurations : Dictionary = {
 	0: {
 		ROUND_POINT.BEGINNING:1,
-		ROUND_POINT.FIRST_QUARTER:1,
+		ROUND_POINT.FIRST_QUARTER:2,
 		ROUND_POINT.HALF_WAY:2,
 		ROUND_POINT.THREE_QUARTER:3
 	},
 	1: {
 		ROUND_POINT.BEGINNING:2,
-		ROUND_POINT.FIRST_QUARTER:2,
+		ROUND_POINT.FIRST_QUARTER:3,
 		ROUND_POINT.HALF_WAY:3,
 		ROUND_POINT.THREE_QUARTER:4
 	},
 	2: {
 		ROUND_POINT.BEGINNING:2,
 		ROUND_POINT.FIRST_QUARTER:3,
-		ROUND_POINT.HALF_WAY:3,
+		ROUND_POINT.HALF_WAY:4,
 		ROUND_POINT.THREE_QUARTER:4
 	},
 }
 
 func get_max_configs() -> int:
+	if GameManager.round_number >= 3:
+		return 0
+	
 	return max_configurations[round_number][current_round_point]
 
 enum ROUND_POINT {BEGINNING, FIRST_QUARTER, HALF_WAY, THREE_QUARTER}
@@ -73,7 +76,7 @@ var three_quarter_way_point : bool = false
 var fortified_pistol_bullets_cost : int = 15
 var fortified_pistol_bullets : bool = false
 
-var fortified_pistol_rifle_cost : int = 15
+var fortified_pistol_rifle_cost : int = 20
 var fortified_rifle_bullets : bool = false
 
 var hub_instructions_shown : bool = false
