@@ -10,6 +10,9 @@ class_name Player extends CharacterBody3D
 @onready var camera: Camera3D = $Head/Camera
 @onready var point_at_marker: Marker3D = $Head/PointAtMarker
 
+@onready var cross_bow_bolt_position: Marker3D = $Head/Marker3D/GunArm/CrossBow/CrossBowBoltPosition
+@onready var super_cross_bow_bolt_position: Marker3D = $Head/Marker3D/GunArm/UltraBow/SuperCrossBowBoltPosition
+
 var target_index : int = 1
 var target_location : Marker3D
 @onready var look_at_positions : Array[Marker3D] = [look_at_point_3, look_at_point_1, look_at_point_2, look_at_point_4]
@@ -72,6 +75,8 @@ var enemy_alerts: Array = []
 var enemy_list : Array[Enemy] = []
 
 var can_hurt : bool = true
+
+var tracked_enemy : Node3D
 
 @onready var look_at_points : Dictionary[String,Marker3D] = {
 	"point 1" : look_at_point_1,
@@ -294,7 +299,11 @@ func play_shoot_animation() -> void:
 	#SignalBus.update_ammo_count.emit()
 	chosen_gun_animation_player.play("SHOOT")
 	var body_part = shoot_ray()
-	shoot_enemy(body_part)
+	if body_part:
+		tracked_enemy = body_part.get_parent()
+	else:
+		tracked_enemy = null
+	#shoot_enemy(body_part)
 	SignalBus.shot_fired.emit()
 	SignalBus.shake_camera.emit(0.5)
 	#if GameManager.ammo_count <= 0 and GameManager.equipped_weapon == GameManager.WEAPONS.PISTOL:
@@ -470,7 +479,29 @@ func play_reload_animation() -> void:
 	SignalBus.bullet_fired.emit()
 	shooting = false
 
-
 func face_boss_spawn_area() -> void:
 	target_location = look_at_point_1
 	GameManager.can_move = false
+
+func spawn_cross_bow_bolt(bolt_position : Marker3D) -> void:
+	
+	var direction : Vector3 = Vector3.ZERO
+	
+	var cross_bow_bolt : BoltProjectile = preload("uid://c2dmt8r828mej").instantiate()
+	cross_bow_bolt.target = tracked_enemy
+	cross_bow_bolt.global_position = bolt_position.global_position
+	if !tracked_enemy:
+		direction = -bolt_position.global_transform.basis.z
+		cross_bow_bolt.direction = direction
+	else:
+		if tracked_enemy.has_method("show_lock_on_target"):
+			tracked_enemy.show_lock_on_target()
+			SignalBus.enemy_hit.emit(tracked_enemy)
+		print("Distance: ",bolt_position.global_position.distance_to(tracked_enemy.bolt_position.global_position))
+	get_parent().add_child(cross_bow_bolt)
+
+func spawn_bolt_from_cross_bow() -> void:
+	spawn_cross_bow_bolt(cross_bow_bolt_position)
+	
+func spawn_bolt_from_super_cross_bow() -> void:
+	spawn_cross_bow_bolt(super_cross_bow_bolt_position)

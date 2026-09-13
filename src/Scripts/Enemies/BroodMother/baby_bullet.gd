@@ -2,6 +2,7 @@ class_name BabyBullet extends CharacterBody3D
 
 @onready var bulletrat_2: Node3D = $bulletrat2
 @onready var grow_player: AnimationPlayer = $GrowPlayer
+@export var bolt_position : Marker3D
 const RAT_DEATH_1 = preload("uid://d3ghyfjmncx5c")
 const BABY_SPLAT_1 = preload("uid://csuh2qfmiek87")
 const BABY_SPLAT_2 = preload("uid://tiujpr158j0")

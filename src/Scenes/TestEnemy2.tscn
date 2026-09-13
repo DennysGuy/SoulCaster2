@@ -10,10 +10,12 @@
 [ext_resource type="Script" uid="uid://db3c7w8r75xoq" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_hurt_1.gd" id="5_45i6o"]
 [ext_resource type="Shader" uid="uid://dckiap2vdruhu" path="res://src/Scenes/hitflash.gdshader" id="6_45i6o"]
 [ext_resource type="Script" uid="uid://c23yhki7863by" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_hurt_2.gd" id="6_niopx"]
+[ext_resource type="PackedScene" uid="uid://br762gfi4u8o3" path="res://src/Scenes/BoltPierce.tscn" id="7_45i6o"]
 [ext_resource type="Script" uid="uid://bfjj6wufm7403" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_dead.gd" id="7_e4k35"]
 [ext_resource type="Script" uid="uid://b577hi4520t0u" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_attack.gd" id="8_nbx1m"]
 [ext_resource type="Script" uid="uid://bexjwrt4l1qrd" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_head_shot.gd" id="9_gkopp"]
 [ext_resource type="PackedScene" uid="uid://ri2g3xgvuq8y" path="res://src/Scenes/BodyCollider.tscn" id="11_nlr0b"]
+[ext_resource type="PackedScene" uid="uid://dhjj6ow3afw3p" path="res://src/Scenes/HUD/LockOnTarget.tscn" id="16_niopx"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_60yqc"]
 load_path = "res://.godot/imported/rabied rat_rabied rat.png-f03edc9d6cd080e142f10a12ea7896c4.s3tc.ctex"
@@ -2661,13 +2663,16 @@ size = Vector3(1, 2.0920715, 3.078125)
 [sub_resource type="BoxShape3D" id="BoxShape3D_b3u6r"]
 size = Vector3(1.1426239, 2.8259773, 1)
 
-[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
+[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "arrow_hits", "bolt_position", "lock_on_target", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_60yqc")
 animation_player = NodePath("rabied rat/AnimationPlayer")
 damage_label_position = NodePath("DamageLabelPosition")
 blood_spout = NodePath("BloodSpoutArea")
 skeleton = NodePath("rabied rat/rat/Skeleton3D")
+arrow_hits = [NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce1"), NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce2"), NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce3"), NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce4"), NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce8"), NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce9"), NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce5"), NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce6"), NodePath("rabied rat/rat/Skeleton3D/HeadBoneAttachment/BoltPierce7"), NodePath("rabied rat/rat/Skeleton3D/BodyBoneAttachment/BoltPierce8"), NodePath("rabied rat/rat/Skeleton3D/BodyBoneAttachment/BoltPierce9"), NodePath("rabied rat/rat/Skeleton3D/BodyBoneAttachment/BoltPierce10"), NodePath("rabied rat/rat/Skeleton3D/BodyBoneAttachment/BoltPierce11"), NodePath("rabied rat/rat/Skeleton3D/BodyBoneAttachment/BoltPierce12")]
+bolt_position = NodePath("BoltPosition")
+lock_on_target = NodePath("LockOnTarget")
 enemy_name = "Rabid Rat Cronie"
 move_speed = 60.0
 health = 90
@@ -2919,6 +2924,58 @@ mesh = SubResource("ArrayMesh_7ooq6")
 skin = SubResource("Skin_k64uy")
 skeleton = NodePath("..")
 
+[node name="HeadBoneAttachment" type="BoneAttachment3D" parent="rabied rat/rat/Skeleton3D" unique_id=1749776519]
+transform = Transform3D(0.9996811, -0.014983433, -0.020326497, 0.024806088, 0.73330766, 0.67944413, 0.0047251685, -0.6797317, 0.73344535, -0.067318335, 2.645877, -0.40773606)
+bone_name = "head_2"
+bone_idx = 2
+
+[node name="BoltPierce1" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=1329564542 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.52347326, 0.4313106, 0.17305183, 0.06100775, -0.19462557, 0.66962594, 0.46071014, 0.5158411, 0.10795427, 0.0616202, 2.8664649, 0.9175947)
+
+[node name="BoltPierce2" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=60949223 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.6202673, 0.29389164, -0.13746357, -0.1731074, -0.048929676, 0.6764907, 0.27441272, 0.63343, 0.11603471, -0.7300086, 2.87833, 0.93369055)
+
+[node name="BoltPierce3" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=2065777768 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.58789605, 0.37891486, 0.02831553, -0.04386913, -0.119501375, 0.6883276, 0.37743044, 0.5763184, 0.12411007, -0.3229473, 2.8722296, 0.9254136)
+
+[node name="BoltPierce4" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=1734670451 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.58170766, 0.29534096, 0.25375167, 0.28861308, 0.020820234, 0.63739234, 0.26137838, 0.6343029, -0.13907221, 0.48246905, 2.7174575, -0.008474588)
+
+[node name="BoltPierce8" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=1026981496 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.33524814, 0.33580077, 0.5146324, 0.39154175, -0.33509576, 0.47371495, 0.4736071, 0.5147316, -0.02734256, 1.3231845, 2.5179045, 0.208431)
+
+[node name="BoltPierce9" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=1380098719 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.33756146, 0.3263624, 0.51917225, 0.050623093, -0.57577926, 0.39486143, 0.6111379, 0.22796015, 0.2540563, 1.3301325, 1.8532166, 1.0401186)
+
+[node name="BoltPierce5" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=1777441237 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.6983123, -0.013052931, -0.046792697, -0.048107117, 0.092041396, 0.6922529, -0.006755808, 0.6937997, -0.092716545, -0.6191702, 2.7339692, 0.0139250755)
+
+[node name="BoltPierce6" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=457794370 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.69857675, -0.019492112, -0.040132575, -0.029460572, -0.2713378, 0.64459896, -0.033505835, 0.6449774, 0.26996574, -0.19270757, 2.518846, 0.2665131)
+
+[node name="BoltPierce7" parent="rabied rat/rat/Skeleton3D/HeadBoneAttachment" unique_id=1053127662 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.54677993, 0.11489204, 0.42170078, 0.34683573, -0.29692212, 0.53060555, 0.26596376, 0.6234076, 0.1750034, 0.9607487, 1.8766413, 1.0252391)
+
+[node name="BodyBoneAttachment" type="BoneAttachment3D" parent="rabied rat/rat/Skeleton3D" unique_id=1491083425]
+transform = Transform3D(0.9982489, -0.05651606, -0.01746511, 0.057319812, 0.9971241, 0.04958071, 0.01461277, -0.050495, 0.99861735, -0.0037407242, 1.5241644, -0.3509317)
+bone_name = "chest"
+bone_idx = 1
+
+[node name="BoltPierce8" parent="rabied rat/rat/Skeleton3D/BodyBoneAttachment" unique_id=982974298 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.2987553, 0.18103765, 0.6066058, 0.632696, 0.107644275, 0.279479, -0.021002045, 0.6675613, -0.20957297, 0.96276176, 1.8126305, 0.61416256)
+
+[node name="BoltPierce9" parent="rabied rat/rat/Skeleton3D/BodyBoneAttachment" unique_id=1121495399 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.68115276, 0.045297828, 0.15485138, 0.16130912, 0.20450836, 0.6497351, -0.0031954795, 0.6679254, -0.20944057, 0.1954628, 1.9056005, 0.6264703)
+
+[node name="BoltPierce10" parent="rabied rat/rat/Skeleton3D/BodyBoneAttachment" unique_id=864349046 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.6806757, -0.043669682, -0.15739608, -0.16329004, 0.19891134, 0.65097666, 0.0041141626, 0.6697218, -0.20360707, -0.7461977, 1.9589134, 0.6429454)
+
+[node name="BoltPierce11" parent="rabied rat/rat/Skeleton3D/BodyBoneAttachment" unique_id=908630463 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.6884539, -0.124063276, -0.02528915, 0.020665603, -0.24804151, 0.654254, -0.12491665, 0.64271593, 0.24761285, -0.09390533, 1.929384, 0.9449642)
+
+[node name="BoltPierce12" parent="rabied rat/rat/Skeleton3D/BodyBoneAttachment" unique_id=485541925 instance=ExtResource("7_45i6o")]
+transform = Transform3D(-0.64406234, -0.19995894, 0.18761699, 0.24221987, -0.19043858, 0.6285401, -0.12850386, 0.64323366, 0.2444119, 0.53317046, 1.8938836, 0.933993)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="rabied rat" unique_id=1627075790]
 libraries/ = SubResource("AnimationLibrary_augd8")
 
@@ -2972,9 +3029,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18256378, 1.4058628, 0)
 shape = SubResource("BoxShape3D_b3u6r")
 
 [node name="DamageLabelPosition" type="Marker3D" parent="." unique_id=2120924916]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06169325, 2.096908, -0.8718689)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06169325, 2.4893365, -0.8718689)
+
+[node name="BoltPosition" type="Marker3D" parent="." unique_id=187260285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0859403, 1.7100999, -0.5306661)
 
 [node name="BloodSpoutArea" type="Marker3D" parent="." unique_id=768779751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01773107, 1.89937, 1.1741455)
+
+[node name="LockOnTarget" parent="." unique_id=1632178840 instance=ExtResource("16_niopx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14800215, 1.9897938, -0.9688475)
+visible = false
 
 [connection signal="body_entered" from="PlayerSensor" to="." method="_on_player_sensor_body_entered"]

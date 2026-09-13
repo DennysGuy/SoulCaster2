@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b2b1jehkwef40" path="res://src/Scripts/Statemachine/Ore/ore_idle.gd" id="5_gwgns"]
 [ext_resource type="Script" uid="uid://bwok6gi8dsd0g" path="res://src/Scripts/Statemachine/Ore/ore_spawn_in.gd" id="6_cgh55"]
 [ext_resource type="Script" uid="uid://cuj71taa282t7" path="res://src/Scripts/Statemachine/Ore/ore_hurt.gd" id="7_h2r6c"]
+[ext_resource type="PackedScene" uid="uid://dhjj6ow3afw3p" path="res://src/Scenes/HUD/LockOnTarget.tscn" id="8_3uaae"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh4a4"]
 resource_local_to_scene = true
@@ -176,8 +177,9 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_m1sm3"]
 radius = 0.8610571
 
-[node name="TestOre" type="Node3D" unique_id=519608720 node_paths=PackedStringArray("hurt_state")]
+[node name="TestOre" type="Node3D" unique_id=519608720 node_paths=PackedStringArray("bolt_position", "hurt_state")]
 script = ExtResource("1_0oabc")
+bolt_position = NodePath("OreChunkArea")
 hurt_state = NodePath("StateMachine/Hurt")
 
 [node name="TestOreModel" type="Node3D" parent="." unique_id=1139113720]
@@ -220,3 +222,7 @@ one_shot = true
 
 [node name="OreChunkArea" type="Marker3D" parent="." unique_id=803745612]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3531791, -0.51615715)
+
+[node name="LockOnTarget" parent="." unique_id=1632178840 instance=ExtResource("8_3uaae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.069221854, 0.46873048, -0.9066666)
+visible = false

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c2dmt8r828mej"]
+
+[ext_resource type="Script" uid="uid://byjvt57mvodog" path="res://src/Scripts/Player/bolt_projectile.gd" id="1_g22ua"]
+[ext_resource type="PackedScene" uid="uid://cf7o01i3nvskd" path="res://Assets/Weapons/Bolt.glb" id="1_vask1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g22ua"]
+size = Vector3(0.31933594, 0.27697754, 0.32910156)
+
+[node name="BoltProjectile" type="Node3D" unique_id=994679456]
+script = ExtResource("1_g22ua")
+speed = 30.0
+
+[node name="Timer" type="Timer" parent="." unique_id=153126694]
+process_callback = 0
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="." unique_id=47952017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03047645, -1.9615108)
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=472115641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016113281, 0.042175293, -0.08251953)
+shape = SubResource("BoxShape3D_g22ua")
+disabled = true
+
+[node name="Bolt" parent="." unique_id=621196264 instance=ExtResource("1_vask1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9728613)
+
+[node name="Cube" parent="Bolt" index="0" unique_id=1318056539]
+transform = Transform3D(-0.026996732, 0.00041240908, -0.00075437664, -0.00041255512, -0.026995964, 0.0073451274, 1.7790666e-05, -0.00020381519, -0.9744117, 0, 0, 0)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_static_body_3d_body_entered"]
+
+[editable path="Bolt"]

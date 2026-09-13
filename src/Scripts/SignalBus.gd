@@ -42,3 +42,4 @@ signal hub_context_menu_closed
 signal shot_fired
 
 signal config_beat
+signal enemy_hit(target : Node3D)

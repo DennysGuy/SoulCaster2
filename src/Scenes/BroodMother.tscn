@@ -4356,13 +4356,14 @@ _data = {
 &"HitFlash": SubResource("Animation_j7kl6")
 }
 
-[node name="BroodMother" type="CharacterBody3D" unique_id=1385822236 node_paths=PackedStringArray("true_idle_state", "animation_player", "damage_label_position", "blood_spout", "skeleton", "dead_state")]
+[node name="BroodMother" type="CharacterBody3D" unique_id=1385822236 node_paths=PackedStringArray("true_idle_state", "animation_player", "damage_label_position", "blood_spout", "skeleton", "bolt_position", "dead_state")]
 script = ExtResource("1_yjmqo")
 true_idle_state = NodePath("StateMachine/TrueIdle")
 animation_player = NodePath("rat mother/AnimationPlayer")
 damage_label_position = NodePath("Marker3D")
 blood_spout = NodePath("BirthArea")
 skeleton = NodePath("rat mother/Brood/Skeleton3D")
+bolt_position = NodePath("BoltPosition")
 enemy_name = "Brood Mother"
 health = 2000
 max_enemy_health = 2000
@@ -4652,3 +4653,5 @@ one_shot = true
 
 [node name="FlashPlayer" type="AnimationPlayer" parent="." unique_id=264963633]
 libraries/ = SubResource("AnimationLibrary_r8vr8")
+
+[node name="BoltPosition" type="Marker3D" parent="." unique_id=873822995]

@@ -7,6 +7,9 @@ var prev_state : State
 @export var damage_label_position : Marker3D
 @export var blood_spout : Marker3D
 @export var skeleton : Skeleton3D
+@export var arrow_hits : Array[Node3D]
+@export var bolt_position : Marker3D
+@export var lock_on_target : Sprite3D
 
 @export_group("Enemy Stats")
 @export var enemy_name : String
@@ -58,6 +61,7 @@ var move_speeds : Dictionary = {
 
 func _ready() -> void:
 	SignalBus.round_ended.connect(kill_enemy)
+	SignalBus.enemy_hit.connect(hide_lock_on_target)
 	var rand_num : int = randi_range(0,100)
 	var selected_value : int = select_speed(rand_num)
 	selected_move_speed = move_speeds[selected_value][0]
@@ -72,7 +76,7 @@ func kill_enemy(ended_round : bool = false) -> void:
 		return
 		
 	alive = false
-	
+	lock_on_target.hide()
 	if ended_round:
 		round_ended = true
 	
@@ -107,6 +111,15 @@ func damage_enemy() -> void:
 	if skeleton:
 		hit_flash()
 	
+	if !arrow_hits.is_empty():
+		var rand_num : int = randi_range(0,arrow_hits.size())
+		var bolt : Node3D = arrow_hits.get(rand_num)
+		if bolt:
+			bolt.show()
+		arrow_hits.remove_at(rand_num)
+	
+	show_lock_on_target()
+	SignalBus.enemy_hit.emit(self)
 	spawn_damage_label(damage, is_crit)
 	health -= damage
 	
@@ -153,6 +166,8 @@ func spawn_blood_spirt() -> void:
 
 func hit_flash() -> void:
 	for child in skeleton.get_children():
+		if child is BoneAttachment3D:
+			continue
 		var mesh: MeshInstance3D = child
 		var base_mat: Material = mesh.get_active_material(0)
 		var flash_mat: ShaderMaterial = base_mat.next_pass
@@ -162,6 +177,8 @@ func hit_flash() -> void:
 	await get_tree().create_timer(0.1).timeout
 
 	for child in skeleton.get_children():
+		if child is BoneAttachment3D:
+			continue
 		var mesh: MeshInstance3D = child
 		var base_mat: Material = mesh.get_active_material(0)
 		var flash_mat: ShaderMaterial = base_mat.next_pass
@@ -189,3 +206,13 @@ func select_speed(value : int) -> int:
 		return 1
 	else:
 		return 0
+
+func show_lock_on_target() -> void:
+	if lock_on_target:
+		lock_on_target.show()
+
+func hide_lock_on_target(target : Node3D) -> void:
+	if target == self:
+		return
+	
+	lock_on_target.hide()

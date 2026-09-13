@@ -64,13 +64,13 @@ func stop_spawn_timer(kill : bool) -> void:
 
 func spawn_enemy() -> void:
 	
-
 	
 	spawn_timer.stop()
 	
 	if !GameManager.round_started:
 		return
-	
+		
+	reset_spawn_point_availability()
 	
 	var min_config : int = 1
 	
@@ -93,8 +93,8 @@ func spawn_enemy() -> void:
 				break
 				
 			# Mark spawn point as occupied
-			chosen_spawn_point["occupied"] = true
-		
+			
+		chosen_spawn_point["occupied"] = true
 		chosen_spawn_point["spawn point"].add_child(chosen_configuration)
 		
 		var stagger_time : float

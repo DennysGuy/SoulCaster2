@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://br762gfi4u8o3"]
+
+[ext_resource type="PackedScene" uid="uid://cf7o01i3nvskd" path="res://Assets/Weapons/Bolt.glb" id="1_fs7dd"]
+
+[node name="BoltPierce12" type="Node3D" unique_id=1329564542]
+transform = Transform3D(-1.4956379, 1.2323179, 0.49443462, 0.17430782, -0.5560737, 1.9132197, 1.3163147, 1.4738308, 0.30844134, 0, 0, 0)
+visible = false
+
+[node name="Bolt" parent="." unique_id=621196264 instance=ExtResource("1_fs7dd")]
+transform = Transform3D(0.5854586, 0.05701972, 0.118266806, -0.057019725, 0.59725744, -0.005688549, -0.118266806, -0.0056885504, 0.5882012, 0, 0, 0)
+
+[node name="Cube" parent="Bolt" index="0" unique_id=1318056539]
+transform = Transform3D(-0.026996732, 0.00041240908, -0.00075437664, -0.00041255512, -0.026995964, 0.0073451274, 1.7790666e-05, -0.00020381519, -0.9744117, 0, 0, 0)
+
+[editable path="Bolt"]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dhjj6ow3afw3p"]
+
+[ext_resource type="Texture2D" uid="uid://dda4d2hgf8hte" path="res://Assets/LockOnTarget.png" id="1_ijxr1"]
+[ext_resource type="Script" uid="uid://dqe63nuvwjiaq" path="res://src/Scripts/HUD/lock_on_target.gd" id="2_r1h5d"]
+
+[node name="LockOnTarget" type="Sprite3D" unique_id=1632178840]
+texture = ExtResource("1_ijxr1")
+script = ExtResource("2_r1h5d")
