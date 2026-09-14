@@ -25,10 +25,10 @@ script = ExtResource("1_0qhbb")
 environment = SubResource("Environment_57xve")
 
 [node name="Bolt" parent="." unique_id=621196264 instance=ExtResource("1_hded2")]
-transform = Transform3D(0.9240331, -1.6711411e-08, -0.38231254, -0.38231254, -4.039077e-08, -0.9240331, 0, 1, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-0.14262892, 0.98977625, 0, -0.37877098, -0.054581724, -0.9238795, -0.914434, -0.13177194, 0.38268343, 0, 0, 0)
 
 [node name="Cube" parent="Bolt" index="0" unique_id=1318056539]
-transform = Transform3D(-0.026996737, 0.00041240908, -0.00075437676, -0.0004125552, -0.026995962, 0.007345129, 1.7790671e-05, -0.00020381517, -0.97441185, 0, 0, 0)
+transform = Transform3D(-0.026996564, 0.00042409572, 0, -0.00042409592, -0.026996551, 0, 0, 0, -0.97443986, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=626976122]
 transform = Transform3D(1, 0, 0, 0, 0.9598641, 0.2804657, 0, -0.2804657, 0.9598641, 0, 1.1308706, 2.6436422)

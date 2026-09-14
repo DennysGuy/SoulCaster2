@@ -1,17 +1,70 @@
 [gd_scene format=3 uid="uid://fm6y38l4gctm"]
 
 [ext_resource type="Script" uid="uid://cyfle3qq8i4ts" path="res://src/Scripts/Menus/shop_menu.gd" id="1_gllw4"]
+[ext_resource type="FontFile" uid="uid://b1a36g4iebhyo" path="res://Assets/Fonts/GoudyMediaeval-DemiBold.ttf" id="2_4ymfw"]
 [ext_resource type="Texture2D" uid="uid://bcls56q7g0x0d" path="res://Assets/sider.png" id="2_p8ncc"]
 [ext_resource type="Texture2D" uid="uid://dp24xadavvam7" path="res://Assets/TrackerTestIcon-sheet.png" id="3_4qwru"]
 [ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_bt663"]
-[ext_resource type="Texture2D" uid="uid://bgdy5qa35if2m" path="res://Assets/BoltOMatic8000.png" id="5_4qwru"]
+[ext_resource type="FontFile" uid="uid://bcrsewr5c6yhk" path="res://Assets/Fonts/GoudyMediaeval-Regular.ttf" id="3_tt1ee"]
+[ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="4_tt1ee"]
+[ext_resource type="PackedScene" uid="uid://b5qnmgtliwnmu" path="res://src/Scenes/Menus/BoltOMaticPreview.tscn" id="5_8mxox"]
+[ext_resource type="Texture2D" uid="uid://er65baetb615" path="res://Assets/QuiverIcon.png" id="6_kjuit"]
+[ext_resource type="Texture2D" uid="uid://cglrwwn7a4cq" path="res://Assets/MiningCrossBowBoltIcon.png" id="7_qbcc6"]
+[ext_resource type="Texture2D" uid="uid://bm2jc2cs7qxjv" path="res://Assets/BotOmaticMagazineIcon.png" id="8_yh3m8"]
+[ext_resource type="Texture2D" uid="uid://dq6cyj1m8u3j3" path="res://Assets/MiningSuperCrossBowBoltIcon.png" id="9_yh3m8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lek5s"]
-bg_color = Color(1.6364455e-06, 0.4858361, 0.668049, 1)
+bg_color = Color(0.38568702, 0.25852132, 0.109802, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.5294118)
+shadow_size = 2
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mxox"]
+bg_color = Color(0.3086967, 0.2020956, 0.051760167, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjuit"]
+bg_color = Color(0.28417885, 0.1928029, 0.043034583, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.5294118)
+shadow_size = 2
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbcc6"]
+bg_color = Color(0.41241828, 0.3057846, 0.6451542, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh3m8"]
+bg_color = Color(0.4081083, 0.3644964, 0.42876312, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1vdu"]
+bg_color = Color(0.24349865, 0.18751764, 0.27238703, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.5294118)
+shadow_size = 2
+shadow_offset = Vector2(2, 1)
 
 [node name="ShopMenu" type="Control" unique_id=1365776299]
 layout_mode = 3
@@ -22,407 +75,52 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gllw4")
 
-[node name="Panel" type="Panel" parent="." unique_id=1895035232]
+[node name="WeaponPanel" type="Panel" parent="." unique_id=1895035232]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1066.0
+offset_top = 27.0
+offset_right = -21.0
+offset_bottom = -654.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lek5s")
 
-[node name="Title" type="Label" parent="Panel" unique_id=441315487]
+[node name="Title" type="Label" parent="WeaponPanel" unique_id=441315487]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
+offset_left = -42.5
+offset_top = 5.0
+offset_right = 63.5
+offset_bottom = 73.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_4ymfw")
+theme_override_font_sizes/font_size = 56
+text = "Shop"
+
+[node name="PurchaseRifleButton" type="Button" parent="WeaponPanel" unique_id=1390619159]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -94.5
+offset_top = -55.0
+offset_right = 12.5
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 32
-text = "Weapons Dealer Shop"
-
-[node name="WeaponsTitle" type="Label" parent="Panel" unique_id=1843704969]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -482.0
-offset_top = 98.0
-offset_right = -339.0
-offset_bottom = 143.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 32
-text = "Weapons"
-
-[node name="WeaponsTitle2" type="Label" parent="Panel" unique_id=2062508773]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -236.0
-offset_top = 92.0
-offset_right = 218.0
-offset_bottom = 126.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Hover over Icons and text to read more"
-
-[node name="OreCount" type="Label" parent="Panel" unique_id=1821467376]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -550.0
-offset_top = 19.0
-offset_right = -407.0
-offset_bottom = 64.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 32
-text = "x0"
-
-[node name="WeaponsUpgradesTitle" type="Label" parent="Panel" unique_id=488267414]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -482.0
-offset_top = 409.0
-offset_right = -339.0
-offset_bottom = 454.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 32
-text = "Weapon Upgrades"
-
-[node name="RifleMagSize" type="Label" parent="Panel" unique_id=1935764449]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -261.0
-offset_top = 476.0
-offset_right = 81.0
-offset_bottom = 510.0
-grow_horizontal = 2
-tooltip_text = "Increases Rifle Mag Size by 4 (Requires Rifle)"
-mouse_filter = 0
-theme_override_font_sizes/font_size = 24
-text = "Super Cross Bow Mag Size: 12"
-
-[node name="Amuelts" type="Label" parent="Panel" unique_id=1072883399]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 195.0
-offset_top = 101.0
-offset_right = 478.0
-offset_bottom = 146.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 32
-text = "Amulets"
-horizontal_alignment = 1
-
-[node name="AmuletTitle" type="Label" parent="Panel" unique_id=395112804]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 296.0
-offset_top = 165.0
-offset_right = 431.0
-offset_bottom = 199.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Radar"
-
-[node name="AmuletTitle2" type="Label" parent="Panel" unique_id=1768955398]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -446.0
-offset_top = 164.0
-offset_right = -373.0
-offset_bottom = 198.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Bolt-O-Matic 8000"
-
-[node name="Cost" type="Label" parent="Panel" unique_id=793261442]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 324.0
-offset_top = 194.0
-offset_right = 364.0
-offset_bottom = 222.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
-text = "x 30"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Cost2" type="Label" parent="Panel" unique_id=1545838671]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -434.5
-offset_top = 338.0
-offset_right = -383.5
-offset_bottom = 366.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
-text = "x 100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PistolMagazineCost" type="Label" parent="Panel" unique_id=1623602739]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -361.0
-offset_top = 521.0
-offset_right = -321.0
-offset_bottom = 549.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
-text = "x 5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PistolMagSize" type="Label" parent="Panel" unique_id=1013566203]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -552.0
-offset_top = 476.0
-offset_right = -269.0
-offset_bottom = 510.0
-grow_horizontal = 2
-tooltip_text = "Increase Bolts Quiver by 1"
-mouse_filter = 0
-theme_override_font_sizes/font_size = 24
-text = " Bolts Quiver Size: 1"
-
-[node name="PurchasePistolMagButton" type="Button" parent="Panel" unique_id=1288156406]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 90.0
-offset_top = 162.0
-offset_right = 170.0
-offset_bottom = 193.0
-grow_vertical = 2
 text = "Purchase"
 
-[node name="OreIcon5" type="TextureRect" parent="Panel" unique_id=936006156]
-layout_mode = 0
-offset_left = 245.0
-offset_top = 524.0
-offset_right = 293.0
-offset_bottom = 572.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
-
-[node name="FortifiedPistolBulletsCost" type="Label" parent="Panel" unique_id=91486863]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -361.0
-offset_top = 625.0
-offset_right = -321.0
-offset_bottom = 653.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
-text = "x 15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ForfiedPistolBulletsTitle" type="Label" parent="Panel" unique_id=140078754]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -552.0
-offset_top = 580.0
-offset_right = -269.0
-offset_bottom = 614.0
-grow_horizontal = 2
-tooltip_text = "Upgrades Standard Pistol Bullets to Fortified Pistol Bullets.
-- Doubles damage to ore rocks
-- Doubles received ore rocks"
-mouse_filter = 0
-theme_override_font_sizes/font_size = 24
-text = "Pistol Mining Bullets"
-
-[node name="FortifiedPistolBulletsButton" type="Button" parent="Panel" unique_id=860205881]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 90.0
-offset_top = 266.0
-offset_right = 170.0
-offset_bottom = 297.0
-grow_vertical = 2
-text = "Purchase"
-
-[node name="OreIcon7" type="TextureRect" parent="Panel" unique_id=1972077592]
-layout_mode = 0
-offset_left = 245.0
-offset_top = 628.0
-offset_right = 293.0
-offset_bottom = 676.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
-
-[node name="FortifiedRifleBulletsCost" type="Label" parent="Panel" unique_id=238941482]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -78.0
-offset_top = 625.0
-offset_right = -38.0
-offset_bottom = 653.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
-text = "x 20"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ForfiedRifleBulletsTitle" type="Label" parent="Panel" unique_id=477333265]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -269.0
-offset_top = 580.0
-offset_right = 14.0
-offset_bottom = 614.0
-grow_horizontal = 2
-tooltip_text = "Upgrades Standard Rifle Bullets to Fortified Pistol Bullets.
-- Doubles damage to ore rocks
-- Doubles received ore rocks"
-mouse_filter = 0
-theme_override_font_sizes/font_size = 24
-text = "Rifle Mining Bullets"
-
-[node name="FortifiedRfielBulletsButton" type="Button" parent="Panel" unique_id=2138491045]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 373.0
-offset_top = 266.0
-offset_right = 453.0
-offset_bottom = 297.0
-grow_vertical = 2
-text = "Purchase"
-
-[node name="OreIcon8" type="TextureRect" parent="Panel" unique_id=967298675]
-layout_mode = 0
-offset_left = 528.0
-offset_top = 628.0
-offset_right = 576.0
-offset_bottom = 676.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
-
-[node name="RifleMagazineCost" type="Label" parent="Panel" unique_id=1383329020]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -77.0
-offset_top = 521.0
-offset_right = -37.0
-offset_bottom = 549.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
-text = "x 10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RadarAmuletIcon" type="PanelContainer" parent="Panel" unique_id=338739865]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 203.0
-offset_top = -184.0
-offset_right = 288.0
-offset_bottom = -99.0
-grow_horizontal = 2
-grow_vertical = 2
-tooltip_text = "Radar unveils an arrow indicator warning you when an Enemy has spawned in a particular direction."
-
-[node name="TextureRect" type="TextureRect" parent="Panel/RadarAmuletIcon" unique_id=429222152]
-layout_mode = 2
-tooltip_text = "Radar reveals an arrow in the direction an enemy spawned."
-texture = ExtResource("2_p8ncc")
-expand_mode = 1
-
-[node name="TrackerAmuletIcon" type="PanelContainer" parent="Panel" unique_id=1563480427]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 203.0
-offset_top = -74.0
-offset_right = 288.0
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
-tooltip_text = "Radar unveils an arrow indicator warning you when an Enemy has spawned in a particular direction."
-
-[node name="TextureRect" type="TextureRect" parent="Panel/TrackerAmuletIcon" unique_id=1144203388]
-layout_mode = 2
-tooltip_text = "Visibly shows and tracks remaining HP of the most recent enemy fired upon."
-texture = ExtResource("3_4qwru")
-expand_mode = 1
-
-[node name="PurchaseRadarButton" type="Button" parent="Panel" unique_id=933534987]
-layout_mode = 0
-offset_left = 937.0
-offset_top = 230.0
-offset_right = 1017.0
-offset_bottom = 261.0
-text = "Purchase"
-
-[node name="PurchaseTrackerButton" type="Button" parent="Panel" unique_id=1410266911]
-layout_mode = 0
-offset_left = 937.0
-offset_top = 340.0
-offset_right = 1017.0
-offset_bottom = 371.0
-text = "Purchase"
-
-[node name="PurchaseRifleButton" type="Button" parent="Panel" unique_id=1390619159]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 177.0
-offset_top = 16.0
-offset_right = 257.0
-offset_bottom = 47.0
-grow_vertical = 2
-text = "Purchase"
-
-[node name="CloseMenu" type="Button" parent="Panel" unique_id=500307679]
+[node name="CloseMenu" type="Button" parent="WeaponPanel" unique_id=500307679]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -432,111 +130,750 @@ offset_top = 14.0
 offset_right = -12.0
 offset_bottom = 45.0
 grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 38
 text = "X"
 
-[node name="OreIcon" type="TextureRect" parent="Panel" unique_id=1744008890]
-layout_mode = 0
-offset_left = 934.0
-offset_top = 198.0
-offset_right = 982.0
-offset_bottom = 246.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
-
-[node name="AmuletTitle3" type="Label" parent="Panel" unique_id=872725149]
+[node name="RifleCost" type="Label" parent="WeaponPanel" unique_id=1545838671]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 295.0
-offset_top = 278.0
-offset_right = 467.0
-offset_bottom = 312.0
+offset_left = 78.5
+offset_top = 344.0
+offset_right = 166.5
+offset_bottom = 388.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Enemy Tracker"
-
-[node name="Cost3" type="Label" parent="Panel" unique_id=754909820]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 324.0
-offset_top = 307.0
-offset_right = 364.0
-offset_bottom = 335.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
-text = "x20"
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 42
+text = "x 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OreIcon4" type="TextureRect" parent="Panel" unique_id=52753538]
+[node name="OreIcon" type="TextureRect" parent="WeaponPanel" unique_id=808567126]
 layout_mode = 0
-offset_left = 934.0
-offset_top = 311.0
-offset_right = 982.0
-offset_bottom = 359.0
+offset_left = 444.0
+offset_top = 347.0
+offset_right = 528.0
+offset_bottom = 431.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_bt663")
 
-[node name="OreIcon3" type="TextureRect" parent="Panel" unique_id=211753227]
-layout_mode = 0
-offset_left = 28.0
-offset_top = 17.0
-offset_right = 124.0
-offset_bottom = 113.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
-
-[node name="OreIcon2" type="TextureRect" parent="Panel" unique_id=808567126]
-layout_mode = 0
-offset_left = 178.0
-offset_top = 340.0
-offset_right = 226.0
-offset_bottom = 388.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
-
-[node name="RifleImage" type="TextureRect" parent="Panel" unique_id=1702236874]
+[node name="WeaponPreviewPanel" type="Panel" parent="WeaponPanel" unique_id=1339608145]
 layout_mode = 1
-offset_left = 106.0
-offset_top = 198.0
-offset_right = 589.53687
-offset_bottom = 453.3937
-scale = Vector2(0.5325112, 0.5325112)
-tooltip_text = "- +10 attack damage bonus
-- +50% fire rate
-- Doubles Magazine Size"
-texture = ExtResource("5_4qwru")
-expand_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.5
+offset_top = -92.5
+offset_right = 209.5
+offset_bottom = 91.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8mxox")
 
-[node name="PurchaseRifleMagButton" type="Button" parent="Panel" unique_id=1225690785]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="WeaponPanel/WeaponPreviewPanel" unique_id=2053768637]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -80.0
+offset_right = 187.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="WeaponPanel/WeaponPreviewPanel/SubViewportContainer" unique_id=759189648]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(370, 160)
+render_target_update_mode = 4
+
+[node name="BoltOMaticPreview" parent="WeaponPanel/WeaponPreviewPanel/SubViewportContainer/SubViewport" unique_id=1025516464 instance=ExtResource("5_8mxox")]
+
+[node name="UpgradesPanel" type="Panel" parent="." unique_id=678367220]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1066.0
+offset_top = 434.0
+offset_right = -21.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lek5s")
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradesPanel" unique_id=437779601]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="WeaponUpgradesPanel" type="Panel" parent="UpgradesPanel/MarginContainer" unique_id=686157222]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjuit")
+
+[node name="QuiverSize" type="Panel" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel" unique_id=1791405478]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 134.0
+offset_right = 392.0
+offset_bottom = 263.31683
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbcc6")
+
+[node name="QuiverIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize" unique_id=1222347091]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 375.0
-offset_top = 162.0
-offset_right = 490.0
-offset_bottom = 193.0
+offset_left = 2.0
+offset_top = -42.0
+offset_right = 86.0
+offset_bottom = 42.0
 grow_vertical = 2
-text = "Requires Rifle"
+texture = ExtResource("6_kjuit")
 
-[node name="OreIcon6" type="TextureRect" parent="Panel" unique_id=1135685582]
+[node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize" unique_id=1566016680]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -18.658447
+offset_right = -36.5
+offset_bottom = 29.341553
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bt663")
+
+[node name="CrossBowQuiverSize" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize" unique_id=458297178]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.5
+offset_top = -58.658447
+offset_right = 158.5
+offset_bottom = -32.658447
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Crossbow Quiver Size: 1"
+
+[node name="CrossBowQuiverCost" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize" unique_id=1313531747]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -6.6584473
+offset_right = 15.5
+offset_bottom = 19.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "x 10"
+
+[node name="CrossBowAmmoPurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize" unique_id=1840454690]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 44.5
+offset_top = -5.6584473
+offset_right = 120.5
+offset_bottom = 27.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 28
+text = "Purchase"
+
+[node name="CrossBowMiningBolt" type="Panel" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel" unique_id=249179188]
 layout_mode = 0
-offset_left = 529.0
-offset_top = 524.0
-offset_right = 577.0
-offset_bottom = 572.0
+offset_left = 429.0
+offset_top = 134.0
+offset_right = 782.0
+offset_bottom = 263.31683
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbcc6")
+
+[node name="MiningBoltIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt" unique_id=518321830]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -42.0
+offset_right = 86.0
+offset_bottom = 42.0
+grow_vertical = 2
+texture = ExtResource("7_qbcc6")
+
+[node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt" unique_id=341191737]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -18.658447
+offset_right = -36.5
+offset_bottom = 29.341553
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bt663")
+
+[node name="MiningBoltTitle" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt" unique_id=1734128990]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.5
+offset_top = -58.658447
+offset_right = 158.5
+offset_bottom = -32.658447
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Mining Cross Bow Bolt"
+
+[node name="MiningBoltCost" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt" unique_id=272811791]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -6.6584473
+offset_right = 15.5
+offset_bottom = 19.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "x 10"
+
+[node name="MiningCrossBowBoltPurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt" unique_id=945912819]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 44.5
+offset_top = -5.6584473
+offset_right = 120.5
+offset_bottom = 27.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 28
+text = "Purchase"
+
+[node name="BoltOMaticMagazineSize" type="Panel" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel" unique_id=995012651]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 292.0
+offset_right = 390.0
+offset_bottom = 421.31683
+theme_override_styles/panel = SubResource("StyleBoxFlat_yh3m8")
+
+[node name="MagazinIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize" unique_id=1071632745]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -42.0
+offset_right = 84.0
+offset_bottom = 42.0
+grow_vertical = 2
+texture = ExtResource("8_yh3m8")
+
+[node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize" unique_id=1675448082]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -18.658447
+offset_right = -36.5
+offset_bottom = 29.341553
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bt663")
+
+[node name="BoltOMaticMagSize" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize" unique_id=633229751]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -58.658447
+offset_right = 175.5
+offset_bottom = -32.658447
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Bolt-O-Matic Mag Size: 6"
+
+[node name="BoltOMaticMagSizeCost" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize" unique_id=1385622276]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -6.6584473
+offset_right = 15.5
+offset_bottom = 19.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "x 10"
+
+[node name="BoltOMaticMagSizePurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize" unique_id=696965357]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 44.5
+offset_top = -5.6584473
+offset_right = 120.5
+offset_bottom = 27.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 28
+text = "Purchase"
+
+[node name="BoltOMaticMagazineSize2" type="Panel" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel" unique_id=1832364818]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 292.0
+offset_right = 784.0
+offset_bottom = 421.31683
+theme_override_styles/panel = SubResource("StyleBoxFlat_yh3m8")
+
+[node name="MiningBoltIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize2" unique_id=554949064]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -42.0
+offset_right = 84.0
+offset_bottom = 42.0
+grow_vertical = 2
+texture = ExtResource("9_yh3m8")
+
+[node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize2" unique_id=181224917]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -18.658447
+offset_right = -36.5
+offset_bottom = 29.341553
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bt663")
+
+[node name="MiningBoltTitle" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize2" unique_id=707542601]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -58.658447
+offset_right = 175.5
+offset_bottom = -32.658447
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Bolt-O-Matic Mining Bolt"
+
+[node name="BoltOMaticMiningBoltCost" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize2" unique_id=1780663949]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -6.6584473
+offset_right = 15.5
+offset_bottom = 19.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "x 10"
+
+[node name="BoltOMaticMininBoltPurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize2" unique_id=1393456080]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 44.5
+offset_top = -5.6584473
+offset_right = 120.5
+offset_bottom = 27.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 28
+text = "Purchase"
+
+[node name="Label" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel" unique_id=255725035]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 76.0
+offset_right = 199.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 36
+text = "Ammunition"
+
+[node name="Label2" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel" unique_id=1092223238]
+layout_mode = 0
+offset_left = 439.0
+offset_top = 76.0
+offset_right = 668.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 36
+text = "Ammuntion Type"
+
+[node name="AmuletsPanel" type="Panel" parent="UpgradesPanel/MarginContainer" unique_id=482165866]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h1vdu")
+
+[node name="RadarAmulet" type="Panel" parent="UpgradesPanel/MarginContainer/AmuletsPanel" unique_id=1442400072]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.5
+offset_top = -140.99997
+offset_right = 8.5
+offset_bottom = -11.683136
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yh3m8")
+
+[node name="RaderIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet" unique_id=367661438]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -49.658447
+offset_right = 92.0
+offset_bottom = 43.341553
+grow_vertical = 2
+texture = ExtResource("2_p8ncc")
+expand_mode = 1
+
+[node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet" unique_id=831847837]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -18.658447
+offset_right = -36.5
+offset_bottom = 29.341553
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bt663")
+
+[node name="RadarTitle" type="Label" parent="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet" unique_id=1597763487]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -58.658447
+offset_right = 175.5
+offset_bottom = -32.658447
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Enemy Rader"
+
+[node name="RadarCost" type="Label" parent="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet" unique_id=371587082]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -6.6584473
+offset_right = 15.5
+offset_bottom = 19.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "x 30"
+
+[node name="RadarPurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet" unique_id=1887783481]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 44.5
+offset_top = -5.6584473
+offset_right = 120.5
+offset_bottom = 27.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 28
+text = "Purchase"
+
+[node name="TrackerAmulet" type="Panel" parent="UpgradesPanel/MarginContainer/AmuletsPanel" unique_id=402489568]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.5
+offset_top = 24.00003
+offset_right = 8.5
+offset_bottom = 153.31686
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yh3m8")
+
+[node name="TrackerIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet" unique_id=1519524659]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -36.658447
+offset_right = 85.0
+offset_bottom = 36.341553
+grow_vertical = 2
+texture = ExtResource("3_4qwru")
+
+[node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet" unique_id=280185805]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -18.658447
+offset_right = -36.5
+offset_bottom = 29.341553
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bt663")
+
+[node name="TrackerTitle" type="Label" parent="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet" unique_id=375095855]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -58.658447
+offset_right = 175.5
+offset_bottom = -32.658447
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Enemy Health Tracker"
+
+[node name="TrackerCost" type="Label" parent="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet" unique_id=1514875020]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -6.6584473
+offset_right = 15.5
+offset_bottom = 19.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "x 20"
+
+[node name="TrackerPuchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet" unique_id=1240171277]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 44.5
+offset_top = -5.6584473
+offset_right = 120.5
+offset_bottom = 27.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 28
+text = "Purchase"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradesPanel" unique_id=2147352933]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 53.0
+offset_right = 277.0
+offset_bottom = 93.0
+theme_override_constants/separation = 16
+
+[node name="WeaponUpgradesButton" type="Button" parent="UpgradesPanel/HBoxContainer" unique_id=1670719264]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Weapon Upgrades"
+
+[node name="AmuletsButton" type="Button" parent="UpgradesPanel/HBoxContainer" unique_id=588090775]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Amulets"
+
+[node name="Tip1" type="Label" parent="." unique_id=2062508773]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 373.0
+offset_top = 98.0
+offset_right = 713.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Hover over Icons and text to read more"
+
+[node name="OreCount" type="Label" parent="." unique_id=1821467376]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 171.0
+offset_top = 50.0
+offset_right = 279.04443
+offset_bottom = 84.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 32
+text = "x0"
+
+[node name="AmuletTitle2" type="Label" parent="." unique_id=1768955398]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 455.0
+offset_top = 327.0
+offset_right = 626.0
+offset_bottom = 357.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Bolt-O-Matic 8000"
+
+[node name="OreIcon3" type="TextureRect" parent="." unique_id=211753227]
+layout_mode = 0
+offset_left = 1077.0
+offset_top = 44.0
+offset_right = 1173.0
+offset_bottom = 140.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_bt663")
 
-[connection signal="button_up" from="Panel/PurchasePistolMagButton" to="." method="_on_purchase_pistol_mag_button_button_up"]
-[connection signal="button_up" from="Panel/FortifiedPistolBulletsButton" to="." method="_on_fortified_pistol_bullets_button_button_up"]
-[connection signal="button_up" from="Panel/FortifiedRfielBulletsButton" to="." method="_on_fortified_rfiel_bullets_button_button_up"]
-[connection signal="button_up" from="Panel/PurchaseRadarButton" to="." method="_on_purchase_radar_button_button_up"]
-[connection signal="button_up" from="Panel/PurchaseTrackerButton" to="." method="_on_purchase_tracker_button_button_up"]
-[connection signal="button_up" from="Panel/PurchaseRifleButton" to="." method="_on_purchase_rifle_button_button_up"]
-[connection signal="button_up" from="Panel/CloseMenu" to="." method="_on_close_menu_button_up"]
-[connection signal="button_up" from="Panel/PurchaseRifleMagButton" to="." method="_on_purchase_rifle_mag_button_button_up"]
+[connection signal="button_up" from="WeaponPanel/PurchaseRifleButton" to="." method="_on_purchase_rifle_button_button_up"]
+[connection signal="button_up" from="WeaponPanel/CloseMenu" to="." method="_on_close_menu_button_up"]
+[connection signal="button_up" from="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize/CrossBowAmmoPurchaseButton" to="." method="_on_cross_bow_ammo_purchase_button_button_up"]
+[connection signal="button_up" from="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt/MiningCrossBowBoltPurchaseButton" to="." method="_on_mining_cross_bow_bolt_purchase_button_button_up"]
+[connection signal="button_up" from="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize/BoltOMaticMagSizePurchaseButton" to="." method="_on_bolt_o_matic_mag_size_purchase_button_button_up"]
+[connection signal="button_up" from="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize2/BoltOMaticMininBoltPurchaseButton" to="." method="_on_bolt_o_matic_minin_bolt_purchase_button_button_up"]
+[connection signal="button_up" from="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet/RadarPurchaseButton" to="." method="_on_radar_purchase_button_button_up"]
+[connection signal="button_up" from="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet/TrackerPuchaseButton" to="." method="_on_tracker_puchase_button_button_up"]
+[connection signal="button_up" from="UpgradesPanel/HBoxContainer/WeaponUpgradesButton" to="." method="_on_weapon_upgrades_button_button_up"]
+[connection signal="button_up" from="UpgradesPanel/HBoxContainer/AmuletsButton" to="." method="_on_amulets_button_button_up"]

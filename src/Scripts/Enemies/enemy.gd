@@ -76,7 +76,8 @@ func kill_enemy(ended_round : bool = false) -> void:
 		return
 		
 	alive = false
-	lock_on_target.hide()
+	if lock_on_target:
+		lock_on_target.hide()
 	if ended_round:
 		round_ended = true
 	

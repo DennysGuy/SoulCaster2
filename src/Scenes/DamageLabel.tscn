@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxs04348rjstf" path="res://src/Scripts/damage_label.gd" id="1_ed8fy"]
 [ext_resource type="Texture2D" uid="uid://dyqhpn3h178wd" path="res://Assets/DamageLabelBG.png" id="2_fwctq"]
+[ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="3_p8vke"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ed8fy"]
 viewport_path = NodePath("SubViewport")
@@ -151,6 +152,7 @@ offset_bottom = 33.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_p8vke")
 theme_override_font_sizes/font_size = 48
 text = "23"
 horizontal_alignment = 1

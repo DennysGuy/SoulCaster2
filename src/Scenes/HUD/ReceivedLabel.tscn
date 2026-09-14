@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ca2bgl0v774sj"]
 
 [ext_resource type="Script" uid="uid://dokf885n4e3ma" path="res://src/Scripts/HUD/received_label.gd" id="1_i4vkx"]
+[ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="2_254qq"]
 
 [node name="ReceivedLabel" type="Control" unique_id=419050528 node_paths=PackedStringArray("label")]
 layout_mode = 3
@@ -14,6 +15,8 @@ label = NodePath("Label")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_254qq")
+theme_override_font_sizes/font_size = 36
 text = "+1 sec."
 
 [node name="Timer" type="Timer" parent="." unique_id=1315054332]

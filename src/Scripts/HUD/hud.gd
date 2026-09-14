@@ -5,6 +5,7 @@ class_name HUD extends CanvasLayer
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var level: Label = $ProgressBar/Level
 @onready var xp: Label = $ProgressBar/XP
+@onready var ap: Label = $ProgressBar/AP
 
 @onready var xp_gained_position: Marker2D = $XPGainedPosition
 @onready var time_gained_position: Marker2D = $TimeGainedPosition
@@ -44,6 +45,7 @@ var hub_context_showing : bool = false
 var arena_context_showing : bool = false
 
 var context_pos : int = 0
+@onready var bolts_holder: HBoxContainer = $BoltsHolder
 
 const GRUN_1 = preload("uid://bsofvgd2ah7px")
 const GRUNT_2 = preload("uid://2gj05mllf3ho")
@@ -61,7 +63,7 @@ func _ready() -> void:
 	SignalBus.player_damaged.connect(flash_screen_red)
 	SignalBus.ore_gathered.connect(update_ore_count_label)
 	SignalBus.enemy_found.connect(update_enemy_tracker)
-	SignalBus.bullet_fired.connect(update_bullets_tracker)
+	SignalBus.bullet_fired.connect(update_bolts_holder)
 	SignalBus.player_hurt.connect(decrease_time_label)
 	SignalBus.boss_damaged.connect(update_boss_bar)
 	SignalBus.boss_defeated.connect(end_fight)
@@ -70,7 +72,7 @@ func _ready() -> void:
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
 	#round_timer.start()
 	update_level()
-	update_bullets_tracker()
+	update_bolts_holder()
 	if GameManager.enemy_tracker_owned:
 		enemy_tracker.show()
 		
@@ -115,6 +117,7 @@ func _physics_process(delta: float) -> void:
 func update_level() -> void:
 	level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
 	xp.text = "[%s/%s]" % [int(PlayerStats.player_stats["Current XP"]), int(PlayerStats.player_stats["Needed XP"])]
+	ap.text = "AP: %s" % [int(PlayerStats.player_stats["Ability Points"])]
 	progress_bar.value = int(PlayerStats.player_stats["Current XP"])
 	progress_bar.max_value = int(PlayerStats.player_stats["Needed XP"])
 
@@ -142,7 +145,7 @@ func flash_screen_red() -> void:
 	
 
 func update_ore_count_label(amount : int) -> void:
-	ore_count_label.text = str(int(PlayerStats.player_stats["Ore"]))
+	ore_count_label.text = "x%s" % str(int(PlayerStats.player_stats["Ore"]))
 	if amount > 0:
 		var ore_gathered_lable : ReceivedLabel = preload("uid://ca2bgl0v774sj").instantiate()
 		ore_gathered_lable.label.text = "+%sore" % amount
@@ -154,8 +157,6 @@ func update_enemy_tracker(enemy_name : String, enemy_health : int, enemy_max_hea
 	enemy_hp.max_value = enemy_max_health
 	enemy_hp.value = enemy_health
 
-func update_bullets_tracker() -> void:
-	bullets_tracker.text = "%s/%s" % [GameManager.bullets_in_clip, GameManager.magazine]
 
 func start_round() -> void:		
 	round_ended = false
@@ -302,3 +303,13 @@ func disable_hurt_ability() -> void:
 
 func enable_hurt_ability() -> void:
 	GameManager.can_hurt_player = true
+
+func update_bolts_holder() -> void:
+	clear_bolts_holder()
+	for i in range(GameManager.bullets_in_clip):
+		var bolt_hud_icon : BoltHUDIcon = preload("uid://booyib7rd0el6").instantiate()
+		bolts_holder.add_child(bolt_hud_icon)
+
+func clear_bolts_holder() -> void:
+	for child in bolts_holder.get_children():
+		child.queue_free()

@@ -34,7 +34,8 @@ func _physics_process(delta: float) -> void:
 			target.die()
 			queue_free()
 		elif target is Enemy:
-			target.damage_enemy()
+			if target.can_hurt:
+				target.damage_enemy()
 			queue_free()
 		elif target is TestOre:
 			target.damage_ore()

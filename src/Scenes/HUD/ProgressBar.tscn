@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://c15d0y8jhrh0a"]
+
+[ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="1_mnd7m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
+bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
+
+[node name="ProgressBar" type="ProgressBar" unique_id=1962971616]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -927.0
+offset_top = -27.0
+offset_right = 942.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_rty5i")
+
+[node name="Level" type="Label" parent="." unique_id=938808094]
+layout_mode = 0
+offset_top = -37.0
+offset_right = 123.0
+offset_bottom = -3.0
+theme_override_fonts/font = ExtResource("1_mnd7m")
+theme_override_font_sizes/font_size = 32
+text = "Level: 1"
+
+[node name="AP" type="Label" parent="." unique_id=507976309]
+layout_mode = 0
+offset_left = 133.0
+offset_top = -33.0
+offset_right = 256.0
+offset_bottom = 1.0
+theme_override_fonts/font = ExtResource("1_mnd7m")
+theme_override_font_sizes/font_size = 32
+text = "AP: 0"
+
+[node name="XP" type="Label" parent="." unique_id=1904144712]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = -34.0
+offset_right = -7.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("1_mnd7m")
+theme_override_font_sizes/font_size = 32
+text = "[10/10]"
+horizontal_alignment = 2

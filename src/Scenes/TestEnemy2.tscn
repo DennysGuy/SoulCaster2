@@ -2994,6 +2994,7 @@ script = ExtResource("4_16i0a")
 script = ExtResource("5_45i6o")
 pursue_state = NodePath("../Pursue")
 attack_state = NodePath("../Attack")
+hurt_animation_names = Array[String](["Hurt"])
 
 [node name="Hurt2" type="Node" parent="StateMachine" unique_id=710490520 node_paths=PackedStringArray("pursue_state", "attack_state")]
 script = ExtResource("6_niopx")

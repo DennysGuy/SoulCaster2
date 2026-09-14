@@ -5,11 +5,18 @@ var start_round_timer : float = 15
 var start_round_timer_wait_time : float = 15
 @onready var camera: Camera3D = $Player/Head/Camera
 
+@onready var progress_bar: ProgressBar = $CanvasLayer/ProgressBar
+@onready var level: Label = $CanvasLayer/ProgressBar/Level
+@onready var ap: Label = $CanvasLayer/ProgressBar/AP
+@onready var xp: Label = $CanvasLayer/ProgressBar/XP
+
+
 var stored_selectable : MenuSelectable
 @onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
-@onready var start_battle_label: Label = $StartBattleLabel
-@onready var controls_label: Label = $ControlsLabel
+@onready var start_battle_label: Label = $CanvasLayer/StartBattleLabel
+@onready var controls_label: Label = $CanvasLayer/ControlsLabel
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,10 +25,16 @@ func _ready() -> void:
 	GameManager.in_menu = false
 	player.gun_arm.hide()
 	if !GameManager.hub_instructions_shown:
+		progress_bar.hide()
 		start_battle_label.hide()
 		controls_label.hide()
 		spawn_hub_context()
-
+	
+	progress_bar.max_value = PlayerStats.player_stats["Needed XP"]
+	progress_bar.value = PlayerStats.player_stats["Current XP"]
+	xp.text = "[%s/%s]" % [int(PlayerStats.player_stats["Current XP"]),int(PlayerStats.player_stats["Needed XP"])]
+	ap.text = "AP: %s" % int(PlayerStats.player_stats["Ability Points"])
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -61,6 +74,7 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if stored_selectable and !GameManager.in_menu:
 				stored_selectable.open_menu()
+				SignalBus.hub_menu_accessed.emit(stored_selectable.look_at_point)
 
 func spawn_hub_context() -> void:
 	var hub_context_panel : HubContextPanel = preload("uid://cnv6x8tgahuc1").instantiate()
@@ -69,6 +83,7 @@ func spawn_hub_context() -> void:
 func show_start_combat_label() -> void:
 	start_battle_label.show()
 	controls_label.show()
+	progress_bar.show()
 
 func spawn_round_select_menu() -> void:
 	GameManager.in_menu = true

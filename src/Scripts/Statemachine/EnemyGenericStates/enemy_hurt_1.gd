@@ -3,9 +3,11 @@ class_name EnemyHurt1 extends State
 @export var pursue_state : State
 @export var attack_state : State
 
+@export var hurt_animation_names : Array[String]
+
 func enter() -> void:
-	parent.animation_player.play("Hurt")
-	parent.timer.wait_time = 0.6667
+	parent.animation_player.play(hurt_animation_names.pick_random())
+	parent.timer.wait_time = parent.animation_player.current_animation_length
 	parent.timer.start()
 
 func exit() -> void:

@@ -92,6 +92,8 @@ const SENSITIVITY := 0.6
 func _ready() -> void:
 	SignalBus.enemy_spawned.connect(notify_enemy)
 	SignalBus.face_boss_area.connect(face_boss_spawn_area)
+	SignalBus.hub_menu_accessed.connect(look_at_hub_position)
+	
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	camera.make_current()
@@ -505,3 +507,10 @@ func spawn_bolt_from_cross_bow() -> void:
 	
 func spawn_bolt_from_super_cross_bow() -> void:
 	spawn_cross_bow_bolt(super_cross_bow_bolt_position)
+
+func look_at_hub_position(look_at_point : Marker3D):
+	target_location = look_at_point
+	zoom_camera_mid()
+
+func zoom_camera_mid() -> void:
+	zoom_target = 30

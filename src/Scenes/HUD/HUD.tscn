@@ -5,12 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_t1brt"]
 [ext_resource type="PackedScene" uid="uid://c87ouqp84eqp7" path="res://src/Scenes/HUD/RoundDiamond.tscn" id="4_7pn66"]
 [ext_resource type="StyleBox" uid="uid://5eyxyvcgpq2q" path="res://src/RoundStyle.tres" id="4_wwnsm"]
+[ext_resource type="FontFile" uid="uid://dqo5h1vqnpvsl" path="res://Assets/Fonts/MorrisRoman-Black.ttf" id="5_xs85b"]
 [ext_resource type="Script" uid="uid://dxg6uh4s7j7ab" path="res://src/Scripts/arena_context_panel.gd" id="6_7pn66"]
 [ext_resource type="Texture2D" uid="uid://dam4v5p51n5b4" path="res://Assets/WaveDiamondEmpty.png" id="6_lkjxp"]
 [ext_resource type="Texture2D" uid="uid://d3apwcm4ylvd2" path="res://Assets/WaveDiamondFilled.png" id="7_761it"]
 [ext_resource type="Texture2D" uid="uid://dk6iunojkq143" path="res://Assets/BossWaveEmpty.png" id="8_2c58t"]
 [ext_resource type="Texture2D" uid="uid://dyrx0x1hwcsdd" path="res://Assets/BossWaveFilled.png" id="9_veicy"]
-[ext_resource type="PackedScene" uid="uid://hgkgq320bg8e" path="res://src/Scenes/HUD/BoltPreview.tscn" id="11_veicy"]
+[ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="10_6w4u3"]
+[ext_resource type="PackedScene" uid="uid://booyib7rd0el6" path="res://src/Scenes/HUD/BoltHUDIcon.tscn" id="13_xs85b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
 bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
@@ -270,53 +272,71 @@ corner_radius_bottom_left = 5
 [node name="HUD" type="CanvasLayer" unique_id=1895423373]
 script = ExtResource("1_ippal")
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1924909690]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -329.0
-offset_top = -27.0
-offset_right = 329.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/fill = SubResource("StyleBoxFlat_rty5i")
-
-[node name="Level" type="Label" parent="ProgressBar" unique_id=2085323812]
-layout_mode = 0
-offset_top = -28.0
-offset_right = 123.0
-offset_bottom = -5.0
-text = "Level: 1"
-
-[node name="XP" type="Label" parent="ProgressBar" unique_id=1992549865]
-layout_mode = 0
-offset_left = 532.0
-offset_top = -28.0
-offset_right = 655.0
-offset_bottom = -5.0
-text = "[10/10]"
-horizontal_alignment = 2
-
 [node name="RoundTimerLabel" parent="." unique_id=62024656 instance=ExtResource("2_5ysmx")]
 anchors_preset = 5
 anchor_top = 0.0
 anchor_bottom = 0.0
 offset_left = -117.0
-offset_top = 69.0
+offset_top = 99.0
 offset_right = 100.0
-offset_bottom = 171.0
+offset_bottom = 218.0
 grow_vertical = 1
 
 [node name="TimeGainedPosition" type="Marker2D" parent="." unique_id=1338418775]
-position = Vector2(662, 135)
+position = Vector2(992, 183)
 
 [node name="OreGainedPosition" type="Marker2D" parent="." unique_id=1073767489]
 position = Vector2(95, 83)
 
 [node name="XPGainedPosition" type="Marker2D" parent="." unique_id=1327782419]
-position = Vector2(942, 658)
+position = Vector2(958, 1034)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1962971616]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -930.0
+offset_top = -36.0
+offset_right = 935.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_rty5i")
+
+[node name="Level" type="Label" parent="ProgressBar" unique_id=938808094]
+layout_mode = 0
+offset_top = -34.0
+offset_right = 123.0
+theme_override_fonts/font = ExtResource("10_6w4u3")
+theme_override_font_sizes/font_size = 32
+text = "Level: 1"
+
+[node name="AP" type="Label" parent="ProgressBar" unique_id=507976309]
+layout_mode = 0
+offset_left = 128.0
+offset_top = -33.0
+offset_right = 251.0
+offset_bottom = 1.0
+theme_override_fonts/font = ExtResource("10_6w4u3")
+theme_override_font_sizes/font_size = 32
+text = "AP: 0"
+
+[node name="XP" type="Label" parent="ProgressBar" unique_id=1904144712]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -114.0
+offset_top = -30.0
+offset_right = -16.323486
+offset_bottom = -3.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("10_6w4u3")
+theme_override_font_sizes/font_size = 26
+text = "[10/10]"
+horizontal_alignment = 2
 
 [node name="OreIcon" type="TextureRect" parent="." unique_id=1062039678]
 offset_left = 16.0
@@ -332,36 +352,24 @@ offset_top = 20.0
 offset_right = 138.0
 offset_bottom = 65.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 32
 text = "x 40"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1250733799]
 libraries/ = SubResource("AnimationLibrary_t1brt")
-
-[node name="BulletsTracker" type="Label" parent="." unique_id=106580476]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -98.0
-offset_top = -50.0
-offset_right = -31.0
-offset_bottom = -5.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "6/32"
 
 [node name="EnemyTracker" type="Panel" parent="." unique_id=1205098400]
 visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 46.0
-offset_top = -73.0
-offset_right = 231.0
-offset_bottom = -7.0
+offset_left = 30.0
+offset_top = -196.0
+offset_right = 310.0
+offset_bottom = -85.0
 grow_vertical = 0
 
 [node name="EnemyName" type="Label" parent="EnemyTracker" unique_id=934214204]
@@ -369,11 +377,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -51.5
-offset_top = 12.0
-offset_right = 51.5
-offset_bottom = 35.0
+offset_left = -92.0
+offset_top = 28.0
+offset_right = 92.0
+offset_bottom = 60.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("5_xs85b")
+theme_override_font_sizes/font_size = 36
 text = "Enemy Name"
 
 [node name="EnemyHP" type="ProgressBar" parent="EnemyTracker" unique_id=1446326015]
@@ -383,10 +393,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = 9.0
-offset_right = 74.5
-offset_bottom = 25.5
+offset_left = -119.0
+offset_top = 28.0
+offset_right = 105.0
+offset_bottom = 49.302597
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_t1brt")
@@ -397,10 +407,10 @@ show_percentage = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -460.0
+offset_left = -780.0
 offset_top = 12.0
-offset_right = 464.0
-offset_bottom = 33.0
+offset_right = 778.0
+offset_bottom = 38.386364
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 12
 theme_override_styles/background = SubResource("StyleBoxFlat_7pn66")
@@ -410,10 +420,10 @@ theme_override_styles/fill = ExtResource("4_wwnsm")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -172.0
-offset_top = 39.0
-offset_right = 172.0
-offset_bottom = 87.0
+offset_left = -246.0
+offset_top = 48.0
+offset_right = 246.0
+offset_bottom = 96.0
 grow_horizontal = 2
 theme_override_constants/separation = 100
 
@@ -438,6 +448,7 @@ wave_graphic_unfilled = ExtResource("8_2c58t")
 wave_graphic_filled = ExtResource("9_veicy")
 
 [node name="HurtRect" type="ColorRect" parent="." unique_id=295245294]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -459,7 +470,8 @@ offset_right = 164.0
 offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("10_6w4u3")
+theme_override_font_sizes/font_size = 128
 text = "3"
 horizontal_alignment = 1
 
@@ -522,26 +534,25 @@ grow_vertical = 0
 text = "Press Space to Continue"
 
 [node name="Label" type="Label" parent="." unique_id=1111943450]
-offset_left = 179.0
-offset_top = 39.0
-offset_right = 358.0
-offset_bottom = 62.0
+offset_left = 15.0
+offset_top = 92.0
+offset_right = 227.0
+offset_bottom = 118.0
+theme_override_fonts/font = ExtResource("10_6w4u3")
+theme_override_font_sizes/font_size = 24
 text = "Hold 'Q' to Exit Combat"
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1016456887]
-offset_left = 1044.0
-offset_top = 612.0
-offset_right = 1556.0
-offset_bottom = 1124.0
-scale = Vector2(0.33493993, 0.26871854)
+[node name="BoltsHolder" type="HBoxContainer" parent="." unique_id=548677851]
+offset_left = 1317.0
+offset_top = 791.0
+offset_right = 1906.0
+offset_bottom = 1031.0
+theme_override_constants/separation = -60
+alignment = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1188942008]
-own_world_3d = true
-transparent_bg = true
-handle_input_locally = false
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="BoltPreview" parent="SubViewportContainer/SubViewport" unique_id=1336283887 instance=ExtResource("11_veicy")]
+[node name="BoltHUDIcon" parent="BoltsHolder" unique_id=408396402 instance=ExtResource("13_xs85b")]
+layout_mode = 2
 
 [connection signal="button_up" from="ContextPanel/Next" to="." method="_on_next_button_up"]
+
+[editable path="RoundTimerLabel"]

@@ -17,10 +17,29 @@ class_name ShopMenu extends Control
 @onready var fortified_pistol_bullets_button: Button = $Panel/FortifiedPistolBulletsButton
 @onready var fortified_rfiel_bullets_button: Button = $Panel/FortifiedRfielBulletsButton
 
+@onready var cross_bow_ammo_purchase_button: Button = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize/CrossBowAmmoPurchaseButton
+@onready var mining_cross_bow_bolt_purchase_button: Button = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt/MiningCrossBowBoltPurchaseButton
+@onready var bolt_o_matic_mag_size_purchase_button: Button = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize/BoltOMaticMagSizePurchaseButton
+@onready var bolt_o_matic_minin_bolt_purchase_button: Button = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize2/BoltOMaticMininBoltPurchaseButton
+
+@onready var cross_bow_quiver_size: Label = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize/CrossBowQuiverSize
+@onready var cross_bow_quiver_cost: Label = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel/QuiverSize/CrossBowQuiverCost
+
+@onready var bolt_o_matic_mag_size: Label = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize/BoltOMaticMagSize
+@onready var bolt_o_matic_mag_size_cost: Label = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize/BoltOMaticMagSizeCost
+
+@onready var radar_purchase_button: Button = $UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet/RadarPurchaseButton
+@onready var tracker_puchase_button: Button = $UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet/TrackerPuchaseButton
+
+@onready var amulets_panel: Panel = $UpgradesPanel/MarginContainer/AmuletsPanel
+@onready var weapon_upgrades_panel: Panel = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	update_menu()
+	update_weapon_upgrades_panel()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -44,67 +63,6 @@ func update_menu() -> void:
 		purchase_rifle_button.disabled = true
 		purchase_rifle_button.text = "Owned"
 	
-	if !GameManager.amulet_owned:
-		if PlayerStats.player_stats["Ore"] >= 30:
-			purchase_radar_button.disabled = false
-			purchase_radar_button.text = "Purchase!"
-		else:
-			purchase_radar_button.disabled = true
-			purchase_radar_button.text = "Insufficient Ore"
-	else:
-		purchase_radar_button.disabled = true
-		purchase_radar_button.text = "Owned"
-
-	if !GameManager.enemy_tracker_owned:
-		if PlayerStats.player_stats["Ore"] >= 20:
-			purchase_tracker_button.disabled = false
-			purchase_tracker_button.text = "Purchase!"
-		else:
-			purchase_tracker_button.disabled = true
-			purchase_tracker_button.text = "Insufficient Ore"
-	else:
-		purchase_tracker_button.disabled = true
-		purchase_tracker_button.text = "Owned"
-
-	if PlayerStats.player_stats["Ore"] < GameManager.pistol_mag_cost:
-		purchase_pistol_mag_button.disabled = true
-		purchase_pistol_mag_button.text = "Insufficient Ore"
-	else:
-		purchase_pistol_mag_button.disabled = false
-		purchase_pistol_mag_button.text = "Purchase!"
-		
-	if PlayerStats.player_stats["Ore"] < GameManager.rifle_mag_cost:
-		purchase_rifle_mag_button.disabled = true
-		purchase_rifle_mag_button.text = "Insufficient Ore"
-	else:
-		purchase_rifle_mag_button.disabled = false
-		purchase_rifle_mag_button.text = "Purchase!"	
-
-	if !GameManager.fortified_pistol_bullets:
-		if PlayerStats.player_stats["Ore"] >= GameManager.fortified_pistol_bullets_cost:
-			fortified_pistol_bullets_button.disabled = false
-			fortified_pistol_bullets_button.text = "Purchase!"
-		else:
-			fortified_pistol_bullets_button.disabled = true
-			fortified_pistol_bullets_button.text = "Insufficient Ore"
-	else:
-		fortified_pistol_bullets_button.disabled = true
-		fortified_pistol_bullets_button.text = "Owned"
-
-	if !GameManager.fortified_rifle_bullets:
-		if PlayerStats.player_stats["Ore"] >= GameManager.fortified_pistol_rifle_cost:
-			fortified_rfiel_bullets_button.disabled = false
-			fortified_rfiel_bullets_button.text = "Purchase!"
-		else:
-			fortified_rfiel_bullets_button.disabled = true
-			fortified_rfiel_bullets_button.text = "Insufficient Ore"
-	else:
-		fortified_rfiel_bullets_button.disabled = true
-		fortified_rfiel_bullets_button.text = "Owned"
-
-	pistol_magazine_cost.text = "x %s" % GameManager.pistol_mag_cost
-	rifle_magazine_cost.text = "x %s" % GameManager.rifle_mag_cost
-
 func _on_purchase_radar_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 30
 	GameManager.amulet_owned = true
@@ -120,13 +78,11 @@ func _on_purchase_tracker_button_button_up() -> void:
 	GameManager.enemy_tracker_owned = true
 	update_menu()
 
-
 func _on_purchase_pistol_mag_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.pistol_mag_cost
 	GameManager.pistol_magazine_size += 1
 	GameManager.pistol_mag_cost *= 2
 	update_menu()
-
 
 func _on_purchase_rifle_mag_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.rifle_mag_cost
@@ -134,14 +90,123 @@ func _on_purchase_rifle_mag_button_button_up() -> void:
 	GameManager.rifle_mag_cost *= 2
 	update_menu()
 
-
 func _on_fortified_pistol_bullets_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_bullets_cost
 	GameManager.fortified_pistol_bullets = true
-	update_menu()
-
+	update_weapon_upgrades_panel()
 
 func _on_fortified_rfiel_bullets_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_rifle_cost
 	GameManager.fortified_rifle_bullets = true
-	update_menu()
+	update_weapon_upgrades_panel()
+
+func _on_cross_bow_ammo_purchase_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.pistol_mag_cost
+	GameManager.pistol_magazine_size += 1
+	GameManager.pistol_mag_cost *= 2
+	update_weapon_upgrades_panel()
+
+func _on_mining_cross_bow_bolt_purchase_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_bullets_cost
+	GameManager.fortified_pistol_bullets = true
+	update_weapon_upgrades_panel()
+
+func _on_bolt_o_matic_mag_size_purchase_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.rifle_mag_cost
+	GameManager.rifle_magazine_size += 2
+	GameManager.rifle_mag_cost *= 2
+	update_weapon_upgrades_panel()
+
+func _on_bolt_o_matic_minin_bolt_purchase_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_rifle_cost
+	GameManager.fortified_rifle_bullets = true
+	update_weapon_upgrades_panel()
+
+func update_weapon_upgrades_panel() -> void:
+	
+	if PlayerStats.player_stats["Ore"] < GameManager.pistol_mag_cost:
+		cross_bow_ammo_purchase_button.disabled = true
+		cross_bow_ammo_purchase_button.text = "Insufficient Ore"
+	else:
+		cross_bow_ammo_purchase_button.disabled = false
+		cross_bow_ammo_purchase_button.text = "Purchase!"
+		
+	if PlayerStats.player_stats["Ore"] < GameManager.rifle_mag_cost:
+		bolt_o_matic_mag_size_purchase_button.disabled = true
+		bolt_o_matic_mag_size_purchase_button.text = "Insufficient Ore"
+	else:
+		bolt_o_matic_mag_size_purchase_button.disabled = false
+		bolt_o_matic_mag_size_purchase_button.text = "Purchase!"	
+
+	if !GameManager.fortified_pistol_bullets:
+		if PlayerStats.player_stats["Ore"] >= GameManager.fortified_pistol_bullets_cost:
+			mining_cross_bow_bolt_purchase_button.disabled = false
+			mining_cross_bow_bolt_purchase_button.text = "Purchase!"
+		else:
+			mining_cross_bow_bolt_purchase_button.disabled = true
+			mining_cross_bow_bolt_purchase_button.text = "Insufficient Ore"
+	else:
+		mining_cross_bow_bolt_purchase_button.disabled = true
+		mining_cross_bow_bolt_purchase_button.text = "Owned"
+	
+	
+	if !GameManager.fortified_rifle_bullets:
+		if PlayerStats.player_stats["Ore"] >= GameManager.fortified_pistol_rifle_cost:
+			bolt_o_matic_minin_bolt_purchase_button.disabled = false
+			bolt_o_matic_minin_bolt_purchase_button.text = "Purchase!"
+		else:
+			bolt_o_matic_minin_bolt_purchase_button.disabled = true
+			bolt_o_matic_minin_bolt_purchase_button.text = "Insufficient Ore"
+	else:
+		bolt_o_matic_minin_bolt_purchase_button.disabled = true
+		bolt_o_matic_minin_bolt_purchase_button.text = "Owned"
+
+	cross_bow_quiver_size.text = "Cross Bow Quiver Size: %s" % GameManager.pistol_magazine_size
+	bolt_o_matic_mag_size.text = "Bolt-O-Matic Mag Size: %s" % GameManager.rifle_magazine_size
+
+	cross_bow_quiver_cost.text = "x %s" % GameManager.pistol_mag_cost
+	bolt_o_matic_mag_size_cost.text = "x %s" % GameManager.rifle_mag_cost
+
+
+func update_amulet_menu() -> void:
+	if !GameManager.amulet_owned:
+		if PlayerStats.player_stats["Ore"] >= 30:
+			radar_purchase_button.disabled = false
+			radar_purchase_button.text = "Purchase!"
+		else:
+			radar_purchase_button.disabled = true
+			radar_purchase_button.text = "Insufficient Ore"
+	else:
+		radar_purchase_button.disabled = true
+		radar_purchase_button.text = "Owned"
+
+	if !GameManager.enemy_tracker_owned:
+		if PlayerStats.player_stats["Ore"] >= 20:
+			tracker_puchase_button.disabled = false
+			tracker_puchase_button.text = "Purchase!"
+		else:
+			tracker_puchase_button.disabled = true
+			tracker_puchase_button.text = "Insufficient Ore"
+	else:
+		tracker_puchase_button.disabled = true
+		tracker_puchase_button.text = "Owned"
+
+func _on_radar_purchase_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= 30
+	GameManager.amulet_owned = true
+	update_amulet_menu()
+
+func _on_tracker_puchase_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= 20
+	GameManager.enemy_tracker_owned = true
+	update_amulet_menu()
+
+func _on_weapon_upgrades_button_button_up() -> void:
+	update_weapon_upgrades_panel()
+	weapon_upgrades_panel.show()
+	amulets_panel.hide()
+
+func _on_amulets_button_button_up() -> void:
+	update_amulet_menu()
+	amulets_panel.show()
+	weapon_upgrades_panel.hide()
