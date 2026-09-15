@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bexjwrt4l1qrd" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_head_shot.gd" id="8_oqn32"]
 [ext_resource type="PackedScene" uid="uid://br762gfi4u8o3" path="res://src/Scenes/BoltPierce.tscn" id="8_povfk"]
 [ext_resource type="PackedScene" uid="uid://ri2g3xgvuq8y" path="res://src/Scenes/BodyCollider.tscn" id="10_b3u6r"]
+[ext_resource type="Texture2D" uid="uid://cka7fptq1om1q" path="res://Assets/Shadow.png" id="16_povfk"]
 [ext_resource type="PackedScene" uid="uid://dhjj6ow3afw3p" path="res://src/Scenes/HUD/LockOnTarget.tscn" id="17_xgh2c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1qra"]
@@ -1948,13 +1949,17 @@ _data = {
 &"SpawnIn": SubResource("Animation_q6ed3")
 }
 
-[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "arrow_hits", "bolt_position", "lock_on_target", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_povfk"]
+transparency = 1
+no_depth_test = true
+albedo_texture = ExtResource("16_povfk")
+
+[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "arrow_hits", "bolt_position", "lock_on_target", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_3gpk3")
 animation_player = NodePath("rat(4)/AnimationPlayer")
 damage_label_position = NodePath("DamageLabelPosition")
 blood_spout = NodePath("BloodSpout")
-skeleton = NodePath("")
 arrow_hits = [NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D/BoltPierce1"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D/BoltPierce2"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D/BoltPierce3"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D/BoltPierce4"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D/BoltPierce5"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D/BoltPierce6"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D2/BoltPierce7"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D2/BoltPierce8"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D2/BoltPierce9"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D2/BoltPierce10"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D2/BoltPierce11"), NodePath("rat(4)/rat/Skeleton3D/BoneAttachment3D2/BoltPierce12")]
 bolt_position = NodePath("BoltPosition")
 lock_on_target = NodePath("LockOnTarget")
@@ -2323,5 +2328,10 @@ libraries/ = SubResource("AnimationLibrary_ki4ie")
 [node name="LockOnTarget" parent="." unique_id=1632178840 instance=ExtResource("17_xgh2c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034582675, 1.3765686, -1.6278317)
 visible = false
+
+[node name="Sprite3D" type="CSGBox3D" parent="." unique_id=620608528]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, -0.09582138, -0.0832867, -0.011390716)
+size = Vector3(2.8083496, 2.6362457, 0.001)
+material = SubResource("StandardMaterial3D_povfk")
 
 [connection signal="body_entered" from="PlayerSensor" to="." method="_on_player_sensor_body_entered"]

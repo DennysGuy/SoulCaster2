@@ -110,9 +110,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -94.5
+offset_left = -155.5
 offset_top = -55.0
-offset_right = 12.5
+offset_right = -48.5
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -196,6 +196,50 @@ size = Vector2i(370, 160)
 render_target_update_mode = 4
 
 [node name="BoltOMaticPreview" parent="WeaponPanel/WeaponPreviewPanel/SubViewportContainer/SubViewport" unique_id=1025516464 instance=ExtResource("5_8mxox")]
+
+[node name="Tip1" type="Label" parent="WeaponPanel" unique_id=2062508773]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -149.5
+offset_top = 71.0
+offset_right = 190.5
+offset_bottom = 101.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Hover over Icons and text to read more"
+
+[node name="OreCount" type="Label" parent="WeaponPanel" unique_id=1821467376]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -351.5
+offset_top = 23.0
+offset_right = -243.45557
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 32
+text = "x0"
+
+[node name="BoltOMaticTitle" type="Label" parent="WeaponPanel" unique_id=1768955398]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.5
+offset_top = 300.0
+offset_right = 103.5
+offset_bottom = 330.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Bolt-O-Matic 8000"
 
 [node name="UpgradesPanel" type="Panel" parent="." unique_id=678367220]
 layout_mode = 1
@@ -792,6 +836,21 @@ theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 28
 text = "Purchase"
 
+[node name="RadarTitle2" type="Label" parent="UpgradesPanel/MarginContainer/AmuletsPanel" unique_id=6947374]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.5
+offset_top = 17.0
+offset_right = 108.5
+offset_bottom = 67.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 48
+text = "Amulets"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="UpgradesPanel" unique_id=2147352933]
 layout_mode = 0
 offset_left = 18.0
@@ -813,50 +872,6 @@ mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_tt1ee")
 theme_override_font_sizes/font_size = 24
 text = "Amulets"
-
-[node name="Tip1" type="Label" parent="." unique_id=2062508773]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 373.0
-offset_top = 98.0
-offset_right = 713.0
-offset_bottom = 128.0
-grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_tt1ee")
-theme_override_font_sizes/font_size = 24
-text = "Hover over Icons and text to read more"
-
-[node name="OreCount" type="Label" parent="." unique_id=1821467376]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 171.0
-offset_top = 50.0
-offset_right = 279.04443
-offset_bottom = 84.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("4_tt1ee")
-theme_override_font_sizes/font_size = 32
-text = "x0"
-
-[node name="AmuletTitle2" type="Label" parent="." unique_id=1768955398]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 455.0
-offset_top = 327.0
-offset_right = 626.0
-offset_bottom = 357.0
-grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_tt1ee")
-theme_override_font_sizes/font_size = 24
-text = "Bolt-O-Matic 8000"
 
 [node name="OreIcon3" type="TextureRect" parent="." unique_id=211753227]
 layout_mode = 0

@@ -1,9 +1,14 @@
 class_name ShopMenu extends Control
 
 @onready var purchase_radar_button: Button = $Panel/PurchaseRadarButton
-@onready var purchase_rifle_button: Button = $Panel/PurchaseRifleButton
+@onready var purchase_rifle_button: Button = $WeaponPanel/PurchaseRifleButton
+
 @onready var purchase_tracker_button: Button = $Panel/PurchaseTrackerButton
-@onready var ore_count: Label = $Panel/OreCount
+
+@onready var tip_1: Label = $WeaponPanel/Tip1
+@onready var ore_count: Label = $WeaponPanel/OreCount
+@onready var bolt_o_matic_title: Label = $WeaponPanel/BoltOMaticTitle
+
 
 @onready var pistol_mag_size: Label = $Panel/PistolMagSize
 @onready var rifle_mag_size: Label = $Panel/RifleMagSize

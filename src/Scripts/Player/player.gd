@@ -490,7 +490,8 @@ func spawn_cross_bow_bolt(bolt_position : Marker3D) -> void:
 	var direction : Vector3 = Vector3.ZERO
 	
 	var cross_bow_bolt : BoltProjectile = preload("uid://c2dmt8r828mej").instantiate()
-	cross_bow_bolt.target = tracked_enemy
+	if is_instance_valid(tracked_enemy):
+		cross_bow_bolt.target = tracked_enemy
 	cross_bow_bolt.global_position = bolt_position.global_position
 	if !tracked_enemy:
 		direction = -bolt_position.global_transform.basis.z
