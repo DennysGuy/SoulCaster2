@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cu1itwp0k17e1" path="res://src/Scripts/hub.gd" id="1_qnekn"]
 [ext_resource type="Script" uid="uid://dy84mhivqky8c" path="res://src/Scripts/cart.gd" id="3_s5psd"]
-[ext_resource type="PackedScene" uid="uid://bdsl5acdaedkf" path="res://Assets/ShopGuy/merchant.glb" id="4_5tnby"]
 [ext_resource type="PackedScene" uid="uid://fm6y38l4gctm" path="res://src/Scenes/Menus/ShopMenu.tscn" id="4_jjwho"]
 [ext_resource type="PackedScene" uid="uid://q4afxy36pwwo" path="res://Assets/CharacterHub/Armory.glb" id="5_bjfpp"]
 [ext_resource type="PackedScene" uid="uid://f3pck105hhe2" path="res://Assets/ShopGuy/Scene Cart(1).glb" id="5_eysaa"]
@@ -445,44 +444,54 @@ material_override = SubResource("StandardMaterial3D_bjfpp")
 size = Vector3(113.070984, 0.001, 80.38525)
 
 [node name="Player" parent="." unique_id=1844450298 node_paths=PackedStringArray("look_at_point_1", "look_at_point_2", "look_at_point_3", "look_at_point_4") instance=ExtResource("9_ulcxc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4940615, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 look_at_point_1 = NodePath("../LookAtPoint1")
 look_at_point_2 = NodePath("../LookAtPoint2")
 look_at_point_3 = NodePath("../LookAtPoint4")
 look_at_point_4 = NodePath("../LookAtPoint3")
 
-[node name="Cart" type="Node3D" parent="." unique_id=1701203635 node_paths=PackedStringArray("look_at_point", "canvas_layer")]
+[node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
+transform = Transform3D(-0.99754035, -0.04798669, -0.051094152, -0.051125973, 0.99676466, 0.062018577, 0.04795278, 0.06447826, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+
+[node name="HomePosition" type="Marker3D" parent="." unique_id=603688218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="ShopPosition" type="Marker3D" parent="." unique_id=1676431669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81530046, 2.329174, -4.517474)
+
+[node name="Cart" type="Node3D" parent="." unique_id=1701203635 node_paths=PackedStringArray("animation_player", "look_at_point", "canvas_layer")]
 script = ExtResource("3_s5psd")
+animation_player = NodePath("Scene Cart(1)/AnimationPlayer")
 menu = ExtResource("4_jjwho")
-look_at_point = NodePath("../ShopLookAtMarker")
+look_at_point = NodePath("../ShopPosition")
 canvas_layer = NodePath("../CanvasLayer")
 
 [node name="Scene Cart(1)" parent="Cart" unique_id=1784509532 instance=ExtResource("5_eysaa")]
 transform = Transform3D(-1.3113417e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.3113417e-08, -7.8988886, 1.277215, -15.214264)
 
 [node name="Skeleton3D" parent="Cart/Scene Cart(1)/Merchant" parent_id_path=PackedInt32Array(1784509532, 2015706674) index="0" unique_id=166335173]
-bones/0/position = Vector3(-0.013239409, -0.009405334, 0.0073421593)
-bones/0/rotation = Quaternion(-0.06121232, 0.045685302, -0.012136875, 0.99700487)
-bones/1/rotation = Quaternion(0.1847342, 0.56446856, -0.18735568, 0.7823978)
-bones/2/position = Vector3(-0.013290753, -0.11090691, 0.027031867)
-bones/2/rotation = Quaternion(0.01513073, 0.19318624, 0.981036, 0.0042956774)
-bones/3/position = Vector3(0.48560074, 0.89367175, -0.10621627)
-bones/3/rotation = Quaternion(0.9546152, 0.20891777, -0.13496819, 0.1638503)
-bones/4/rotation = Quaternion(-0.3127879, 0.17709371, 0.07848608, 0.92986107)
-bones/5/rotation = Quaternion(0.05010966, -0.6085422, 0.24844098, 0.7519592)
-bones/6/rotation = Quaternion(-0.19454406, -0.23598625, 0.50571984, 0.80666625)
-bones/7/position = Vector3(-0.41705272, 0.87994957, 0.23660988)
-bones/7/rotation = Quaternion(0.93884474, 0.061390504, -0.22403657, 0.25418386)
-bones/8/rotation = Quaternion(-0.3859252, -0.46908343, -0.16219717, 0.77763397)
-bones/9/rotation = Quaternion(-0.104563996, 0.9437972, 0.3059024, 0.06882577)
-bones/10/rotation = Quaternion(-0.22556168, 0.40715265, 0.07365499, 0.88199973)
-bones/11/position = Vector3(0.23891352, -0.5718574, 0.36014062)
-bones/11/rotation = Quaternion(0.56157726, 0.46130264, 0.37180346, 0.57757515)
-bones/12/rotation = Quaternion(0.090174794, -0.021259045, 0.7484111, 0.6567324)
-bones/13/rotation = Quaternion(-0.34806085, 0.014975728, -0.69657844, 0.6272225)
-bones/14/position = Vector3(-0.36729476, -0.58346134, 0.34862363)
-bones/14/rotation = Quaternion(0.63717425, -0.33061007, -0.33025318, 0.61289376)
-bones/15/rotation = Quaternion(0.37186283, 0.08663965, -0.5148546, 0.76755226)
+bones/0/position = Vector3(-0.013040194, -0.00781712, 0.0035838669)
+bones/0/rotation = Quaternion(-0.02550647, 0.017870298, -0.0045634634, 0.99950457)
+bones/1/rotation = Quaternion(-0.07414468, 0.22632748, -0.04837094, 0.97001994)
+bones/2/position = Vector3(-0.013290753, -0.110906884, 0.02703186)
+bones/2/rotation = Quaternion(0.01513073, 0.19318622, 0.981036, 0.0042956755)
+bones/3/position = Vector3(0.52568537, 1.0709755, -0.0423878)
+bones/3/rotation = Quaternion(0.9553645, 0.20362592, -0.058711067, 0.20583509)
+bones/4/rotation = Quaternion(-0.7140682, -0.16827978, 0.0041842847, 0.6795374)
+bones/5/rotation = Quaternion(-0.057407692, -0.6139398, 0.52576506, 0.5859636)
+bones/6/rotation = Quaternion(-0.60929596, -0.11645884, 0.43659997, 0.65159523)
+bones/7/position = Vector3(-0.3222097, 0.9405425, 0.31121182)
+bones/7/rotation = Quaternion(0.7878346, 0.006094046, -0.36988604, 0.4924063)
+bones/8/rotation = Quaternion(-0.41543406, -0.37481493, 0.07274054, 0.8256132)
+bones/9/rotation = Quaternion(-0.10456397, 0.94379723, 0.30590242, 0.06882575)
+bones/10/rotation = Quaternion(-0.22556172, 0.40715253, 0.073655084, 0.8819999)
+bones/11/position = Vector3(0.23897602, -0.5739851, 0.3590368)
+bones/11/rotation = Quaternion(0.53105927, 0.47934082, 0.3427279, 0.6088892)
+bones/12/rotation = Quaternion(0.04164069, -0.023088502, 0.65835214, 0.7512027)
+bones/13/rotation = Quaternion(-0.24535197, -0.046493817, -0.52476364, 0.8137959)
+bones/14/position = Vector3(-0.36733964, -0.58133364, 0.34972832)
+bones/14/rotation = Quaternion(0.6005793, -0.3504604, -0.3147297, 0.6460861)
+bones/15/rotation = Quaternion(0.37898442, 0.08993465, -0.5261832, 0.7559191)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cart" unique_id=546191940]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.70586)
@@ -492,10 +501,6 @@ collision_mask = 32
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cart/StaticBody3D" unique_id=979720179]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9432068, 2.4492798, 1.7568359)
 shape = SubResource("BoxShape3D_jjwho")
-
-[node name="merchant" parent="." unique_id=30515948 instance=ExtResource("4_5tnby")]
-transform = Transform3D(0.17986579, 0, 0.08745455, 0, 0.2, 0, -0.08745455, 0, 0.17986579, -2.7824457, 4.042576, -8.020174)
-visible = false
 
 [node name="LookAtPoint1" type="Marker3D" parent="." unique_id=542316599]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6707125, -16.551933)
@@ -507,7 +512,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.579443, 3.6707125, 0.212917
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08629227, 3.6707125, 9.904657)
 
 [node name="LookAtPoint4" type="Marker3D" parent="." unique_id=323710396]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.691458, 3.6707125, 0.18987751)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.176023, 3.6707125, 1.7726171)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1944459197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.223196, 2.1764836, -0.0126953125)
@@ -525,11 +530,13 @@ transform = Transform3D(-0.26250917, 0, 0.9649295, 0, 1, 0, -0.9649295, 0, -0.26
 [node name="chest" parent="." unique_id=467790914 instance=ExtResource("6_gpfey")]
 transform = Transform3D(-0.82089, 0, -0.57108617, 0, 1, 0, 0.57108617, 0, -0.82089, -15.018394, -0.293149, -8.529556)
 
-[node name="FirePlace" type="Node3D" parent="." unique_id=531905876 node_paths=PackedStringArray("canvas_layer")]
+[node name="FirePlace" type="Node3D" parent="." unique_id=531905876 node_paths=PackedStringArray("look_at_point", "canvas_layer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.46027, 0, 2.299086)
 script = ExtResource("13_4dycr")
 menu = ExtResource("14_m0qss")
+look_at_point = NodePath("../CampfirePosition")
 canvas_layer = NodePath("../CanvasLayer")
+move_speed = 0.5
 
 [node name="fireplace" type="Node3D" parent="FirePlace" unique_id=1972710603]
 
@@ -596,6 +603,9 @@ collision_mask = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4453735, -1.936966)
 shape = SubResource("BoxShape3D_ahwup")
 
+[node name="CampfirePosition" type="Marker3D" parent="." unique_id=1947067369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.663572, 0.7328547, 3.9235055)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=719552097]
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" unique_id=1962971616]
@@ -648,13 +658,14 @@ horizontal_alignment = 2
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 536.0
-offset_top = 13.0
-offset_right = 896.0
-offset_bottom = 58.0
+offset_left = 571.0
+offset_top = 15.0
+offset_right = 936.0
+offset_bottom = 60.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("11_ahwup")
+theme_override_font_sizes/font_size = 42
 text = "Press 'R' to Enter Arena"
 
 [node name="ControlsLabel" type="Label" parent="CanvasLayer" unique_id=1774843994]
@@ -667,7 +678,8 @@ offset_right = -548.0
 offset_bottom = 83.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("11_ahwup")
+theme_override_font_sizes/font_size = 32
 text = "Rotate Camera: WASD
 Select  Menu: Left Click on Station"
 
@@ -684,4 +696,5 @@ bus = &"Music"
 [node name="ShopLookAtMarker" type="Marker3D" parent="." unique_id=1519040011]
 transform = Transform3D(-0.18008994, 0.98365015, 0, -0.98365015, -0.18008994, 0, 0, 0, 1, 8.4241085, 3.1755958, -10.217134)
 
+[editable path="Player"]
 [editable path="Cart/Scene Cart(1)"]

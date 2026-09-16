@@ -38,10 +38,12 @@ class_name ShopMenu extends Control
 
 @onready var amulets_panel: Panel = $UpgradesPanel/MarginContainer/AmuletsPanel
 @onready var weapon_upgrades_panel: Panel = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	animation_player.play("SpawnIn")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	update_menu()
 	update_weapon_upgrades_panel()
@@ -76,6 +78,10 @@ func _on_purchase_radar_button_button_up() -> void:
 func _on_close_menu_button_up() -> void:
 	GameManager.in_menu = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	SignalBus.shop_exited.emit()
+	SignalBus.menu_exited.emit()
+	animation_player.play("SpawnOut")
+	await animation_player.animation_finished
 	queue_free()
 
 func _on_purchase_tracker_button_button_up() -> void:

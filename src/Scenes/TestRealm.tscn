@@ -25,8 +25,9 @@ sky_material = SubResource("PanoramaSkyMaterial_s5xg8")
 [sub_resource type="Environment" id="Environment_sfhgb"]
 background_mode = 2
 sky = SubResource("Sky_uqw8w")
-ambient_light_source = 2
+ambient_light_source = 1
 ambient_light_color = Color(0.6872149, 0.68721503, 0.6872149, 1)
+tonemap_mode = 2
 tonemap_white = 4.22
 glow_intensity = 0.12
 adjustment_enabled = true
@@ -2251,8 +2252,8 @@ shader_parameter/PaletteColor0 = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/PaletteColor1 = Color(0.25, 0.15, 0.12, 1)
 shader_parameter/PaletteColor2 = Color(0.5, 0.35, 0.25, 1)
 shader_parameter/PaletteColor3 = Color(0.9, 0.85, 0.7, 1)
-shader_parameter/Brightness = 1.0000000475
-shader_parameter/Saturation = 1.49600007106
+shader_parameter/Brightness = 1.0
+shader_parameter/Saturation = 1.10800005263
 shader_parameter/Contrast = 1.0000000475
 
 [node name="TestRealm" type="Node3D" unique_id=290320890 groups=["Arena"]]
@@ -2312,7 +2313,7 @@ transform = Transform3D(0.03339396, 0.0010283848, 0.5734204, 0.00014523084, 0.17
 mesh = SubResource("ArrayMesh_bhmb7")
 
 [node name="Cylinder_001" type="MeshInstance3D" parent="Arena" unique_id=317137535]
-transform = Transform3D(0.10638116, 0, -0.037647475, 0, 1.656157, 0, 0.037647475, 0, 0.10638116, -6.436886, 5.644554, -9.360109)
+transform = Transform3D(0.10638116, 0, -0.037647475, 0, 1.656157, 0, 0.037647475, 0, 0.10638116, -6.436886, 4.6732197, -9.360109)
 mesh = SubResource("ArrayMesh_lq8u0")
 
 [node name="Plane_006" type="MeshInstance3D" parent="Arena" unique_id=450788867]
@@ -2677,6 +2678,30 @@ bus = &"Music"
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 17.703098, 9.842545, -2.109621)
 material_override = SubResource("ShaderMaterial_plpmp")
 size = Vector3(2.4818115, 1.6269531, 2.0708008)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1401289283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.300053, 12.908434, 9.998739)
+light_bake_mode = 1
+omni_range = 191.508
+omni_attenuation = 0.445
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=814752070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6642113, -0.580637, 3.698545)
+light_energy = 3.763
+light_bake_mode = 1
+omni_range = 33.137
+omni_attenuation = 0.28
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1402534155]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 37.262657, 7.870164, -17.821465)
+spot_range = 10.02
+spot_attenuation = -0.15
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1117361883]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -3.0744367, 20.613129, 29.199524)
+light_bake_mode = 1
+spot_range = 15.681134
+spot_attenuation = -0.29
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="OreSpawnTimer" to="." method="_on_ore_spawn_timer_timeout"]

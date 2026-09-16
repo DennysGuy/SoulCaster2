@@ -17,10 +17,12 @@ var stored_selectable : MenuSelectable
 @onready var start_battle_label: Label = $CanvasLayer/StartBattleLabel
 @onready var controls_label: Label = $CanvasLayer/ControlsLabel
 
+@onready var home_position: Marker3D = $HomePosition
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.hub_context_menu_closed.connect(show_start_combat_label)
+	SignalBus.menu_exited.connect(move_player_to_home)
 	GameManager.in_arena = false
 	GameManager.in_menu = false
 	player.gun_arm.hide()
@@ -74,7 +76,9 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if stored_selectable and !GameManager.in_menu:
 				stored_selectable.open_menu()
-				SignalBus.hub_menu_accessed.emit(stored_selectable.look_at_point)
+				if stored_selectable.has_method("play_activation_animation"):
+					stored_selectable.play_activation_animation()
+				move_player_to_shop(stored_selectable.look_at_point,stored_selectable.move_speed)
 
 func spawn_hub_context() -> void:
 	var hub_context_panel : HubContextPanel = preload("uid://cnv6x8tgahuc1").instantiate()
@@ -89,3 +93,15 @@ func spawn_round_select_menu() -> void:
 	GameManager.in_menu = true
 	var round_select_menu : StartRoundPanel =preload("uid://noxi046h5l3k").instantiate()
 	canvas_layer.add_child(round_select_menu)
+
+func move_player_to_shop(marker : Marker3D, move_speed : float) -> void:
+	GameManager.can_move = false
+	var tween : Tween = create_tween()
+	tween.tween_property(player, "global_position",marker.global_position,move_speed)
+	await tween.finished
+
+func move_player_to_home() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(player, "global_position",home_position.global_position,0.5)
+	await tween.finished
+	GameManager.can_move = true

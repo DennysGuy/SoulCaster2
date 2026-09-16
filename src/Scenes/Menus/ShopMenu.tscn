@@ -66,6 +66,96 @@ shadow_color = Color(0, 0, 0, 0.5294118)
 shadow_size = 2
 shadow_offset = Vector2(2, 1)
 
+[sub_resource type="Animation" id="Animation_yh3m8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradesPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1066, 1520)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPanel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1066, 1113)]
+}
+
+[sub_resource type="Animation" id="Animation_tf7al"]
+resource_name = "SpawnIn"
+length = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradesPanel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1066, 1520), Vector2(1066, 441)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPanel:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1066, 1113), Vector2(1066, 34)]
+}
+
+[sub_resource type="Animation" id="Animation_l2xwa"]
+resource_name = "SpawnOut"
+length = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradesPanel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1066, 441), Vector2(1066, 1520)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPanel:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1066, 34), Vector2(1066, 1113)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkh00"]
+_data = {
+&"RESET": SubResource("Animation_yh3m8"),
+&"SpawnIn": SubResource("Animation_tf7al"),
+&"SpawnOut": SubResource("Animation_l2xwa")
+}
+
 [node name="ShopMenu" type="Control" unique_id=1365776299]
 layout_mode = 3
 anchors_preset = 15
@@ -81,9 +171,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1066.0
-offset_top = 27.0
+offset_top = 1113.0
 offset_right = -21.0
-offset_bottom = -654.0
+offset_bottom = 431.99976
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lek5s")
@@ -241,15 +331,24 @@ theme_override_fonts/font = ExtResource("3_tt1ee")
 theme_override_font_sizes/font_size = 24
 text = "Bolt-O-Matic 8000"
 
+[node name="OreIcon3" type="TextureRect" parent="WeaponPanel" unique_id=211753227]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 14.0
+offset_right = 107.0
+offset_bottom = 110.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bt663")
+
 [node name="UpgradesPanel" type="Panel" parent="." unique_id=678367220]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1066.0
-offset_top = 434.0
+offset_top = 1520.0
 offset_right = -21.0
-offset_bottom = -33.0
+offset_bottom = 1053.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lek5s")
@@ -873,14 +972,8 @@ theme_override_fonts/font = ExtResource("3_tt1ee")
 theme_override_font_sizes/font_size = 24
 text = "Amulets"
 
-[node name="OreIcon3" type="TextureRect" parent="." unique_id=211753227]
-layout_mode = 0
-offset_left = 1077.0
-offset_top = 44.0
-offset_right = 1173.0
-offset_bottom = 140.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1585083139]
+libraries/ = SubResource("AnimationLibrary_jkh00")
 
 [connection signal="button_up" from="WeaponPanel/PurchaseRifleButton" to="." method="_on_purchase_rifle_button_button_up"]
 [connection signal="button_up" from="WeaponPanel/CloseMenu" to="." method="_on_close_menu_button_up"]

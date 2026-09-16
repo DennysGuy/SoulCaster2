@@ -1,40 +1,45 @@
 class_name StatsUpgradeMenu extends Control
 
-@onready var attack_damage_level: Label = $StatsUpgradePanel/GridContainer/AttackDamageLevel
-@onready var attack_speed_level: Label = $StatsUpgradePanel/GridContainer/AttackSpeedLevel
-@onready var movement_speed_level: Label = $StatsUpgradePanel/GridContainer/MovementSpeedLevel
-@onready var crit_chance_level: Label = $StatsUpgradePanel/GridContainer/CritChanceLevel
-@onready var crit_damage_level: Label = $StatsUpgradePanel/GridContainer/CritDamageLevel
-@onready var starting_timer_level: Label = $StatsUpgradePanel/GridContainer/StartingTimerLevel
-@onready var ore_spawn_time_level: Label = $StatsUpgradePanel/GridContainer/OreSpawnTimeLevel
-@onready var reload_speed_level: Label = $StatsUpgradePanel/GridContainer/ReloadSpeedLevel
-@onready var progress_speed_level: Label = $StatsUpgradePanel/GridContainer/ProgressSpeedLevel
-@onready var ap_amount_level: Label = $StatsUpgradePanel/GridContainer/APAmountLevel
-@onready var xp_bonus_level: Label = $StatsUpgradePanel/GridContainer/XPBonusLevel
-@onready var life_steal_level: Label = $StatsUpgradePanel/GridContainer/LifeStealLevel
+
+@onready var attack_damage_level: Label = $Panel/StatsUpgradePanel/GridContainer/AttackDamageLevel
+@onready var attack_speed_level: Label = $Panel/StatsUpgradePanel/GridContainer/AttackSpeedLevel
+@onready var crit_chance_level: Label = $Panel/StatsUpgradePanel/GridContainer/CritChanceLevel
+@onready var crit_damage_level: Label = $Panel/StatsUpgradePanel/GridContainer/CritDamageLevel
+@onready var starting_timer_level: Label = $Panel/StatsUpgradePanel/GridContainer/StartingTimerLevel
+@onready var ore_spawn_time_level: Label = $Panel/StatsUpgradePanel/GridContainer/OreSpawnTimeLevel
+@onready var reload_speed_level: Label = $Panel/StatsUpgradePanel/GridContainer/ReloadSpeedLevel
+@onready var progress_speed_level: Label = $Panel/StatsUpgradePanel/GridContainer/ProgressSpeedLevel
+@onready var life_steal_level: Label = $Panel/StatsUpgradePanel/GridContainer/LifeStealLevel
+@onready var ap_amount_level: Label = $Panel/StatsUpgradePanel/GridContainer/APAmountLevel
+@onready var xp_bonus_level: Label = $Panel/StatsUpgradePanel/GridContainer/XPBonusLevel
 
 
-@onready var attack_damage_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/AttackDamageUpgradeButton
-@onready var attack_speed_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/AttackSpeedUpgradeButton
-@onready var crit_chance_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/CritChanceUpgradeButton
-@onready var crit_damage_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/CritDamageUpgradeButton
-@onready var starting_timer_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/StartingTimerUpgradeButton
-@onready var ore_spawn_time_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/OreSpawnTimeUpgradeButton
-@onready var reload_speed_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/ReloadSpeedUpgradeButton
-@onready var progress_speed_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/ProgressSpeedUpgradeButton
-@onready var ap_amountupgrade_button: Button = $StatsUpgradePanel/VBoxContainer/APAmountupgradeButton
-@onready var xp_bonus_upgrade_button: Button = $StatsUpgradePanel/VBoxContainer/XPBonusUpgradeButton
-@onready var life_steal_upgrade_button_2: Button = $StatsUpgradePanel/VBoxContainer/LifeStealUpgradeButton2
+@onready var attack_damage_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/AttackDamageUpgradeButton
+@onready var attack_speed_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/AttackSpeedUpgradeButton
+@onready var crit_chance_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/CritChanceUpgradeButton
+@onready var crit_damage_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/CritDamageUpgradeButton
+@onready var starting_timer_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/StartingTimerUpgradeButton
+@onready var ore_spawn_time_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/OreSpawnTimeUpgradeButton
+@onready var reload_speed_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/ReloadSpeedUpgradeButton
+@onready var progress_speed_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/ProgressSpeedUpgradeButton
+@onready var life_steal_upgrade_button_2: Button = $Panel/StatsUpgradePanel/VBoxContainer/LifeStealUpgradeButton2
+@onready var ap_amountupgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/APAmountupgradeButton
+@onready var xp_bonus_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/XPBonusUpgradeButton
 
+@onready var stats: Label = $Panel/StatsPanel/Stats
+
+@onready var ap_label: Label = $Panel/APLabel
 
 
 @onready var upgrade_buttons : Array[Button] = [attack_damage_upgrade_button, attack_speed_upgrade_button, crit_chance_upgrade_button, crit_damage_upgrade_button, starting_timer_upgrade_button, ore_spawn_time_upgrade_button, reload_speed_upgrade_button]
-@onready var stats: Label = $StatsPanel/Stats
 
-@onready var ap_label: Label = $APLabel
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	animation_player.play("SpawnIn")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	init_upgrades()
 	update_stats_description()
@@ -187,6 +192,9 @@ func update_stats_description() -> void:
 func _on_button_button_up() -> void:
 	GameManager.in_menu = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	SignalBus.menu_exited.emit()
+	animation_player.play("SpawnOut")
+	await animation_player.animation_finished
 	queue_free()
 
 func _on_progress_speed_upgrade_button_button_up() -> void:

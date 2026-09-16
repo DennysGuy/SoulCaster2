@@ -44,3 +44,5 @@ signal shot_fired
 signal config_beat
 signal enemy_hit(target : Node3D)
 signal hub_menu_accessed(look_at_point : Marker3D)
+signal menu_exited
+signal shop_exited
