@@ -3,15 +3,29 @@
 [ext_resource type="Script" uid="uid://behklm821gtwf" path="res://src/Scripts/test_ore.gd" id="1_0oabc"]
 [ext_resource type="Texture2D" uid="uid://ddm23pig01fri" path="res://Assets/TestOre_0.png" id="2_h2r6c"]
 [ext_resource type="PackedScene" uid="uid://byerexir7pws6" path="res://src/Scenes/OreCollider.tscn" id="3_m1sm3"]
+[ext_resource type="Shader" uid="uid://baufimyjamedw" path="res://src/Scenes/TestOre.gdshader" id="3_unq00"]
 [ext_resource type="Script" uid="uid://cthjv8ulf3hq6" path="res://src/Scripts/Statemachine/state_machine.gd" id="4_s44uc"]
 [ext_resource type="Script" uid="uid://b2b1jehkwef40" path="res://src/Scripts/Statemachine/Ore/ore_idle.gd" id="5_gwgns"]
 [ext_resource type="Script" uid="uid://bwok6gi8dsd0g" path="res://src/Scripts/Statemachine/Ore/ore_spawn_in.gd" id="6_cgh55"]
 [ext_resource type="Script" uid="uid://cuj71taa282t7" path="res://src/Scripts/Statemachine/Ore/ore_hurt.gd" id="7_h2r6c"]
 [ext_resource type="PackedScene" uid="uid://dhjj6ow3afw3p" path="res://src/Scenes/HUD/LockOnTarget.tscn" id="8_3uaae"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y88dp"]
+render_priority = 0
+shader = ExtResource("3_unq00")
+shader_parameter/shine_color = Color(1, 0.67418694, 0.57320005, 1)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_width = 0.7530000357675
+shader_parameter/cycle_interval = 2.2000001045
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.0
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh4a4"]
 resource_local_to_scene = true
 resource_name = "material_0"
+next_pass = SubResource("ShaderMaterial_y88dp")
 transparency = 2
 alpha_scissor_threshold = 0.05
 alpha_antialiasing_mode = 0

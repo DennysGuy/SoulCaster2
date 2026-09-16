@@ -2681,27 +2681,33 @@ size = Vector3(2.4818115, 1.6269531, 2.0708008)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1401289283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.300053, 12.908434, 9.998739)
+light_specular = 0.0
 light_bake_mode = 1
 omni_range = 191.508
 omni_attenuation = 0.445
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=814752070]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6642113, -0.580637, 3.698545)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6642113, -3.0288906, 2.1406527)
 light_energy = 3.763
+light_specular = 0.0
 light_bake_mode = 1
-omni_range = 33.137
-omni_attenuation = 0.28
+omni_range = 30.0
+omni_attenuation = 0.505
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1402534155]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 37.262657, 7.870164, -17.821465)
+light_specular = 0.0
 spot_range = 10.02
 spot_attenuation = -0.15
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1117361883]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -3.0744367, 20.613129, 29.199524)
+transform = Transform3D(0.9258508, -0.36073697, -0.11255737, 0, -0.2978581, 0.95461017, -0.37788928, -0.8838266, -0.27577215, 4.827762, 8.991199, 28.009094)
+light_specular = 0.0
 light_bake_mode = 1
-spot_range = 15.681134
-spot_attenuation = -0.29
+spot_range = 18.904
+spot_attenuation = -0.07
+spot_angle = 32.86
+spot_angle_attenuation = 3.0314324
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="OreSpawnTimer" to="." method="_on_ore_spawn_timer_timeout"]
