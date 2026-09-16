@@ -24,14 +24,16 @@ sky_material = SubResource("PanoramaSkyMaterial_s5xg8")
 
 [sub_resource type="Environment" id="Environment_sfhgb"]
 background_mode = 2
+background_energy_multiplier = 0.5
 sky = SubResource("Sky_uqw8w")
-ambient_light_source = 1
-ambient_light_color = Color(0.6872149, 0.68721503, 0.6872149, 1)
+ambient_light_source = 3
+ambient_light_color = Color(3.85046e-07, 0.40567562, 0.466376, 1)
+ambient_light_sky_contribution = 0.7
+ambient_light_energy = 0.1
 tonemap_mode = 2
-tonemap_white = 4.22
+tonemap_exposure = 0.5
 glow_intensity = 0.12
 adjustment_enabled = true
-adjustment_contrast = 1.035
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rty5i"]
 albedo_color = Color(0, 0.52535284, 0.3643165, 1)
@@ -2256,6 +2258,9 @@ shader_parameter/Brightness = 1.0
 shader_parameter/Saturation = 1.10800005263
 shader_parameter/Contrast = 1.0000000475
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plpmp"]
+albedo_color = Color(0.9999985, 0.99915653, 0.7907425, 1)
+
 [node name="TestRealm" type="Node3D" unique_id=290320890 groups=["Arena"]]
 script = ExtResource("1_ca2mb")
 
@@ -2309,7 +2314,7 @@ transform = Transform3D(-14.577672, 0, 0, 0, -14.577672, 0, 0, 0, -14.577672, 4.
 mesh = SubResource("ArrayMesh_wc1xd")
 
 [node name="Cube_007" type="MeshInstance3D" parent="Arena" unique_id=2117088582]
-transform = Transform3D(0.03339396, 0.0010283848, 0.5734204, 0.00014523084, 0.17364283, -0.042690855, -0.012926529, 0.004607589, 1.4808753, -4.996844, 7.89832, 8.877468)
+transform = Transform3D(0.03339396, 0.0010283848, 0.5734204, 0.00014523084, 0.17364283, -0.042690855, -0.012926529, 0.004607589, 1.4808753, -4.9968433, 6.6140714, 8.877468)
 mesh = SubResource("ArrayMesh_bhmb7")
 
 [node name="Cylinder_001" type="MeshInstance3D" parent="Arena" unique_id=317137535]
@@ -2341,11 +2346,11 @@ transform = Transform3D(6.275601, 0, 0, 0, 2.406902, 0, 0, 0, 1, 14.654551, 5.98
 mesh = SubResource("ArrayMesh_f60nj")
 
 [node name="Cylinder_002" type="MeshInstance3D" parent="Arena" unique_id=691243640]
-transform = Transform3D(0.14887173, 0.0033845645, 0, -0.010134832, 0.049716268, 0, 0, 0, 0.1492163, -3.8166711, 3.9031181, 16.745909)
+transform = Transform3D(0.14887173, 0.0033845645, 0, -0.010134832, 0.049716268, 0, 0, 0, 0.1492163, -3.8166714, 2.5629618, 16.745909)
 mesh = SubResource("ArrayMesh_utckp")
 
 [node name="Cube_003" type="MeshInstance3D" parent="Arena" unique_id=1514401662]
-transform = Transform3D(0.07213046, 0, -0.12648803, 0, 1.2488717, 0, 0.10344949, 0, 0.08819411, -1.7223816, 4.843576, 22.342577)
+transform = Transform3D(0.07213046, 0, -0.12648803, 0, 1.2488717, 0, 0.10344949, 0, 0.08819411, -1.7223816, 3.683567, 22.342577)
 mesh = SubResource("ArrayMesh_ecbxk")
 
 [node name="Cube_035" type="MeshInstance3D" parent="Arena" unique_id=488258671]
@@ -2365,7 +2370,7 @@ transform = Transform3D(2.022869, 0, 1.3602407, 0, 1, 0, -1.869645, 0, 1.4717174
 mesh = SubResource("ArrayMesh_upjg7")
 
 [node name="Cube_034" type="MeshInstance3D" parent="Arena" unique_id=182270925]
-transform = Transform3D(0.11057008, 0.114182085, -0.07280899, -0.01343345, 1.241749, -0.0008111003, 0.059147302, 0.068572104, 0.13592505, 0.8406286, 4.573045, 30.214342)
+transform = Transform3D(0.11136936, -0.016807368, -0.072321534, -0.0017516038, 1.2468741, -0.008450085, 0.059147313, 0.068572104, 0.13592505, 0.8406286, 3.7212753, 30.214342)
 mesh = SubResource("ArrayMesh_vuagw")
 
 [node name="Cube_036" type="MeshInstance3D" parent="Arena" unique_id=19842338]
@@ -2389,7 +2394,7 @@ transform = Transform3D(1.577994, 0, -2.1008172, 0, 3.3940623, 0, 3.6526663, 0, 
 mesh = SubResource("ArrayMesh_53lcx")
 
 [node name="Cube_001" type="MeshInstance3D" parent="Arena" unique_id=326091540]
-transform = Transform3D(0.11688333, 0, 0.025009397, 0, 1.1750576, 0, -0.02045418, 0, 0.14291361, 20.87867, 5.3395967, 30.571226)
+transform = Transform3D(0.0967778, 0, 0.083950385, 0, 1.1750576, 0, -0.06865966, 0, 0.11833051, 26.291664, 3.5954986, 24.953867)
 mesh = SubResource("ArrayMesh_tdbb6")
 
 [node name="Plane_001" type="MeshInstance3D" parent="Arena" unique_id=295495931]
@@ -2466,7 +2471,7 @@ transform = Transform3D(-0.07456738, -0.021690935, 0.0979137, -0.001525637, 0.98
 mesh = SubResource("ArrayMesh_y3p3a")
 
 [node name="Plane_007" type="MeshInstance3D" parent="Arena" unique_id=1834305012]
-transform = Transform3D(-1.1595168, 0.13900338, 2.3344364, 0.32418647, 2.9668477, 0.026494544, -2.314997, 0.34584716, -1.1655432, 25.253666, 2.658782, 16.885923)
+transform = Transform3D(-1.1595168, 0.13900338, 2.3344364, 0.32418647, 2.9668477, 0.026494544, -2.314997, 0.34584716, -1.1655432, 25.253666, 2.658782, 19.741007)
 mesh = SubResource("ArrayMesh_f5jri")
 
 [node name="Plane_017" type="MeshInstance3D" parent="Arena" unique_id=1631398402]
@@ -2478,7 +2483,7 @@ transform = Transform3D(3.7725716, -0.044678148, -0.76215833, 0.029900923, 3.848
 mesh = SubResource("ArrayMesh_ocufy")
 
 [node name="Plane_021" type="MeshInstance3D" parent="Arena" unique_id=1267669113]
-transform = Transform3D(3.408062, 0.31322208, 1.7613015, -0.35226685, 3.832895, -1.4278647e-08, -1.7539096, -0.16119519, 3.4224253, -11.857449, 5.7176065, 1.6813698)
+transform = Transform3D(3.408062, 0.31322208, 1.7613015, -0.35226685, 3.832895, -1.4278647e-08, -1.7539096, -0.16119519, 3.4224253, -11.857449, 5.940649, -4.3607087)
 mesh = SubResource("ArrayMesh_8slab")
 
 [node name="Plane_022" type="MeshInstance3D" parent="Arena" unique_id=1928028838]
@@ -2522,7 +2527,7 @@ transform = Transform3D(3.756208, 0.34521878, -0.7660961, -0.3522668, 3.832895, 
 mesh = SubResource("ArrayMesh_35mo5")
 
 [node name="Cube_005" type="MeshInstance3D" parent="Arena" unique_id=632639811]
-transform = Transform3D(1.2052264, 0, -0.6335937, 0, 0.8509734, 0, 1.150455, 0, 0.66375804, 7.34474, 3.1763372, 29.655882)
+transform = Transform3D(1.6651975, 0, 0.031318903, 0, 0.85097337, 0, -0.05686772, 0, 0.91707945, 6.1656218, 3.1763372, 30.614414)
 mesh = SubResource("ArrayMesh_8b0g4")
 
 [node name="Plane" type="MeshInstance3D" parent="Arena" unique_id=1666007756]
@@ -2542,7 +2547,7 @@ transform = Transform3D(0.039648414, 0, -0.111851275, 0, 0.11867057, 0, 0.111851
 mesh = SubResource("ArrayMesh_p1amk")
 
 [node name="Cylinder_007" type="MeshInstance3D" parent="Arena" unique_id=860994578]
-transform = Transform3D(0.40372884, -0.0016750724, 0.31810528, 0.031694826, 0.08961393, -0.024791934, -0.3166672, 0.0068337447, 0.40308088, 17.363976, 4.714978, 33.074898)
+transform = Transform3D(0.40372884, -0.0016750724, 0.31810528, 0.031694826, 0.08961393, -0.024791934, -0.3166672, 0.0068337447, 0.40308088, 18.584183, 3.3292732, 36.00662)
 mesh = SubResource("ArrayMesh_mfuia")
 
 [node name="Cube_008" type="MeshInstance3D" parent="Arena" unique_id=255020894]
@@ -2554,7 +2559,7 @@ transform = Transform3D(0.47134012, 0.03486711, 0.5472851, -0.45507306, 0.098882
 mesh = SubResource("ArrayMesh_fssrw")
 
 [node name="Cylinder_006" type="MeshInstance3D" parent="Arena" unique_id=1820857516]
-transform = Transform3D(0.43528792, -0.046678293, 0.059493918, -0.067267604, 0.0006812564, 0.5096466, -0.26510212, -0.0768169, -0.03163203, 17.363976, 4.3063416, 31.09347)
+transform = Transform3D(0.43528792, -0.046678293, 0.059493918, -0.067267604, 0.0006812564, 0.5096466, -0.26510212, -0.0768169, -0.03163203, 18.584183, 2.9206367, 34.025192)
 mesh = SubResource("ArrayMesh_8h8cx")
 
 [node name="CameraPoint1" type="Marker3D" parent="." unique_id=679263532]
@@ -2570,7 +2575,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -2)
 
 [node name="BossSpawnPoint" type="Marker3D" parent="." unique_id=1963958776]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -16.421322)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.3495474, -22.397125)
 
 [node name="OreSpawnPoints" type="Node" parent="." unique_id=678950103]
 
@@ -2599,16 +2604,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.524382, 0.04038173, 13.466
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.080778, 0.04038173, 9.856805)
 
 [node name="OreSpawnPoint9" type="Marker3D" parent="OreSpawnPoints" unique_id=522966840]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.262434, 0.04038173, 2.9791756)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.686457, 0.33580214, 2.9791756)
 
 [node name="OreSpawnPoint10" type="Marker3D" parent="OreSpawnPoints" unique_id=1006371307]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.316092, 0.04038173, -3.7799063)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2582045, 0.04038173, -14.32898)
 
 [node name="OreSpawnPoint11" type="Marker3D" parent="OreSpawnPoints" unique_id=795658293]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.155197, 0.04038173, 1.0608578)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.163227, 0.4165985, 1.0608578)
 
 [node name="OreSpawnPoint12" type="Marker3D" parent="OreSpawnPoints" unique_id=1822446838]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.155197, 0.04038173, -10.265754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.025775, 0.04038173, -9.098597)
 
 [node name="OreSpawnPoint13" type="Marker3D" parent="OreSpawnPoints" unique_id=817697109]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.155197, -63.400528, -28.184643)
@@ -2649,7 +2654,7 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.57
 index = 3
 
 [node name="SpawnPoint4" parent="SpawnPoints" unique_id=1801478672 instance=ExtResource("4_sfhgb")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 17.799845, 0, -1.2725449)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.6653194, 0.14331436, -12.416569)
 index = 4
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1279209991]
@@ -2681,18 +2686,22 @@ size = Vector3(2.4818115, 1.6269531, 2.0708008)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1401289283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.300053, 12.908434, 9.998739)
+light_color = Color(0.66445196, 0.86241406, 0.90304303, 1)
 light_specular = 0.0
 light_bake_mode = 1
 omni_range = 191.508
 omni_attenuation = 0.445
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=814752070]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6642113, -3.0288906, 2.1406527)
-light_energy = 3.763
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6642113, -3.517025, 2.1406527)
+light_color = Color(0.9718016, 0.8290935, 0.7902274, 1)
+light_energy = 2.347
+light_indirect_energy = 1.5
+light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 light_bake_mode = 1
-omni_range = 30.0
-omni_attenuation = 0.505
+omni_range = 38.0
+omni_attenuation = 0.301
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1402534155]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 37.262657, 7.870164, -17.821465)
@@ -2708,6 +2717,18 @@ spot_range = 18.904
 spot_attenuation = -0.07
 spot_angle = 32.86
 spot_angle_attenuation = 3.0314324
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." unique_id=911958157]
+transform = Transform3D(0.87591606, -0.046833828, 0.48018506, -0.47336686, 0.10893471, 0.8741036, -0.09324643, -0.9929451, 0.07324807, 130.63908, 137.11682, 28.255701)
+light_color = Color(0.45192093, 0.9588483, 0.9999998, 1)
+light_energy = 3.122
+spot_range = 162.277
+spot_angle = 10.1
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1905073429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.92495, 43.99588, 23.64025)
+material_override = SubResource("StandardMaterial3D_plpmp")
+radius = 18.645926
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="OreSpawnTimer" to="." method="_on_ore_spawn_timer_timeout"]
