@@ -14,6 +14,8 @@ var can_hit : bool = false
 @onready var ore_chunk_area: Marker3D = $OreChunkArea
 
 func _ready() -> void:
+	var player = get_tree().get_first_node_in_group("Player")
+	look_at(player.global_transform.origin, Vector3.UP)
 	SignalBus.enemy_hit.connect(hide_lock_on_target)
 	state_machine.init(self)
 

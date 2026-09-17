@@ -255,6 +255,96 @@ _data = {
 &"YouWin": SubResource("Animation_0c126")
 }
 
+[sub_resource type="Animation" id="Animation_gx84v"]
+resource_name = "CloseIn"
+length = 0.23333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TopBar:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -540), Vector2(0, -1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BotBar:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 540), Vector2(0, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_xs85b"]
+resource_name = "CloseOut"
+length = 0.23333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TopBar:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -1080), Vector2(0, -540)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BotBar:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 540)]
+}
+
+[sub_resource type="Animation" id="Animation_lt1va"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TopBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -540)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BotBar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 540)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gx84v"]
+_data = {
+&"CloseIn": SubResource("Animation_gx84v"),
+&"CloseOut": SubResource("Animation_xs85b"),
+&"RESET": SubResource("Animation_lt1va")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1brt"]
 bg_color = Color(1, 0.3287198, 0.38030145, 1)
 corner_radius_top_left = 5
@@ -360,6 +450,10 @@ vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1250733799]
 libraries/ = SubResource("AnimationLibrary_t1brt")
+
+[node name="BarPlayer" type="AnimationPlayer" parent="." unique_id=1562708024]
+root_node = NodePath("../AnimationPlayer")
+libraries/ = SubResource("AnimationLibrary_gx84v")
 
 [node name="EnemyTracker" type="Panel" parent="." unique_id=1205098400]
 visible = false
@@ -551,6 +645,26 @@ alignment = 2
 
 [node name="BoltHUDIcon" parent="BoltsHolder" unique_id=408396402 instance=ExtResource("13_xs85b")]
 layout_mode = 2
+
+[node name="TopBar" type="ColorRect" parent="." unique_id=107427671]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -540.0
+offset_bottom = -540.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BotBar" type="ColorRect" parent="." unique_id=729999154]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 540.0
+offset_bottom = 539.99976
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="button_up" from="ContextPanel/Next" to="." method="_on_next_button_up"]
 

@@ -4,6 +4,8 @@ class_name TestEnemy extends Enemy
 
 @onready var skeleton_3d: Skeleton3D = $"rat(2)/rat/Skeleton3D"
 
+
+
 var player_in_range : bool = false
 
 func _ready() -> void:

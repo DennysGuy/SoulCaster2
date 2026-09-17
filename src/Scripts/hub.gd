@@ -10,6 +10,9 @@ var start_round_timer_wait_time : float = 15
 @onready var ap: Label = $CanvasLayer/ProgressBar/AP
 @onready var xp: Label = $CanvasLayer/ProgressBar/XP
 
+@onready var hud_animation_player: AnimationPlayer = $HUDAnimationPlayer
+const START_FIGHT = preload("uid://pf7s6r3v0oal")
+@onready var music: AudioStreamPlayer = $Music
 
 var stored_selectable : MenuSelectable
 @onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
@@ -21,8 +24,10 @@ var stored_selectable : MenuSelectable
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	hud_animation_player.play("CloseIn")
 	SignalBus.hub_context_menu_closed.connect(show_start_combat_label)
 	SignalBus.menu_exited.connect(move_player_to_home)
+	SignalBus.arena_started.connect(play_close_out)
 	GameManager.in_arena = false
 	GameManager.in_menu = false
 	player.gun_arm.hide()
@@ -105,3 +110,8 @@ func move_player_to_home() -> void:
 	tween.tween_property(player, "global_position",home_position.global_position,0.5)
 	await tween.finished
 	GameManager.can_move = true
+
+func play_close_out() -> void:
+	music.stop()
+	GameManager.play_sfx(START_FIGHT)
+	hud_animation_player.play("CloseOut")

@@ -55,6 +55,7 @@ const GRUNT_3 = preload("uid://bsg37rag4j8qx")
 
 var quit_time_left : float = 12
 var quit_time : float = 12
+@onready var bar_player: AnimationPlayer = $BarPlayer
 
 func _ready() -> void:
 	SignalBus.xp_was_gained.connect(add_xp)
@@ -92,6 +93,7 @@ func _ready() -> void:
 		start_boss_fight()
 	else:
 		animation_player.play("RoundCountDown")
+	bar_player.play("CloseIn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -266,6 +268,8 @@ func end_fight() -> void:
 	animation_player.play("YouWin")
 
 func go_to_hub() -> void:
+	bar_player.play("CloseOut")
+	await get_tree().create_timer(0.3).timeout
 	get_tree().change_scene_to_file("uid://b54wn7lrvkbdi")
 
 func play_round_start_sfx() -> void:

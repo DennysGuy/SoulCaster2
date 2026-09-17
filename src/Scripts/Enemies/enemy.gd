@@ -10,6 +10,7 @@ var prev_state : State
 @export var arrow_hits : Array[Node3D]
 @export var bolt_position : Marker3D
 @export var lock_on_target : Sprite3D
+@export var leap_player : AudioStreamPlayer3D
 
 @export_group("Enemy Stats")
 @export var enemy_name : String
@@ -46,17 +47,24 @@ const RAT_DEATH_1 = preload("uid://d3ghyfjmncx5c")
 
 @onready var hurts : Array[AudioStream] = [hurt_1,hurt_2,hurt_3]
 
+const RAT_LEAP_1 = preload("uid://c7gf702jnbls2")
+const RAT_LEAP_2 = preload("uid://cf6dtnrcoij5i")
+const RAT_LEAP_3 = preload("uid://by242hcdg8ma4")
+
+@onready var leaps : Array[AudioStream] = [RAT_LEAP_1,RAT_LEAP_2,RAT_LEAP_3]
+
+
 var round_ended : bool = false
 
 var alive : bool = true
 var can_hurt : bool = true
 
-var selected_move_speed : float = 0
+@onready var selected_move_speed : float = move_speed
 var selected_speed_scale : float = 0.7
-var move_speeds : Dictionary = {
+@onready var move_speeds : Dictionary = {
 	0 : [move_speed, 0.7],
-	1 : [selected_move_speed+30,1.0],
-	2 : [selected_move_speed+60,1.3]
+	1 : [selected_move_speed+20,1.0],
+	2 : [selected_move_speed+35,1.3]
 }
 
 func _ready() -> void:
@@ -186,8 +194,6 @@ func hit_flash() -> void:
 
 		flash_mat.set("shader_parameter/flash", 0.0)
 
-
-
 func make_materials_unique(node: Node):
 	if node is MeshInstance3D and node.mesh:
 		for i in node.mesh.get_surface_count():
@@ -198,7 +204,6 @@ func make_materials_unique(node: Node):
 
 	for child in node.get_children():
 		make_materials_unique(child)
-
 
 func select_speed(value : int) -> int:
 	if value <= 15:
@@ -217,3 +222,7 @@ func hide_lock_on_target(target : Node3D) -> void:
 		return
 	
 	lock_on_target.hide()
+
+func play_leap() -> void:
+	leap_player.stream = leaps.pick_random()
+	leap_player.play()

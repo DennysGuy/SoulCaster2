@@ -20,6 +20,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_start_button_button_up() -> void:
+	SignalBus.arena_started.emit()
+	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("uid://c8ok5h5m1ggwb")
 
 func _on_close_button_button_up() -> void:
