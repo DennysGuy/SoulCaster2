@@ -2330,7 +2330,7 @@ collision_mask = 3
 shape = SubResource("ConcavePolygonShape3D_s5xg8")
 
 [node name="Cube_007" type="MeshInstance3D" parent="Arena" unique_id=2117088582]
-transform = Transform3D(0.03339396, 0.0010283848, 0.5734204, 0.00014523084, 0.17364283, -0.042690855, -0.012926529, 0.004607589, 1.4808753, -4.9968433, 6.6140714, 8.877468)
+transform = Transform3D(0.03339396, 0.0010283848, 0.5734204, 0.00014523084, 0.17364283, -0.042690855, -0.012926529, 0.004607589, 1.4808753, -7.547985, 6.6140714, 8.877468)
 mesh = SubResource("ArrayMesh_bhmb7")
 
 [node name="Cylinder_001" type="MeshInstance3D" parent="Arena" unique_id=317137535]
@@ -2665,19 +2665,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.525543, -63.400528, 20.55
 [node name="SpawnPoints" type="Node" parent="." unique_id=566166875]
 
 [node name="SpawnPoint1" parent="SpawnPoints" unique_id=1108102491 instance=ExtResource("4_sfhgb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18.913101)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23.90648)
 index = 1
 
 [node name="SpawnPoint2" parent="SpawnPoints" unique_id=1406007955 instance=ExtResource("4_sfhgb")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.947908, 0, -0.26244354)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -21.18105, 0, -0.26244354)
 index = 2
 
 [node name="SpawnPoint3" parent="SpawnPoints" unique_id=252435790 instance=ExtResource("4_sfhgb")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.5889969, 1.1368935, -17.467438)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.5889969, 1.1368935, -19.76049)
 index = 3
 
 [node name="SpawnPoint4" parent="SpawnPoints" unique_id=1801478672 instance=ExtResource("4_sfhgb")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 21.771778, 0.14331436, 0.54130936)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 21.217766, 0.14331436, 0.54130936)
 index = 4
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1279209991]

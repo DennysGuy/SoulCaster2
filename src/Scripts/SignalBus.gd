@@ -47,3 +47,4 @@ signal hub_menu_accessed(look_at_point : Marker3D)
 signal menu_exited
 signal shop_exited
 signal arena_started
+signal arena_ended

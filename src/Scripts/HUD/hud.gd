@@ -69,6 +69,7 @@ func _ready() -> void:
 	SignalBus.boss_damaged.connect(update_boss_bar)
 	SignalBus.boss_defeated.connect(end_fight)
 	SignalBus.arena_context_button_closed.connect(close_context_panel)
+	SignalBus.arena_ended.connect(go_to_hub)
 	update_ore_count_label(0)
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
 	#round_timer.start()
@@ -269,7 +270,7 @@ func end_fight() -> void:
 
 func go_to_hub() -> void:
 	bar_player.play("CloseOut")
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("uid://b54wn7lrvkbdi")
 
 func play_round_start_sfx() -> void:
