@@ -526,7 +526,7 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 24
-text = "x 10"
+text = "x 15"
 
 [node name="MiningCrossBowBoltPurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt" unique_id=945912819]
 layout_mode = 1
@@ -700,7 +700,7 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 24
-text = "x 10"
+text = "x 20"
 
 [node name="BoltOMaticMininBoltPurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/BoltOMaticMagazineSize2" unique_id=1393456080]
 layout_mode = 1

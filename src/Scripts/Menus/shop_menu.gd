@@ -56,7 +56,9 @@ func _on_purchase_rifle_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 100
 	GameManager.rifle_owned = true
 	update_menu()
-
+	update_amulet_menu()
+	update_weapon_upgrades_panel()
+	
 func update_menu() -> void:
 	ore_count.text = "x %s" % int(PlayerStats.player_stats["Ore"])
 	if !GameManager.rifle_owned:
@@ -105,33 +107,39 @@ func _on_fortified_pistol_bullets_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_bullets_cost
 	GameManager.fortified_pistol_bullets = true
 	update_weapon_upgrades_panel()
+	update_menu()
 
 func _on_fortified_rfiel_bullets_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_rifle_cost
 	GameManager.fortified_rifle_bullets = true
 	update_weapon_upgrades_panel()
+	update_menu()
 
 func _on_cross_bow_ammo_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.pistol_mag_cost
 	GameManager.pistol_magazine_size += 1
 	GameManager.pistol_mag_cost *= 2
 	update_weapon_upgrades_panel()
+	update_menu()
 
 func _on_mining_cross_bow_bolt_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_bullets_cost
 	GameManager.fortified_pistol_bullets = true
 	update_weapon_upgrades_panel()
+	update_menu()
 
 func _on_bolt_o_matic_mag_size_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.rifle_mag_cost
 	GameManager.rifle_magazine_size += 2
 	GameManager.rifle_mag_cost *= 2
 	update_weapon_upgrades_panel()
+	update_menu()
 
 func _on_bolt_o_matic_minin_bolt_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_rifle_cost
 	GameManager.fortified_rifle_bullets = true
 	update_weapon_upgrades_panel()
+	update_menu()
 
 func update_weapon_upgrades_panel() -> void:
 	
@@ -179,6 +187,7 @@ func update_weapon_upgrades_panel() -> void:
 	bolt_o_matic_mag_size_cost.text = "x %s" % GameManager.rifle_mag_cost
 
 
+
 func update_amulet_menu() -> void:
 	if !GameManager.amulet_owned:
 		if PlayerStats.player_stats["Ore"] >= 30:
@@ -206,18 +215,22 @@ func _on_radar_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 30
 	GameManager.amulet_owned = true
 	update_amulet_menu()
+	update_menu()
 
 func _on_tracker_puchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 20
 	GameManager.enemy_tracker_owned = true
 	update_amulet_menu()
+	update_menu()
 
 func _on_weapon_upgrades_button_button_up() -> void:
 	update_weapon_upgrades_panel()
+	update_menu()
 	weapon_upgrades_panel.show()
 	amulets_panel.hide()
 
 func _on_amulets_button_button_up() -> void:
 	update_amulet_menu()
+	update_menu()
 	amulets_panel.show()
 	weapon_upgrades_panel.hide()

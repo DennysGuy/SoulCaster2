@@ -270,7 +270,7 @@ func end_fight() -> void:
 
 func go_to_hub() -> void:
 	bar_player.play("CloseOut")
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("uid://b54wn7lrvkbdi")
 
 func play_round_start_sfx() -> void:

@@ -221,7 +221,8 @@ func hide_lock_on_target(target : Node3D) -> void:
 	if target == self:
 		return
 	
-	lock_on_target.hide()
+	if lock_on_target:
+		lock_on_target.hide()
 
 func play_leap() -> void:
 	leap_player.stream = leaps.pick_random()

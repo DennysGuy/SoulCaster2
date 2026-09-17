@@ -42,6 +42,7 @@ func _ready() -> void:
 	SignalBus.boss_fight_started.connect(spawn_boss)
 	SignalBus.combat_engaged.connect(start_boss_music)
 	SignalBus.config_beat.connect(deduct_configs_to_kill)
+	SignalBus.arena_ended.connect(stop_arena_battle)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -160,3 +161,7 @@ func deduct_configs_to_kill() -> void:
 	print("REMAINING CONFIGS %s" % configs_to_beat)
 	if configs_to_beat <= 0:
 		start_spawn_timer()
+
+
+func stop_arena_battle() -> void:
+	music_player.stop()
