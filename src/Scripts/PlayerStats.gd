@@ -6,6 +6,7 @@ var player_stats : Dictionary = {
 	"Needed XP": 50.0,
 	"Attack Speed": 1.0, # influences the speed of weapon firing animation
 	"Attack Damage": 7.0,
+	"Grenade Damage": 7.0,
 	"Movement Speed": 15.0, #speed at which the camera shifts to a new side
 	"Crit Chance": 0.0,
 	"Crit Damage": 1.5,

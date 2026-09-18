@@ -2698,7 +2698,7 @@ libraries/ = SubResource("AnimationLibrary_qdhp6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0085994005, 1.2154319, -1.3343687)
 
 [node name="UltraBow" type="Node3D" parent="Head/Marker3D/GunArm" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986694, -0.051094152, -0.051125977, 0.99676466, 0.062018577, 0.04795278, 0.06447826, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.047986675, -0.051094152, -0.05112596, 0.99676466, 0.062018562, 0.047952782, 0.06447825, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 visible = false
 
 [node name="UltraBow" type="Node3D" parent="Head/Marker3D/GunArm/UltraBow" unique_id=2105935698]
@@ -3166,3 +3166,6 @@ flip_h = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1951491715]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7551332, 0)
 shape = SubResource("CapsuleShape3D_4mdpm")
+
+[node name="GrenadePosition" type="Marker3D" parent="." unique_id=1051295221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5913603, -4.8596077)

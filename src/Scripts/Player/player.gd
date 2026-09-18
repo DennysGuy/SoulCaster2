@@ -33,6 +33,7 @@ var zoom_speed: float = 5.0    # how fast zoom eases
 @onready var cross_bow_animation_player: AnimationPlayer = $Head/Marker3D/GunArm/CrossBow/AnimationPlayer
 @onready var super_bow_animation_player: AnimationPlayer = $Head/Marker3D/GunArm/UltraBow/AnimationPlayer
 
+@onready var grenade_position: Marker3D = $GrenadePosition
 
 var initial_player_rotation = Vector3.ZERO
 var initial_head_rotation = Vector3.ZERO
@@ -77,6 +78,7 @@ var enemy_list : Array[Enemy] = []
 var can_hurt : bool = true
 
 var tracked_enemy : Node3D
+const GRENADE_TOSS = preload("uid://br5xvc8wkgq8a")
 
 @onready var look_at_points : Dictionary[String,Marker3D] = {
 	"point 1" : look_at_point_1,
@@ -141,6 +143,9 @@ func _process(delta: float) -> void:
 				GameManager.bullets_in_clip -= 1
 				SignalBus.bullet_fired.emit()
 				play_shoot_animation()
+		
+		if Input.is_action_just_pressed("throw_grenade") and GameManager.grenades_owned > 0:
+			spawn_grenade()
 		
 		if Input.is_action_just_pressed("reload") and GameManager.in_arena:
 			shooting = true
@@ -500,7 +505,7 @@ func spawn_cross_bow_bolt(bolt_position : Marker3D) -> void:
 		if tracked_enemy.has_method("show_lock_on_target"):
 			tracked_enemy.show_lock_on_target()
 			SignalBus.enemy_hit.emit(tracked_enemy)
-		print("Distance: ",bolt_position.global_position.distance_to(tracked_enemy.bolt_position.global_position))
+		#print("Distance: ",bolt_position.global_position.distance_to(tracked_enemy.bolt_position.global_position))
 	get_parent().add_child(cross_bow_bolt)
 
 func spawn_bolt_from_cross_bow() -> void:
@@ -515,3 +520,16 @@ func look_at_hub_position(look_at_point : Marker3D):
 
 func zoom_camera_mid() -> void:
 	zoom_target = 30
+
+func spawn_grenade() -> void:
+	var grenade: Grenade = preload("uid://e35y3337ul1i").instantiate()
+
+	grenade.global_position = grenade_position.global_position
+
+	# Forward throw + a little upward arc
+	grenade.velocity = (-cross_bow_bolt_position.global_transform.basis.z * 20.0) + Vector3.UP * 5.0
+
+	get_parent().add_child(grenade)
+	GameManager.grenades_owned -= 1
+	GameManager.play_sfx(GRENADE_TOSS)
+	SignalBus.grenade_thrown.emit()

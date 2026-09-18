@@ -40,6 +40,9 @@ class_name ShopMenu extends Control
 @onready var weapon_upgrades_panel: Panel = $UpgradesPanel/MarginContainer/WeaponUpgradesPanel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@onready var grenade_title: Label = $UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet/GrenadeTitle
+@onready var grenade_purchase_button: Button = $UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet/GrenadePurchaseButton
+@onready var special_weapons: Panel = $UpgradesPanel/MarginContainer/SpecialWeapons
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -228,9 +231,32 @@ func _on_weapon_upgrades_button_button_up() -> void:
 	update_menu()
 	weapon_upgrades_panel.show()
 	amulets_panel.hide()
+	special_weapons.hide()
 
 func _on_amulets_button_button_up() -> void:
 	update_amulet_menu()
 	update_menu()
 	amulets_panel.show()
 	weapon_upgrades_panel.hide()
+	special_weapons.hide()
+
+func _on_grenade_purchase_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.basic_grenade_cost
+	GameManager.grenades_owned += 1
+	update_special_weapons_menu()
+	update_menu()
+	
+func update_special_weapons_menu() -> void:
+	grenade_title.text = "Grenade (%s Owned)" % GameManager.grenades_owned
+	if PlayerStats.player_stats["Ore"] >= GameManager.basic_grenade_cost:
+		grenade_purchase_button.disabled = false
+		grenade_purchase_button.text = "Purchase!"
+	else:
+		grenade_purchase_button.disabled = true
+		grenade_purchase_button.text = "Insufficient Ore"
+
+func _on_special_weapons_button_button_up() -> void:
+	weapon_upgrades_panel.hide()
+	amulets_panel.hide()
+	update_special_weapons_menu()
+	special_weapons.show()

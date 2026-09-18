@@ -22,6 +22,7 @@ class_name HUD extends CanvasLayer
 @onready var round_diamond_container: HBoxContainer = $RoundDiamondContainer
 
 @onready var round_timer_label: WaveTimerLabel = $RoundTimerLabel
+@onready var grenade_count_label: Label = $GrenadeCountLabel
 
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
@@ -70,7 +71,9 @@ func _ready() -> void:
 	SignalBus.boss_defeated.connect(end_fight)
 	SignalBus.arena_context_button_closed.connect(close_context_panel)
 	SignalBus.arena_ended.connect(go_to_hub)
+	SignalBus.grenade_thrown.connect(update_grenade_count)
 	update_ore_count_label(0)
+	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
 	#round_timer.start()
 	update_level()
@@ -318,3 +321,6 @@ func update_bolts_holder() -> void:
 func clear_bolts_holder() -> void:
 	for child in bolts_holder.get_children():
 		child.queue_free()
+
+func update_grenade_count() -> void:
+	grenade_count_label.text = "x%s" % GameManager.grenades_owned

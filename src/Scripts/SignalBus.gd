@@ -46,5 +46,7 @@ signal enemy_hit(target : Node3D)
 signal hub_menu_accessed(look_at_point : Marker3D)
 signal menu_exited
 signal shop_exited
+
+signal grenade_thrown
 signal arena_started
 signal arena_ended

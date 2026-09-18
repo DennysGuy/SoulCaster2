@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dd7wa1ar6qtpn"]
+
+[ext_resource type="Script" uid="uid://djfytpjyj3a3s" path="res://src/Scripts/poison_smoke.gd" id="1_x1wfw"]
+[ext_resource type="AudioStream" uid="uid://daufn4e05v0wy" path="res://Assets/Audio/PoisonousGas.wav" id="2_ttbyh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uqw8w"]
+size = Vector3(13.30304, 1, 13.97113)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s5xg8"]
+emission_shape_scale = Vector3(2, 0, 2)
+emission_shape = 3
+emission_box_extents = Vector3(2.5, 1, 2.5)
+angle_min = -65.79999
+angle_max = -65.79999
+velocity_pivot = Vector3(0, 0, 1)
+direction = Vector3(0.5, -1, 0.5)
+spread = 118.82
+flatness = 0.534
+gravity = Vector3(0, -5, 0)
+linear_accel_min = 29.029997
+linear_accel_max = 54.839996
+damping_min = 16.397001
+damping_max = 34.677002
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wlpid"]
+transparency = 1
+blend_mode = 1
+cull_mode = 1
+albedo_color = Color(0.39215687, 0.8901961, 0, 0.13333334)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gureh"]
+material = SubResource("StandardMaterial3D_wlpid")
+radius = 0.15
+height = 0.5
+
+[node name="PoisonSmoke" type="Node3D" unique_id=910052659]
+script = ExtResource("1_x1wfw")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=637839447]
+stream = ExtResource("2_ttbyh")
+max_distance = 120.0
+
+[node name="Area3D" type="Area3D" parent="." unique_id=143631188]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2027082896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28677368, 0, -0.4154359)
+shape = SubResource("BoxShape3D_uqw8w")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1043315486]
+transform = Transform3D(0.0043725343, 0.009408891, 0.99994606, -0.0042676223, 0.9999469, -0.009390149, -0.9999816, -0.0042263526, 0.0044124797, 0, 0, 0)
+amount = 400
+lifetime = 0.12
+speed_scale = 0.5
+randomness = 0.24
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_s5xg8")
+draw_passes = 2
+draw_pass_1 = SubResource("SphereMesh_gureh")
+draw_pass_2 = null
+
+[node name="AliveTimer" type="Timer" parent="." unique_id=1154241534]
+process_callback = 0
+wait_time = 12.0
+one_shot = true
+
+[connection signal="timeout" from="AliveTimer" to="." method="_on_alive_timer_timeout"]

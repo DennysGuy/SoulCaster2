@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dk6iunojkq143" path="res://Assets/BossWaveEmpty.png" id="8_2c58t"]
 [ext_resource type="Texture2D" uid="uid://dyrx0x1hwcsdd" path="res://Assets/BossWaveFilled.png" id="9_veicy"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="10_6w4u3"]
+[ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="12_lt1va"]
 [ext_resource type="PackedScene" uid="uid://booyib7rd0el6" path="res://src/Scenes/HUD/BoltHUDIcon.tscn" id="13_xs85b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
@@ -480,7 +481,6 @@ root_node = NodePath("../AnimationPlayer")
 libraries/ = SubResource("AnimationLibrary_gx84v")
 
 [node name="EnemyTracker" type="Panel" parent="." unique_id=1205098400]
-visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -592,6 +592,27 @@ theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 128
 text = "3"
 horizontal_alignment = 1
+
+[node name="GrenadeIcon" type="TextureRect" parent="." unique_id=1818915977]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 26.0
+offset_top = 154.0
+offset_right = 83.0
+offset_bottom = 230.0
+grow_vertical = 2
+texture = ExtResource("12_lt1va")
+expand_mode = 1
+
+[node name="GrenadeCountLabel" type="Label" parent="." unique_id=780836397]
+offset_left = 93.0
+offset_top = 709.0
+offset_right = 188.0
+offset_bottom = 763.0
+theme_override_fonts/font = ExtResource("10_6w4u3")
+theme_override_font_sizes/font_size = 52
+text = "x0"
 
 [node name="ContextPanel" type="Panel" parent="." unique_id=751790954]
 process_mode = 3

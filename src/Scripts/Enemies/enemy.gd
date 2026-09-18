@@ -99,14 +99,20 @@ func head_shot_kill() -> void:
 	
 	state_machine.change_state(head_shot_dead)
 
-func damage_enemy() -> void:
+func damage_enemy(applied_damage : int = 0) -> void:
 	if not alive:	
 		return
 	
 	if hurt_1_state:
 		state_machine.change_state(hurt_1_state)
-		
-	var damage : int = randi_range(int(PlayerStats.player_stats["Attack Damage"]-2), int(PlayerStats.player_stats["Attack Damage"]+2))
+	
+	
+	var damage : int 
+	
+	if applied_damage <= 0:
+		damage = randi_range(int(PlayerStats.player_stats["Attack Damage"]-2), int(PlayerStats.player_stats["Attack Damage"]+2))
+	else:
+		damage = applied_damage
 	
 	var is_crit : bool = calculate_crit()
 	if is_crit:

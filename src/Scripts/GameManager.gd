@@ -85,6 +85,9 @@ var arena_instructions_shown : bool = false
 var furtherest_round_unlocked : int = 0
 var current_round_selected : int = 0
 
+var basic_grenade_cost : int = 8
+
+var grenades_owned : int = 0
 
 @onready var waves : Dictionary = {
 	0 : {
