@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dleph5i0grnjx"
+path="res://.godot/imported/VOX_Announcer_CountDown_ One_01.wav-4d6d8527af0e33b7690882caf48c7656.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/VOX_Announcer_CountDown_ One_01.wav"
+dest_files=["res://.godot/imported/VOX_Announcer_CountDown_ One_01.wav-4d6d8527af0e33b7690882caf48c7656.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

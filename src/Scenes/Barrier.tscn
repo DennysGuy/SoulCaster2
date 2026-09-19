@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c0qgky5g2sk2d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wkd3r"]
+albedo_color = Color(0.61044675, 0.34304947, 0.22159296, 1)
+
+[node name="Barrier" type="CSGBox3D" unique_id=2008808184]
+material_override = SubResource("StandardMaterial3D_wkd3r")
+size = Vector3(13.80719, 1.3535156, 1)

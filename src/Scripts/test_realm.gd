@@ -7,6 +7,9 @@ class_name TestRealm extends Node3D
 @onready var boss_spawn_point: Marker3D = $BossSpawnPoint
 const BOSS_THEME = preload("uid://c4n1b2qik86oq")
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
+@onready var cut_scene_cam: Camera3D = $CutSceneCam
+@onready var player: Player = $Player
+@onready var cut_scene_player: AnimationPlayer = $CutScenePlayer
 
 @onready var spawn_point_1: EnemySpawnPoint = $SpawnPoints/SpawnPoint1
 @onready var spawn_point_2: EnemySpawnPoint = $SpawnPoints/SpawnPoint2
@@ -24,8 +27,10 @@ var configs_to_beat : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	player.camera.current = false
+	cut_scene_player.play("PanIntro")
 	#spawn_timer.start()
-	GameManager.can_move = true
+	GameManager.can_move = false
 	ore_spawn_timer.start()
 	
 	GameManager.hits_taken = 0
@@ -162,6 +167,10 @@ func deduct_configs_to_kill() -> void:
 	if configs_to_beat <= 0:
 		start_spawn_timer()
 
-
 func stop_arena_battle() -> void:
 	music_player.stop()
+
+func transition_to_player_camera() -> void:
+	player.camera.current = true
+	cut_scene_cam.queue_free()
+	GameManager.can_move = true

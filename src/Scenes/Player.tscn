@@ -2698,8 +2698,7 @@ libraries/ = SubResource("AnimationLibrary_qdhp6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0085994005, 1.2154319, -1.3343687)
 
 [node name="UltraBow" type="Node3D" parent="Head/Marker3D/GunArm" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986675, -0.051094152, -0.05112596, 0.99676466, 0.062018562, 0.047952782, 0.06447825, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
-visible = false
+transform = Transform3D(-0.99754035, -0.047986697, -0.051094152, -0.051125977, 0.99676466, 0.06201849, 0.047952782, 0.06447818, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="UltraBow" type="Node3D" parent="Head/Marker3D/GunArm/UltraBow" unique_id=2105935698]
 transform = Transform3D(1.2999996, -1.8626451e-08, -2.4680048e-08, 4.656613e-10, 0.01987569, -1.2998476, -3.7252903e-09, 1.299848, 0.019875757, -0.013769388, 0.9215592, -3.6773963)

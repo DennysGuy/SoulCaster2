@@ -11,6 +11,7 @@ class_name HUD extends CanvasLayer
 @onready var time_gained_position: Marker2D = $TimeGainedPosition
 @onready var ore_gained_position: Marker2D = $OreGainedPosition
 
+
 @onready var enemy_tracker: Panel = $EnemyTracker
 @onready var enemy_name: Label = $EnemyTracker/EnemyName
 @onready var enemy_hp: ProgressBar = $EnemyTracker/EnemyHP
@@ -29,6 +30,12 @@ const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
 
 const GONG_HIT_ROUND_END = preload("uid://cl80qmb3yld4f")
 const ROUND_START = preload("uid://b68fxjxw701up")
+
+const COUNT_DOWN_BEEP = preload("uid://bceqt2b1aafi6")
+const VOX_ANNOUNCER_COUNT_DOWN__ONE_01 = preload("uid://dleph5i0grnjx")
+const VOX_ANNOUNCER_COUNT_DOWN__SURVIVE_01 = preload("uid://bkqune2h2pnxa")
+const VOX_ANNOUNCER_COUNT_DOWN__THREE_01 = preload("uid://802tvpyyyw3f")
+const VOX_ANNOUNCER_COUNT_DOWN__TWO_01 = preload("uid://kp32xkr5y3bo")
 
 const XP_MULTIPLIER_FACTOR : float = 1.2
 const BASE_XP_AMOUNT : int = 50
@@ -59,6 +66,7 @@ var quit_time : float = 12
 @onready var bar_player: AnimationPlayer = $BarPlayer
 
 func _ready() -> void:
+	
 	SignalBus.xp_was_gained.connect(add_xp)
 	SignalBus.time_added.connect(add_time_label)
 	SignalBus.progress_added.connect(add_progress)
@@ -324,3 +332,19 @@ func clear_bolts_holder() -> void:
 
 func update_grenade_count() -> void:
 	grenade_count_label.text = "x%s" % GameManager.grenades_owned
+
+func play_one() -> void:
+	GameManager.play_sfx(VOX_ANNOUNCER_COUNT_DOWN__ONE_01)
+	GameManager.play_sfx(COUNT_DOWN_BEEP,-2)
+
+func play_two() -> void:
+	GameManager.play_sfx(VOX_ANNOUNCER_COUNT_DOWN__TWO_01)
+	GameManager.play_sfx(COUNT_DOWN_BEEP,-2)
+
+func play_three() -> void:
+	GameManager.play_sfx(VOX_ANNOUNCER_COUNT_DOWN__THREE_01)
+	GameManager.play_sfx(COUNT_DOWN_BEEP,-2)
+
+func play_survive() -> void:
+	GameManager.play_sfx(VOX_ANNOUNCER_COUNT_DOWN__SURVIVE_01)
+	GameManager.play_sfx(COUNT_DOWN_BEEP,-2)
