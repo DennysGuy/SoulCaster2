@@ -8,8 +8,12 @@ script = ExtResource("1_xv1ml")
 enemies = NodePath("Node3D")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=488415967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8220246, 4.6651764)
 visible = false
-size = Vector3(21.863098, 0.001, 6.290222)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(21.863098, 0.001, 15.620575)
 
 [node name="Node3D" type="Node3D" parent="." unique_id=877140234]
 

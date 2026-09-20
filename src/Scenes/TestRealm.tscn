@@ -6227,7 +6227,7 @@ libraries/ = SubResource("AnimationLibrary_qdhp6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0085994005, 1.2154319, -1.3343687)
 
 [node name="UltraBow" type="Node3D" parent="Player/Head/Marker3D/GunArm" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986545, -0.051094152, -0.05112582, 0.99676466, 0.06201841, 0.047952797, 0.06447809, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.047986533, -0.051094152, -0.05112581, 0.99676466, 0.06201835, 0.0479528, 0.06447803, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="UltraBow" type="Node3D" parent="Player/Head/Marker3D/GunArm/UltraBow" unique_id=2105935698]
 transform = Transform3D(1.2999996, -1.8626451e-08, -2.4680048e-08, 4.656613e-10, 0.01987569, -1.2998476, -3.7252903e-09, 1.299848, 0.019875757, -0.013769388, 0.9215592, -3.6773963)
@@ -6858,6 +6858,7 @@ bus = &"Music"
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1559373778]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 18.093607, 9.742699, -1.8696079)
+visible = false
 material_override = SubResource("ShaderMaterial_plpmp")
 size = Vector3(2.4818115, 1.6269531, 2.0708008)
 
