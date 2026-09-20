@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://c8ok5h5m1ggwb"]
 
 [ext_resource type="Script" uid="uid://cp8jbvxrpbbpf" path="res://src/Scripts/test_realm.gd" id="1_ca2mb"]
+[ext_resource type="Texture2D" uid="uid://6g0dfi5vmlkr" path="res://Assets/PlayerDrawing.png" id="2_sdv3x"]
 [ext_resource type="Script" uid="uid://cdxtm3oao6svc" path="res://src/Scripts/Player/player.gd" id="2_v4c23"]
 [ext_resource type="Texture2D" uid="uid://cdx7eixwm6qmj" path="res://Assets/Arena/arena.png" id="3_cv6wc"]
 [ext_resource type="Script" uid="uid://cjqloe12rvu72" path="res://src/Scripts/camera.gd" id="3_sdv3x"]
@@ -2401,6 +2402,12 @@ _data = {
 radius = 0.81640625
 height = 4.309082
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7diyy"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("2_sdv3x")
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s5xg8"]
 panorama = ExtResource("15_s5xg8")
 
@@ -2496,6 +2503,18 @@ tracks/2/keys = {
 "method": &"transition_to_player_camera"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PlayerSprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.5545124, 0, 0), Vector3(-1.5550884, -1.5707964, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_uqw8w"]
 length = 0.001
@@ -2522,6 +2541,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 1.6988686, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PlayerSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5545124, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_plpmp"]
@@ -4719,43 +4750,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_86yrn")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_h3ory"]
-_surfaces = [{
-"aabb": AABB(-2.0181031, -0.7789751, -2.0181031, 4.0362062, 0.39275414, 4.0362062),
-"format": 34896613377,
-"index_count": 96,
-"index_data": PackedByteArray("AAABAAIAAAADAAEAFAAAAAIAFAACAAUAFQADAAAAFQAHAAMAFgAAABQAFgAVAAAABAAUAAUABAAFAAgACgAEAAgACgAIAAsADAAEAAoAFwAUAAQADAAXAAQAFwAWABQAEgAXAAwAEgAQABcAEAAWABcAEwAQABIAEwARABAAEAAYABYAEQAYABAAGAAVABYAEQAPABgAGAAGABUADwAGABgABgAHABUADwANAAYABgAJAAcADQAJAAYADQAOAAkA"),
-"lods": [0.19116679, PackedByteArray("AAABAAIAAAADAAEABAAAAAIABAACAAUABgADAAAABgAHAAMABAAFAAgABgAJAAcACgAEAAgACgAIAAsADAAEAAoADQAJAAYADQAOAAkADwANAAYADAAQAAQADwAGABAAEAAGAAAAEAAAAAQAEQAPABAAEgAQAAwAEwARABAAEwAQABIA")],
-"name": "arena",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 25,
-"vertex_data": PackedByteArray("/7////8/AAD//wAAAAAAAP//AAD/PwAA/78AAAAAAAD/v////78AAP//AAD/fwAA/z////8/AAD/fwAAAAAAAP//AAD/vwAA/z8AAAAAAAD/vwAA//8AAP//AAD//wAA/38AAP//AAAAAAAA/z8AAAAAAAAAAAAAAAAAAP9/AAD/P////78AAAAAAAD/vwAA/z8AAP//AAAAAAAA//8AAP+/////fwAA/3////8/AAD/f////38AAP9/////vwAA/z////9/AAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_tbjwt"]
-resource_name = "Arena_Plane_008"
-_surfaces = [{
-"aabb": AABB(-2.0181031, -0.7789751, -2.0181031, 4.0362062, 0.39275414, 4.0362062),
-"attribute_data": PackedByteArray("9ySzWpkwEU+ZMLNa9yQRT7QNs1pWGRFPtA0RTxICs1oSAhFP9yT3cfcks1qZMFVmmTD3cfckmH2ZMJh99yT3cVYZmH20DfdxtA2YfRICmH0SAvdxEgJVZrQN93G0DbNatA33cfcks1r3JPdxtA2zWvcks1r3JBFPVhmzWlYZVWZWGfdxtA1VZvckVWZWGbNamTD3cfckVWaZMLNaVhn3cfckmH33JPdxEgL3cbQNVWYSArNatA33cbQNmH20DRFPtA2zWg=="),
-"format": 34896613399,
-"index_count": 96,
-"index_data": PackedByteArray("HAABAAIAHAAdAAEABAAFAB4ABAAGAAUAHgAFAAMAHgADAAAAGAAfACAAGAAhAB8AIAAfACIAIAAiABoAHwAZACIAHwAjABkAIQAjAB8AIQAbACMACQALACQACQAlAAsAJQAmAAsAJQAKACYAEAAPAA0AEAAnAA8AEgAnABAAEgARACcAKAAMAA4AKAApAAwAKgArABYAKgAVACsAFQAXACsAFQAsABcAEwAtAC4AEwAUAC0ABwAvADAABwAIAC8A"),
-"lods": [0.19116679, PackedByteArray("AAABAAIAAAADAAEABAADAAAABAAFAAMABAAGAAUABwAGAAQABwAIAAYACQAKAAIACQACAAsACQALAAwADQAMAA4ADQAPAAwAEAAPAA0AEAARAA8AEgARABAAEwARABIAEwAUABEAFAAVABYAFQAXABYAFQAHABcAGAAZABoAGAAbABkA")],
-"material": SubResource("StandardMaterial3D_mwgc6"),
-"name": "arena",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 49,
-"vertex_data": PackedByteArray("/7////8/Hs///wAAAAAgyP//AAD/P/7H/78AAAAAHs//P////z8ez/9/AAAAAB7P/z8AAAAAHs8AAAAA/z/+xwAAAAAAACDI/7////+/YsH/v////z9iwf//AAD/f2LB//8AAP+/w7j/vwAA///fsP//AAD//5u4/7////+/37D/fwAA///fsP8/////v9+w/z8AAP//37AAAAAA//+buAAAAAD/v8O4AAAAAP9/YsH/P////79iwf8/////P2LB/z////+//7//v////z//v/+/////v/+//z////8//7//v////z/lx/+/AAAAAP7H/3////8/Hs//f////3//v/9/////v/+//z////9//7//v////3//v/9/////P/+///8AAP+/YsH/v////39iwf//AAD/P2LB/3////+/37D/vwAA///DuP+/////v++4AAAAAP+/YsH/P////39iwQAAAAD/P2LB/z////+/77j/PwAA///DuP8/AAAAAP7H/z////8/5cf///9/Ju17d9PsfXX///9/////f////3////9/ffUrk3r32JIN3YZuDd2Gbg3dhm6F6dd1////f9Lp2HP///9/////f////3////9/2PMrltf1eJaG7vCihu7woobu8KL///9/////f////3////9/h+ytc9PsfXX///9/////f////3////9/////f////38N3YZuDd2Gbg3dhm7///9/henXdT7ppneG7vCihu7woobu8KKm97+W1/V4ln31K5Os83aT")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_h3ory")
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_is28e"]
-data = PackedVector3Array(1.009, -0.38619998, -1.0091, 2.0181, -0.779, -2.0181, 2.0181, -0.779, -1.0091, 1.009, -0.38619998, -1.0091, 1.009, -0.779, -2.0181, 2.0181, -0.779, -2.0181, -1.0091, -0.38619998, -1.0091, 0, -0.779, -2.0181, 0, -0.38619998, -1.0091, -1.0091, -0.38619998, -1.0091, -1.0091, -0.779, -2.0181, 0, -0.779, -2.0181, 0, -0.38619998, -1.0091, 0, -0.779, -2.0181, 1.009, -0.779, -2.0181, 0, -0.38619998, -1.0091, 1.009, -0.779, -2.0181, 1.009, -0.38619998, -1.0091, -1.0091, -0.38619998, 1.009, 0, -0.38619998, 0, 0, -0.38619998, 1.009, -1.0091, -0.38619998, 1.009, -1.0091, -0.38619998, 0, 0, -0.38619998, 0, 0, -0.38619998, 1.009, 0, -0.38619998, 0, 1.009, -0.38619998, 0, 0, -0.38619998, 1.009, 1.009, -0.38619998, 0, 1.009, -0.38619998, 1.009, 0, -0.38619998, 0, 1.009, -0.38619998, -1.0091, 1.009, -0.38619998, 0, 0, -0.38619998, 0, 0, -0.38619998, -1.0091, 1.009, -0.38619998, -1.0091, -1.0091, -0.38619998, 0, 0, -0.38619998, -1.0091, 0, -0.38619998, 0, -1.0091, -0.38619998, 0, -1.0091, -0.38619998, -1.0091, 0, -0.38619998, -1.0091, 1.009, -0.38619998, 1.009, 2.0181, -0.779, 0, 2.0181, -0.779, 1.009, 1.009, -0.38619998, 1.009, 1.009, -0.38619998, 0, 2.0181, -0.779, 0, 1.009, -0.38619998, 0, 2.0181, -0.779, -1.0091, 2.0181, -0.779, 0, 1.009, -0.38619998, 0, 1.009, -0.38619998, -1.0091, 2.0181, -0.779, -1.0091, 0, -0.779, 2.0181, 1.009, -0.38619998, 1.009, 1.009, -0.779, 2.0181, 0, -0.779, 2.0181, 0, -0.38619998, 1.009, 1.009, -0.38619998, 1.009, -1.0091, -0.779, 2.0181, 0, -0.38619998, 1.009, 0, -0.779, 2.0181, -1.0091, -0.779, 2.0181, -1.0091, -0.38619998, 1.009, 0, -0.38619998, 1.009, 1.009, -0.779, 2.0181, 2.0181, -0.779, 1.009, 2.0181, -0.779, 2.0181, 1.009, -0.779, 2.0181, 1.009, -0.38619998, 1.009, 2.0181, -0.779, 1.009, -2.0181, -0.779, 1.009, -1.0091, -0.38619998, 0, -1.0091, -0.38619998, 1.009, -2.0181, -0.779, 1.009, -2.0181, -0.779, 0, -1.0091, -0.38619998, 0, -2.0181, -0.779, 0, -1.0091, -0.38619998, -1.0091, -1.0091, -0.38619998, 0, -2.0181, -0.779, 0, -2.0181, -0.779, -1.0091, -1.0091, -0.38619998, -1.0091, -2.0181, -0.779, 2.0181, -1.0091, -0.38619998, 1.009, -1.0091, -0.779, 2.0181, -2.0181, -0.779, 2.0181, -2.0181, -0.779, 1.009, -1.0091, -0.38619998, 1.009, -2.0181, -0.779, -1.0091, -1.0091, -0.779, -2.0181, -1.0091, -0.38619998, -1.0091, -2.0181, -0.779, -1.0091, -2.0181, -0.779, -2.0181, -1.0091, -0.779, -2.0181)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_l8tv3"]
 _surfaces = [{
 "aabb": AABB(-2.0181031, -0.7789751, -2.0181031, 4.0362062, 0.39275414, 4.0362062),
@@ -5919,6 +5913,7 @@ script = ExtResource("1_ca2mb")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1844450298 node_paths=PackedStringArray("look_at_point_1", "look_at_point_2", "look_at_point_3", "look_at_point_4", "alert_arrow", "alert_arrow_2", "alert_arrow_3", "alert_arrow_4") groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.742454, 0.17282033, -5.270798)
+visible = false
 script = ExtResource("2_v4c23")
 look_at_point_1 = NodePath("../CameraPoint1")
 look_at_point_2 = NodePath("../CameraPoint2")
@@ -6232,7 +6227,7 @@ libraries/ = SubResource("AnimationLibrary_qdhp6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0085994005, 1.2154319, -1.3343687)
 
 [node name="UltraBow" type="Node3D" parent="Player/Head/Marker3D/GunArm" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986552, -0.051094152, -0.05112583, 0.99676466, 0.062018417, 0.047952797, 0.0644781, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.047986545, -0.051094152, -0.05112582, 0.99676466, 0.06201841, 0.047952797, 0.06447809, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="UltraBow" type="Node3D" parent="Player/Head/Marker3D/GunArm/UltraBow" unique_id=2105935698]
 transform = Transform3D(1.2999996, -1.8626451e-08, -2.4680048e-08, 4.656613e-10, 0.01987569, -1.2998476, -3.7252903e-09, 1.299848, 0.019875757, -0.013769388, 0.9215592, -3.6773963)
@@ -6703,6 +6698,11 @@ shape = SubResource("CapsuleShape3D_4mdpm")
 [node name="GrenadePosition" type="Marker3D" parent="Player" unique_id=1051295221]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5913603, -4.8596077)
 
+[node name="PlayerSprite" type="CSGBox3D" parent="." unique_id=1774175450]
+transform = Transform3D(1, 0, 0, 0, 0.016283223, 0.9998674, 0, -0.9998673, 0.016283223, -5.0659637, 2.013178, -5.0043445)
+size = Vector3(0.001, 3.939209, 4.5786133)
+material = SubResource("StandardMaterial3D_7diyy")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=851416319]
 environment = SubResource("Environment_sfhgb")
 
@@ -6858,7 +6858,6 @@ bus = &"Music"
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1559373778]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 18.093607, 9.742699, -1.8696079)
-visible = false
 material_override = SubResource("ShaderMaterial_plpmp")
 size = Vector3(2.4818115, 1.6269531, 2.0708008)
 
@@ -6925,7 +6924,7 @@ root_node = NodePath("../CutSceneCam")
 libraries/ = SubResource("AnimationLibrary_plpmp")
 
 [node name="CutSceneCam" type="Camera3D" parent="." unique_id=1081922134]
-transform = Transform3D(-0.12772246, 0, 0.9918099, 0, 1, 0, -0.9918099, 0, -0.12772246, 79.04602, 8.238413, 0)
+transform = Transform3D(-0.12772244, 0, 0.9918098, 0, 1, 0, -0.9918098, 0, -0.12772244, 79.04602, 8.238413, 0)
 current = true
 fov = 50.0
 
@@ -6983,6 +6982,8 @@ transform = Transform3D(4.512646, 0, 0, 0, 4.512646, 0, 0, 0, 4.512646, 24.58476
 mesh = SubResource("ArrayMesh_kvf3l")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena2/Cube_012" unique_id=2082500382]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/Cube_012/StaticBody3D" unique_id=1043920536]
 shape = SubResource("ConcavePolygonShape3D_nhh2d")
@@ -7008,6 +7009,8 @@ transform = Transform3D(6.275601, 0, 0, 0, 2.406902, 0, 0, 0, 1, 14.654551, 5.98
 mesh = SubResource("ArrayMesh_p6e6s")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena2/Cube_028" unique_id=135013807]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/Cube_028/StaticBody3D" unique_id=140479699]
 shape = SubResource("ConcavePolygonShape3D_fvym7")
@@ -7017,6 +7020,8 @@ transform = Transform3D(6.154575, 0, 0, 0, 0.4423939, 0, 0, 0, 1, 14.032044, 6.0
 mesh = SubResource("ArrayMesh_0p8h7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena2/Cube_029" unique_id=210154926]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/Cube_029/StaticBody3D" unique_id=544352170]
 shape = SubResource("ConcavePolygonShape3D_r0hv1")
@@ -7026,6 +7031,8 @@ transform = Transform3D(2.6094694, 0, 0.6418208, 0, 1, 0, -0.8821799, 0, 1.89849
 mesh = SubResource("ArrayMesh_mjduh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena2/Cube_033" unique_id=1347354901]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/Cube_033/StaticBody3D" unique_id=1323588484]
 shape = SubResource("ConcavePolygonShape3D_6t0j1")
@@ -7035,6 +7042,8 @@ transform = Transform3D(0.12478963, 0.1317343, -0.0152317295, -0.013433451, 1.24
 mesh = SubResource("ArrayMesh_nr2bi")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena2/Cube_034" unique_id=276217545]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/Cube_034/StaticBody3D" unique_id=264578802]
 shape = SubResource("ConcavePolygonShape3D_sdv3x")
@@ -7052,6 +7061,8 @@ transform = Transform3D(2.5571942, 0, -0.7449129, 0, 1, 0, 1.0238795, 0, 1.86046
 mesh = SubResource("ArrayMesh_jxkov")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena2/Cube_039" unique_id=1473578986]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/Cube_039/StaticBody3D" unique_id=1181743677]
 shape = SubResource("ConcavePolygonShape3D_7diyy")
@@ -7107,6 +7118,8 @@ transform = Transform3D(0.10638116, 0, -0.037647475, 0, 1.656157, 0, 0.037647475
 mesh = SubResource("ArrayMesh_44vkg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena2/Cylinder_001" unique_id=1241828797]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/Cylinder_001/StaticBody3D" unique_id=800412416]
 shape = SubResource("ConcavePolygonShape3D_vao34")
@@ -7148,9 +7161,11 @@ transform = Transform3D(-14.577672, 0, 0, 0, -14.577672, 0, 0, 0, -14.577672, 4.
 mesh = SubResource("ArrayMesh_fjdcu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena2/ground" unique_id=2035794619]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/ground/StaticBody3D" unique_id=1602904415]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.21982509)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00019353628, -3.2712705e-08, -0.21879107)
 shape = SubResource("ConcavePolygonShape3D_0yfw8")
 
 [node name="Plane" type="MeshInstance3D" parent="Arena2" unique_id=1215166313]
@@ -7232,15 +7247,6 @@ mesh = SubResource("ArrayMesh_2nxhj")
 [node name="Plane_020" type="MeshInstance3D" parent="Arena2" unique_id=1019233844]
 transform = Transform3D(0.21603319, -0.4782782, 0.25830773, 0.25848946, 0.47620615, 0.04736919, -0.11542059, 0.17128922, 0.58956105, 84.06891, 11.47112, -10.734085)
 mesh = SubResource("ArrayMesh_he6wa")
-
-[node name="Plane_021" type="MeshInstance3D" parent="Arena2" unique_id=1587987292]
-transform = Transform3D(3.408062, 0.31322208, 1.7613015, -0.35226685, 3.832895, -1.4278647e-08, -1.7539096, -0.16119519, 3.4224253, -17.111746, 5.7176065, -0.6100035)
-mesh = SubResource("ArrayMesh_tbjwt")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Arena2/Plane_021" unique_id=1063995737]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena2/Plane_021/StaticBody3D" unique_id=725128527]
-shape = SubResource("ConcavePolygonShape3D_is28e")
 
 [node name="Plane_022" type="MeshInstance3D" parent="Arena2" unique_id=92255029]
 transform = Transform3D(3.3872344, 0.3113079, -1.8013625, -0.35226685, 3.832895, 3.2006607e-08, 1.7938025, 0.16486157, 3.40151, 31.591211, 5.190382, -8.116009)

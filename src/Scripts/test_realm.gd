@@ -24,6 +24,9 @@ const BOSS_THEME = preload("uid://c4n1b2qik86oq")
 	{"spawn point": spawn_point_4, "occupied": false, "index": 3 }
 ]
 
+@onready var player_sprite: CSGBox3D = $PlayerSprite
+
+
 var configs_to_beat : int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -175,6 +178,8 @@ func stop_arena_battle() -> void:
 	music_player.stop()
 
 func transition_to_player_camera() -> void:
+	player_sprite.queue_free()
+	player.visible = true
 	player.camera.current = true
 	cut_scene_cam.queue_free()
 	GameManager.can_move = true

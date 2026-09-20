@@ -14,4 +14,4 @@ size = Vector3(21.863098, 0.001, 6.290222)
 [node name="Node3D" type="Node3D" parent="." unique_id=877140234]
 
 [node name="TestEnemy" parent="Node3D" unique_id=486612471 instance=ExtResource("2_yygm1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.533233, 0.0001988411, 5.951911)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.533233, 1.0714772, 4.7887206)
