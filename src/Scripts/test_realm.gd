@@ -15,12 +15,13 @@ const BOSS_THEME = preload("uid://c4n1b2qik86oq")
 @onready var spawn_point_2: EnemySpawnPoint = $SpawnPoints/SpawnPoint2
 @onready var spawn_point_3: EnemySpawnPoint = $SpawnPoints/SpawnPoint3
 @onready var spawn_point_4: EnemySpawnPoint = $SpawnPoints/SpawnPoint4
+@onready var arena_animation_player: AnimationPlayer = $Arena2/ArenaAnimationPlayer
 
 @onready var available_spawn_points : Array = [
-	{"spawn point": spawn_point_1, "occupied": false },
-	{"spawn point": spawn_point_2, "occupied": false},
-	{"spawn point": spawn_point_3, "occupied": false},
-	{"spawn point": spawn_point_4, "occupied": false}
+	{"spawn point": spawn_point_1, "occupied": false, "index": 0 },
+	{"spawn point": spawn_point_2, "occupied": false, "index": 1 },
+	{"spawn point": spawn_point_3, "occupied": false, "index": 2 },
+	{"spawn point": spawn_point_4, "occupied": false, "index": 3 }
 ]
 
 var configs_to_beat : int = 0
@@ -48,6 +49,7 @@ func _ready() -> void:
 	SignalBus.combat_engaged.connect(start_boss_music)
 	SignalBus.config_beat.connect(deduct_configs_to_kill)
 	SignalBus.arena_ended.connect(stop_arena_battle)
+	arena_animation_player.play("NewTide")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -88,11 +90,8 @@ func spawn_enemy() -> void:
 	configs_to_beat = config_amount
 	print("THIS IS THE SET CONFIG AMOUNT %s" % configs_to_beat)
 	for i in range(config_amount):
-		var config_list : Array = GameManager.wave_configurations[GameManager.round_number][GameManager.current_round_point]
-		var random_config : PackedScene = GameManager.pick_weighted_config(config_list)
-		var chosen_configuration : EnemyConfiguration = random_config.instantiate()
-		
 		var chosen_spawn_point : Dictionary = {}
+		
 		while true:
 			var candidate = available_spawn_points.pick_random()
 			if not candidate["occupied"]:
@@ -100,7 +99,12 @@ func spawn_enemy() -> void:
 				break
 				
 			# Mark spawn point as occupied
-			
+		print("THIS IS CHOSEN INDEX: %s " % chosen_spawn_point["index"])
+		
+		var config_list : Array = GameManager.wave_configurations[GameManager.round_number][GameManager.current_round_point][chosen_spawn_point["index"]]
+		var random_config : PackedScene = GameManager.pick_weighted_config(config_list)
+		print("THIS IS THE SCENE: %s" % random_config) 
+		var chosen_configuration : EnemyConfiguration = random_config.instantiate()
 		chosen_spawn_point["occupied"] = true
 		chosen_spawn_point["spawn point"].add_child(chosen_configuration)
 		

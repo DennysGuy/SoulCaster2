@@ -5,6 +5,7 @@ class_name TestEnemy extends Enemy
 @onready var skeleton_3d: Skeleton3D = $"rat(2)/rat/Skeleton3D"
 
 
+@onready var spawn_in_player: AnimationPlayer = $SpawnInPlayer
 
 var player_in_range : bool = false
 
@@ -15,6 +16,7 @@ func _ready() -> void:
 	SignalBus.enemy_spawned.emit(self)
 	state_machine.init(self)
 	#ake_materials_unique(skeleton_3d)
+	spawn_in_player.play("SpawnIn")
 
 func _process(delta: float) -> void:
 	super(delta)
