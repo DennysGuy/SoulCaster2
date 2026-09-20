@@ -16,7 +16,8 @@ func _ready() -> void:
 	SignalBus.enemy_spawned.emit(self)
 	state_machine.init(self)
 	#ake_materials_unique(skeleton_3d)
-	spawn_in_player.play("SpawnIn")
+	if spawn_in_player:
+		spawn_in_player.play("SpawnIn")
 
 func _process(delta: float) -> void:
 	super(delta)

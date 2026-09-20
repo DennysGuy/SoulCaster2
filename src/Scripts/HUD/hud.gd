@@ -120,8 +120,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if round_started:
-		#if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
-			#add_progress(50)
+		if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
+			add_progress(50)
 		
 		if Input.is_action_just_pressed("jump") and arena_context_showing:
 			close_context_panel()

@@ -24,4 +24,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3623605, 0, 2.4366784)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6795588, 0, 0.9205513)
 
 [node name="TestEnemy3" parent="Node3D" unique_id=186119172 instance=ExtResource("2_7nrx8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.554434, 0, 4.285013)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1038413, 0, 2.6641865)

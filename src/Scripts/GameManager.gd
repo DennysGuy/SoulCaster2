@@ -224,6 +224,30 @@ const R_1P_3_ENEMY_CONFIGURATION_3_POINT_4 = preload("uid://dcsno16wr4ess")
 const R_1P_3_ENEMY_CONFIGURATION_4_POINT_4 = preload("uid://bi8eprunntg7a")
 const R_1P_3_ENEMY_CONFIGURATION_5_POINT_4 = preload("uid://b72detlkcrxv7")
 
+const R_2P_1_ENEMY_CONFIGURATION_1_POINT_1 = preload("uid://cl5pp12u7gox8")
+const R_2P_1_ENEMY_CONFIGURATION_2_POINT_1 = preload("uid://crokupuahf6ju")
+const R_2P_1_ENEMY_CONFIGURATION_3_POINT_1 = preload("uid://y8d57gvq0jvp")
+const R_2P_1_ENEMY_CONFIGURATION_4_POINT_1 = preload("uid://crfwk40xeeghe")
+const R_2P_1_ENEMY_CONFIGURATION_5_POINT_1 = preload("uid://vhkmtatrqdys")
+
+const R_2P_1_ENEMY_CONFIGURATION_1_POINT_2 = preload("uid://bmmq3o0i5if6v")
+const R_2P_1_ENEMY_CONFIGURATION_2_POINT_2 = preload("uid://dq6b84shlyloe")
+const R_2P_1_ENEMY_CONFIGURATION_3_POINT_2 = preload("uid://26ahgiwbk5v2")
+const R_2P_1_ENEMY_CONFIGURATION_4_POINT_2 = preload("uid://bwch58ce8rqyv")
+const R_2P_1_ENEMY_CONFIGURATION_5_POINT_2 = preload("uid://c58butls0glqx")
+
+const R_2P_1_ENEMY_CONFIGURATION_1_POINT_3 = preload("uid://ctbk8rvyyyrcu")
+const R_2P_1_ENEMY_CONFIGURATION_2_POINT_3 = preload("uid://w3uvwmn8fi0j")
+const R_2P_1_ENEMY_CONFIGURATION_3_POINT_3 = preload("uid://dhc6fs83gqylr")
+const R_2P_1_ENEMY_CONFIGURATION_4_POINT_3 = preload("uid://coi8kw5mikb6q")
+const R_2P_1_ENEMY_CONFIGURATION_5_POINT_3 = preload("uid://b00wf4awjtr7b")
+
+const R_2P_1_ENEMY_CONFIGURATION_1_POINT_4 = preload("uid://bgio7msl258wk")
+const R_2P_1_ENEMY_CONFIGURATION_2_POINT_4 = preload("uid://dfctjm6r1jtv1")
+const R_2P_1_ENEMY_CONFIGURATION_3_POINT_4 = preload("uid://b4s8w7vsrkv")
+const R_2P_1_ENEMY_CONFIGURATION_4_POINT_4 = preload("uid://ckj3nnx4hxh4b")
+const R_2P_1_ENEMY_CONFIGURATION_5_POINT_4 = preload("uid://dn6gfggbt0q07")
+
 
 func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0):
 	var player := AudioStreamPlayer.new()
@@ -269,7 +293,7 @@ func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0
 		}
 			,
 		ROUND_POINT.FIRST_QUARTER: { 
-			0:[
+		0:[
 			{"scene": R_1P_1_ENEMY_CONFIGURATION_1_POINT_1, "weight": 1},
 			{"scene":R_1P_1_ENEMY_CONFIGURATION_2_POINT_1, "weight":5},
 			{"scene":R_1P_1_ENEMY_CONFIGURATION_3_POINT_1, "weight":3},
@@ -363,32 +387,32 @@ func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0
 	1:
 		{ROUND_POINT.BEGINNING: {
 			0: [
-				{"scene": R_2P_1_ENEMY_CONFIGURATION_1, "weight": 5},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_2, "weight":4},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_5, "weight":1}
+				{"scene": R_2P_1_ENEMY_CONFIGURATION_1_POINT_1, "weight": 5},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_2_POINT_1, "weight":4},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_3_POINT_1, "weight":3},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_4_POINT_1, "weight":2},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_5_POINT_1, "weight":1}
 			],
 			1: [
-				{"scene": R_2P_1_ENEMY_CONFIGURATION_1, "weight": 5},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_2, "weight":4},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_5, "weight":1}
+				{"scene": R_2P_1_ENEMY_CONFIGURATION_1_POINT_2, "weight": 5},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_2_POINT_2, "weight":4},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_3_POINT_2, "weight":3},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_4_POINT_2, "weight":2},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_5_POINT_2, "weight":1}
 			],
 			2:[
-				{"scene": R_2P_1_ENEMY_CONFIGURATION_1, "weight": 5},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_2, "weight":4},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_5, "weight":1}
+				{"scene": R_2P_1_ENEMY_CONFIGURATION_1_POINT_3, "weight": 5},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_2_POINT_3, "weight":4},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_3_POINT_3, "weight":3},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_4_POINT_3, "weight":2},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_5_POINT_3, "weight":1}
 			],
 			3: [
-				{"scene": R_2P_1_ENEMY_CONFIGURATION_1, "weight": 5},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_2, "weight":4},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_2P_1_ENEMY_CONFIGURATION_5, "weight":1}
+				{"scene": R_2P_1_ENEMY_CONFIGURATION_1_POINT_4, "weight": 5},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_2_POINT_4, "weight":4},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_3_POINT_4, "weight":3},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_4_POINT_4, "weight":2},
+				{"scene":R_2P_1_ENEMY_CONFIGURATION_5_POINT_4, "weight":1}
 			]
 		},
 		ROUND_POINT.FIRST_QUARTER:{
