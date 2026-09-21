@@ -6858,7 +6858,6 @@ bus = &"Music"
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1559373778]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 18.093607, 9.742699, -1.8696079)
-visible = false
 material_override = SubResource("ShaderMaterial_plpmp")
 size = Vector3(2.4818115, 1.6269531, 2.0708008)
 

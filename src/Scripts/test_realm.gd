@@ -16,6 +16,7 @@ const BOSS_THEME = preload("uid://c4n1b2qik86oq")
 @onready var spawn_point_3: EnemySpawnPoint = $SpawnPoints/SpawnPoint3
 @onready var spawn_point_4: EnemySpawnPoint = $SpawnPoints/SpawnPoint4
 @onready var arena_animation_player: AnimationPlayer = $Arena2/ArenaAnimationPlayer
+const ENEMY_SPAWN_SFX = preload("uid://bfk213an2avam")
 
 @onready var available_spawn_points : Array = [
 	{"spawn point": spawn_point_1, "occupied": false, "index": 0 },
@@ -92,6 +93,7 @@ func spawn_enemy() -> void:
 	var config_amount : int = randi_range(min_config,GameManager.get_max_configs())
 	configs_to_beat = config_amount
 	print("THIS IS THE SET CONFIG AMOUNT %s" % configs_to_beat)
+	GameManager.play_sfx(ENEMY_SPAWN_SFX)
 	for i in range(config_amount):
 		var chosen_spawn_point : Dictionary = {}
 		
