@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cp045j5jw7l4g"]
+
+[ext_resource type="Script" uid="uid://cm7aa2rh3fisf" path="res://src/Scripts/enemy_configuration.gd" id="1_rd4x7"]
+[ext_resource type="PackedScene" uid="uid://be7m7tct4a7cq" path="res://src/Scenes/TestEnemy.tscn" id="2_v38oe"]
+
+[node name="Conifguration" type="Node3D" unique_id=2039213139 node_paths=PackedStringArray("enemies")]
+script = ExtResource("1_rd4x7")
+enemies = NodePath("Node3D")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=488415967]
+visible = false
+size = Vector3(21.863098, 0.001, 6.290222)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=877140234]
+
+[node name="TestEnemy2" parent="Node3D" unique_id=1627531188 instance=ExtResource("2_v38oe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.219787, 7.5551953, 3.2657475)
+
+[node name="TestEnemy3" parent="Node3D" unique_id=562644774 instance=ExtResource("2_v38oe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9178138, 2.5273032, 5.448987)
+
+[node name="TestEnemy4" parent="Node3D" unique_id=486612471 instance=ExtResource("2_v38oe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1587, 1.0889187, 5.448987)
