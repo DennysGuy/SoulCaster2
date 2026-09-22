@@ -320,6 +320,54 @@ const R_3P_1_ENEMY_CONFIGURATION_3_POINT_4 = preload("uid://cfg5y56lhdycr")
 const R_3P_1_ENEMY_CONFIGURATION_4_POINT_4 = preload("uid://vx08omwcxw0y")
 const R_3P_1_ENEMY_CONFIGURATION_5_POINT_4 = preload("uid://b7wlxco71cw22")
 
+const R_3P_2_ENEMY_CONFIGURATION_1_POINT_1 = preload("uid://dwj5qdftxevy5")
+const R_3P_2_ENEMY_CONFIGURATION_2_POINT_1 = preload("uid://blja3dn4ymcof")
+const R_3P_2_ENEMY_CONFIGURATION_3_POINT_1 = preload("uid://b7bt7artfhgbu")
+const R_3P_2_ENEMY_CONFIGURATION_4_POINT_1 = preload("uid://b8t7lnf5nbrug")
+const R_3P_2_ENEMY_CONFIGURATION_5_POINT_1 = preload("uid://ctadaky8jgci8")
+
+const R_3P_2_ENEMY_CONFIGURATION_1_POINT_2 = preload("uid://ecmrxanlva6c")
+const R_3P_2_ENEMY_CONFIGURATION_2_POINT_2 = preload("uid://8v35toinjyhx")
+const R_3P_2_ENEMY_CONFIGURATION_3_POINT_2 = preload("uid://1ra8nf0s6p7c")
+const R_3P_2_ENEMY_CONFIGURATION_4_POINT_2 = preload("uid://cwktb81pewinr")
+const R_3P_2_ENEMY_CONFIGURATION_5_POINT_2 = preload("uid://1pi8ps5yq4vn")
+
+const R_3P_2_ENEMY_CONFIGURATION_1_POINT_3 = preload("uid://cdyyo35x0equ2")
+const R_3P_2_ENEMY_CONFIGURATION_2_POINT_3 = preload("uid://1xjvjfd7svql")
+const R_3P_2_ENEMY_CONFIGURATION_3_POINT_3 = preload("uid://d1snbs0hgtw2l")
+const R_3P_2_ENEMY_CONFIGURATION_4_POINT_3 = preload("uid://wm7nggp17ty6")
+const R_3P_2_ENEMY_CONFIGURATION_5_POINT_3 = preload("uid://c6cdc41j2rrdy")
+
+const R_3P_2_ENEMY_CONFIGURATION_1_POINT_4 = preload("uid://dcu3ruu323jek")
+const R_3P_2_ENEMY_CONFIGURATION_2_POINT_4 = preload("uid://btlebkpl0r68s")
+const R_3P_2_ENEMY_CONFIGURATION_3_POINT_4 = preload("uid://bmv70hfoh8gvm")
+const R_3P_2_ENEMY_CONFIGURATION_4_POINT_4 = preload("uid://cu0e61484pywd")
+const R_3P_2_ENEMY_CONFIGURATION_5_POINT_4 = preload("uid://cpg8or4rgjxqq")
+
+const R_3P_3_ENEMY_CONFIGURATION_1_POINT_1 = preload("uid://ce87h6qd8c0ey")
+const R_3P_3_ENEMY_CONFIGURATION_2_POINT_1 = preload("uid://drp87pdse2bbe")
+const R_3P_3_ENEMY_CONFIGURATION_3_POINT_1 = preload("uid://sivyk7ahqibd")
+const R_3P_3_ENEMY_CONFIGURATION_4_POINT_1 = preload("uid://b0omxmp11ewue")
+const R_3P_3_ENEMY_CONFIGURATION_5_POINT_1 = preload("uid://cuyd8y4l14oj4")
+
+const R_3P_3_ENEMY_CONFIGURATION_1_POINT_2 = preload("uid://dhbm4wa2el18i")
+const R_3P_3_ENEMY_CONFIGURATION_2_POINT_2 = preload("uid://c78ha3mr6gebq")
+const R_3P_3_ENEMY_CONFIGURATION_3_POINT_2 = preload("uid://b481wbk214j60")
+const R_3P_3_ENEMY_CONFIGURATION_4_POINT_2 = preload("uid://dyc6s4esi6dyx")
+const R_3P_3_ENEMY_CONFIGURATION_5_POINT_2 = preload("uid://b1hk8w2qch30d")
+
+const R_3P_3_ENEMY_CONFIGURATION_1_POINT_3 = preload("uid://cxietxksgnrvm")
+const R_3P_3_ENEMY_CONFIGURATION_2_POINT_3 = preload("uid://dj871edg7q340")
+const R_3P_3_ENEMY_CONFIGURATION_3_POINT_3 = preload("uid://db5cd58cbcbwi")
+const R_3P_3_ENEMY_CONFIGURATION_4_POINT_3 = preload("uid://daoun3ywjmxx0")
+const R_3P_3_ENEMY_CONFIGURATION_5_POINT_3 = preload("uid://chgodoe3ny3hs")
+
+const R_3P_3_ENEMY_CONFIGURATION_1_POINT_4 = preload("uid://cbgg57shmcs02")
+const R_3P_3_ENEMY_CONFIGURATION_2_POINT_4 = preload("uid://bg6iimsipbfvu")
+const R_3P_3_ENEMY_CONFIGURATION_3_POINT_4 = preload("uid://b6e18ki0vmi72")
+const R_3P_3_ENEMY_CONFIGURATION_4_POINT_4 = preload("uid://j0efxdtq1otp")
+const R_3P_3_ENEMY_CONFIGURATION_5_POINT_4 = preload("uid://be8krdngpvapf")
+
 
 func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0):
 	var player := AudioStreamPlayer.new()
@@ -640,62 +688,62 @@ func play_sfx(sound: AudioStream, volume: float = 0.0, pitch_scale : float = 1.0
 		},
 		ROUND_POINT.HALF_WAY:{
 			0:[
-				{"scene": R_3P_2_ENEMY_CONFIGURATION_1, "weight": 1},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_2, "weight":4},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_5, "weight":5}
+				{"scene": R_3P_2_ENEMY_CONFIGURATION_1_POINT_1, "weight": 1},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_2_POINT_1, "weight":4},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_3_POINT_1, "weight":3},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_4_POINT_1, "weight":2},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_5_POINT_1, "weight":5}
 			],
 			1:[
-				{"scene": R_3P_2_ENEMY_CONFIGURATION_1, "weight": 1},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_2, "weight":4},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_5, "weight":5}
+				{"scene": R_3P_2_ENEMY_CONFIGURATION_1_POINT_2, "weight": 1},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_2_POINT_2, "weight":4},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_3_POINT_2, "weight":3},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_4_POINT_2, "weight":2},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_5_POINT_2, "weight":5}
 			],
 			2:[
-				{"scene": R_3P_2_ENEMY_CONFIGURATION_1, "weight": 1},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_2, "weight":4},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_5, "weight":5}
+				{"scene": R_3P_2_ENEMY_CONFIGURATION_1_POINT_3, "weight": 1},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_2_POINT_3, "weight":4},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_3_POINT_3, "weight":3},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_4_POINT_3, "weight":2},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_5_POINT_3, "weight":5}
 			],
 			3:[
-				{"scene": R_3P_2_ENEMY_CONFIGURATION_1, "weight": 1},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_2, "weight":4},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_3, "weight":3},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_4, "weight":2},
-				{"scene":R_3P_2_ENEMY_CONFIGURATION_5, "weight":5}
+				{"scene": R_3P_2_ENEMY_CONFIGURATION_1_POINT_4, "weight": 1},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_2_POINT_4, "weight":4},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_3_POINT_4, "weight":3},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_4_POINT_4, "weight":2},
+				{"scene":R_3P_2_ENEMY_CONFIGURATION_5_POINT_4, "weight":5}
 			],
 		},
 		ROUND_POINT.THREE_QUARTER: {
 			0:[
-				{"scene": R_3P_3_ENEMY_CONFIGURATION_1, "weight": 3},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_2, "weight":5},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_3, "weight":2},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_4, "weight":1},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_5, "weight":3}
+				{"scene": R_3P_3_ENEMY_CONFIGURATION_1_POINT_1, "weight": 3},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_2_POINT_1, "weight":5},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_3_POINT_1, "weight":2},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_4_POINT_1, "weight":1},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_5_POINT_1, "weight":3}
 			],
 			1:[
-				{"scene": R_3P_3_ENEMY_CONFIGURATION_1, "weight": 3},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_2, "weight":5},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_3, "weight":2},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_4, "weight":1},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_5, "weight":3}
+				{"scene": R_3P_3_ENEMY_CONFIGURATION_1_POINT_2, "weight": 3},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_2_POINT_2, "weight":5},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_3_POINT_2, "weight":2},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_4_POINT_2, "weight":1},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_5_POINT_2, "weight":3}
 			],
 			2:[
-				{"scene": R_3P_3_ENEMY_CONFIGURATION_1, "weight": 3},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_2, "weight":5},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_3, "weight":2},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_4, "weight":1},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_5, "weight":3}
+				{"scene": R_3P_3_ENEMY_CONFIGURATION_1_POINT_3, "weight": 3},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_2_POINT_3, "weight":5},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_3_POINT_3, "weight":2},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_4_POINT_3, "weight":1},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_5_POINT_3, "weight":3}
 			],
 			3:[
-				{"scene": R_3P_3_ENEMY_CONFIGURATION_1, "weight": 3},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_2, "weight":5},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_3, "weight":2},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_4, "weight":1},
-				{"scene":R_3P_3_ENEMY_CONFIGURATION_5, "weight":3}
+				{"scene": R_3P_3_ENEMY_CONFIGURATION_1_POINT_4, "weight": 3},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_2_POINT_4, "weight":5},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_3_POINT_4, "weight":2},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_4_POINT_4, "weight":1},
+				{"scene":R_3P_3_ENEMY_CONFIGURATION_5_POINT_4, "weight":3}
 			],
 		},
 	},
