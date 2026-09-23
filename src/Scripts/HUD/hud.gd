@@ -80,6 +80,7 @@ func _ready() -> void:
 	SignalBus.arena_context_button_closed.connect(close_context_panel)
 	SignalBus.arena_ended.connect(go_to_hub)
 	SignalBus.grenade_thrown.connect(update_grenade_count)
+	SignalBus.boss_jumped_out.connect(start_mini_round_count_down)
 	update_ore_count_label(0)
 	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
@@ -348,3 +349,9 @@ func play_three() -> void:
 func play_survive() -> void:
 	GameManager.play_sfx(VOX_ANNOUNCER_COUNT_DOWN__SURVIVE_01)
 	GameManager.play_sfx(COUNT_DOWN_BEEP,-2)
+
+func start_mini_round() -> void:
+	SignalBus.mini_round_started.emit()
+
+func start_mini_round_count_down() -> void:
+	animation_player.play("MiniRoundCountDown")

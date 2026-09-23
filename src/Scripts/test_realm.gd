@@ -4,7 +4,7 @@ class_name TestRealm extends Node3D
 @onready var spawn_points: Node = $SpawnPoints
 @onready var ore_spawn_points: Node = $OreSpawnPoints
 @onready var ore_spawn_timer: Timer = $OreSpawnTimer
-@onready var boss_spawn_point: Marker3D = $BossSpawnPoint
+@onready var boss_spawn_point: Marker3D = $BossSpawnPoints/BossSpawnPoint
 const BOSS_THEME = preload("uid://c4n1b2qik86oq")
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var cut_scene_cam: Camera3D = $CutSceneCam
@@ -18,6 +18,8 @@ const BOSS_THEME = preload("uid://c4n1b2qik86oq")
 @onready var arena_animation_player: AnimationPlayer = $Arena2/ArenaAnimationPlayer
 const ENEMY_SPAWN_SFX = preload("uid://bfk213an2avam")
 
+@onready var boss_spawn_points: Node3D = $BossSpawnPoints
+
 @onready var available_spawn_points : Array = [
 	{"spawn point": spawn_point_1, "occupied": false, "index": 0 },
 	{"spawn point": spawn_point_2, "occupied": false, "index": 1 },
@@ -29,6 +31,7 @@ const ENEMY_SPAWN_SFX = preload("uid://bfk213an2avam")
 
 
 var configs_to_beat : int = 0
+var waves_to_beat : int  = 0 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -72,12 +75,11 @@ func start_spawn_timer() -> void:
 
 func stop_spawn_timer(kill : bool) -> void:
 	configs_to_beat = 0
+	waves_to_beat = 0
 	spawn_timer.wait_time = 0
 	spawn_timer.stop()
 
 func spawn_enemy() -> void:
-	
-	
 	spawn_timer.stop()
 	
 	if !GameManager.round_started:
@@ -89,6 +91,14 @@ func spawn_enemy() -> void:
 	
 	if GameManager.round_number >= 1:
 		min_config = 2
+	
+	if GameManager.mini_round_started:
+		waves_to_beat -= 1
+		if waves_to_beat == -1:
+			#SignalBus.mini_round_finished.emit()
+			spawn_boss_in_random_spot()
+			GameManager.mini_round_started = false
+			return
 	
 	var config_amount : int = randi_range(min_config,GameManager.get_max_configs())
 	configs_to_beat = config_amount
@@ -106,7 +116,10 @@ func spawn_enemy() -> void:
 			# Mark spawn point as occupied
 		print("THIS IS CHOSEN INDEX: %s " % chosen_spawn_point["index"])
 		
-		var config_list : Array = GameManager.wave_configurations[GameManager.round_number][GameManager.current_round_point][chosen_spawn_point["index"]]
+		var current_round : int = GameManager.round_number
+		if GameManager.round_number > 2:
+			GameManager.round_number = 2
+		var config_list : Array = GameManager.wave_configurations[current_round][GameManager.current_round_point][chosen_spawn_point["index"]]
 		var random_config : PackedScene = GameManager.pick_weighted_config(config_list)
 		print("THIS IS THE SCENE: %s" % random_config) 
 		var chosen_configuration : EnemyConfiguration = random_config.instantiate()
@@ -125,7 +138,7 @@ func spawn_enemy() -> void:
 		
 		if !GameManager.round_started:
 			return
-			
+		
 		var spawn_time : float = GameManager.round_timers[GameManager.round_number]
 		var random_time : float = max(1,randf_range(spawn_time - 0.6, spawn_time + 0.5))
 		spawn_timer.wait_time = random_time
@@ -185,3 +198,14 @@ func transition_to_player_camera() -> void:
 	player.camera.current = true
 	cut_scene_cam.queue_free()
 	GameManager.can_move = true
+
+func start_mini_round_spawn() -> void:
+	waves_to_beat = randi_range(3,5)
+	start_spawn_timer()
+
+func spawn_boss_in_random_spot() -> void:
+	var boss : BroodMother = preload("uid://d4gg3flbxkfb5").instantiate()
+	var random_spawn_point : Marker3D = boss_spawn_points.get_children().pick_random()	
+	boss.global_position = random_spawn_point.global_position
+	#boss.rotation = boss_spawn_point.rotation
+	add_child(boss)

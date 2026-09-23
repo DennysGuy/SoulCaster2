@@ -12,6 +12,8 @@ var rifle_owned : bool = false
 var amulet_owned : bool = false
 var enemy_tracker_owned : bool = false
 
+var mini_round_started : bool = false
+
 var bullets_left : int = 32
 var pistol_magazine_size : int = 1
 var rifle_magazine_size : int = 6
@@ -38,6 +40,9 @@ var round_times : Array[int] = [125, 230, 340]
 
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,3,3]
+
+var max_boss_health : int = 2000
+var current_boss_health : int = 2000
 
 var max_configurations : Dictionary = {
 	0: {

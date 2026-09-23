@@ -136,17 +136,24 @@ func damage_enemy(applied_damage : int = 0) -> void:
 	show_lock_on_target()
 	SignalBus.enemy_hit.emit(self)
 	spawn_damage_label(damage, is_crit)
-	health -= damage
 	
 	if self is BroodMother:
-		SignalBus.boss_damaged.emit(health, max_enemy_health)
+		GameManager.current_boss_health -= damage
+		SignalBus.boss_damaged.emit(GameManager.current_boss_health, GameManager.max_boss_health)
+		if GameManager.current_boss_health <= 0:
+			kill_enemy()
+			GameManager.play_sfx(RAT_DEATH_1)
+		else:
+			GameManager.play_sfx(hurts.pick_random())
 	else:
+		health -= damage
 		SignalBus.enemy_found.emit(enemy_name, health, max_enemy_health)
-	if health <= 0:
-		kill_enemy()
-		GameManager.play_sfx(RAT_DEATH_1)
-	else:
-		GameManager.play_sfx(hurts.pick_random())
+	
+		if health <= 0:
+			kill_enemy()
+			GameManager.play_sfx(RAT_DEATH_1)
+		else:
+			GameManager.play_sfx(hurts.pick_random())
 
 func spawn_damage_label(damage : int, is_crit : bool) -> void:
 	var damage_label : DamageLabel = preload("uid://blcs0f2y7cia2").instantiate()

@@ -20,6 +20,7 @@ const BOSS_BIRTH_4 = preload("uid://b0xck7v14lb50")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	look_at(player.global_position, Vector3.UP)
 	SignalBus.combat_engaged.connect(start_combat)
 	state_machine.init(self)
 

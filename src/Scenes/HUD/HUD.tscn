@@ -28,7 +28,7 @@ tracks/0/path = NodePath("CountDownLabel:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 1.99, 3),
+"times": PackedFloat32Array(0, 1, 2, 3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": ["3", "2", "1", "Fight!"]
@@ -52,9 +52,18 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(4.5333333),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 2, 4.5333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
+"args": [],
+"method": &"play_three"
+}, {
+"args": [],
+"method": &"play_two"
+}, {
+"args": [],
+"method": &"play_one"
+}, {
 "args": [],
 "method": &"start_fight"
 }]
@@ -72,6 +81,18 @@ tracks/3/keys = {
 "args": [],
 "method": &"play_round_start_sfx"
 }]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CountDownLabel:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.07, 0.1, 1, 1.0333333, 1.07, 1.1, 2, 2.0333333, 2.0700002, 2.1, 3, 3.0333333, 3.0700002, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1.3, 1.3), Vector2(1, 1), Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1.3, 1.3), Vector2(1, 1), Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1.3, 1.3), Vector2(1, 1), Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1.3, 1.3), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_5ysmx"]
@@ -104,6 +125,87 @@ tracks/1/keys = {
 }, {
 "args": [],
 "method": &"enable_hurt_ability"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_g1kdu"]
+resource_name = "MiniRoundCountDown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountDownLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Survive!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CountDownLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_mini_round"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_round_start_sfx"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CountDownLabel:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666666, 0.099999905),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.7, 0.7), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_survive"
 }]
 }
 
@@ -298,6 +400,7 @@ tracks/2/keys = {
 _data = {
 &"BossCountDown": SubResource("Animation_7pn66"),
 &"HurtFlash": SubResource("Animation_5ysmx"),
+&"MiniRoundCountDown": SubResource("Animation_g1kdu"),
 &"RESET": SubResource("Animation_t1brt"),
 &"RoundCountDown": SubResource("Animation_wwnsm"),
 &"YouWin": SubResource("Animation_0c126")
@@ -731,7 +834,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 540.0
-offset_bottom = 540.00024
+offset_bottom = 540.0005
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)

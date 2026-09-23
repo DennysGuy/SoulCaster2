@@ -50,3 +50,6 @@ signal shop_exited
 signal grenade_thrown
 signal arena_started
 signal arena_ended
+signal mini_round_started
+signal boss_jumped_out
+signal mini_round_finished
