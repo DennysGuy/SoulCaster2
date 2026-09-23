@@ -2669,7 +2669,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1qra"]
-size = Vector3(1.704895, 2.721405, 3.7661133)
+size = Vector3(0.8310089, 1.2047081, 0.99479675)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n8flt"]
 size = Vector3(1, 2.0920715, 3.078125)
@@ -2994,7 +2994,7 @@ transform = Transform3D(-0.64406234, -0.19995894, 0.18761699, 0.24221987, -0.190
 libraries/ = SubResource("AnimationLibrary_augd8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=752249226]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011016846, 1.3761117, 1.3830566)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.103752136, 0.6177633, 1.5658646)
 shape = SubResource("BoxShape3D_q1qra")
 
 [node name="StateMachine" type="Node" parent="." unique_id=988515247 node_paths=PackedStringArray("initial_state")]

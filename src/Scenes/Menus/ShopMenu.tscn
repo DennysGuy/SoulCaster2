@@ -1045,7 +1045,7 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 24
-text = "x 15"
+text = "x 8"
 
 [node name="GrenadePurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet" unique_id=290708639]
 layout_mode = 1

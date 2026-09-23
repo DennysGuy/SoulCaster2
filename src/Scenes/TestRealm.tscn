@@ -2423,6 +2423,7 @@ tonemap_mode = 2
 tonemap_exposure = 0.5
 glow_intensity = 0.12
 adjustment_enabled = true
+adjustment_brightness = 0.81
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rty5i"]
 albedo_color = Color(0, 0.52535284, 0.3643165, 1)
@@ -6756,64 +6757,64 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1
 [node name="OreSpawnPoints" type="Node" parent="." unique_id=678950103]
 
 [node name="OreSpawnPoint1" type="Marker3D" parent="OreSpawnPoints" unique_id=1886904166]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04038173, 13.656064)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6649666, 0.04038173, 2.4475203)
 
 [node name="OreSpawnPoint2" type="Marker3D" parent="OreSpawnPoints" unique_id=861787188]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3705034, 0.04038173, 16.406155)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3705034, 0.04038173, 6.72501)
 
 [node name="OreSpawnPoint3" type="Marker3D" parent="OreSpawnPoints" unique_id=863567701]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.956135, 0.04038173, 16.406155)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.252502, 0.39507985, -0.8429661)
 
 [node name="OreSpawnPoint4" type="Marker3D" parent="OreSpawnPoints" unique_id=963221460]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.188551, 0.04038173, 17.95684)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.543854, 0.6884225, 4.533083)
 
 [node name="OreSpawnPoint5" type="Marker3D" parent="OreSpawnPoints" unique_id=744510563]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.121954, 0.04038173, 12.780168)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.121954, 0.35677534, -7.0386)
 
 [node name="OreSpawnPoint6" type="Marker3D" parent="OreSpawnPoints" unique_id=2113749035]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.463196, 0.04038173, 5.668109)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.932377, 0.04038173, -1.4182525)
 
 [node name="OreSpawnPoint7" type="Marker3D" parent="OreSpawnPoints" unique_id=1653971624]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.524382, 0.04038173, 13.466672)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8645048, 0.04038173, -3.4637194)
 
 [node name="OreSpawnPoint8" type="Marker3D" parent="OreSpawnPoints" unique_id=881205446]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.080778, 0.04038173, 9.856805)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6775465, 0.04038173, -10.679131)
 
 [node name="OreSpawnPoint9" type="Marker3D" parent="OreSpawnPoints" unique_id=522966840]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.686457, 0.33580214, 2.9791756)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.905188, 0.33580214, -5.7397194)
 
 [node name="OreSpawnPoint10" type="Marker3D" parent="OreSpawnPoints" unique_id=1006371307]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2582045, 0.04038173, -14.32898)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1785994, 3.525457, -30.721472)
 
 [node name="OreSpawnPoint11" type="Marker3D" parent="OreSpawnPoints" unique_id=795658293]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.163227, 0.1625697, 1.0608578)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3070741, 3.917177, -32.43288)
 
 [node name="OreSpawnPoint12" type="Marker3D" parent="OreSpawnPoints" unique_id=1822446838]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.025775, 0.04038173, -9.098597)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.732391, 0.04038173, -12.024169)
 
 [node name="OreSpawnPoint13" type="Marker3D" parent="OreSpawnPoints" unique_id=817697109]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.155197, -63.400528, -28.184643)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.388237, 0.07551813, -5.174057)
 
 [node name="OreSpawnPoint14" type="Marker3D" parent="OreSpawnPoints" unique_id=1946757264]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.69125, -63.400528, -19.638847)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2051878, 0.07551813, -14.30699)
 
 [node name="OreSpawnPoint15" type="Marker3D" parent="OreSpawnPoints" unique_id=1431763073]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.053318, -63.400528, -19.638847)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9705691, 0.07551813, -26.037075)
 
 [node name="OreSpawnPoint16" type="Marker3D" parent="OreSpawnPoints" unique_id=696462250]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.989023, -63.400528, -24.298225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3514194, 0.07551813, -17.366814)
 
 [node name="OreSpawnPoint17" type="Marker3D" parent="OreSpawnPoints" unique_id=811894427]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.145763, -63.400528, 1.257576)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.124088, 0.07551813, 1.257576)
 
 [node name="OreSpawnPoint18" type="Marker3D" parent="OreSpawnPoints" unique_id=1152319395]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.239998, -63.400528, 13.942898)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.429382, 0.07551813, -1.0929394)
 
 [node name="OreSpawnPoint19" type="Marker3D" parent="OreSpawnPoints" unique_id=1063677662]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.239998, -63.400528, 27.297989)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.338425, 0.07551813, -9.116756)
 
 [node name="OreSpawnPoint20" type="Marker3D" parent="OreSpawnPoints" unique_id=1541790173]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.525543, -63.400528, 20.559814)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.245613, 0.07551813, -2.6527777)
 
 [node name="SpawnPoints" type="Node" parent="." unique_id=566166875]
 
