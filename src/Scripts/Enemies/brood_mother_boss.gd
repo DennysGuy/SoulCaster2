@@ -3,6 +3,7 @@ class_name BroodMother extends Enemy
 @onready var timer: Timer = $Timer
 @onready var birth_area: Marker3D = $BirthArea
 @export var true_idle_state : State
+@export var stun_state : State
 
 const BOSS_DEATH = preload("uid://bcruebecyj6as")
 
@@ -20,8 +21,10 @@ const BOSS_BIRTH_4 = preload("uid://b0xck7v14lb50")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	player = get_tree().get_first_node_in_group("Player")
 	look_at(player.global_position, Vector3.UP)
 	SignalBus.combat_engaged.connect(start_combat)
+	SignalBus.boss_stun_threshold_reached.connect(send_to_stun_state)
 	state_machine.init(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -60,3 +63,6 @@ func play_boss_birth_moan() -> void:
 
 func play_boss_death() -> void:
 	GameManager.play_sfx(BOSS_DEATH)
+
+func send_to_stun_state() -> void:
+	state_machine.change_state(stun_state)

@@ -6839,16 +6839,16 @@ one_shot = true
 [node name="BossSpawnPoints" type="Node3D" parent="." unique_id=1899758521]
 
 [node name="BossSpawnPoint" type="Marker3D" parent="BossSpawnPoints" unique_id=1963958776]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.0293193, 1.3495474, -16.362242)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.0293193, 1.3495474, -19.670132)
 
 [node name="BossSpawnPoint2" type="Marker3D" parent="BossSpawnPoints" unique_id=1193842657]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -13.278009, 1.3495474, -5.6531057)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -16.942202, 1.3495474, -5.6531057)
 
 [node name="BossSpawnPoint3" type="Marker3D" parent="BossSpawnPoints" unique_id=1458937329]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.588407, 1.3495474, 3.2419376)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.588407, 1.3495474, 6.856595)
 
 [node name="BossSpawnPoint4" type="Marker3D" parent="BossSpawnPoints" unique_id=682611131]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.405885, 1.3495474, -4.97248)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.405885, 3.259925, -4.97248)
 
 [node name="OreSpawnTimer" type="Timer" parent="." unique_id=1640726564]
 process_callback = 0
@@ -6937,7 +6937,7 @@ root_node = NodePath("../CutSceneCam")
 libraries/ = SubResource("AnimationLibrary_plpmp")
 
 [node name="CutSceneCam" type="Camera3D" parent="." unique_id=1081922134]
-transform = Transform3D(-0.12772244, 0, 0.9918097, 0, 1, 0, -0.9918097, 0, -0.12772244, 79.04602, 8.238413, 0)
+transform = Transform3D(-0.12772241, 0, 0.99180955, 0, 1, 0, -0.99180955, 0, -0.12772241, 79.04602, 8.238413, 0)
 current = true
 fov = 50.0
 

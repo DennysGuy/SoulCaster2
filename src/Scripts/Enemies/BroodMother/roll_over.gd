@@ -1,8 +1,11 @@
-class_name JumpOutState extends State
+class_name RollOver extends State
+
+@export var idle_state : State
 
 func enter() -> void:
-	parent.animation_player.play("JumpOut")
-	parent.timer.wait_time = 2.0
+	parent.animation_player.play("RollOver")
+	parent.timer.wait_time = 3.0
+	parent.timer.start()
 
 func exit() -> void:
 	pass
@@ -16,8 +19,7 @@ func process_frame(_delta: float) -> State:
 func process_physics(_delta: float) -> State:
 	
 	if parent.timer.time_left <= 0:
-		GameManager.mini_round_started = true
-		SignalBus.boss_jumped_out.emit()
-		parent.queue_free()
+		return idle_state
 	
 	return null
+		

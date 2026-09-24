@@ -139,7 +139,7 @@ func damage_enemy(applied_damage : int = 0) -> void:
 	
 	if self is BroodMother:
 		GameManager.current_boss_health -= damage
-		SignalBus.boss_damaged.emit(GameManager.current_boss_health, GameManager.max_boss_health)
+		SignalBus.boss_damaged.emit(damage, GameManager.current_boss_health, GameManager.max_boss_health)
 		if GameManager.current_boss_health <= 0:
 			kill_enemy()
 			GameManager.play_sfx(RAT_DEATH_1)

@@ -56,6 +56,8 @@ func _ready() -> void:
 	SignalBus.combat_engaged.connect(start_boss_music)
 	SignalBus.config_beat.connect(deduct_configs_to_kill)
 	SignalBus.arena_ended.connect(stop_arena_battle)
+	SignalBus.mini_round_started.connect(start_mini_round_spawn)
+	#SignalBus.boss_jumped_out.connect(start_mini_round_spawn)
 	arena_animation_player.play("NewTide")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -82,7 +84,7 @@ func stop_spawn_timer(kill : bool) -> void:
 func spawn_enemy() -> void:
 	spawn_timer.stop()
 	
-	if !GameManager.round_started:
+	if !GameManager.round_started and !GameManager.mini_round_started:
 		return
 		
 	reset_spawn_point_availability()
@@ -97,6 +99,7 @@ func spawn_enemy() -> void:
 		if waves_to_beat == -1:
 			#SignalBus.mini_round_finished.emit()
 			spawn_boss_in_random_spot()
+			GameManager.just_spawned_mini_round = true
 			GameManager.mini_round_started = false
 			return
 	
@@ -104,7 +107,7 @@ func spawn_enemy() -> void:
 	configs_to_beat = config_amount
 	print("THIS IS THE SET CONFIG AMOUNT %s" % configs_to_beat)
 	GameManager.play_sfx(ENEMY_SPAWN_SFX)
-	for i in range(config_amount):
+	for i in range(configs_to_beat):
 		var chosen_spawn_point : Dictionary = {}
 		
 		while true:
@@ -136,7 +139,7 @@ func spawn_enemy() -> void:
 				stagger_time = 1.5
 			await get_tree().create_timer(randf_range(stagger_time-0.2,stagger_time+0.2)).timeout
 		
-		if !GameManager.round_started:
+		if !GameManager.round_started and !GameManager.mini_round_started:
 			return
 		
 		var spawn_time : float = GameManager.round_timers[GameManager.round_number]
@@ -200,7 +203,7 @@ func transition_to_player_camera() -> void:
 	GameManager.can_move = true
 
 func start_mini_round_spawn() -> void:
-	waves_to_beat = randi_range(3,5)
+	waves_to_beat = randi_range(1,3)
 	start_spawn_timer()
 
 func spawn_boss_in_random_spot() -> void:

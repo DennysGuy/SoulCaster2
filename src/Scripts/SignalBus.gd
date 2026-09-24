@@ -35,7 +35,7 @@ signal progress_added(value : float)
 signal boss_fight_started
 signal face_boss_area
 signal combat_engaged
-signal boss_damaged(health: int,max_health : int)
+signal boss_damaged(damage_done : int, health: int,max_health : int)
 signal boss_defeated
 signal arena_context_button_closed
 signal hub_context_menu_closed
@@ -53,3 +53,5 @@ signal arena_ended
 signal mini_round_started
 signal boss_jumped_out
 signal mini_round_finished
+
+signal boss_stun_threshold_reached

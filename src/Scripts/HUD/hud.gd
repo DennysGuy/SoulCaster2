@@ -21,6 +21,7 @@ class_name HUD extends CanvasLayer
 @onready var bullets_tracker: Label = $BulletsTracker
 
 @onready var round_diamond_container: HBoxContainer = $RoundDiamondContainer
+@onready var boss_stun_progress_bar: ProgressBar = $BossStunProgressBar
 
 @onready var round_timer_label: WaveTimerLabel = $RoundTimerLabel
 @onready var grenade_count_label: Label = $GrenadeCountLabel
@@ -121,8 +122,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if round_started:
-		#if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
-			#add_progress(50)
+		if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
+			add_progress(50)
 		
 		if Input.is_action_just_pressed("jump") and arena_context_showing:
 			close_context_panel()
@@ -271,10 +272,19 @@ func start_fight() -> void:
 
 	SignalBus.combat_engaged.emit()
 
-func update_boss_bar(value : int, max_value : int) -> void:
+func update_boss_bar(damage_done : int, value : int, max_value : int) -> void:
 	round_progress_bar.value = value
 	round_progress_bar.max_value = max_value
-
+	
+	if !GameManager.boss_was_stunned:
+		GameManager.current_boss_stun += damage_done
+		boss_stun_progress_bar.value = GameManager.current_boss_stun
+		var current_boss_stun : int = GameManager.current_boss_stun
+		if current_boss_stun >= GameManager.max_boss_stun:
+			SignalBus.boss_stun_threshold_reached.emit()
+			GameManager.current_boss_stun = 0
+			boss_stun_progress_bar.value = 0
+		
 func end_fight() -> void:
 	GameManager.round_number = -1
 	round_timer_label.pause_timer()
@@ -282,6 +292,10 @@ func end_fight() -> void:
 
 func go_to_hub() -> void:
 	bar_player.play("CloseOut")
+	GameManager.mini_round_started = false
+	GameManager.boss_was_stunned = false
+	GameManager.current_boss_health = GameManager.max_boss_health
+	GameManager.current_boss_stun = 0
 	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("uid://b54wn7lrvkbdi")
 
@@ -355,3 +369,8 @@ func start_mini_round() -> void:
 
 func start_mini_round_count_down() -> void:
 	animation_player.play("MiniRoundCountDown")
+
+func show_stun_bar() -> void:
+	boss_stun_progress_bar.value = 0
+	boss_stun_progress_bar.max_value = GameManager.max_boss_stun
+	boss_stun_progress_bar.show()
