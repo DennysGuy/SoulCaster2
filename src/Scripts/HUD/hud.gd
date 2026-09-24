@@ -59,6 +59,8 @@ var context_pos : int = 0
 const GRUN_1 = preload("uid://bsofvgd2ah7px")
 const GRUNT_2 = preload("uid://2gj05mllf3ho")
 const GRUNT_3 = preload("uid://bsg37rag4j8qx")
+const LEVEL_UP = preload("uid://crxa0sswpnn7g")
+@onready var notification_player: AnimationPlayer = $NotificationPlayer
 
 @onready var grunts : Array[AudioStream] = [GRUNT_2, GRUN_1, GRUNT_3]
 
@@ -122,8 +124,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if round_started:
-		if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
-			add_progress(50)
+		#if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
+			#add_progress(50)
 		
 		if Input.is_action_just_pressed("jump") and arena_context_showing:
 			close_context_panel()
@@ -136,6 +138,7 @@ func update_level() -> void:
 	ap.text = "AP: %s" % [int(PlayerStats.player_stats["Ability Points"])]
 	progress_bar.value = int(PlayerStats.player_stats["Current XP"])
 	progress_bar.max_value = int(PlayerStats.player_stats["Needed XP"])
+	
 
 func level_up() -> void:
 	GameManager.levels_gained += 1
@@ -143,6 +146,8 @@ func level_up() -> void:
 	PlayerStats.player_stats["Current XP"] = abs(int(PlayerStats.player_stats["Current XP"] - PlayerStats.player_stats["Needed XP"]))
 	PlayerStats.player_stats["Needed XP"] = int(BASE_XP_AMOUNT * pow(XP_MULTIPLIER_FACTOR, PlayerStats.player_stats["Level"]))
 	PlayerStats.player_stats["Ability Points"] += PlayerStats.player_stats["AP Amount"]
+	GameManager.play_sfx(LEVEL_UP)
+	notification_player.play("LevelUp")
 	update_level()
 
 func add_xp(amount : int) -> void:

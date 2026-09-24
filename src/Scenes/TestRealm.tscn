@@ -5527,6 +5527,7 @@ shadow_mesh = SubResource("ArrayMesh_itlwm")
 resource_name = "Swamp"
 cull_mode = 2
 albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("6_uqw8w")
 metallic = 1.0
 emission_enabled = true
 emission = Color(0.48452926, 0.48452926, 0.48452926, 1)
@@ -5857,6 +5858,9 @@ bind_count = 1
 bind/0/name = &"Bone"
 bind/0/bone = -1
 bind/0/pose = Transform3D(0.22878894, 0, 0, 0, 0.22878894, 0, 0, 0, 0.22878894, -17.890722, 0.15649948, -3.2567587)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lus5e"]
+albedo_texture = ExtResource("6_uqw8w")
 
 [sub_resource type="Animation" id="Animation_v4c23"]
 resource_name = "NewTide"
@@ -7364,6 +7368,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_v4c23")
 
 [node name="Plane_047" type="MeshInstance3D" parent="Arena2" unique_id=157510764]
 transform = Transform3D(47.759758, 0, 0, 0, 47.759758, 0, 0, 0, 47.759758, 54.718224, 0.8084097, 14.096169)
+visible = false
 mesh = SubResource("ArrayMesh_sgdmj")
 surface_material_override/0 = SubResource("StandardMaterial3D_v4c23")
 
@@ -7411,7 +7416,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9073486e-06, -1.4901161e-08, 0)
 bones/0/enabled = true
-bones/0/position = Vector3(0, 0, 0)
+bones/0/position = Vector3(0, 0.11182873, 0)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 
@@ -7419,6 +7424,7 @@ bones/0/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_15pqn")
 skin = SubResource("Skin_4wey1")
 skeleton = NodePath("..")
+surface_material_override/0 = SubResource("StandardMaterial3D_lus5e")
 
 [node name="ArenaAnimationPlayer" type="AnimationPlayer" parent="Arena2" unique_id=493273254]
 libraries/ = SubResource("AnimationLibrary_gxtpt")

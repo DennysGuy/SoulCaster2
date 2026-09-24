@@ -58,7 +58,7 @@ func _ready() -> void:
 	SignalBus.arena_ended.connect(stop_arena_battle)
 	SignalBus.mini_round_started.connect(start_mini_round_spawn)
 	#SignalBus.boss_jumped_out.connect(start_mini_round_spawn)
-	arena_animation_player.play("NewTide")
+	arena_animation_player.play("tide")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

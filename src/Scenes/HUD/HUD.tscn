@@ -499,6 +499,67 @@ _data = {
 &"RESET": SubResource("Animation_lt1va")
 }
 
+[sub_resource type="Animation" id="Animation_sx6ht"]
+resource_name = "LevelUp"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../NotificationLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5026405),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../NotificationLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s42vb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../NotificationLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../NotificationLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_phtwg"]
+_data = {
+&"LevelUp": SubResource("Animation_sx6ht"),
+&"RESET": SubResource("Animation_s42vb")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1brt"]
 bg_color = Color(1, 0.3287198, 0.38030145, 1)
 corner_radius_top_left = 5
@@ -622,6 +683,10 @@ libraries/ = SubResource("AnimationLibrary_t1brt")
 root_node = NodePath("../AnimationPlayer")
 libraries/ = SubResource("AnimationLibrary_gx84v")
 
+[node name="NotificationPlayer" type="AnimationPlayer" parent="." unique_id=1337418151]
+root_node = NodePath("../AnimationPlayer")
+libraries/ = SubResource("AnimationLibrary_phtwg")
+
 [node name="EnemyTracker" type="Panel" parent="." unique_id=1205098400]
 visible = false
 anchors_preset = 2
@@ -734,6 +799,26 @@ pivot_offset = Vector2(177, 70)
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 128
 text = "3"
+horizontal_alignment = 1
+
+[node name="NotificationLabel" type="Label" parent="." unique_id=269717496]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.5
+offset_top = -278.0
+offset_right = 218.5
+offset_bottom = -146.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(177, 70)
+theme_override_fonts/font = ExtResource("10_6w4u3")
+theme_override_font_sizes/font_size = 128
+text = "Level Up!"
 horizontal_alignment = 1
 
 [node name="GrenadeIcon" type="TextureRect" parent="." unique_id=1818915977]

@@ -4,6 +4,8 @@ class_name WaveTimerLabel extends RichTextLabel
 var seconds : int = 10
 var milliseconds : int = 0
 
+const _10_SECOND_BEEP = preload("uid://c82h8rlugajc8")
+
 var timer_started : bool
 @onready var marker_2d: Marker2D = $Marker2D
 
@@ -28,11 +30,13 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if timer_started:
-		if milliseconds == 0:
+		if milliseconds <= 0:
 			seconds -= 1
 			seconds_tracker += 1
 			milliseconds = 100
-				
+			
+			if seconds <= 10:
+				GameManager.play_sfx(_10_SECOND_BEEP)
 			if seconds_tracker >= 60:
 
 				seconds_tracker = 0
