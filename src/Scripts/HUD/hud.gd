@@ -41,6 +41,7 @@ const VOX_ANNOUNCER_COUNT_DOWN__TWO_01 = preload("uid://kp32xkr5y3bo")
 const XP_MULTIPLIER_FACTOR : float = 1.2
 const BASE_XP_AMOUNT : int = 50
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var flash_player: AnimationPlayer = $FlashPlayer
 
 var round_started : bool = false
 var round_ended : bool = false
@@ -84,6 +85,8 @@ func _ready() -> void:
 	SignalBus.arena_ended.connect(go_to_hub)
 	SignalBus.grenade_thrown.connect(update_grenade_count)
 	SignalBus.boss_jumped_out.connect(start_mini_round_count_down)
+	SignalBus.shot_fired.connect(play_short_flash)
+	SignalBus.boss_stunned.connect(play_long_flash)
 	update_ore_count_label(0)
 	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
@@ -124,8 +127,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if round_started:
-		#if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
-			#add_progress(50)
+		if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
+			add_progress(50)
 		
 		if Input.is_action_just_pressed("jump") and arena_context_showing:
 			close_context_panel()
@@ -379,3 +382,9 @@ func show_stun_bar() -> void:
 	boss_stun_progress_bar.value = 0
 	boss_stun_progress_bar.max_value = GameManager.max_boss_stun
 	boss_stun_progress_bar.show()
+
+func play_short_flash() -> void:
+	flash_player.play("ShortFlash")
+
+func play_long_flash() -> void:
+	flash_player.play("LongFlash")

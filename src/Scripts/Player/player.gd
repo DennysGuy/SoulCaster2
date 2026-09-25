@@ -11,7 +11,9 @@ class_name Player extends CharacterBody3D
 @onready var point_at_marker: Marker3D = $Head/PointAtMarker
 
 @onready var cross_bow_bolt_position: Marker3D = $Head/Marker3D/GunArm/CrossBow/CrossBowBoltPosition
+@onready var cross_bow_sparks_position: Marker3D = $CrossBowSparksPosition
 @onready var super_cross_bow_bolt_position: Marker3D = $Head/Marker3D/GunArm/UltraBow/SuperCrossBowBoltPosition
+
 
 var target_index : int = 1
 var target_location : Marker3D
@@ -23,7 +25,7 @@ var target_location : Marker3D
 @onready var pistol: Node3D = $Head/Marker3D/GunArm/Pistol
 
 var rotate_speed: float = 60.0  # higher = faster turn
-var zoom_target: float = 60.0  # smaller FOV = zoom in
+var zoom_target: float = 70.0  # smaller FOV = zoom in
 var zoom_speed: float = 5.0    # how fast zoom eases
 
 @onready var gun_arm: Node3D = $Head/Marker3D/GunArm
@@ -227,7 +229,6 @@ func rotate_camera_opposite() -> void:
 			target_index = 0
 			
 	target_location = look_at_positions[target_index]
-
 
 func move_camera(_delta: float) -> void:
 	if target_location:
@@ -495,9 +496,12 @@ func spawn_cross_bow_bolt(bolt_position : Marker3D) -> void:
 	var direction : Vector3 = Vector3.ZERO
 	
 	var cross_bow_bolt : BoltProjectile = preload("uid://c2dmt8r828mej").instantiate()
+	var sparks : ShootSparks = preload("uid://l5ueculb03l5").instantiate()
 	if is_instance_valid(tracked_enemy):
 		cross_bow_bolt.target = tracked_enemy
 	cross_bow_bolt.global_position = bolt_position.global_position
+	sparks.global_position = bolt_position.global_position
+	sparks.rotation = rotation
 	if !tracked_enemy:
 		direction = -bolt_position.global_transform.basis.z
 		cross_bow_bolt.direction = direction
@@ -506,9 +510,12 @@ func spawn_cross_bow_bolt(bolt_position : Marker3D) -> void:
 			tracked_enemy.show_lock_on_target()
 			SignalBus.enemy_hit.emit(tracked_enemy)
 		#print("Distance: ",bolt_position.global_position.distance_to(tracked_enemy.bolt_position.global_position))
+	get_parent().add_child(sparks)
 	get_parent().add_child(cross_bow_bolt)
+	HitStopManager.freeze(0.02,0.05)
 
 func spawn_bolt_from_cross_bow() -> void:
+	
 	spawn_cross_bow_bolt(cross_bow_bolt_position)
 	
 func spawn_bolt_from_super_cross_bow() -> void:

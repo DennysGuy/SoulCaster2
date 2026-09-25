@@ -17,6 +17,9 @@ func enter() -> void:
 	var gained_xp : int = int(parent.xp * PlayerStats.player_stats["XP Bonus"])
 	SignalBus.xp_was_gained.emit(gained_xp)
 	var added_time : int = PlayerStats.player_stats["Life Steal"]
+	if parent.enemy_name == "Rabid Rat Cronie":
+		added_time += 1
+		
 	SignalBus.time_added.emit(added_time)
 	if !parent.round_ended:
 		SignalBus.progress_added.emit(parent.progress_amount)

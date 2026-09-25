@@ -1,8 +1,10 @@
 class_name JumpOutState extends State
 
 func enter() -> void:
-	parent.animation_player.play("JumpOut")
+	var tween : Tween = create_tween()
+	tween.tween_property(parent, "global_position:y", 20, 0.5)
 	parent.timer.wait_time = 2.0
+	parent.timer.start()
 
 func exit() -> void:
 	pass

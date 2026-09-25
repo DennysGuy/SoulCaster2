@@ -4,8 +4,10 @@ class_name BroodMother extends Enemy
 @onready var birth_area: Marker3D = $BirthArea
 @export var true_idle_state : State
 @export var stun_state : State
+@onready var rat_mother: Node3D = $"rat mother"
 
 const BOSS_DEATH = preload("uid://bcruebecyj6as")
+const DIZZY = preload("uid://c2feiv62ak5px")
 
 
 const BOSSFALL = preload("uid://dblm77efdm7xg")
@@ -63,6 +65,9 @@ func play_boss_birth_moan() -> void:
 
 func play_boss_death() -> void:
 	GameManager.play_sfx(BOSS_DEATH)
+
+func play_dizzy() -> void:
+	GameManager.play_sfx(DIZZY)
 
 func send_to_stun_state() -> void:
 	state_machine.change_state(stun_state)

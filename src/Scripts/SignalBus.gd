@@ -40,6 +40,7 @@ signal boss_defeated
 signal arena_context_button_closed
 signal hub_context_menu_closed
 signal shot_fired
+signal boss_stunned
 
 signal config_beat
 signal enemy_hit(target : Node3D)

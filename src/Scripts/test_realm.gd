@@ -203,7 +203,7 @@ func transition_to_player_camera() -> void:
 	GameManager.can_move = true
 
 func start_mini_round_spawn() -> void:
-	waves_to_beat = randi_range(1,3)
+	waves_to_beat = randi_range(1,2)
 	start_spawn_timer()
 
 func spawn_boss_in_random_spot() -> void:

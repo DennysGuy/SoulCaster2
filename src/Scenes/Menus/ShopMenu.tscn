@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cyfle3qq8i4ts" path="res://src/Scripts/Menus/shop_menu.gd" id="1_gllw4"]
 [ext_resource type="FontFile" uid="uid://b1a36g4iebhyo" path="res://Assets/Fonts/GoudyMediaeval-DemiBold.ttf" id="2_4ymfw"]
-[ext_resource type="Texture2D" uid="uid://bcls56q7g0x0d" path="res://Assets/sider.png" id="2_p8ncc"]
-[ext_resource type="Texture2D" uid="uid://dp24xadavvam7" path="res://Assets/TrackerTestIcon-sheet.png" id="3_4qwru"]
 [ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_bt663"]
 [ext_resource type="FontFile" uid="uid://bcrsewr5c6yhk" path="res://Assets/Fonts/GoudyMediaeval-Regular.ttf" id="3_tt1ee"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="4_tt1ee"]
@@ -12,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cglrwwn7a4cq" path="res://Assets/MiningCrossBowBoltIcon.png" id="7_qbcc6"]
 [ext_resource type="Texture2D" uid="uid://bm2jc2cs7qxjv" path="res://Assets/BotOmaticMagazineIcon.png" id="8_yh3m8"]
 [ext_resource type="Texture2D" uid="uid://dq6cyj1m8u3j3" path="res://Assets/MiningSuperCrossBowBoltIcon.png" id="9_yh3m8"]
+[ext_resource type="Texture2D" uid="uid://clt28k4c6j7kp" path="res://Assets/Arena/radar2.png" id="11_tf7al"]
+[ext_resource type="Texture2D" uid="uid://cgkslt3ubg254" path="res://Assets/Arena/amulethealthtracker.png" id="12_l2xwa"]
 [ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="13_tf7al"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lek5s"]
@@ -751,7 +751,6 @@ theme_override_font_sizes/font_size = 36
 text = "Ammuntion Type"
 
 [node name="AmuletsPanel" type="Panel" parent="UpgradesPanel/MarginContainer" unique_id=482165866]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tf7al")
 
@@ -780,7 +779,7 @@ offset_top = -49.658447
 offset_right = 92.0
 offset_bottom = 43.341553
 grow_vertical = 2
-texture = ExtResource("2_p8ncc")
+texture = ExtResource("11_tf7al")
 expand_mode = 1
 
 [node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet" unique_id=831847837]
@@ -871,12 +870,13 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 12.0
-offset_top = -36.658447
-offset_right = 85.0
-offset_bottom = 36.341553
+offset_left = -5.0
+offset_top = -51.658447
+offset_right = 94.0
+offset_bottom = 47.341553
 grow_vertical = 2
-texture = ExtResource("3_4qwru")
+texture = ExtResource("12_l2xwa")
+expand_mode = 1
 
 [node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet" unique_id=280185805]
 layout_mode = 1
