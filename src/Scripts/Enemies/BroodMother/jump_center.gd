@@ -1,0 +1,41 @@
+class_name JumpCenter extends State
+
+@export var attack_state : State
+@export var roll_prep_state : State
+@export var jump_up_state : State
+
+func enter() -> void:
+	#parent.animation_player.play(animation_name)
+	var tween : Tween = create_tween()
+	var final_position : Vector3 = parent.established_position
+	tween.tween_property(parent, "global_position", final_position, 0.4)
+	parent.timer.wait_time = 1.0
+
+func exit() -> void:
+	pass
+
+func process_input(_event: InputEvent) -> State:
+	return null
+
+func process_frame(_delta: float) -> State:
+	return null
+
+func process_physics(_delta: float) -> State:
+	
+	if parent.timer.time_left <= 0:
+		if GameManager.boss_was_stunned:
+			return jump_up_state
+		
+		var chance : bool = random_number(30)
+		if chance:
+			return roll_prep_state
+		return attack_state
+	
+	return null
+		
+func random_number(chance : int) -> bool:
+	var rand_int : int = randi_range(0,100)
+	if rand_int <= chance:
+		return true
+	
+	return false

@@ -10,7 +10,7 @@ func enter() -> void:
 	timer = wait_time
 	GameManager.play_sfx(BOSS_PREP)
 	parent.animation_player.play("AttackPrep")
-	number_of_times = randi_range(6,14)
+	number_of_times = randi_range(2,4)
 	
 func exit() -> void:
 	pass

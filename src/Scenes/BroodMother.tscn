@@ -15,6 +15,9 @@
 [ext_resource type="Script" uid="uid://gnh5yy4x0ago" path="res://src/Scripts/Enemies/BroodMother/roll_charge_up.gd" id="12_n4tys"]
 [ext_resource type="Script" uid="uid://bc24ridub8ih" path="res://src/Scripts/Enemies/BroodMother/roll_over.gd" id="13_c04s5"]
 [ext_resource type="Script" uid="uid://6e4ng6jra2wo" path="res://src/Scripts/Enemies/BroodMother/stun.gd" id="14_v210s"]
+[ext_resource type="Script" uid="uid://bi4b2qt8jomtn" path="res://src/Scripts/Enemies/BroodMother/jump_left.gd" id="15_88l1p"]
+[ext_resource type="Script" uid="uid://bi012pj1d0hei" path="res://src/Scripts/Enemies/BroodMother/jump_right.gd" id="16_rmk1k"]
+[ext_resource type="Script" uid="uid://insrhga17dqv" path="res://src/Scripts/Enemies/BroodMother/jump_center.gd" id="17_hdv7e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjmqo"]
 size = Vector3(3.5795288, 4.8329773, 2.8815918)
@@ -3392,11 +3395,14 @@ animation_name = "SpawnIn"
 script = ExtResource("6_drvek")
 idle_state = NodePath("../BackToIdle")
 
-[node name="TrueIdle" type="Node" parent="StateMachine" unique_id=1854862715 node_paths=PackedStringArray("attack_state", "jump_up_state", "roll_prep_state")]
+[node name="TrueIdle" type="Node" parent="StateMachine" unique_id=1854862715 node_paths=PackedStringArray("attack_state", "jump_up_state", "roll_prep_state", "jump_left", "jump_right", "jump_center")]
 script = ExtResource("7_j7kl6")
 attack_state = NodePath("../Attack")
 jump_up_state = NodePath("../JumpOut")
 roll_prep_state = NodePath("../RollChargeUp")
+jump_left = NodePath("../JumpLeft")
+jump_right = NodePath("../JumpRight")
+jump_center = NodePath("../JumpCenter")
 
 [node name="Dead" type="Node" parent="StateMachine" unique_id=1871075078]
 script = ExtResource("8_r8vr8")
@@ -3404,9 +3410,6 @@ script = ExtResource("8_r8vr8")
 [node name="BackToIdle" type="Node" parent="StateMachine" unique_id=1255983977 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("10_8wx8k")
 idle_state = NodePath("../TrueIdle")
-
-[node name="JumpOut" type="Node" parent="StateMachine" unique_id=946486233]
-script = ExtResource("11_cgiui")
 
 [node name="RollChargeUp" type="Node" parent="StateMachine" unique_id=1597121389 node_paths=PackedStringArray("roll_over_state")]
 script = ExtResource("12_n4tys")
@@ -3419,6 +3422,27 @@ idle_state = NodePath("../TrueIdle")
 [node name="Stun" type="Node" parent="StateMachine" unique_id=1777809434 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("14_v210s")
 idle_state = NodePath("../TrueIdle")
+
+[node name="JumpOut" type="Node" parent="StateMachine" unique_id=946486233]
+script = ExtResource("11_cgiui")
+
+[node name="JumpLeft" type="Node" parent="StateMachine" unique_id=74819641 node_paths=PackedStringArray("attack_state", "roll_prep_state", "jump_up_state")]
+script = ExtResource("15_88l1p")
+attack_state = NodePath("../Attack")
+roll_prep_state = NodePath("../RollChargeUp")
+jump_up_state = NodePath("../JumpOut")
+
+[node name="JumpRight" type="Node" parent="StateMachine" unique_id=1379224950 node_paths=PackedStringArray("attack_state", "roll_prep_state", "jump_up_state")]
+script = ExtResource("16_rmk1k")
+attack_state = NodePath("../Attack")
+roll_prep_state = NodePath("../RollChargeUp")
+jump_up_state = NodePath("../JumpOut")
+
+[node name="JumpCenter" type="Node" parent="StateMachine" unique_id=1588874301 node_paths=PackedStringArray("attack_state", "roll_prep_state", "jump_up_state")]
+script = ExtResource("17_hdv7e")
+attack_state = NodePath("../Attack")
+roll_prep_state = NodePath("../RollChargeUp")
+jump_up_state = NodePath("../JumpOut")
 
 [node name="BodyCollider" parent="." unique_id=1117758394 instance=ExtResource("5_ddb4o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.1411197)

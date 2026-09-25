@@ -4,7 +4,7 @@ class_name RollChargeUp extends State
 
 func enter() -> void:
 	parent.animation_player.play("RollOverPrep")
-	parent.timer.wait_time = 5.0
+	parent.timer.wait_time = 2.0
 	parent.timer.start()
 
 func exit() -> void:

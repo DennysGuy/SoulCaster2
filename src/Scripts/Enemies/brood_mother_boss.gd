@@ -6,6 +6,8 @@ class_name BroodMother extends Enemy
 @export var stun_state : State
 @onready var rat_mother: Node3D = $"rat mother"
 
+var established_position : Vector3 = Vector3.ZERO
+
 const BOSS_DEATH = preload("uid://bcruebecyj6as")
 const DIZZY = preload("uid://c2feiv62ak5px")
 
@@ -23,8 +25,8 @@ const BOSS_BIRTH_4 = preload("uid://b0xck7v14lb50")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	established_position = global_position
 	player = get_tree().get_first_node_in_group("Player")
-	look_at(player.global_position, Vector3.UP)
 	SignalBus.combat_engaged.connect(start_combat)
 	SignalBus.boss_stun_threshold_reached.connect(send_to_stun_state)
 	state_machine.init(self)
@@ -35,6 +37,7 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 func _physics_process(delta: float) -> void:
+	look_at(player.global_position, Vector3.UP)
 	state_machine.process_physics(delta)
 
 func _unhandled_input(event: InputEvent) -> void:

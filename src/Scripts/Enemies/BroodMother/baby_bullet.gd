@@ -13,7 +13,7 @@ const SHOOT_WHISTLE = preload("uid://dq3uc67np1niw")
 
 @onready var animation_player: AnimationPlayer = $bulletrat2/AnimationPlayer
 var attack_damage: int = 3
-var move_speed : float = 350
+@export var move_speed : float = 350
 var player : Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
