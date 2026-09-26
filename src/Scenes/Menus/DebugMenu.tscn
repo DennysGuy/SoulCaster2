@@ -1,0 +1,237 @@
+[gd_scene format=3 uid="uid://c2ycsc3y5vui7"]
+
+[ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="1_145q0"]
+[ext_resource type="Script" uid="uid://db1hn21eol85a" path="res://src/Scripts/Menus/debug_menu.gd" id="1_iiivf"]
+[ext_resource type="FontFile" uid="uid://dxhfnu6r40cg7" path="res://Assets/Fonts/Mordred.ttf" id="2_gctut"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gctut"]
+bg_color = Color(0.55365413, 0.00023295284, 0.55757356, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="DebugMenu" type="Control" unique_id=942155374]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iiivf")
+
+[node name="Panel" type="Panel" parent="." unique_id=1793989555]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.25
+offset_top = -166.75
+offset_right = 218.25
+offset_bottom = 166.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gctut")
+
+[node name="Label" type="Label" parent="Panel" unique_id=460892047]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.5
+offset_right = 49.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_145q0")
+theme_override_font_sizes/font_size = 48
+text = "Debug Menu"
+
+[node name="Label2" type="Label" parent="Panel" unique_id=1198814814]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -124.5
+offset_top = 56.5
+offset_right = 124.5
+offset_bottom = 83.5
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_gctut")
+theme_override_font_sizes/font_size = 26
+text = "~All You Can Cheat~"
+horizontal_alignment = 1
+
+[node name="UnlockAllRoundsButton" type="Button" parent="Panel" unique_id=875827210]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 127.0
+offset_top = -62.25
+offset_right = 189.0
+offset_bottom = -31.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unlock"
+
+[node name="UnlockAllRoundsTitle" type="Label" parent="Panel" unique_id=1135133234]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -64.25
+offset_right = 105.0
+offset_bottom = -35.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_gctut")
+theme_override_font_sizes/font_size = 26
+text = "Unlock All Rounds"
+
+[node name="UnlockBoltOMaticButton" type="Button" parent="Panel" unique_id=217176048]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 127.0
+offset_top = -20.25
+offset_right = 189.0
+offset_bottom = 10.75
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unlock"
+
+[node name="UnlockBoltOMaticTitle" type="Label" parent="Panel" unique_id=1652867654]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -25.25
+offset_right = 107.0
+offset_bottom = 3.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_gctut")
+theme_override_font_sizes/font_size = 26
+text = "Unlock Bolt-O-Matic"
+
+[node name="UnlockSuperDamageButton" type="Button" parent="Panel" unique_id=1281711626]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 127.0
+offset_top = 19.75
+offset_right = 189.0
+offset_bottom = 50.75
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unlock"
+
+[node name="UnlockSuperDamageTitle" type="Label" parent="Panel" unique_id=286947565]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = 16.75
+offset_right = 108.0
+offset_bottom = 45.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_gctut")
+theme_override_font_sizes/font_size = 26
+text = "Unlock Super Damage"
+
+[node name="IncreaseOreButton" type="Button" parent="Panel" unique_id=1578392425]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 125.0
+offset_top = 70.0
+offset_right = 187.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Add"
+
+[node name="IncreaseOreTitle" type="Label" parent="Panel" unique_id=424381117]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.25
+offset_top = 69.0
+offset_right = 108.75
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_gctut")
+theme_override_font_sizes/font_size = 26
+text = "Increase Ore: 0"
+
+[node name="IncreaseAPButton" type="Button" parent="Panel" unique_id=1052986730]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 124.0
+offset_top = 109.0
+offset_right = 186.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Add"
+
+[node name="IncreaseAPTitle" type="Label" parent="Panel" unique_id=478097299]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.25
+offset_top = 107.75
+offset_right = 109.75
+offset_bottom = 136.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_gctut")
+theme_override_font_sizes/font_size = 26
+text = "Increase AP: 0 "
+
+[connection signal="button_up" from="Panel/UnlockAllRoundsButton" to="." method="_on_unlock_all_rounds_button_button_up"]
+[connection signal="button_up" from="Panel/UnlockBoltOMaticButton" to="." method="_on_unlock_bolt_o_matic_button_button_up"]
+[connection signal="button_up" from="Panel/UnlockSuperDamageButton" to="." method="_on_unlock_super_damage_button_button_up"]
+[connection signal="button_up" from="Panel/IncreaseOreButton" to="." method="_on_increase_ore_button_button_up"]
+[connection signal="button_up" from="Panel/IncreaseAPButton" to="." method="_on_increase_ap_button_button_up"]

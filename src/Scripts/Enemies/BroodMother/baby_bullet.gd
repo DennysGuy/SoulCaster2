@@ -12,7 +12,7 @@ const SHOOT_WHISTLE = preload("uid://dq3uc67np1niw")
 @onready var splats : Array[AudioStream] = [BABY_SPLAT_1,BABY_SPLAT_2]
 
 @onready var animation_player: AnimationPlayer = $bulletrat2/AnimationPlayer
-var attack_damage: int = 3
+var attack_damage: int = 2
 @export var move_speed : float = 350
 var player : Player
 # Called when the node enters the scene tree for the first time.
@@ -49,6 +49,6 @@ func attack_player() -> void:
 	queue_free()
 
 func die() -> void:
-	
+	SignalBus.time_added.emit(1.0)
 	GameManager.play_sfx(RAT_DEATH_1)
 	queue_free()

@@ -5,7 +5,7 @@ var player_stats : Dictionary = {
 	"Current XP": 0.0,
 	"Needed XP": 50.0,
 	"Attack Speed": 1.0, # influences the speed of weapon firing animation
-	"Attack Damage": 60.0,
+	"Attack Damage": 7.0,
 	"Grenade Damage": 7.0,
 	"Movement Speed": 15.0, #speed at which the camera shifts to a new side
 	"Crit Chance": 0.0,
@@ -13,7 +13,7 @@ var player_stats : Dictionary = {
 	"Starting Timer": 50,
 	"Defense": 0.0, #reduces the time taken off when taking damage
 	"Ore Spawn Time": 7,
-	"Reload Speed": 3.0, # influences the speed of reload animation
+	"Reload Speed": 1.0, # influences the speed of reload animation
 	"Ability Points": 0.0,
 	"Currency": 0.0,
 	"Ore": 0.0,

@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bw1jutw4ko677" path="res://src/Scripts/Enemies/brood_mother_boss.gd" id="1_yjmqo"]
 [ext_resource type="Texture2D" uid="uid://33kwayghvigl" path="res://Assets/Broodmother/rat mother(2)_broodmother.png" id="2_50qrq"]
+[ext_resource type="AudioStream" uid="uid://hl3lgvfx8630" path="res://Assets/Audio/RabidRatHurt1.wav" id="2_yhgr2"]
 [ext_resource type="Shader" uid="uid://dckiap2vdruhu" path="res://src/Scenes/hitflash.gdshader" id="3_50qrq"]
 [ext_resource type="Script" uid="uid://cthjv8ulf3hq6" path="res://src/Scripts/Statemachine/state_machine.gd" id="3_c4ps3"]
+[ext_resource type="AudioStream" uid="uid://c2mc1n5oof8xe" path="res://Assets/Audio/RabidRatHurt2.wav" id="3_rc2ya"]
+[ext_resource type="AudioStream" uid="uid://dco3s2di2bx06" path="res://Assets/Audio/RabidRatHurt3.wav" id="4_0gfg8"]
 [ext_resource type="Script" uid="uid://cp8q8p7tx7hn7" path="res://src/Scripts/Enemies/BroodMother/brood_mother_idle.gd" id="4_875m0"]
 [ext_resource type="Script" uid="uid://cmjxphwyub54u" path="res://src/Scripts/Enemies/BroodMother/mother_spawn_in.gd" id="5_05fr6"]
 [ext_resource type="PackedScene" uid="uid://ri2g3xgvuq8y" path="res://src/Scenes/BodyCollider.tscn" id="5_ddb4o"]
@@ -1098,7 +1101,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.56666666),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 34.80537, 0)]
@@ -2134,7 +2137,7 @@ tracks/33/path = NodePath("..")
 tracks/33/interp = 1
 tracks/33/loop_wrap = true
 tracks/33/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.06666666),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -3138,9 +3141,13 @@ bolt_position = NodePath("BoltPosition")
 enemy_name = "Brood Mother"
 health = 2000
 max_enemy_health = 2000
-attack_damage = 7
+attack_damage = 5
+progress_amount = 10.0
 xp = 80
 dead_state = NodePath("StateMachine/Dead")
+hurt_1 = ExtResource("2_yhgr2")
+hurt_2 = ExtResource("3_rc2ya")
+hurt_3 = ExtResource("4_0gfg8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1736182387]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08657837, 1.9320221, -0.0657959)
@@ -3391,9 +3398,12 @@ idle_state = NodePath("../Idle")
 true_idle_state = NodePath("../TrueIdle")
 animation_name = "SpawnIn"
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=1401660238 node_paths=PackedStringArray("idle_state")]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1401660238 node_paths=PackedStringArray("idle_state", "jump_left", "jump_right", "jump_center")]
 script = ExtResource("6_drvek")
 idle_state = NodePath("../BackToIdle")
+jump_left = NodePath("../JumpLeft")
+jump_right = NodePath("../JumpRight")
+jump_center = NodePath("../JumpCenter")
 
 [node name="TrueIdle" type="Node" parent="StateMachine" unique_id=1854862715 node_paths=PackedStringArray("attack_state", "jump_up_state", "roll_prep_state", "jump_left", "jump_right", "jump_center")]
 script = ExtResource("7_j7kl6")

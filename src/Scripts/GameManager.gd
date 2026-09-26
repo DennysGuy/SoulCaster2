@@ -14,6 +14,7 @@ var enemy_tracker_owned : bool = false
 
 var mini_round_started : bool = false
 var boss_was_stunned : bool = false
+var boss_in_roll_mode : bool = false
 
 var bullets_left : int = 32
 var pistol_magazine_size : int = 1
@@ -42,10 +43,10 @@ var round_times : Array[int] = [125, 230, 340]
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,3,3]
 
-var max_boss_health : int = 2000
-var current_boss_health : int = 2000
+var max_boss_health : int = 3500
+var current_boss_health : int = 3500
 
-var max_boss_stun : int = 400
+var max_boss_stun : int = 600
 var current_boss_stun : int = 0
 
 var max_configurations : Dictionary = {
@@ -72,9 +73,16 @@ var max_configurations : Dictionary = {
 func get_max_configs() -> int:
 	if GameManager.round_number >= 3 and !GameManager.mini_round_started:
 		return 0
-	if round_number >= 3:
-		round_number = 2
-		current_round_point = 2
+	if GameManager.mini_round_started:
+		if GameManager.current_boss_health >= round(GameManager.max_boss_health * 0.7):
+			GameManager.round_number = 0
+			current_round_point = ROUND_POINT.FIRST_QUARTER
+		elif GameManager.current_boss_health >= round(GameManager.max_boss_health * 0.3) and GameManager.current_boss_health <= round(GameManager.max_boss_health * 0.7):
+			GameManager.round_number = 1
+			current_round_point = ROUND_POINT.HALF_WAY
+		elif GameManager.current_boss_health <= round(GameManager.max_boss_health * 0.3):
+			GameManager.round_number = 2
+			current_round_point = ROUND_POINT.THREE_QUARTER
 	return max_configurations[round_number][current_round_point]
 
 enum ROUND_POINT {BEGINNING, FIRST_QUARTER, HALF_WAY, THREE_QUARTER}

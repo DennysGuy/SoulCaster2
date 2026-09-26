@@ -168,19 +168,19 @@ func _physics_process(delta: float) -> void:
 func move_player() -> void:
 	if Input.is_action_just_pressed("rotate_left"):
 		#AudioManager.play_sfx(AudioManager.LOOKLEFT,-2)
-		print("Rotate Left")
+		#print("Rotate Left")
 		GameManager.play_sfx(LOOKLEFT,-4)
 		rotate_camera_left()
 
 	if Input.is_action_just_pressed("rotate_right"):
 		#AudioManager.play_sfx(AudioManager.LOOKRIGHT,-2)
-		print("Rotate Right")
+		#print("Rotate Right")
 		GameManager.play_sfx(LOOKRIGHT,-4)
 		rotate_camera_right()
 		
 	if Input.is_action_just_pressed("rotate_opposite"):
 		#AudioManager.play_sfx(AudioManager.LOOKLEFT, -2)
-		print("Rotate Behind")
+		#print("Rotate Behind")
 		GameManager.play_sfx(LOOKRIGHT,-4)
 		rotate_camera_opposite()
 		

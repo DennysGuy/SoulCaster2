@@ -1,10 +1,12 @@
 class_name JumpOutState extends State
+const JUMP_UP = preload("uid://cwf83mqw2kpyt")
 
 func enter() -> void:
 	var tween : Tween = create_tween()
 	tween.tween_property(parent, "global_position:y", 20, 0.5)
 	parent.timer.wait_time = 2.0
 	parent.timer.start()
+	GameManager.play_sfx(JUMP_UP)
 
 func exit() -> void:
 	pass

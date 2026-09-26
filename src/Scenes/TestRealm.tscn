@@ -3679,7 +3679,7 @@ one_shot = true
 [node name="BossSpawnPoints" type="Node3D" parent="." unique_id=1899758521]
 
 [node name="BossSpawnPoint" type="Marker3D" parent="BossSpawnPoints" unique_id=1963958776]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.0293193, 1.3495474, -19.670132)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3.637227, 1.3495474, -17.793163)
 
 [node name="BossSpawnPoint2" type="Marker3D" parent="BossSpawnPoints" unique_id=1193842657]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -16.942202, 1.3495474, -5.6531057)
@@ -3710,7 +3710,6 @@ bus = &"Music"
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1559373778]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 18.093607, 9.742699, -1.8696079)
-visible = false
 material_override = SubResource("ShaderMaterial_plpmp")
 size = Vector3(2.4818115, 1.6269531, 2.0708008)
 
@@ -3764,11 +3763,20 @@ material_override = SubResource("StandardMaterial3D_plpmp")
 radius = 18.645926
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=310982374]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.357437, 0.3740275, -2.6418867)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.357437, -1.057204, -2.6418867)
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=84697068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8042145, -0.2607422, -2.3518982)
+shape = SubResource("BoxShape3D_s5xg8")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="." unique_id=722409345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.35982, -0.10417104, -2.6418867)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4" unique_id=538734287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8042145, -0.2607422, -2.3518982)
 shape = SubResource("BoxShape3D_s5xg8")
 

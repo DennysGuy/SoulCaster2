@@ -120,8 +120,8 @@ func spawn_enemy() -> void:
 		print("THIS IS CHOSEN INDEX: %s " % chosen_spawn_point["index"])
 		
 		var current_round : int = GameManager.round_number
-		if GameManager.round_number > 2:
-			GameManager.round_number = 2
+		
+		print("THIS IS THE CURRENT ROUND: %s" % GameManager.round_number)
 		var config_list : Array = GameManager.wave_configurations[current_round][GameManager.current_round_point][chosen_spawn_point["index"]]
 		var random_config : PackedScene = GameManager.pick_weighted_config(config_list)
 		print("THIS IS THE SCENE: %s" % random_config) 
@@ -211,4 +211,5 @@ func spawn_boss_in_random_spot() -> void:
 	var random_spawn_point : Marker3D = boss_spawn_points.get_children().pick_random()	
 	boss.global_position = random_spawn_point.global_position
 	#boss.rotation = boss_spawn_point.rotation
+	GameManager.round_number = 3
 	add_child(boss)

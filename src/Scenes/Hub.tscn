@@ -1,11 +1,13 @@
 [gd_scene format=4 uid="uid://jgsciuanachx"]
 
 [ext_resource type="Script" uid="uid://cu1itwp0k17e1" path="res://src/Scripts/hub.gd" id="1_qnekn"]
+[ext_resource type="Texture2D" uid="uid://brka4756v2ter" path="res://Assets/Arena/Wispy_Sky-Night_03-1024x512.png" id="2_rjs8l"]
 [ext_resource type="Script" uid="uid://dy84mhivqky8c" path="res://src/Scripts/cart.gd" id="3_s5psd"]
 [ext_resource type="PackedScene" uid="uid://fm6y38l4gctm" path="res://src/Scenes/Menus/ShopMenu.tscn" id="4_jjwho"]
 [ext_resource type="PackedScene" uid="uid://f3pck105hhe2" path="res://Assets/ShopGuy/Scene Cart(1).glb" id="5_eysaa"]
 [ext_resource type="Texture2D" uid="uid://dmcw3rprob4ng" path="res://Assets/Hub/cart.png" id="6_lhmkk"]
 [ext_resource type="PackedScene" uid="uid://b661qq3np83p6" path="res://src/Scenes/Player.tscn" id="9_ulcxc"]
+[ext_resource type="PackedScene" uid="uid://c2ycsc3y5vui7" path="res://src/Scenes/Menus/DebugMenu.tscn" id="10_lhmkk"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="11_ahwup"]
 [ext_resource type="AudioStream" uid="uid://djpctdm7ekscx" path="res://Assets/Audio/HubAmbience.wav" id="12_eysaa"]
 [ext_resource type="Script" uid="uid://v8t52da5rcq" path="res://src/Scripts/fire_place.gd" id="13_4dycr"]
@@ -16,10 +18,18 @@
 [ext_resource type="Texture2D" uid="uid://c7bxu7yhv41qu" path="res://Assets/Hub/arena.png" id="14_rjs8l"]
 [ext_resource type="Shader" uid="uid://bp61plnfa2kpn" path="res://src/Scenes/TestRealm.gdshader" id="16_lhmkk"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dylb3"]
+panorama = ExtResource("2_rjs8l")
+
+[sub_resource type="Sky" id="Sky_lhmkk"]
+sky_material = SubResource("PanoramaSkyMaterial_dylb3")
+
 [sub_resource type="Environment" id="Environment_gpfey"]
-background_mode = 1
-background_energy_multiplier = 1.43
+background_mode = 2
+background_color = Color(0.2123048, 0.21230483, 0.21230477, 1)
+sky = SubResource("Sky_lhmkk")
 ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
 tonemap_mode = 2
 glow_enabled = true
 
@@ -3297,17 +3307,17 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rjs8l"]
 render_priority = 0
 shader = ExtResource("16_lhmkk")
-shader_parameter/TwixelAngle = 5.0000002375
+shader_parameter/TwixelAngle = 2.000000095
 shader_parameter/PixelSize = 1.0
 shader_parameter/Posterize = true
 shader_parameter/ColorSteps = 64
 shader_parameter/UsePalette = false
-shader_parameter/PaletteSize = 12
+shader_parameter/PaletteSize = 14
 shader_parameter/PaletteColor0 = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/PaletteColor1 = Color(0.25, 0.15, 0.12, 1)
 shader_parameter/PaletteColor2 = Color(0.5, 0.35, 0.25, 1)
 shader_parameter/PaletteColor3 = Color(0.9, 0.85, 0.7, 1)
-shader_parameter/Brightness = 1.0
+shader_parameter/Brightness = 1.5850000752875
 shader_parameter/Saturation = 1.0
 shader_parameter/Contrast = 1.0
 
@@ -3331,7 +3341,10 @@ look_at_point_3 = NodePath("../LookAtPoint4")
 look_at_point_4 = NodePath("../LookAtPoint3")
 
 [node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986675, -0.051094152, -0.05112596, 0.99676466, 0.062018577, 0.04795278, 0.06447826, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.047986668, -0.051094152, -0.05112595, 0.99676466, 0.06201857, 0.047952782, 0.064478256, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+
+[node name="UltraBow" parent="Player/Head/Marker3D/GunArm/UltraBow" index="0" unique_id=2105935698]
+transform = Transform3D(1, 2.8597196e-09, 4.020746e-10, 3.58294e-10, 0.015292958, -0.99988306, -2.8655336e-09, 0.99988306, 0.015292958, -0.013769388, 0.9215592, -3.6773963)
 
 [node name="HomePosition" type="Marker3D" parent="." unique_id=603688218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.511593, 11.942739, -14.713236)
@@ -3623,6 +3636,15 @@ theme_override_font_sizes/font_size = 32
 text = "Rotate Camera: WASD
 Select  Menu: Left Click on Station"
 
+[node name="DebugMenu" parent="CanvasLayer" unique_id=942155374 instance=ExtResource("10_lhmkk")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 250.0
+offset_right = 250.0
+grow_horizontal = 0
+
 [node name="TopBar" type="ColorRect" parent="CanvasLayer" unique_id=1298449211]
 z_index = 4096
 anchors_preset = 15
@@ -3640,7 +3662,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -540.0
-offset_bottom = -539.9995
+offset_bottom = -539.99976
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)

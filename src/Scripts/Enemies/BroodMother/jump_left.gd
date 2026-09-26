@@ -3,13 +3,16 @@ class_name JumpLeft extends State
 @export var attack_state : State
 @export var roll_prep_state : State
 @export var jump_up_state : State
+const BOSS_MOVE_LEFT = preload("uid://b3hj0mm01s7xv")
 
 func enter() -> void:
 	#parent.animation_player.play(animation_name)
+	parent.cur_position = parent.CURRENT_POSITION.LEFT
 	var tween : Tween = create_tween()
-	var final_position : Vector3 = parent.established_position + parent.global_transform.basis.x * 6
+	var final_position : Vector3 = parent.established_position + parent.global_transform.basis.x * 5
 	tween.tween_property(parent, "global_position",final_position, 0.4 )
 	parent.timer.wait_time = 1.0
+	GameManager.play_sfx(BOSS_MOVE_LEFT)
 
 func exit() -> void:
 	pass

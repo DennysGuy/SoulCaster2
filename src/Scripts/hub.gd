@@ -22,6 +22,10 @@ var stored_selectable : MenuSelectable
 
 @onready var home_position: Marker3D = $HomePosition
 
+@onready var debug_menu: DebugMenu = $CanvasLayer/DebugMenu
+
+var debug_menu_showing : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hud_animation_player.play("CloseIn")
@@ -47,6 +51,18 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	
+	if Input.is_action_just_pressed("toggle_debug_menu"):
+		if !debug_menu_showing:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			show_debug_menu()
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+			hide_debug_menu()
+		
+		debug_menu_showing = !debug_menu_showing
+		
+	
 	if Input.is_action_just_pressed("start_round"):
 		spawn_round_select_menu()
 	else:
@@ -115,3 +131,11 @@ func play_close_out() -> void:
 	music.stop()
 	GameManager.play_sfx(START_FIGHT)
 	hud_animation_player.play("CloseOut")
+
+func hide_debug_menu() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(debug_menu, "position", Vector2(2170,540), 0.3)	
+
+func show_debug_menu() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(debug_menu, "position", Vector2(1670,540), 0.3)

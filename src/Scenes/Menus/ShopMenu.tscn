@@ -751,6 +751,7 @@ theme_override_font_sizes/font_size = 36
 text = "Ammuntion Type"
 
 [node name="AmuletsPanel" type="Panel" parent="UpgradesPanel/MarginContainer" unique_id=482165866]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tf7al")
 

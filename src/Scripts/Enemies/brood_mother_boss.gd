@@ -6,6 +6,9 @@ class_name BroodMother extends Enemy
 @export var stun_state : State
 @onready var rat_mother: Node3D = $"rat mother"
 
+enum CURRENT_POSITION {LEFT, CENTER, RIGHT}
+var cur_position : CURRENT_POSITION = CURRENT_POSITION.CENTER
+
 var established_position : Vector3 = Vector3.ZERO
 
 const BOSS_DEATH = preload("uid://bcruebecyj6as")

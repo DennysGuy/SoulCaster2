@@ -43,6 +43,8 @@ const BASE_XP_AMOUNT : int = 50
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var flash_player: AnimationPlayer = $FlashPlayer
 
+const VOX_BOSS_DIALOGUE_BLASPHEMY_04 = preload("uid://1taeuss8bqxl")
+
 var round_started : bool = false
 var round_ended : bool = false
 @onready var round_progress_bar: ProgressBar = $RoundProgressBar
@@ -127,8 +129,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if round_started:
-		if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
-			add_progress(50)
+		#if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
+			#add_progress(50)
 		
 		if Input.is_action_just_pressed("jump") and arena_context_showing:
 			close_context_panel()
@@ -283,9 +285,14 @@ func start_fight() -> void:
 func update_boss_bar(damage_done : int, value : int, max_value : int) -> void:
 	round_progress_bar.value = value
 	round_progress_bar.max_value = max_value
-	
+	var damage : int = damage_done
 	if !GameManager.boss_was_stunned:
-		GameManager.current_boss_stun += damage_done
+		
+		if GameManager.boss_in_roll_mode:
+			damage *= 1.6
+		
+		GameManager.current_boss_stun += damage
+		
 		boss_stun_progress_bar.value = GameManager.current_boss_stun
 		var current_boss_stun : int = GameManager.current_boss_stun
 		if current_boss_stun >= GameManager.max_boss_stun:
@@ -376,6 +383,7 @@ func start_mini_round() -> void:
 	SignalBus.mini_round_started.emit()
 
 func start_mini_round_count_down() -> void:
+	GameManager.play_sfx(VOX_BOSS_DIALOGUE_BLASPHEMY_04)
 	animation_player.play("MiniRoundCountDown")
 
 func show_stun_bar() -> void:
