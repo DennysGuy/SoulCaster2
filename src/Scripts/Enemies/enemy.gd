@@ -62,7 +62,7 @@ var can_hurt : bool = true
 @onready var selected_move_speed : float = move_speed
 var selected_speed_scale : float = 0.7
 @onready var move_speeds : Dictionary = {
-	0 : [move_speed, 0.7],
+	0 : [move_speed, 1.0],
 	1 : [selected_move_speed+20,1.0],
 	2 : [selected_move_speed+35,1.3]
 }

@@ -56,3 +56,4 @@ signal boss_jumped_out
 signal mini_round_finished
 
 signal boss_stun_threshold_reached
+signal hunt_round_ended

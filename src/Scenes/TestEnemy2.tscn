@@ -416,7 +416,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="Animation" id="Animation_rk1al"]
-resource_name = "Atack"
+resource_name = "Attack"
 length = 1.5666667
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -2660,7 +2660,7 @@ tracks/30/keys = PackedFloat32Array(0, 1, -0.23262642, 0.01336819, -0.09930893, 
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_augd8"]
 _data = {
-&"Atack": SubResource("Animation_rk1al"),
+&"Attack": SubResource("Animation_rk1al"),
 &"Hurt": SubResource("Animation_oo2wu"),
 &"RESET": SubResource("Animation_60yqc"),
 &"Run": SubResource("Animation_26208"),

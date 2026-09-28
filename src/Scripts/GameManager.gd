@@ -16,6 +16,8 @@ var mini_round_started : bool = false
 var boss_was_stunned : bool = false
 var boss_in_roll_mode : bool = false
 
+var ore_hunt_mode_started : bool = false
+
 var bullets_left : int = 32
 var pistol_magazine_size : int = 1
 var rifle_magazine_size : int = 6
@@ -37,7 +39,7 @@ var levels_gained : int = 0
 var rounds_beaten : int = 0
 var enemies_killed : int = 0
 var ore_acquired : int = 0
-var round_timers : Array[int] = [3, 2, 1]
+var round_timers : Array[int] = [6, 4, 2]
 var round_times : Array[int] = [125, 230, 340]
 
 var minimum_spawn : Array[int] = [1,1,2]
@@ -46,8 +48,11 @@ var maximum_spawn : Array[int] = [2,3,3]
 var max_boss_health : int = 3500
 var current_boss_health : int = 3500
 
-var max_boss_stun : int = 600
+var max_boss_stun : int = 540
 var current_boss_stun : int = 0
+
+var hunt_mode_time : int = 20
+var current_hunt_mode_time : int = 20
 
 var max_configurations : Dictionary = {
 	0: {

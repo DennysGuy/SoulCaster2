@@ -73,7 +73,11 @@ func stop_timer() -> void:
 	
 	#GameManager.round_number = -1
 	#get_tree().change_scene_to_file("uid://b54wn7lrvkbdi")
-	SignalBus.arena_ended.emit()
+	if GameManager.ore_hunt_mode_started:
+		SignalBus.hunt_round_ended.emit()
+		GameManager.ore_hunt_mode_started = false
+	else:
+		SignalBus.arena_ended.emit()
 
 func reset_timer() -> void:
 	timer_started = false
@@ -81,7 +85,6 @@ func reset_timer() -> void:
 
 func decrement_wait_time(value : int) -> void:
 
-	
 	seconds -= value
 	seconds_tracker += value
 	if seconds < 0:
@@ -116,3 +119,7 @@ func zero_out_timer() -> void:
 	seconds = 0
 	milliseconds = 0
 	set_label()
+
+func set_hunt_round_timer() -> void:
+	GameManager.ore_hunt_mode_started = true
+	set_time(GameManager.hunt_mode_time)

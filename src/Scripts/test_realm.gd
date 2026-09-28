@@ -148,6 +148,10 @@ func spawn_enemy() -> void:
 	
 func _on_ore_spawn_timer_timeout() -> void:
 	spawn_ore()
+	var ore_spawn_time = PlayerStats.player_stats["Ore Spawn Time"]
+	if GameManager.ore_hunt_mode_started:
+		ore_spawn_time -= 2
+	
 	ore_spawn_timer.wait_time = randi_range(PlayerStats.player_stats["Ore Spawn Time"]-2,PlayerStats.player_stats["Ore Spawn Time"])
 	ore_spawn_timer.start()
 

@@ -89,6 +89,7 @@ func _ready() -> void:
 	SignalBus.boss_jumped_out.connect(start_mini_round_count_down)
 	SignalBus.shot_fired.connect(play_short_flash)
 	SignalBus.boss_stunned.connect(play_long_flash)
+	SignalBus.hunt_round_ended.connect(start_combat_round)
 	update_ore_count_label(0)
 	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
@@ -113,7 +114,7 @@ func _ready() -> void:
 	if GameManager.round_number >= 3:
 		start_boss_fight()
 	else:
-		animation_player.play("RoundCountDown")
+		start_ore_hunt_countdown()
 	bar_player.play("CloseIn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -396,3 +397,13 @@ func play_short_flash() -> void:
 
 func play_long_flash() -> void:
 	flash_player.play("LongFlash")
+
+func start_ore_hunt_countdown() -> void:
+	round_timer_label.set_hunt_round_timer()
+	animation_player.play("OreHuntCountDown")
+	
+func start_combat_round() -> void:
+	animation_player.play("RoundCountDown")
+
+func start_timer() -> void:
+	round_timer_label.start_timer()
