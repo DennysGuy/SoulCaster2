@@ -44,6 +44,7 @@ const BASE_XP_AMOUNT : int = 50
 @onready var flash_player: AnimationPlayer = $FlashPlayer
 
 const VOX_BOSS_DIALOGUE_BLASPHEMY_04 = preload("uid://1taeuss8bqxl")
+@onready var hold_space_notice: Label = $HoldSpaceNotice
 
 var round_started : bool = false
 var round_ended : bool = false
@@ -69,6 +70,10 @@ const LEVEL_UP = preload("uid://crxa0sswpnn7g")
 
 var quit_time_left : float = 12
 var quit_time : float = 12
+
+var skip_time_left : float = 15
+var skip_time : float = 15
+
 @onready var bar_player: AnimationPlayer = $BarPlayer
 
 func _ready() -> void:
@@ -129,10 +134,15 @@ func _process(delta: float) -> void:
 		quit_time_left = quit_time
 
 func _physics_process(delta: float) -> void:
-	if round_started:
-		#if Input.is_action_just_pressed("jump") and GameManager.round_number < GameManager.MAX_ROUND:
-			#add_progress(50)
+	if GameManager.ore_hunt_mode_started: 
+		if Input.is_action_pressed("jump"):
+			skip_time_left -= 15 * delta
+			if skip_time_left <= 0:
+				round_timer_label.zero_out_timer()
+		elif Input.is_action_just_released("jump"):
+			skip_time_left = skip_time
 		
+	if round_started:
 		if Input.is_action_just_pressed("jump") and arena_context_showing:
 			close_context_panel()
 		
@@ -221,7 +231,7 @@ func end_round() -> void:
 	if GameManager.round_number > GameManager.furtherest_round_unlocked:
 		GameManager.furtherest_round_unlocked = GameManager.round_number
 	if GameManager.round_number < GameManager.MAX_ROUND:
-		animation_player.play("RoundCountDown")
+		animation_player.play("OreHuntCountDown")
 	else:
 		start_boss_fight()
 	
@@ -399,10 +409,13 @@ func play_long_flash() -> void:
 	flash_player.play("LongFlash")
 
 func start_ore_hunt_countdown() -> void:
+	GameManager.ore_hunt_mode_started = true
+	hold_space_notice.show()
 	round_timer_label.set_hunt_round_timer()
 	animation_player.play("OreHuntCountDown")
 	
 func start_combat_round() -> void:
+	hold_space_notice.hide()
 	animation_player.play("RoundCountDown")
 
 func start_timer() -> void:

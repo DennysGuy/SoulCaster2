@@ -7,7 +7,7 @@ func enter() -> void:
 
 	parent.animation_player.speed_scale = parent.selected_speed_scale
 	
-	if parent.enemy_name == "Rat Cronie" and parent.move_speed == 70:
+	if parent.enemy_name == "Rat Cronie" and parent.selected_move_speed == 70:
 		parent.play_walk_animation("Walk")
 	else:
 		parent.play_walk_animation("Run")

@@ -45,10 +45,10 @@ var round_times : Array[int] = [125, 230, 340]
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,3,3]
 
-var max_boss_health : int = 3500
-var current_boss_health : int = 3500
+var max_boss_health : int = 3000
+var current_boss_health : int = 3000
 
-var max_boss_stun : int = 540
+var max_boss_stun : int = 450
 var current_boss_stun : int = 0
 
 var hunt_mode_time : int = 20
