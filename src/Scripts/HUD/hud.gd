@@ -231,7 +231,7 @@ func end_round() -> void:
 	if GameManager.round_number > GameManager.furtherest_round_unlocked:
 		GameManager.furtherest_round_unlocked = GameManager.round_number
 	if GameManager.round_number < GameManager.MAX_ROUND:
-		animation_player.play("OreHuntCountDown")
+		start_ore_hunt_countdown()
 	else:
 		start_boss_fight()
 	

@@ -25,6 +25,7 @@ var stored_selectable : MenuSelectable
 @onready var debug_menu: DebugMenu = $CanvasLayer/DebugMenu
 
 var debug_menu_showing : bool = false
+const INTRO = preload("uid://cdqmidl7aawcp")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,7 +40,8 @@ func _ready() -> void:
 		progress_bar.hide()
 		start_battle_label.hide()
 		controls_label.hide()
-		spawn_hub_context()
+		Dialogic.start(INTRO)
+		#spawn_hub_context()
 	
 	progress_bar.max_value = PlayerStats.player_stats["Needed XP"]
 	progress_bar.value = PlayerStats.player_stats["Current XP"]
