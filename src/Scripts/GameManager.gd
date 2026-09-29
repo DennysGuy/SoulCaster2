@@ -54,6 +54,8 @@ var current_boss_stun : int = 0
 var hunt_mode_time : int = 20
 var current_hunt_mode_time : int = 20
 
+var in_cutscene : bool = false
+
 var max_configurations : Dictionary = {
 	0: {
 		ROUND_POINT.BEGINNING:1,

@@ -36,7 +36,7 @@ overrides = {
 "box_color_use_global": "false",
 "box_margin_bottom": "30.0",
 "box_size": "Vector2(1000, 200)",
-"normal_font": "\"res://Assets/Fonts/GoudyMediaeval-DemiBold.ttf\"",
+"normal_font": "\"res://Assets/Fonts/KnightsQuest.ttf\"",
 "text_size": "28.0",
 "text_use_global_font": "false",
 "text_use_global_size": "false",

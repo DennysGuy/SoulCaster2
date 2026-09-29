@@ -14,6 +14,8 @@
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="10_6w4u3"]
 [ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="12_lt1va"]
 [ext_resource type="PackedScene" uid="uid://booyib7rd0el6" path="res://src/Scenes/HUD/BoltHUDIcon.tscn" id="13_xs85b"]
+[ext_resource type="Texture2D" uid="uid://j3bjw76bnnul" path="res://Assets/Arena/CombatMode.png" id="15_g1kdu"]
+[ext_resource type="Texture2D" uid="uid://cljqe5rqldjc6" path="res://Assets/Arena/OreMode.png" id="16_sx6ht"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
 bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
@@ -727,10 +729,10 @@ script = ExtResource("1_ippal")
 anchors_preset = 5
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = -117.0
-offset_top = 78.0
-offset_right = 100.0
-offset_bottom = 197.0
+offset_left = -107.0
+offset_top = 89.0
+offset_right = 110.0
+offset_bottom = 208.0
 grow_vertical = 1
 
 [node name="TimeGainedPosition" type="Marker2D" parent="." unique_id=1338418775]
@@ -928,6 +930,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="HealthIcon" type="TextureRect" parent="." unique_id=1014798557]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -117.0
+offset_top = 114.0
+offset_right = -62.0
+offset_bottom = 185.0
+grow_horizontal = 2
+texture = ExtResource("15_g1kdu")
+expand_mode = 1
+
+[node name="HuntIcon" type="TextureRect" parent="." unique_id=544888847]
+visible = false
+offset_left = 830.0
+offset_top = 111.0
+offset_right = 911.0
+offset_bottom = 192.0
+texture = ExtResource("16_sx6ht")
+expand_mode = 1
 
 [node name="CountDownLabel" type="Label" parent="." unique_id=147933115]
 anchors_preset = 8

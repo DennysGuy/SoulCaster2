@@ -97,7 +97,9 @@ func _ready() -> void:
 	SignalBus.enemy_spawned.connect(notify_enemy)
 	SignalBus.face_boss_area.connect(face_boss_spawn_area)
 	SignalBus.hub_menu_accessed.connect(look_at_hub_position)
-	
+	SignalBus.intro_cutscene_started.connect(release_target_look_at)
+	SignalBus.intro_cutscene_move_player_to_campfire.connect(rotate_camera_left)
+	SignalBus.intro_cutscene_return_player_to_cart.connect(rotate_camera_right)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	camera.make_current()
@@ -540,3 +542,7 @@ func spawn_grenade() -> void:
 	GameManager.grenades_owned -= 1
 	GameManager.play_sfx(GRENADE_TOSS)
 	SignalBus.grenade_thrown.emit()
+
+
+func release_target_look_at() -> void:
+	target_location = null

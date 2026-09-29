@@ -57,3 +57,12 @@ signal mini_round_finished
 
 signal boss_stun_threshold_reached
 signal hunt_round_ended
+
+signal intro_cutscene_started
+signal intro_cutscene_player_return
+signal intro_cutscene_move_player_to_campfire
+signal intro_cutscene_return_player_to_cart
+
+signal control_label_revealed
+
+signal start_battle_label_revealed

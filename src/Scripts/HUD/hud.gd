@@ -26,6 +26,10 @@ class_name HUD extends CanvasLayer
 @onready var round_timer_label: WaveTimerLabel = $RoundTimerLabel
 @onready var grenade_count_label: Label = $GrenadeCountLabel
 
+@onready var health_icon: TextureRect = $HealthIcon
+@onready var hunt_icon: TextureRect = $HuntIcon
+
+
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
 
@@ -409,12 +413,16 @@ func play_long_flash() -> void:
 	flash_player.play("LongFlash")
 
 func start_ore_hunt_countdown() -> void:
+	health_icon.hide()
+	hunt_icon.show()
 	GameManager.ore_hunt_mode_started = true
 	hold_space_notice.show()
 	round_timer_label.set_hunt_round_timer()
 	animation_player.play("OreHuntCountDown")
 	
 func start_combat_round() -> void:
+	health_icon.show()
+	hunt_icon.hide()
 	hold_space_notice.hide()
 	animation_player.play("RoundCountDown")
 

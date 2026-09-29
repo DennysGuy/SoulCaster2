@@ -1,0 +1,29 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dtee4s7mykbb2"]
+
+[ext_resource type="Texture2D" uid="uid://ddm23pig01fri" path="res://Assets/TestOre_0.png" id="1_qnj4e"]
+[ext_resource type="Shader" uid="uid://baufimyjamedw" path="res://src/Scenes/TestOre.gdshader" id="2_6fvt4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y88dp"]
+render_priority = 0
+shader = ExtResource("2_6fvt4")
+shader_parameter/shine_color = Color(1, 0.67418694, 0.57320005, 1)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_width = 0.7530000357675
+shader_parameter/cycle_interval = 2.2000001045
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.0
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
+
+[resource]
+resource_local_to_scene = true
+resource_name = "material_0"
+next_pass = SubResource("ShaderMaterial_y88dp")
+transparency = 2
+alpha_scissor_threshold = 0.05
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_qnj4e")
+emission_enabled = true
+texture_filter = 0
+texture_repeat = false

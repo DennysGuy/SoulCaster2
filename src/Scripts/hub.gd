@@ -20,6 +20,7 @@ var stored_selectable : MenuSelectable
 @onready var start_battle_label: Label = $CanvasLayer/StartBattleLabel
 @onready var controls_label: Label = $CanvasLayer/ControlsLabel
 
+
 @onready var home_position: Marker3D = $HomePosition
 
 @onready var debug_menu: DebugMenu = $CanvasLayer/DebugMenu
@@ -27,12 +28,21 @@ var stored_selectable : MenuSelectable
 var debug_menu_showing : bool = false
 const INTRO = preload("uid://cdqmidl7aawcp")
 
+@onready var merchant_animator: AnimationPlayer = $Cart/Cart/MerchantAnimator
+@onready var shop_keeper_talk_position: Marker3D = $ShopKeeperTalkPosition
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hud_animation_player.play("CloseIn")
 	SignalBus.hub_context_menu_closed.connect(show_start_combat_label)
 	SignalBus.menu_exited.connect(move_player_to_home)
 	SignalBus.arena_started.connect(play_close_out)
+	SignalBus.intro_cutscene_started.connect(play_starting_cutscene)
+	SignalBus.intro_cutscene_player_return.connect(return_player_to_home_during_intro_cutscene)
+	SignalBus.control_label_revealed.connect(show_controls_label)
+	SignalBus.start_battle_label_revealed.connect(show_start_battle_label)
+	
 	GameManager.in_arena = false
 	GameManager.in_menu = false
 	player.gun_arm.hide()
@@ -112,6 +122,12 @@ func show_start_combat_label() -> void:
 	controls_label.show()
 	progress_bar.show()
 
+func show_start_battle_label() -> void:
+	start_battle_label.show()
+
+func show_controls_label() -> void:
+	controls_label.show()
+
 func spawn_round_select_menu() -> void:
 	GameManager.in_menu = true
 	var round_select_menu : StartRoundPanel =preload("uid://noxi046h5l3k").instantiate()
@@ -127,7 +143,14 @@ func move_player_to_home() -> void:
 	var tween : Tween = create_tween()
 	tween.tween_property(player, "global_position",home_position.global_position,0.5)
 	await tween.finished
-	GameManager.can_move = true
+	if !GameManager.in_cutscene:
+		GameManager.can_move = true
+
+func move_player_to_merchant() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(player, "global_position",shop_keeper_talk_position.global_position,0.5)
+	await tween.finished
+	GameManager.can_move = false
 
 func play_close_out() -> void:
 	music.stop()
@@ -141,3 +164,14 @@ func hide_debug_menu() -> void:
 func show_debug_menu() -> void:
 	var tween : Tween = create_tween()
 	tween.tween_property(debug_menu, "position", Vector2(1670,540), 0.3)
+
+func play_merchant_talk_1() -> void:
+	merchant_animator.play("talk 1")
+
+func play_starting_cutscene() -> void:
+	GameManager.can_move = false
+	move_player_to_merchant()
+	play_merchant_talk_1()
+
+func return_player_to_home_during_intro_cutscene() -> void:
+	move_player_to_home()
