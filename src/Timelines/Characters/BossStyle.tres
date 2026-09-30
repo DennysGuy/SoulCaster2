@@ -40,7 +40,10 @@ scene = ExtResource("6_73d4w")
 overrides = {
 "box_margin_bottom": "30.0",
 "box_size": "Vector2(1500, 200)",
-"typing_sounds_pitch": "0.8",
+"typing_sounds_every_nths_character": "4.0",
+"typing_sounds_mode": "1",
+"typing_sounds_pitch": "0.5",
+"typing_sounds_pitch_variance": "0.3",
 "typing_sounds_sounds_folder": "\"res://src/Timelines/Characters/ShopKeeperVoice\"",
 "typing_sounds_volume": "0.0"
 }

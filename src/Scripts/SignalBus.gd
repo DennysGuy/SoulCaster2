@@ -71,3 +71,4 @@ signal count_down_ended
 
 signal cutscene_ended
 signal boss_cutscene_ended
+signal combat_tutorial_ended

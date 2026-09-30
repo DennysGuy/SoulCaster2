@@ -11,5 +11,6 @@ ShopMan: Finally, look up at the top, you have right there is a 'PROGRESS BAR' t
 ShopMan: Below the progress bar, you have a TIMER. As we don't want to die now, we set limits on how long we can hang at the heart of the infestation, when the TIMER runs out you'll be yanked out of the ARENA and sent back to the HUB.
 ShopMan: Finally, at the bottom, is you XP bar - kill RATs to acquire "XP", gain enough XP and you'll LEVEL UP and rewarded AP. AP can be spent at the CAMPFIRE to strengthen your abilities as an EXTERMINATOR.
 ShopMan: Well, Rookie. That's about it. Good Luck!
-do CutSceneManager.start_combat_round()
 do GameManager.unlock_player()
+[wait time="1.0"]
+do CutSceneManager.start_combat_round()

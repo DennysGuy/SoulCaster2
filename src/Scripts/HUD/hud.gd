@@ -31,6 +31,8 @@ const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 @onready var health_icon: TextureRect = $HealthIcon
 @onready var hunt_icon: TextureRect = $HuntIcon
 
+@onready var hunt_context_panel: ArenaContextPanel = $HuntContextPanel
+
 
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
@@ -57,11 +59,13 @@ var round_ended : bool = false
 @onready var round_progress_bar: ProgressBar = $RoundProgressBar
 # Called when the node enters the scene tree for the first time.
 
-@onready var context_panel: Panel = $ContextPanel
+@onready var context_panel: ArenaContextPanel = $ContextPanel
+
 @onready var context_label: Label = $ContextPanel/ContextLabel
 
 var hub_context_showing : bool = false
 var arena_context_showing : bool = false
+var hunt_context_showing : bool = false
 
 var context_pos : int = 0
 @onready var bolts_holder: HBoxContainer = $BoltsHolder
@@ -103,7 +107,8 @@ func _ready() -> void:
 	SignalBus.shot_fired.connect(play_short_flash)
 	SignalBus.boss_stunned.connect(play_long_flash)
 	SignalBus.hunt_round_ended.connect(start_combat_round)
-	SignalBus.hunt_tutorial_ended.connect(start_ore_hunt_countdown)
+	SignalBus.hunt_tutorial_ended.connect(show_hunt_context_panel)
+	SignalBus.combat_tutorial_ended.connect(show_combat_context_panel)
 	SignalBus.boss_cutscene_ended.connect(start_fight)
 	update_ore_count_label(0)
 	update_grenade_count()
@@ -159,9 +164,12 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_just_released("jump"):
 			skip_time_left = skip_time
 		
-	if round_started:
-		if Input.is_action_just_pressed("jump") and arena_context_showing:
-			close_context_panel()
+
+	if Input.is_action_just_pressed("jump") and arena_context_showing:
+		close_context_panel()
+	
+	if Input.is_action_just_pressed("jump") and hunt_context_showing:
+		close_hunt_context_panel()
 		
 
 
@@ -232,8 +240,7 @@ func start_round() -> void:
 		SignalBus.round_started.emit()
 		play_round_start_sfx()
 		play_survive()
-		if !GameManager.arena_instructions_shown:
-			show_arena_context()
+
 	
 
 func load_timer() -> void:
@@ -358,9 +365,6 @@ func go_to_hub() -> void:
 func play_round_start_sfx() -> void:
 	GameManager.play_sfx(ROUND_START)
 
-func show_arena_context() -> void:
-	context_panel.show()
-	get_tree().paused = true
 	
 func show_hub_context() -> void:
 	context_panel.show()
@@ -380,9 +384,22 @@ func close_context_panel() -> void:
 	if arena_context_showing:
 		get_tree().paused = false
 		context_panel.hide()
+		hunt_context_panel.hide()
 		GameManager.arena_instructions_shown = true
 		arena_context_showing = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		start_combat_round()
+	
+func close_hunt_context_panel() -> void:
+	if arena_context_showing:
+		get_tree().paused = false
+		context_panel.hide()
+		hunt_context_panel.hide()
+		GameManager.arena_instructions_shown = true
+		arena_context_showing = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		start_ore_hunt_countdown()
+
 
 func disable_hurt_ability() -> void:
 	GameManager.can_hurt_player = false
@@ -455,3 +472,13 @@ func start_combat_round() -> void:
 
 func start_timer() -> void:
 	round_timer_label.start_timer()
+
+func show_combat_context_panel() -> void:
+	context_panel.show()
+	arena_context_showing = true
+	get_tree().paused = true
+
+func show_hunt_context_panel() -> void:
+	hunt_context_panel.show()
+	hunt_context_showing = true
+	get_tree().paused = true

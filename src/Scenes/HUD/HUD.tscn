@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="12_lt1va"]
 [ext_resource type="PackedScene" uid="uid://booyib7rd0el6" path="res://src/Scenes/HUD/BoltHUDIcon.tscn" id="13_xs85b"]
 [ext_resource type="Texture2D" uid="uid://j3bjw76bnnul" path="res://Assets/Arena/CombatMode.png" id="15_g1kdu"]
+[ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="16_s42vb"]
 [ext_resource type="Texture2D" uid="uid://cljqe5rqldjc6" path="res://Assets/Arena/OreMode.png" id="16_sx6ht"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
@@ -728,6 +729,7 @@ offset_top = 89.0
 offset_right = 110.0
 offset_bottom = 208.0
 grow_vertical = 1
+text = ""
 
 [node name="TimeGainedPosition" type="Marker2D" parent="." unique_id=1338418775]
 position = Vector2(992, 183)
@@ -1033,7 +1035,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -365.0
+offset_left = -439.0
 offset_top = -197.5
 offset_right = 365.0
 offset_bottom = 263.5
@@ -1043,12 +1045,13 @@ script = ExtResource("6_7pn66")
 
 [node name="ContextLabel" type="Label" parent="ContextPanel" unique_id=1440265021]
 layout_mode = 0
-offset_left = 11.0
+offset_left = 6.0
 offset_top = 6.0
-offset_right = 602.0
-offset_bottom = 394.0
-theme_override_font_sizes/font_size = 14
-text = "** ATTENTION! READ THOROUGHLY TO UNDERSTAND RULES! ***
+offset_right = 784.0
+offset_bottom = 459.0
+theme_override_fonts/font = ExtResource("16_s42vb")
+theme_override_font_sizes/font_size = 20
+text = "TLDR
 Survive the Rat Barrage; Defeat the Mother Rat! 
 
 Directions:
@@ -1075,9 +1078,57 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 88.5
+offset_left = 160.0
 offset_top = -42.0
-offset_right = 282.5
+offset_right = 354.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press Space to Continue"
+
+[node name="HuntContextPanel" type="Panel" parent="." unique_id=1599806301]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -439.0
+offset_top = -197.5
+offset_right = 365.0
+offset_bottom = 263.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_7pn66")
+
+[node name="ContextLabel" type="Label" parent="HuntContextPanel" unique_id=520193528]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 784.0
+offset_bottom = 459.0
+theme_override_fonts/font = ExtResource("16_s42vb")
+theme_override_font_sizes/font_size = 20
+text = "TLDR
+
+Hunt Rounds are short BUFFER EVENTS before combat rounds. 
+You have 20 seconds to gather any resources that spawn on the map.
+
+Hold \"SPACE BAR\" to skip the hunt round and proceed to the combat phase.
+
+Good Luck!"
+
+[node name="Next" type="Button" parent="HuntContextPanel" unique_id=1413373481]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -42.0
+offset_right = 354.0
 offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -1138,5 +1189,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_lt1va")
 max_value = 400.0
 
 [connection signal="button_up" from="ContextPanel/Next" to="." method="_on_next_button_up"]
+[connection signal="button_up" from="HuntContextPanel/Next" to="." method="_on_next_button_up"]
 
 [editable path="RoundTimerLabel"]
