@@ -31,16 +31,21 @@ CutSceneManager="*uid://cqhabrfsl2sfl"
 [dialogic]
 
 directories/dch_directory={
+"Boss": "res://src/Timelines/Characters/Boss.dch",
 "ShopMan": "res://src/Timelines/Characters/ShopMan.dch"
 }
 directories/dtl_directory={
+"BossIntro": "res://src/Timelines/BossIntro.dtl",
+"CombatTutorial": "res://src/Timelines/CombatTutorial.dtl",
+"HuntRoundTutorial": "res://src/Timelines/HuntRoundTutorial.dtl",
 "Intro": "res://src/Timelines/Intro.dtl"
 }
 layout/style_directory={
 "": "res://src/Timelines/Characters/ShopManStyle.tres",
+"BossStyle": "res://src/Timelines/Characters/BossStyle.tres",
 "ShopManStyle": "res://src/Timelines/Characters/ShopManStyle.tres"
 }
-layout/style_list=["res://src/Timelines/Characters/ShopManStyle.tres"]
+layout/style_list=["res://src/Timelines/Characters/ShopManStyle.tres", "res://src/Timelines/Characters/BossStyle.tres"]
 layout/default_style="res://src/Timelines/Characters/ShopManStyle.tres"
 text/letter_speed=0.01
 text/initial_text_reveal_skippable=true
@@ -59,7 +64,9 @@ choices/reveal_delay=0
 choices/reveal_by_input=false
 save/autosave_delay=60.0
 save/encryption_on_exports_only=true
-text/autopauses={}
+text/autopauses={
+"!?:,.": 0.1
+}
 audio/channel_defaults={
 "": {
 "audio_bus": "",
@@ -75,6 +82,8 @@ audio/channel_defaults={
 }
 }
 variables={}
+text/absolute_autopauses=true
+glossary/default_case_sensitive=true
 
 [display]
 
@@ -101,6 +110,7 @@ import/blender/enabled.web=true
 Player=""
 Arena=""
 Enemy=""
+Ore=""
 
 [input]
 

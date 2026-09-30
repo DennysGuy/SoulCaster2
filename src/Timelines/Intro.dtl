@@ -1,8 +1,9 @@
+do GameManager.lock_player()
 [wait time="2.0"]
 do CutSceneManager.start_intro_cutscene()
 ShopMan: Hello there!
 ShopMan: The fresh meat.. erm, the new rookie has arrived!
-ShopMan: Pardon me, where are my manners? It's quite the pleasure to have you. You read the add thoroughly..
+ShopMan: Pardon me, where are my manners? It's quite the pleasure to have you. You read the advertisement thoroughly..
 ShopMan: DIDN'T YOU?
 ShopMan: Yes... of course you did! I only hire the cream of the crop.. *Except for the last rookie.. oh and maybe the last.. * erm, nevermind that. Just glad to have a fresh soul interested in the extermination business.. It's a dying trade you know!
 ShopMan: Listen, kid. I won't beat around the bush, this is possibly the biggest call of a life time. We got a town with a full infestation of those killer mutant rats that we've been hearing in the newspaper as of recent! Yes, it's our job and our job only.. The other guys were to scared to show their faces - however, we ain't afraid if the pay is right.
@@ -23,5 +24,6 @@ do CutSceneManager.move_player_to_cart_during_cutscene()
 do CutSceneManager.show_start_battle_label()
 ShopMan: When you're ready to fight, press 'R', choose a wave to fight, and you'll be on your way to greatness!
 ShopMan: That's about it!
-ShopMan: Oh? Why aren't I joining the fight you ask? Well, it's simple really. Someone needs to stay back and service any customers, and besides.. there's nothing like a hearty trial by fire to get a rookie up to speed! Good luck out there!
+ShopMan: Oh? Why aren't I joining the fight you ask? Well, it's simple really. Someone needs to stay back and watch the car, and besides\: There's nothing like a hearty trial by fire to get a rookie up to speed! Good luck out there!
 do CutSceneManager.show_hub_hud()
+do GameManager.unlock_player()

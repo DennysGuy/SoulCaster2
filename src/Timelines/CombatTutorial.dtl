@@ -1,0 +1,15 @@
+do GameManager.lock_player()
+ShopMan: Hey you made it! Welcome to the Combat Arena. This is where the brunt of the job will take place.
+ShopMan: We're located smack dab in the middle of the infestation. It's the most efficient way to do things, I'm afraid.
+ShopMan: But no need to fear! We got this! Just like my predecessors always have said - like a splinter, let them naturally work their way out.
+ShopMan: Rather than coming to them, let them come to you - 50% of the work is done. Now this is where you'll truly show if you have what it takes.
+ShopMan: Now for advice..
+ShopMan: Here in just a moment, them mutant bastards will start charging you in all four directions. Keep a keen eye out and don't let them get to close or its PAINVILLE! use WASD to rotate in one of our cardinal directions. Likewise, pressing 'S' on the keyboard will rotate you to the opposite direction your facing. Comes hand in a pinch. Ensure you're checking all positions.. to be as safe as possible.
+ShopMan: Press 'Left Click' to fire your trusty CROSSBOW - it is limited right now, it is all I have for now. Sorry about that, but  you can come to my shope when you've collected enough RESOURCES to upgrade.
+ShopMan: Once you've purchased some grenades from me, you can press 'RIGHT CLICK' to toss them in the direction your facing.
+ShopMan: Finally, look up at the top, you have right there is a 'PROGRESS BAR' that progress bar will fill as you kil rats.. this shows the current completion of the job. Below them are waves.. looks like for this one, you'll need to fight through 3 WAVES of enemies.. before facing a boss.
+ShopMan: Below the progress bar, you have a TIMER. As we don't want to die now, we set limits on how long we can hang at the heart of the infestation, when the TIMER runs out you'll be yanked out of the ARENA and sent back to the HUB.
+ShopMan: Finally, at the bottom, is you XP bar - kill RATs to acquire "XP", gain enough XP and you'll LEVEL UP and rewarded AP. AP can be spent at the CAMPFIRE to strengthen your abilities as an EXTERMINATOR.
+ShopMan: Well, Rookie. That's about it. Good Luck!
+do CutSceneManager.start_combat_round()
+do GameManager.unlock_player()

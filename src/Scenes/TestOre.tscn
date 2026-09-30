@@ -502,7 +502,7 @@ albedo_texture = ExtResource("3_y88dp")
 [sub_resource type="SphereShape3D" id="SphereShape3D_m1sm3"]
 radius = 1.1033221
 
-[node name="TestOre" type="Node3D" unique_id=519608720 node_paths=PackedStringArray("bolt_position", "hurt_state")]
+[node name="TestOre" type="Node3D" unique_id=519608720 node_paths=PackedStringArray("bolt_position", "hurt_state") groups=["Ore"]]
 script = ExtResource("1_0oabc")
 bolt_position = NodePath("OreChunkArea")
 hurt_state = NodePath("StateMachine/Hurt")

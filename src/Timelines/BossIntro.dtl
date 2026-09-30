@@ -1,0 +1,12 @@
+do GameManager.lock_player()
+Boss: HA! HA! HA!
+Boss: Now, who do we have here? Quite the small specimen.
+Boss: You must be the one disturbing my nest. You're a lot tougher than you look.
+Boss: Unfortunately, I cannot allow for you to continue. The era of the RAT is about to dawn.. and I will not let a SOUL infringe on the endowment hour.
+Boss: Hey! Take this as a complement. It shall be an honor to see me in combat. Perfection incarnate.
+Boss: Now please enjoy...
+Boss: A SLOW. PAINFUL. DEMISE! HA! HA! HA!
+ShopMan: What in tarnations? I don't know what is going on here, but never in history have mutant rats displayed Sapience. This is ominous, Rookie. Something at large is at play.. something beyond our comprehension.
+ShopMan: Be careful, this is not going to be a cake walk.
+do GameManager.unlock_player()
+do CutSceneManager.start_boss_fight()

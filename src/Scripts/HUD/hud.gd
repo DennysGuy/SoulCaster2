@@ -11,6 +11,8 @@ class_name HUD extends CanvasLayer
 @onready var time_gained_position: Marker2D = $TimeGainedPosition
 @onready var ore_gained_position: Marker2D = $OreGainedPosition
 
+const HUNT_ROUND_TUTORIAL = preload("uid://cpgwqckakdvgg")
+const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 
 @onready var enemy_tracker: Panel = $EnemyTracker
 @onready var enemy_name: Label = $EnemyTracker/EnemyName
@@ -78,6 +80,8 @@ var quit_time : float = 12
 var skip_time_left : float = 15
 var skip_time : float = 15
 
+const COMBAT_TUTORIAL = preload("uid://h53ha3ah86nd")
+
 @onready var bar_player: AnimationPlayer = $BarPlayer
 
 func _ready() -> void:
@@ -99,6 +103,8 @@ func _ready() -> void:
 	SignalBus.shot_fired.connect(play_short_flash)
 	SignalBus.boss_stunned.connect(play_long_flash)
 	SignalBus.hunt_round_ended.connect(start_combat_round)
+	SignalBus.hunt_tutorial_ended.connect(start_ore_hunt_countdown)
+	SignalBus.boss_cutscene_ended.connect(start_fight)
 	update_ore_count_label(0)
 	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
@@ -123,7 +129,14 @@ func _ready() -> void:
 	if GameManager.round_number >= 3:
 		start_boss_fight()
 	else:
-		start_ore_hunt_countdown()
+		if GameManager.combat_tutorial_state != GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
+			if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL:
+				Dialogic.start(HUNT_ROUND_TUTORIAL)
+				GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.BOSS
+			else:
+				start_ore_hunt_countdown()
+		else:
+			start_combat_round()
 	bar_player.play("CloseIn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -199,22 +212,29 @@ func update_enemy_tracker(enemy_name : String, enemy_health : int, enemy_max_hea
 	enemy_hp.value = enemy_health
 
 
-func start_round() -> void:		
-	round_ended = false
-	round_started = true
-	GameManager.round_started = true
-	GameManager.can_hurt_player = true
-	GameManager.first_quarter_point = false
-	GameManager.half_way_point = false
-	GameManager.three_quarter_way_point = false
-	GameManager.current_round_point = GameManager.ROUND_POINT.BEGINNING
+func start_round() -> void:
+	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
+		Dialogic.start(COMBAT_TUTORIAL)
+		GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL
+	else:
+		round_ended = false
+		round_started = true
+		GameManager.round_started = true
+		GameManager.can_hurt_player = true
+		GameManager.first_quarter_point = false
+		GameManager.half_way_point = false
+		GameManager.three_quarter_way_point = false
+		GameManager.current_round_point = GameManager.ROUND_POINT.BEGINNING
+		
+		round_timer_label.timer_started = true
+		round_progress_bar.value = 0
+		round_progress_bar.max_value = GameManager.round_times[GameManager.round_number]
+		SignalBus.round_started.emit()
+		play_round_start_sfx()
+		play_survive()
+		if !GameManager.arena_instructions_shown:
+			show_arena_context()
 	
-	round_timer_label.timer_started = true
-	round_progress_bar.value = 0
-	round_progress_bar.max_value = GameManager.round_times[GameManager.round_number]
-	SignalBus.round_started.emit()
-	if !GameManager.arena_instructions_shown:
-		show_arena_context()
 
 func load_timer() -> void:
 	round_timer_label.reset_timer()
@@ -283,6 +303,7 @@ func start_boss_fight() -> void:
 	await get_tree().create_timer(2.0).timeout
 	fill_boss_bar()
 	round_timer_label.set_time(90,0)
+	
 	animation_player.play("BossCountDown")
 	
 func fill_boss_bar() -> void:
@@ -292,6 +313,11 @@ func fill_boss_bar() -> void:
 	await tween.tween_property(round_progress_bar, "value", round_progress_bar.max_value, 3.0).finished
 
 func start_fight() -> void:
+	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.BOSS:
+		Dialogic.start(BOSS_INTRO)
+		GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.END
+		return
+		
 	GameManager.can_move = true
 	round_timer_label.start_timer()
 
@@ -336,7 +362,6 @@ func show_arena_context() -> void:
 	context_panel.show()
 	get_tree().paused = true
 	
-
 func show_hub_context() -> void:
 	context_panel.show()
 	context_pos = 0
@@ -419,12 +444,14 @@ func start_ore_hunt_countdown() -> void:
 	hold_space_notice.show()
 	round_timer_label.set_hunt_round_timer()
 	animation_player.play("OreHuntCountDown")
+	SignalBus.count_down_ended.emit()
 	
 func start_combat_round() -> void:
 	health_icon.show()
 	hunt_icon.hide()
 	hold_space_notice.hide()
 	animation_player.play("RoundCountDown")
+	SignalBus.count_down_ended.emit()
 
 func start_timer() -> void:
 	round_timer_label.start_timer()

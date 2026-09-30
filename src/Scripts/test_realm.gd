@@ -20,6 +20,9 @@ const ENEMY_SPAWN_SFX = preload("uid://bfk213an2avam")
 
 @onready var boss_spawn_points: Node3D = $BossSpawnPoints
 
+
+
+
 @onready var available_spawn_points : Array = [
 	{"spawn point": spawn_point_1, "occupied": false, "index": 0 },
 	{"spawn point": spawn_point_2, "occupied": false, "index": 1 },
@@ -39,7 +42,7 @@ func _ready() -> void:
 	cut_scene_player.play("PanIntro")
 	#spawn_timer.start()
 	GameManager.can_move = false
-	ore_spawn_timer.start()
+	#ore_spawn_timer.start()
 	
 	GameManager.hits_taken = 0
 	GameManager.xp_gained = 0
@@ -57,6 +60,7 @@ func _ready() -> void:
 	SignalBus.config_beat.connect(deduct_configs_to_kill)
 	SignalBus.arena_ended.connect(stop_arena_battle)
 	SignalBus.mini_round_started.connect(start_mini_round_spawn)
+	SignalBus.count_down_ended.connect(start_ore_spawn_timer)
 	#SignalBus.boss_jumped_out.connect(start_mini_round_spawn)
 	arena_animation_player.play("tide")
 
@@ -153,17 +157,25 @@ func _on_ore_spawn_timer_timeout() -> void:
 		ore_spawn_time -= 2
 	
 	ore_spawn_timer.wait_time = randi_range(PlayerStats.player_stats["Ore Spawn Time"]-2,PlayerStats.player_stats["Ore Spawn Time"])
-	ore_spawn_timer.start()
-
+	
+	if get_tree().get_nodes_in_group("Ore").size() < PlayerStats.player_stats["Max Ore"]:
+		ore_spawn_timer.start()
 
 func spawn_ore() -> void:
-	var spawn_point : Marker3D = ore_spawn_points.get_children().pick_random()
 	var ore : TestOre = preload("uid://bnujpnfle0d5l").instantiate()
+	var ore_position : Marker3D = get_random_ore_spawn_pos()
+	if ore_position:
+		ore_position.add_child(ore)
+
+func get_random_ore_spawn_pos() -> Marker3D:
+	for child in ore_spawn_points.get_children():
+		if child.get_children().is_empty():
+			return child
 	
-	ore.global_position = spawn_point.global_position
-	add_child(ore)
+	return null
 
 func spawn_boss() -> void:
+	stop_ore_spawn_timer()
 	stop_music()
 	var boss : BroodMother = preload("uid://d4gg3flbxkfb5").instantiate()
 	boss.global_position = boss_spawn_point.global_position
@@ -217,3 +229,9 @@ func spawn_boss_in_random_spot() -> void:
 	#boss.rotation = boss_spawn_point.rotation
 	GameManager.round_number = 3
 	add_child(boss)
+
+func start_ore_spawn_timer() -> void:
+	ore_spawn_timer.start()
+
+func stop_ore_spawn_timer() -> void:
+	ore_spawn_timer.stop()

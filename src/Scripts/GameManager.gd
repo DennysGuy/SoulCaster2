@@ -45,8 +45,8 @@ var round_times : Array[int] = [125, 230, 340]
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,3,3]
 
-var max_boss_health : int = 3000
-var current_boss_health : int = 3000
+var max_boss_health : int = 3300
+var current_boss_health : int = 3300
 
 var max_boss_stun : int = 450
 var current_boss_stun : int = 0
@@ -55,6 +55,9 @@ var hunt_mode_time : int = 20
 var current_hunt_mode_time : int = 20
 
 var in_cutscene : bool = false
+
+enum COMBAT_TUTORIALS {COMBAT_TUTORIAL, RESOURCE_HUNT_TUTORIAL, BOSS, END}
+var combat_tutorial_state : COMBAT_TUTORIALS = COMBAT_TUTORIALS.COMBAT_TUTORIAL
 
 var max_configurations : Dictionary = {
 	0: {
@@ -99,10 +102,10 @@ var first_quarter_point : bool = false
 var half_way_point : bool = false
 var three_quarter_way_point : bool = false
 
-var fortified_pistol_bullets_cost : int = 15
+var fortified_pistol_bullets_cost : int = 30
 var fortified_pistol_bullets : bool = false
 
-var fortified_pistol_rifle_cost : int = 20
+var fortified_pistol_rifle_cost : int = 40
 var fortified_rifle_bullets : bool = false
 
 var hub_instructions_shown : bool = false
@@ -789,3 +792,12 @@ func pick_weighted_config(config_list: Array) -> PackedScene:
 			return entry["scene"]
 	
 	return null # should never hit if weights are valid
+
+func lock_player() -> void:
+	can_move = false
+	in_cutscene = true
+
+func unlock_player() -> void:
+	can_move = true
+	in_cutscene = false
+	

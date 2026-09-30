@@ -66,3 +66,8 @@ signal intro_cutscene_return_player_to_cart
 signal control_label_revealed
 
 signal start_battle_label_revealed
+signal hunt_tutorial_ended
+signal count_down_ended
+
+signal cutscene_ended
+signal boss_cutscene_ended

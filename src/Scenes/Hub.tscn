@@ -5959,7 +5959,7 @@ look_at_point_3 = NodePath("../LookAtPoint4")
 look_at_point_4 = NodePath("../LookAtPoint3")
 
 [node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986653, -0.051094152, -0.051125936, 0.99676466, 0.062018562, 0.047952782, 0.06447825, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.04798665, -0.051094152, -0.051125932, 0.99676466, 0.062018562, 0.047952782, 0.06447825, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="HomePosition" type="Marker3D" parent="." unique_id=603688218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 12, -15)

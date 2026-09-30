@@ -13,6 +13,7 @@ var player_stats : Dictionary = {
 	"Starting Timer": 50,
 	"Defense": 0.0, #reduces the time taken off when taking damage
 	"Ore Spawn Time": 7,
+	"Max Ore": 10,
 	"Reload Speed": 1.0, # influences the speed of reload animation
 	"Ability Points": 0.0,
 	"Currency": 0.0,

@@ -1,0 +1,10 @@
+do GameManager.lock_player()
+ShopMan: That was... more than I expected. Looks like we got a real case on our hands, kid.
+ShopMan: NOT your fault. Don't blame yourself for this one. It's on me this time!
+ShopMan: I need to layout out for you rookie, this is only going to get harder from here on out.
+ShopMan: BUT
+ShopMan: I might be able to, you know, take the edge off things a little bit so to speak.
+ShopMan: From my brief analysis, there appears to be windows of opportunities to get in while there are no rats around.  It may be brief, but you should be able to excavate some of those nasty piles of... garabage... popping up all over. They contain valuable materials that you can bring to me in exchange for Weapon upgrades..
+ShopMan: Hurry! Go before time runs out!
+do GameManager.unlock_player()
+do CutSceneManager.start_hunt_countdown()

@@ -24,3 +24,15 @@ func show_controls_label() -> void:
 
 func show_start_battle_label() -> void:
 	SignalBus.start_battle_label_revealed.emit()
+
+func start_combat_round() -> void:
+	SignalBus.hunt_round_ended.emit()
+
+func start_hunt_countdown() -> void:
+	SignalBus.hunt_tutorial_ended.emit()
+
+func end_cutscene() -> void:
+	SignalBus.cutscene_ended.emit()
+
+func start_boss_fight() -> void:
+	SignalBus.boss_cutscene_ended.emit()

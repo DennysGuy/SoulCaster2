@@ -42,6 +42,7 @@ func _ready() -> void:
 	SignalBus.intro_cutscene_player_return.connect(return_player_to_home_during_intro_cutscene)
 	SignalBus.control_label_revealed.connect(show_controls_label)
 	SignalBus.start_battle_label_revealed.connect(show_start_battle_label)
+	SignalBus.cutscene_ended.connect(unlock_player)
 	
 	GameManager.in_arena = false
 	GameManager.in_menu = false
@@ -50,7 +51,10 @@ func _ready() -> void:
 		progress_bar.hide()
 		start_battle_label.hide()
 		controls_label.hide()
+		GameManager.can_move = false
+		GameManager.in_cutscene = true
 		Dialogic.start(INTRO)
+		GameManager.hub_instructions_shown = true
 		#spawn_hub_context()
 	
 	progress_bar.max_value = PlayerStats.player_stats["Needed XP"]
@@ -106,7 +110,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and GameManager.can_move:
 			if stored_selectable and !GameManager.in_menu:
 				stored_selectable.open_menu()
 				if stored_selectable.has_method("play_activation_animation"):
@@ -175,3 +179,7 @@ func play_starting_cutscene() -> void:
 
 func return_player_to_home_during_intro_cutscene() -> void:
 	move_player_to_home()
+
+func unlock_player() -> void:
+	GameManager.can_move = true
+	GameManager.in_cutscene = false
