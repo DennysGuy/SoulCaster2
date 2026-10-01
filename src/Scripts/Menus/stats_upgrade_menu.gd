@@ -27,16 +27,21 @@ class_name StatsUpgradeMenu extends Control
 
 
 @onready var ap_label: Label = $Panel/APLabel
+const CLOSE_BAG = preload("uid://dupxowuijfykr")
+const OPEN_BAG = preload("uid://ejc6kkycvlb0")
 
 
 @onready var upgrade_buttons : Array[Button] = [attack_damage_upgrade_button, attack_speed_upgrade_button, crit_chance_upgrade_button, crit_damage_upgrade_button, starting_timer_upgrade_button, reload_speed_upgrade_button]
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+const UPGRADE_STAT = preload("uid://fgjyaai5w5pk")
 
+var pitch : float = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameManager.play_sfx(OPEN_BAG)
 	animation_player.play("SpawnIn")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	init_upgrades()
@@ -53,6 +58,8 @@ func _on_attack_damage_upgrade_button_button_up() -> void:
 	if PlayerStats.stat_levels["Attack Damage"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Attack Damage"]["Cost"] +=1
 	
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -62,6 +69,8 @@ func _on_attack_speed_upgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["Attack Speed"]["Level"] += 1
 	if PlayerStats.stat_levels["Attack Speed"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Attack Speed"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -71,6 +80,8 @@ func _on_movement_speed_upgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["Movement Speed"]["Level"] += 1
 	if PlayerStats.stat_levels["Movement Speed"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Movement Speed"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -80,6 +91,8 @@ func _on_crit_chance_upgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["Crit Chance"]["Level"] += 1
 	if PlayerStats.stat_levels["Crit Chance"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Crit Chance"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -89,6 +102,8 @@ func _on_crit_damage_upgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["Crit Damage"]["Level"] += 1
 	if PlayerStats.stat_levels["Crit Damage"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Crit Damage"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -98,6 +113,8 @@ func _on_starting_timer_upgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["Starting Timer"]["Level"] += 1
 	if PlayerStats.stat_levels["Starting Timer"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Starting Timer"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -107,6 +124,8 @@ func _on_ore_spawn_time_upgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["Ore Spawn Time"]["Level"] += 1
 	if PlayerStats.stat_levels["Ore Spawn Time"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Ore Spawn Time"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -116,6 +135,8 @@ func _on_reload_speed_upgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["Reload Speed"]["Level"] += 1
 	if PlayerStats.stat_levels["Reload Speed"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Reload Speed"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -180,6 +201,7 @@ func _on_button_button_up() -> void:
 	GameManager.in_menu = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	SignalBus.menu_exited.emit()
+	GameManager.play_sfx(CLOSE_BAG)
 	animation_player.play("SpawnOut")
 	await animation_player.animation_finished
 	queue_free()
@@ -191,6 +213,8 @@ func _on_ap_amountupgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["AP Amount"]["Level"] += 1
 	if PlayerStats.stat_levels["AP Amount"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["AP Amount"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -200,6 +224,8 @@ func _on_xp_bonus_upgrade_button_button_up() -> void:
 	PlayerStats.stat_levels["XP Bonus"]["Level"] += 1
 	if PlayerStats.stat_levels["XP Bonus"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["XP Bonus"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()
 
@@ -210,5 +236,7 @@ func _on_life_steal_upgrade_button_2_button_up() -> void:
 	PlayerStats.stat_levels["Life Steal"]["Level"] += 1
 	if PlayerStats.stat_levels["Life Steal"]["Level"] % 2 == 0:
 		PlayerStats.stat_levels["Life Steal"]["Cost"] +=1
+	GameManager.play_sfx(UPGRADE_STAT,1.0, pitch)
+	pitch += 0.2
 	init_upgrades()
 	update_stats_description()

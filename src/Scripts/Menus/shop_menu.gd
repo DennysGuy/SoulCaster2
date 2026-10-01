@@ -43,9 +43,19 @@ class_name ShopMenu extends Control
 @onready var grenade_title: Label = $UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet/GrenadeTitle
 @onready var grenade_purchase_button: Button = $UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet/GrenadePurchaseButton
 @onready var special_weapons: Panel = $UpgradesPanel/MarginContainer/SpecialWeapons
+const PURCHASE_WEAPON_SFX = preload("uid://blxprphbhkx5d")
+const BOLT_O_BUY = preload("uid://dxf67h553mrn1")
+const OPEN_MENU = preload("uid://0nxshah4wsng")
+const CLOSE_MENU = preload("uid://bjf34puam605i")
+
+const BUTTON_PRESS_1 = preload("uid://ce6u588w3je7t")
+const BUTTON_PRESS_2 = preload("uid://lgh5r5utryds")
+const BUTTON_PRESS_3 = preload("uid://ctta2mhlu2kg3")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameManager.play_sfx(OPEN_MENU)
 	animation_player.play("SpawnIn")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	update_menu()
@@ -58,6 +68,7 @@ func _process(delta: float) -> void:
 func _on_purchase_rifle_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 130
 	GameManager.rifle_owned = true
+	GameManager.play_sfx(BOLT_O_BUY)
 	update_menu()
 	update_amulet_menu()
 	update_weapon_upgrades_panel()
@@ -85,6 +96,7 @@ func _on_close_menu_button_up() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	SignalBus.shop_exited.emit()
 	SignalBus.menu_exited.emit()
+	GameManager.play_sfx(CLOSE_MENU)
 	animation_player.play("SpawnOut")
 	await animation_player.animation_finished
 	queue_free()
@@ -93,30 +105,35 @@ func _on_purchase_tracker_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 35
 	GameManager.enemy_tracker_owned = true
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_purchase_pistol_mag_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.pistol_mag_cost
 	GameManager.pistol_magazine_size += 1
 	GameManager.pistol_mag_cost *= 2
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_purchase_rifle_mag_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.rifle_mag_cost
 	GameManager.rifle_magazine_size += 2
 	GameManager.rifle_mag_cost *= 2
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_fortified_pistol_bullets_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_bullets_cost
 	GameManager.fortified_pistol_bullets = true
 	update_weapon_upgrades_panel()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_fortified_rfiel_bullets_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_rifle_cost
 	GameManager.fortified_rifle_bullets = true
 	update_weapon_upgrades_panel()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_cross_bow_ammo_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.pistol_mag_cost
@@ -124,12 +141,14 @@ func _on_cross_bow_ammo_purchase_button_button_up() -> void:
 	GameManager.pistol_mag_cost *= 2
 	update_weapon_upgrades_panel()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_mining_cross_bow_bolt_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_bullets_cost
 	GameManager.fortified_pistol_bullets = true
 	update_weapon_upgrades_panel()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_bolt_o_matic_mag_size_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.rifle_mag_cost
@@ -137,12 +156,14 @@ func _on_bolt_o_matic_mag_size_purchase_button_button_up() -> void:
 	GameManager.rifle_mag_cost *= 2
 	update_weapon_upgrades_panel()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_bolt_o_matic_minin_bolt_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.fortified_pistol_rifle_cost
 	GameManager.fortified_rifle_bullets = true
 	update_weapon_upgrades_panel()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func update_weapon_upgrades_panel() -> void:
 	
@@ -219,12 +240,14 @@ func _on_radar_purchase_button_button_up() -> void:
 	GameManager.amulet_owned = true
 	update_amulet_menu()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_tracker_puchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 20
 	GameManager.enemy_tracker_owned = true
 	update_amulet_menu()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 
 func _on_weapon_upgrades_button_button_up() -> void:
 	update_weapon_upgrades_panel()
@@ -232,6 +255,8 @@ func _on_weapon_upgrades_button_button_up() -> void:
 	weapon_upgrades_panel.show()
 	amulets_panel.hide()
 	special_weapons.hide()
+	GameManager.play_sfx(BUTTON_PRESS_1)
+
 
 func _on_amulets_button_button_up() -> void:
 	update_amulet_menu()
@@ -239,12 +264,14 @@ func _on_amulets_button_button_up() -> void:
 	amulets_panel.show()
 	weapon_upgrades_panel.hide()
 	special_weapons.hide()
+	GameManager.play_sfx(BUTTON_PRESS_2)
 
 func _on_grenade_purchase_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= GameManager.basic_grenade_cost
 	GameManager.grenades_owned += 1
 	update_special_weapons_menu()
 	update_menu()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)
 	
 func update_special_weapons_menu() -> void:
 	grenade_title.text = "Grenade (%s Owned)" % GameManager.grenades_owned
@@ -260,3 +287,4 @@ func _on_special_weapons_button_button_up() -> void:
 	amulets_panel.hide()
 	update_special_weapons_menu()
 	special_weapons.show()
+	GameManager.play_sfx(BUTTON_PRESS_3)
