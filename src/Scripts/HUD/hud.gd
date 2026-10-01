@@ -6,6 +6,7 @@ class_name HUD extends CanvasLayer
 @onready var level: Label = $ProgressBar/Level
 @onready var xp: Label = $ProgressBar/XP
 @onready var ap: Label = $ProgressBar/AP
+@onready var context_position: Marker2D = $ContextPosition
 
 @onready var xp_gained_position: Marker2D = $XPGainedPosition
 @onready var time_gained_position: Marker2D = $TimeGainedPosition
@@ -136,9 +137,11 @@ func _ready() -> void:
 	else:
 		if GameManager.combat_tutorial_state != GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
 			if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL:
+				GameManager.in_cutscene = true
 				Dialogic.start(HUNT_ROUND_TUTORIAL)
-				GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.BOSS
+				
 			else:
+				SignalBus.count_down_ended.emit()
 				start_ore_hunt_countdown()
 		else:
 			start_combat_round()
@@ -164,14 +167,14 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_just_released("jump"):
 			skip_time_left = skip_time
 		
-
 	if Input.is_action_just_pressed("jump") and arena_context_showing:
-		close_context_panel()
-	
-	if Input.is_action_just_pressed("jump") and hunt_context_showing:
-		close_hunt_context_panel()
-		
-
+		if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
+			close_context_panel()
+			GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL
+			return
+		elif GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL:
+			close_hunt_context_panel()
+			GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.BOSS
 
 func update_level() -> void:
 	level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
@@ -222,8 +225,8 @@ func update_enemy_tracker(enemy_name : String, enemy_health : int, enemy_max_hea
 
 func start_round() -> void:
 	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
+		GameManager.in_cutscene = true
 		Dialogic.start(COMBAT_TUTORIAL)
-		GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL
 	else:
 		round_ended = false
 		round_started = true
@@ -383,8 +386,8 @@ func _on_next_button_up() -> void:
 func close_context_panel() -> void:
 	if arena_context_showing:
 		get_tree().paused = false
-		context_panel.hide()
-		hunt_context_panel.hide()
+		#context_panel.hide()
+		#hunt_context_panel.hide()
 		GameManager.arena_instructions_shown = true
 		arena_context_showing = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -393,8 +396,8 @@ func close_context_panel() -> void:
 func close_hunt_context_panel() -> void:
 	if arena_context_showing:
 		get_tree().paused = false
-		context_panel.hide()
-		hunt_context_panel.hide()
+		#context_panel.hide()
+		#hunt_context_panel.hide()
 		GameManager.arena_instructions_shown = true
 		arena_context_showing = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -462,7 +465,11 @@ func start_ore_hunt_countdown() -> void:
 	round_timer_label.set_hunt_round_timer()
 	animation_player.play("OreHuntCountDown")
 	SignalBus.count_down_ended.emit()
+
 	
+func start_ore_spawn() -> void:
+	SignalBus.count_down_ended.emit()
+
 func start_combat_round() -> void:
 	health_icon.show()
 	hunt_icon.hide()
@@ -474,11 +481,13 @@ func start_timer() -> void:
 	round_timer_label.start_timer()
 
 func show_combat_context_panel() -> void:
-	context_panel.show()
+	var com_context_panel = preload("uid://boucbbya67yqa").instantiate()
+	add_child(com_context_panel)
 	arena_context_showing = true
-	get_tree().paused = true
+	#get_tree().paused = true
 
 func show_hunt_context_panel() -> void:
-	hunt_context_panel.show()
-	hunt_context_showing = true
-	get_tree().paused = true
+	var hun_context_panel = preload("uid://c6dpqhq23awmn").instantiate()
+	add_child(hun_context_panel)
+	arena_context_showing = true
+	#get_tree().paused = true

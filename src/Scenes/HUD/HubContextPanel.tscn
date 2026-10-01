@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://cnv6x8tgahuc1"]
 
 [ext_resource type="Script" uid="uid://og7tko7nc7e2" path="res://src/Scripts/HUD/hub_context_panel.gd" id="1_y3iph"]
+[ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="2_hdn7v"]
 
 [node name="HubContextPanel" type="Control" unique_id=1860809832]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y3iph")
@@ -33,11 +36,23 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -296.5
-offset_top = -199.0
+offset_top = -206.0
 offset_right = 302.0
-offset_bottom = 84.0
+offset_bottom = 207.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_hdn7v")
+theme_override_font_sizes/font_size = 28
+text = "TLDR
+
+This is the main hub. Use this area to prepare for the arena battle. Click on a facility object to access its menu:
+
+- Click the merchant's cart to access the weapon upgrade station
+- Click the fireplace to access the stats upgrade menu
+- WASD to rotate camera to a different direction
+- Hold 'R' to start Arena Combat!
+
+Good luck!"
 autowrap_mode = 3
 
 [node name="Button" type="Button" parent="Panel" unique_id=1604377564]

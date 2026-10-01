@@ -122,4 +122,4 @@ func zero_out_timer() -> void:
 
 func set_hunt_round_timer() -> void:
 	GameManager.ore_hunt_mode_started = true
-	set_time(GameManager.hunt_mode_time)
+	set_time(20)

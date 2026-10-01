@@ -6,32 +6,30 @@ class_name StatsUpgradeMenu extends Control
 @onready var crit_chance_level: Label = $Panel/StatsUpgradePanel/GridContainer/CritChanceLevel
 @onready var crit_damage_level: Label = $Panel/StatsUpgradePanel/GridContainer/CritDamageLevel
 @onready var starting_timer_level: Label = $Panel/StatsUpgradePanel/GridContainer/StartingTimerLevel
-@onready var ore_spawn_time_level: Label = $Panel/StatsUpgradePanel/GridContainer/OreSpawnTimeLevel
 @onready var reload_speed_level: Label = $Panel/StatsUpgradePanel/GridContainer/ReloadSpeedLevel
-@onready var progress_speed_level: Label = $Panel/StatsUpgradePanel/GridContainer/ProgressSpeedLevel
+
 @onready var life_steal_level: Label = $Panel/StatsUpgradePanel/GridContainer/LifeStealLevel
 @onready var ap_amount_level: Label = $Panel/StatsUpgradePanel/GridContainer/APAmountLevel
 @onready var xp_bonus_level: Label = $Panel/StatsUpgradePanel/GridContainer/XPBonusLevel
 
+@onready var attack_damage_upgrade_button: Button = $Panel/StatsUpgradePanel/AttackDamageUpgradeButton
+@onready var attack_speed_upgrade_button: Button = $Panel/StatsUpgradePanel/AttackSpeedUpgradeButton
+@onready var crit_chance_upgrade_button: Button = $Panel/StatsUpgradePanel/CritChanceUpgradeButton
+@onready var crit_damage_upgrade_button: Button = $Panel/StatsUpgradePanel/CritDamageUpgradeButton
+@onready var starting_timer_upgrade_button: Button = $Panel/StatsUpgradePanel/StartingTimerUpgradeButton
+@onready var reload_speed_upgrade_button: Button = $Panel/StatsUpgradePanel/ReloadSpeedUpgradeButton
+@onready var life_steal_upgrade_button_2: Button = $Panel/StatsUpgradePanel/LifeStealUpgradeButton2
+@onready var ap_amountupgrade_button: Button = $Panel/StatsUpgradePanel/APAmountupgradeButton
+@onready var xp_bonus_upgrade_button: Button = $Panel/StatsUpgradePanel/XPBonusUpgradeButton
 
-@onready var attack_damage_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/AttackDamageUpgradeButton
-@onready var attack_speed_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/AttackSpeedUpgradeButton
-@onready var crit_chance_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/CritChanceUpgradeButton
-@onready var crit_damage_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/CritDamageUpgradeButton
-@onready var starting_timer_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/StartingTimerUpgradeButton
-@onready var ore_spawn_time_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/OreSpawnTimeUpgradeButton
-@onready var reload_speed_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/ReloadSpeedUpgradeButton
-@onready var progress_speed_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/ProgressSpeedUpgradeButton
-@onready var life_steal_upgrade_button_2: Button = $Panel/StatsUpgradePanel/VBoxContainer/LifeStealUpgradeButton2
-@onready var ap_amountupgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/APAmountupgradeButton
-@onready var xp_bonus_upgrade_button: Button = $Panel/StatsUpgradePanel/VBoxContainer/XPBonusUpgradeButton
 
-@onready var stats: Label = $Panel/StatsPanel/Stats
+@onready var stats_label: Label = $Stats/Panel/StatsLabel
+
 
 @onready var ap_label: Label = $Panel/APLabel
 
 
-@onready var upgrade_buttons : Array[Button] = [attack_damage_upgrade_button, attack_speed_upgrade_button, crit_chance_upgrade_button, crit_damage_upgrade_button, starting_timer_upgrade_button, ore_spawn_time_upgrade_button, reload_speed_upgrade_button]
+@onready var upgrade_buttons : Array[Button] = [attack_damage_upgrade_button, attack_speed_upgrade_button, crit_chance_upgrade_button, crit_damage_upgrade_button, starting_timer_upgrade_button, reload_speed_upgrade_button]
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -129,13 +127,10 @@ func init_upgrades() -> void:
 	crit_chance_level.text = "Crit Chance Level: %s/%s" % [PlayerStats.stat_levels["Crit Chance"]["Level"], PlayerStats.stat_levels["Crit Chance"]["Max Level"]]
 	crit_damage_level.text = "Crit Damage Level: %s/%s" % [PlayerStats.stat_levels["Crit Damage"]["Level"], PlayerStats.stat_levels["Crit Damage"]["Max Level"]]
 	starting_timer_level.text = "Starting Timer Level: %s/%s" % [PlayerStats.stat_levels["Starting Timer"]["Level"], PlayerStats.stat_levels["Starting Timer"]["Max Level"]]
-	ore_spawn_time_level.text = "Ore Spawn Time Level: %s/%s" % [PlayerStats.stat_levels["Ore Spawn Time"]["Level"], PlayerStats.stat_levels["Ore Spawn Time"]["Max Level"]]
 	reload_speed_level.text = "Reload Speed Level: %s/%s" % [PlayerStats.stat_levels["Reload Speed"]["Level"], PlayerStats.stat_levels["Reload Speed"]["Max Level"]]
-	progress_speed_level.text = "Progress Gained Level : %s/%s" % [PlayerStats.stat_levels["Progress Speed"]["Level"], PlayerStats.stat_levels["Progress Speed"]["Max Level"]]
 	life_steal_level.text = "Life Steal Level : %s/%s" % [PlayerStats.stat_levels["Life Steal"]["Level"], PlayerStats.stat_levels["Life Steal"]["Max Level"]]
 	ap_amount_level.text =  "AP Amount Level : %s/%s" % [PlayerStats.stat_levels["AP Amount"]["Level"], PlayerStats.stat_levels["AP Amount"]["Max Level"]]
 	xp_bonus_level.text =  "XP Bonus Level : %s/%s" % [PlayerStats.stat_levels["XP Bonus"]["Level"], PlayerStats.stat_levels["XP Bonus"]["Max Level"]]
-
 
 	attack_damage_upgrade_button.text = "Upgrade (%s)" % PlayerStats.stat_levels["Attack Damage"]["Cost"]
 	attack_damage_upgrade_button.disabled = PlayerStats.player_stats["Ability Points"] < PlayerStats.stat_levels["Attack Damage"]["Cost"]
@@ -147,12 +142,8 @@ func init_upgrades() -> void:
 	crit_damage_upgrade_button.disabled = PlayerStats.player_stats["Ability Points"] < PlayerStats.stat_levels["Crit Damage"]["Cost"]
 	starting_timer_upgrade_button.text = "Upgrade (%s)" % PlayerStats.stat_levels["Starting Timer"]["Cost"]
 	starting_timer_upgrade_button.disabled = PlayerStats.player_stats["Ability Points"] < PlayerStats.stat_levels["Starting Timer"]["Cost"]
-	ore_spawn_time_upgrade_button.text = "Upgrade (%s)" % PlayerStats.stat_levels["Ore Spawn Time"]["Cost"]
-	ore_spawn_time_upgrade_button.disabled = PlayerStats.player_stats["Ability Points"] < PlayerStats.stat_levels["Ore Spawn Time"]["Cost"]
 	reload_speed_upgrade_button.text = "Upgrade (%s)" % PlayerStats.stat_levels["Reload Speed"]["Cost"]
 	reload_speed_upgrade_button.disabled = PlayerStats.player_stats["Ability Points"] < PlayerStats.stat_levels["Reload Speed"]["Cost"]
-	progress_speed_upgrade_button.text = "Upgrade (%s)" % PlayerStats.stat_levels["Progress Speed"]["Cost"]
-	progress_speed_upgrade_button.disabled = PlayerStats.player_stats["Ability Points"] < PlayerStats.stat_levels["Progress Speed"]["Cost"]
 	life_steal_upgrade_button_2.text = "Upgrade (%s)" % PlayerStats.stat_levels["Life Steal"]["Cost"]
 	life_steal_upgrade_button_2.disabled = PlayerStats.player_stats["Ability Points"] < PlayerStats.stat_levels["Life Steal"]["Cost"]
 	ap_amountupgrade_button.text = "Upgrade (%s)" % PlayerStats.stat_levels["AP Amount"]["Cost"]
@@ -161,16 +152,14 @@ func init_upgrades() -> void:
 	xp_bonus_upgrade_button.disabled = PlayerStats.player_stats["Ability Points"] < PlayerStats.stat_levels["XP Bonus"]["Cost"]
 
 func update_stats_description() -> void:
-	stats.text = """
+	stats_label.text = """
 	Attack Damage: %s
 	Attack Speed: %s %%
 	Movement Speed: %s
 	Crit Chance: %s %%
 	Crit Damage: %s %%
 	Starting Timer: %s
-	Ore Spawn Time: %s
 	Reload Speed: %s %%
-	Progress Gain: %s seconds
 	Life Steal %s seconds
 	AP Amount: %s
 	XP Bonus: %s %%
@@ -181,9 +170,7 @@ func update_stats_description() -> void:
 		int(PlayerStats.player_stats["Crit Chance"] * 100),
 		int(PlayerStats.player_stats["Crit Damage"] * 100),
 		PlayerStats.player_stats["Starting Timer"],
-		PlayerStats.player_stats["Ore Spawn Time"],
 		int(PlayerStats.player_stats["Reload Speed"] * 100),
-		PlayerStats.player_stats["Progress Speed"],
 		PlayerStats.player_stats["Life Steal"],
 		int(PlayerStats.player_stats["AP Amount"]),
 		int(PlayerStats.player_stats["XP Bonus"] * 100)
@@ -197,14 +184,6 @@ func _on_button_button_up() -> void:
 	await animation_player.animation_finished
 	queue_free()
 
-func _on_progress_speed_upgrade_button_button_up() -> void:
-	PlayerStats.player_stats["Progress Speed"] += PlayerStats.stat_levels["Progress Speed"]["Interval"]
-	PlayerStats.player_stats["Ability Points"] -= PlayerStats.stat_levels["Progress Speed"]["Cost"]
-	PlayerStats.stat_levels["Progress Speed"]["Level"] += 1
-	if PlayerStats.stat_levels["Progress Speed"]["Level"] % 2 == 0:
-		PlayerStats.stat_levels["Progress Speed"]["Cost"] +=1
-	init_upgrades()
-	update_stats_description()
 
 func _on_ap_amountupgrade_button_button_up() -> void:
 	PlayerStats.player_stats["AP Amount"] += PlayerStats.stat_levels["AP Amount"]["Interval"]

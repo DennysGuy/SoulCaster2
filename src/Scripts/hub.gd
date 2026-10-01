@@ -42,7 +42,7 @@ func _ready() -> void:
 	SignalBus.intro_cutscene_player_return.connect(return_player_to_home_during_intro_cutscene)
 	SignalBus.control_label_revealed.connect(show_controls_label)
 	SignalBus.start_battle_label_revealed.connect(show_start_battle_label)
-	SignalBus.cutscene_ended.connect(unlock_player)
+	SignalBus.cutscene_ended.connect(spawn_hub_context)
 	
 	GameManager.in_arena = false
 	GameManager.in_menu = false

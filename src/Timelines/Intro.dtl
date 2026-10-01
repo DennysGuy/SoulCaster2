@@ -26,4 +26,6 @@ ShopMan: When you're ready to fight, press 'R', choose a wave to fight, and you'
 ShopMan: That's about it!
 ShopMan: Oh? Why aren't I joining the fight you ask? Well, it's simple really. Someone needs to stay back and watch the car, and besides\: There's nothing like a hearty trial by fire to get a rookie up to speed! Good luck out there!
 do CutSceneManager.show_hub_hud()
+[wait time="1.0"]
 do GameManager.unlock_player()
+do CutSceneManager.end_cutscene()

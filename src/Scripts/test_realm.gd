@@ -63,6 +63,8 @@ func _ready() -> void:
 	SignalBus.count_down_ended.connect(start_ore_spawn_timer)
 	#SignalBus.boss_jumped_out.connect(start_mini_round_spawn)
 	arena_animation_player.play("tide")
+	if GameManager.ore_hunt_mode_started:
+		start_ore_spawn_timer()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -152,11 +154,11 @@ func spawn_enemy() -> void:
 	
 func _on_ore_spawn_timer_timeout() -> void:
 	spawn_ore()
-	var ore_spawn_time = PlayerStats.player_stats["Ore Spawn Time"]
+	var ore_spawn_time = PlayerStats.player_stats["Ore Spawn Time"]+4
 	if GameManager.ore_hunt_mode_started:
-		ore_spawn_time -= 2
+		ore_spawn_time -= 7
 	
-	ore_spawn_timer.wait_time = randi_range(PlayerStats.player_stats["Ore Spawn Time"]-2,PlayerStats.player_stats["Ore Spawn Time"])
+	ore_spawn_timer.wait_time = randi_range(ore_spawn_time-2,ore_spawn_time)
 	
 	if get_tree().get_nodes_in_group("Ore").size() < PlayerStats.player_stats["Max Ore"]:
 		ore_spawn_timer.start()
@@ -168,7 +170,9 @@ func spawn_ore() -> void:
 		ore_position.add_child(ore)
 
 func get_random_ore_spawn_pos() -> Marker3D:
-	for child in ore_spawn_points.get_children():
+	var ore_points : Array = ore_spawn_points.get_children()
+	ore_points.shuffle()
+	for child in ore_points:
 		if child.get_children().is_empty():
 			return child
 	

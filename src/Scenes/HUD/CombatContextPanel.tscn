@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://boucbbya67yqa"]
+
+[ext_resource type="Script" uid="uid://dxg6uh4s7j7ab" path="res://src/Scripts/arena_context_panel.gd" id="1_wo4sw"]
+[ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="2_uvhef"]
+
+[node name="ContextPanel" type="Panel" unique_id=1130764969]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -439.0
+offset_top = -197.5
+offset_right = 365.0
+offset_bottom = 263.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wo4sw")
+
+[node name="ContextLabel" type="Label" parent="." unique_id=803965862]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 784.0
+offset_bottom = 459.0
+theme_override_fonts/font = ExtResource("2_uvhef")
+theme_override_font_sizes/font_size = 20
+text = "TLDR
+Survive the Rat Barrage; Defeat the Mother Rat! 
+
+Directions:
+1. Your Health is the Timer (the big number towards the top of the screen)! Kill enemies to regain time!
+2. The Progress Bar at the top represents the current round's progress. 
+3. The Progress Bar will fill up when you successfuly kill enemies. 
+4. Once the progress bar fills up completely, you will be moved to the next round. 
+5. If the timer runs out before the end of the round, you will be sent back to the hub.
+
+Controls:
+
+WASD - Move Camera
+Mouse - Aim Weapon
+Left Click - Fire Weapon
+R - Reload
+
+*Shoot and destroy the rocks to acquire ore
+to spend at shop*"
+
+[node name="Next" type="Button" parent="." unique_id=1131210586]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -42.0
+offset_right = 354.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press Space to Continue"

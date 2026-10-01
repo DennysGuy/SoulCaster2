@@ -23,7 +23,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.6, 0.6, 0.6)]
+"values": [Vector3(0.4, 0.4, 0.4)]
 }
 
 [sub_resource type="Animation" id="Animation_0oabc"]
@@ -66,7 +66,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.6, 0.6, 0.6), Vector3(0.3, 0.3, 0.3), Vector3(0.9, 0.9, 0.9), Vector3(0.6, 0.6, 0.6)]
+"values": [Vector3(0.4, 0.4, 0.4), Vector3(0.3, 0.3, 0.3), Vector3(0.9, 0.9, 0.9), Vector3(0.4, 0.4, 0.4)]
 }
 
 [sub_resource type="Animation" id="Animation_m1sm3"]
@@ -82,7 +82,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.3, 0.3, 0.3), Vector3(0.6, 0.6, 0.6)]
+"values": [Vector3(0.1, 0.1, 0.1), Vector3(0.4, 0.4, 0.4)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -500,7 +500,7 @@ transparency = 1
 albedo_texture = ExtResource("3_y88dp")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_m1sm3"]
-radius = 1.1033221
+radius = 0.85458857
 
 [node name="TestOre" type="Node3D" unique_id=519608720 node_paths=PackedStringArray("bolt_position", "hurt_state") groups=["Ore"]]
 script = ExtResource("1_0oabc")
@@ -559,10 +559,10 @@ mesh = SubResource("ArrayMesh_yvwij")
 surface_material_override/0 = SubResource("StandardMaterial3D_54fgj")
 
 [node name="OreCollider" parent="." unique_id=982682263 instance=ExtResource("3_m1sm3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1902504, 0.5207782, -0.79770494)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.034761965, 0.21779048, -0.0018426776)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OreCollider" unique_id=938644452]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031310797, 0.07901317, 0)
+transform = Transform3D(0.9999612, 0.00775972, 0.0041696923, -0.0077755665, 0.99996257, 0.003797607, -0.004140067, -0.0038298825, 0.9999841, 0.0588997, 0, -0.094424486)
 shape = SubResource("SphereShape3D_m1sm3")
 
 [node name="StateMachine" type="Node" parent="." unique_id=556605569 node_paths=PackedStringArray("initial_state")]
