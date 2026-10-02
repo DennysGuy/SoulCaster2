@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://bg0aa7imrlatv" path="res://src/Scripts/Menus/stats_upgrade_menu.gd" id="1_s2mh1"]
 [ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="2_g0t1s"]
 [ext_resource type="FontFile" uid="uid://dkeyahfsm2ov1" path="res://Assets/Fonts/Endalian Script.ttf" id="2_mju0n"]
+[ext_resource type="Texture2D" uid="uid://d08sjqog1i5ba" path="res://Assets/Hub/info.png" id="2_yw0ye"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="3_lkxtq"]
 [ext_resource type="Texture2D" uid="uid://cbwimgo3j8wjk" path="res://Assets/UpgradeMenu/dmg.png" id="4_ito4p"]
 [ext_resource type="Texture2D" uid="uid://ubin5ubsb3wm" path="res://Assets/UpgradeMenu/crit.png" id="5_4dv7x"]
+[ext_resource type="Texture2D" uid="uid://bxmvuvnu5p35i" path="res://Assets/Hub/Ap_spend.png" id="5_cmac7"]
 [ext_resource type="Texture2D" uid="uid://b24d8ledajby4" path="res://Assets/UpgradeMenu/time.png" id="6_01lut"]
 [ext_resource type="Texture2D" uid="uid://c0ewrm5ax2fpr" path="res://Assets/UpgradeMenu/lifesteal.png" id="7_g0t1s"]
 [ext_resource type="Texture2D" uid="uid://3i7glqpxetj7" path="res://Assets/UpgradeMenu/reload.png" id="7_sky01"]
@@ -14,15 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://bnehomc317oya" path="res://Assets/UpgradeMenu/spd.png" id="9_oaid5"]
 [ext_resource type="Texture2D" uid="uid://gi0rgykeyg4l" path="res://Assets/UpgradeMenu/moreAp.png" id="9_yw0ye"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rb1w"]
-bg_color = Color(0.40693712, 0.26840532, 0.14822346, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-shadow_color = Color(0, 0, 0, 0.654902)
-shadow_size = 2
-shadow_offset = Vector2(2, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bwnhy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oc4ad"]
 
 [sub_resource type="Animation" id="Animation_lkxtq"]
 length = 0.001
@@ -123,7 +119,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s2mh1")
 
-[node name="Stats" type="Panel" parent="." unique_id=1760026457]
+[node name="Stats" type="TextureRect" parent="." unique_id=345023731]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,7 +130,7 @@ offset_right = -22.0
 offset_bottom = 897.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_6rb1w")
+texture = ExtResource("2_yw0ye")
 
 [node name="Panel" type="Panel" parent="Stats" unique_id=277143889]
 layout_mode = 1
@@ -149,6 +145,7 @@ offset_right = 214.5
 offset_bottom = 413.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bwnhy")
 
 [node name="StatsLabel" type="Label" parent="Stats/Panel" unique_id=1259053766]
 layout_mode = 1
@@ -157,12 +154,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -181.5
-offset_top = -344.0
-offset_right = 182.5
-offset_bottom = 341.0
+offset_left = -155.0
+offset_top = -388.5
+offset_right = 209.0
+offset_bottom = 296.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = 20
 theme_override_fonts/font = ExtResource("2_g0t1s")
 theme_override_font_sizes/font_size = 40
@@ -173,16 +171,17 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -162.5
-offset_top = 43.0
+offset_top = 29.0
 offset_right = 151.5
-offset_bottom = 88.0
+offset_bottom = 74.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 32
 text = "Stats"
 horizontal_alignment = 1
 
-[node name="Panel" type="Panel" parent="." unique_id=2081258980]
+[node name="Panel" type="TextureRect" parent="." unique_id=768974197]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,18 +192,19 @@ offset_right = -1046.0
 offset_bottom = 897.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_6rb1w")
+texture = ExtResource("5_cmac7")
 
 [node name="Label" type="Label" parent="Panel" unique_id=750834385]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -172.5
-offset_top = 24.0
-offset_right = 141.5
-offset_bottom = 69.0
+offset_left = -148.0
+offset_top = 37.0
+offset_right = 166.0
+offset_bottom = 82.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 32
 text = "Stats Upgrade Menu"
@@ -214,10 +214,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -182.5
-offset_top = 64.0
-offset_right = 162.5
-offset_bottom = 91.0
+offset_left = -167.0
+offset_top = 119.0
+offset_right = 178.0
+offset_bottom = 146.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_lkxtq")
 theme_override_font_sizes/font_size = 26
@@ -228,11 +228,12 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 12.0
-offset_top = -331.5
-offset_right = 845.0
-offset_bottom = 417.5
+offset_left = 50.0
+offset_top = -322.0
+offset_right = 799.0
+offset_bottom = 371.0
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oc4ad")
 
 [node name="GridContainer" type="GridContainer" parent="Panel/StatsUpgradePanel" unique_id=409960809]
 layout_mode = 1
@@ -241,10 +242,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -279.5
-offset_top = -332.5
-offset_right = 432.5
-offset_bottom = 277.5
+offset_left = -236.5
+offset_top = -300.5
+offset_right = 475.5
+offset_bottom = 309.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 110
@@ -255,64 +256,72 @@ columns = 2
 layout_mode = 2
 tooltip_text = "Upgrades Base Weapon Attack by +3 for each level."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "Attack Damage: 0"
 
 [node name="AttackSpeedLevel" type="Label" parent="Panel/StatsUpgradePanel/GridContainer" unique_id=360790909]
 layout_mode = 2
 tooltip_text = "Upgrades Base Weapon Attack Speed by 10% per level."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "Attack Speed: 0"
 
 [node name="CritChanceLevel" type="Label" parent="Panel/StatsUpgradePanel/GridContainer" unique_id=465853052]
 layout_mode = 2
 tooltip_text = "Increases chance to deal critical damage to an enemy by 12% for each level."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "Crit Chance Level: 0"
 
 [node name="CritDamageLevel" type="Label" parent="Panel/StatsUpgradePanel/GridContainer" unique_id=527562675]
 layout_mode = 2
 tooltip_text = "Increases Critical damage by 50% per level."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "Crit Damage Level: 0"
 
 [node name="StartingTimerLevel" type="Label" parent="Panel/StatsUpgradePanel/GridContainer" unique_id=1961650741]
 layout_mode = 2
 tooltip_text = "Increases Starting Timer by 10 for each level."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "Starting Timer Level: 0"
 
 [node name="ReloadSpeedLevel" type="Label" parent="Panel/StatsUpgradePanel/GridContainer" unique_id=1345498173]
 layout_mode = 2
 tooltip_text = "Increases reload speed."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "Reload Speed Level: 0"
 
 [node name="LifeStealLevel" type="Label" parent="Panel/StatsUpgradePanel/GridContainer" unique_id=934066534]
 layout_mode = 2
 tooltip_text = "Increases bonus time gained from killing an enemy by 1 second per level."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "Life Steal Level: 0"
 
 [node name="APAmountLevel" type="Label" parent="Panel/StatsUpgradePanel/GridContainer" unique_id=1149620916]
 layout_mode = 2
 tooltip_text = "Increases amount of AP received upon leveling up - 1 extra AP per level."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "AP Amount Level"
 
 [node name="XPBonusLevel" type="Label" parent="Panel/StatsUpgradePanel/GridContainer" unique_id=881279557]
@@ -320,7 +329,7 @@ layout_mode = 2
 tooltip_text = "Increases amount of XP gained from killing an enemy."
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("3_lkxtq")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "XP Bonus Level: 0"
 
 [node name="AttackDamageUpgradeButton" type="Button" parent="Panel/StatsUpgradePanel" unique_id=443263016]
@@ -335,10 +344,10 @@ text = "Upgrade (1)"
 
 [node name="AttackSpeedUpgradeButton" type="Button" parent="Panel/StatsUpgradePanel" unique_id=360649488]
 layout_mode = 0
-offset_left = 529.0
-offset_top = 90.0
-offset_right = 635.0
-offset_bottom = 123.0
+offset_left = 495.0
+offset_top = 86.0
+offset_right = 601.0
+offset_bottom = 119.0
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 18
 text = "Upgrade (1)"
@@ -355,10 +364,10 @@ text = "Upgrade (1)"
 
 [node name="CritDamageUpgradeButton" type="Button" parent="Panel/StatsUpgradePanel" unique_id=1220339802]
 layout_mode = 0
-offset_left = 528.0
-offset_top = 230.0
-offset_right = 634.0
-offset_bottom = 263.0
+offset_left = 494.0
+offset_top = 226.0
+offset_right = 600.0
+offset_bottom = 259.0
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 18
 text = "Upgrade (1)"
@@ -366,49 +375,49 @@ text = "Upgrade (1)"
 [node name="StartingTimerUpgradeButton" type="Button" parent="Panel/StatsUpgradePanel" unique_id=384066890]
 layout_mode = 0
 offset_left = 138.0
-offset_top = 377.0
+offset_top = 365.0
 offset_right = 244.0
-offset_bottom = 410.0
+offset_bottom = 398.0
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 18
 text = "Upgrade (1)"
 
 [node name="ReloadSpeedUpgradeButton" type="Button" parent="Panel/StatsUpgradePanel" unique_id=1034033026]
 layout_mode = 0
-offset_left = 529.0
-offset_top = 370.0
-offset_right = 635.0
-offset_bottom = 403.0
+offset_left = 495.0
+offset_top = 366.0
+offset_right = 601.0
+offset_bottom = 399.0
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 18
 text = "Upgrade (1)"
 
 [node name="LifeStealUpgradeButton2" type="Button" parent="Panel/StatsUpgradePanel" unique_id=981240596]
 layout_mode = 0
-offset_left = 140.0
-offset_top = 512.0
-offset_right = 246.0
-offset_bottom = 545.0
+offset_left = 137.0
+offset_top = 497.0
+offset_right = 243.0
+offset_bottom = 530.0
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 18
 text = "Upgrade (1)"
 
 [node name="APAmountupgradeButton" type="Button" parent="Panel/StatsUpgradePanel" unique_id=459463447]
 layout_mode = 0
-offset_left = 528.0
-offset_top = 508.0
-offset_right = 634.0
-offset_bottom = 541.0
+offset_left = 494.0
+offset_top = 504.0
+offset_right = 600.0
+offset_bottom = 537.0
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 18
 text = "Upgrade (1)"
 
 [node name="XPBonusUpgradeButton" type="Button" parent="Panel/StatsUpgradePanel" unique_id=352310981]
 layout_mode = 0
-offset_left = 136.0
-offset_top = 648.0
-offset_right = 242.0
-offset_bottom = 681.0
+offset_left = 138.0
+offset_top = 638.0
+offset_right = 244.0
+offset_bottom = 671.0
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 18
 text = "Upgrade (1)"
@@ -434,63 +443,67 @@ expand_mode = 1
 [node name="Icon5" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=466778251]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 336.0
+offset_top = 326.0
 offset_right = 131.0
-offset_bottom = 410.0
+offset_bottom = 400.0
 texture = ExtResource("6_01lut")
 expand_mode = 1
 
 [node name="Icon7" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=70335684]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 468.0
+offset_top = 458.0
 offset_right = 131.0
-offset_bottom = 542.0
+offset_bottom = 532.0
 texture = ExtResource("7_g0t1s")
 expand_mode = 1
 
 [node name="Icon9" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=983239927]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 607.0
+offset_top = 596.0
 offset_right = 131.0
-offset_bottom = 681.0
+offset_bottom = 670.0
 texture = ExtResource("8_oaid5")
 expand_mode = 1
 
 [node name="Icon8" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=2069212415]
 layout_mode = 0
-offset_left = 445.0
-offset_top = 467.0
-offset_right = 519.0
-offset_bottom = 541.0
+offset_left = 411.0
+offset_top = 461.0
+offset_right = 485.0
+offset_bottom = 535.0
 texture = ExtResource("9_yw0ye")
 expand_mode = 1
 
 [node name="Icon6" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=283015837]
 layout_mode = 0
-offset_left = 446.0
-offset_top = 328.0
-offset_right = 520.0
-offset_bottom = 402.0
+offset_left = 412.0
+offset_top = 322.0
+offset_right = 486.0
+offset_bottom = 396.0
 texture = ExtResource("7_sky01")
 expand_mode = 1
 
 [node name="Icon4" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=2034622669]
 layout_mode = 0
-offset_left = 443.0
-offset_top = 189.0
-offset_right = 517.0
-offset_bottom = 263.0
+offset_left = 411.0
+offset_top = 187.0
+offset_right = 485.0
+offset_bottom = 261.0
 texture = ExtResource("8_g0t1s")
 expand_mode = 1
 
 [node name="Icon2" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=197528901]
-layout_mode = 0
-offset_left = 444.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 40.5
 offset_top = 48.0
-offset_right = 518.0
+offset_right = 114.5
 offset_bottom = 122.0
+grow_horizontal = 2
 texture = ExtResource("9_oaid5")
 expand_mode = 1
 
@@ -499,10 +512,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -394.5
-offset_top = 31.0
-offset_right = -296.5
-offset_bottom = 67.0
+offset_left = -276.0
+offset_top = 37.0
+offset_right = -178.0
+offset_bottom = 73.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 26
