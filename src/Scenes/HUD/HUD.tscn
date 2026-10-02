@@ -702,6 +702,144 @@ _data = {
 &"ShortFlash": SubResource("Animation_j3t07")
 }
 
+[sub_resource type="Animation" id="Animation_2a26m"]
+resource_name = "HeartBeat"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthIcon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.1815142422074099]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthIcon:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.23333333, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="Animation" id="Animation_4ln5d"]
+resource_name = "HeartIdle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthIcon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthIcon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.2617994, 0.08726646, -0.2617994]
+}
+
+[sub_resource type="Animation" id="Animation_e2ahw"]
+resource_name = "OreBeat"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HuntIcon:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6vgp8"]
+resource_name = "OreHuntIdle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HuntIcon:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3sobq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthIcon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthIcon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HuntIcon:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3sobq"]
+_data = {
+&"HeartBeat": SubResource("Animation_2a26m"),
+&"HeartIdle": SubResource("Animation_4ln5d"),
+&"OreBeat": SubResource("Animation_e2ahw"),
+&"OreHuntIdle": SubResource("Animation_6vgp8"),
+&"RESET": SubResource("Animation_3sobq")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1brt"]
 bg_color = Color(1, 0.3287198, 0.38030145, 1)
 corner_radius_top_left = 5
@@ -741,7 +879,7 @@ offset_top = 89.0
 offset_right = 110.0
 offset_bottom = 208.0
 grow_vertical = 1
-text = ""
+pivot_offset = Vector2(110, 61)
 
 [node name="TimeGainedPosition" type="Marker2D" parent="." unique_id=1338418775]
 position = Vector2(992, 183)
@@ -836,6 +974,9 @@ libraries/ = SubResource("AnimationLibrary_phtwg")
 [node name="FlashPlayer" type="AnimationPlayer" parent="." unique_id=524060833]
 root_node = NodePath("../WhiteFlash")
 libraries/ = SubResource("AnimationLibrary_153o4")
+
+[node name="IconPlayer" type="AnimationPlayer" parent="." unique_id=1684274951]
+libraries/ = SubResource("AnimationLibrary_3sobq")
 
 [node name="EnemyTracker" type="Panel" parent="." unique_id=1205098400]
 visible = false
@@ -952,6 +1093,7 @@ offset_top = 114.0
 offset_right = -62.0
 offset_bottom = 185.0
 grow_horizontal = 2
+pivot_offset = Vector2(26, 37)
 texture = ExtResource("15_g1kdu")
 expand_mode = 1
 
@@ -961,6 +1103,7 @@ offset_left = 830.0
 offset_top = 111.0
 offset_right = 911.0
 offset_bottom = 192.0
+pivot_offset = Vector2(39, 39)
 texture = ExtResource("16_sx6ht")
 expand_mode = 1
 

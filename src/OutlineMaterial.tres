@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dm4j4o3t0e0k7"]
+
+[ext_resource type="Shader" uid="uid://cntwct6jwly81" path="res://src/Scenes/outline.gdshader" id="1_i5r3m"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_i5r3m")
+shader_parameter/thickness = 2.0000000223518
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/samples = 4
+shader_parameter/sensitivity = 0.1
+shader_parameter/edge_fade = 0.015

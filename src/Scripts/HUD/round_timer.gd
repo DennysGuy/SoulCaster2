@@ -4,7 +4,7 @@ class_name WaveTimerLabel extends RichTextLabel
 var seconds : int = 10
 var milliseconds : int = 0
 
-const _10_SECOND_BEEP = preload("uid://c82h8rlugajc8")
+
 
 var timer_started : bool
 @onready var marker_2d: Marker2D = $Marker2D
@@ -36,7 +36,10 @@ func _physics_process(delta: float) -> void:
 			milliseconds = 100
 			
 			if seconds <= 10:
-				GameManager.play_sfx(_10_SECOND_BEEP)
+				if GameManager.ore_hunt_mode_started:
+					SignalBus.ore_hunt_under_10.emit()
+				else:
+					SignalBus.combat_under_10.emit()
 			if seconds_tracker >= 60:
 
 				seconds_tracker = 0
@@ -91,6 +94,7 @@ func decrement_wait_time(value : int) -> void:
 		seconds = 0
 	
 	milliseconds = 0
+	SignalBus.timer_manipulated.emit()
 	GameManager.hits_taken += 1
 	#var label : TimeDecrementLabel = preload("uid://c1srx6v31xvtu").instantiate()
 	#label.time = value
@@ -102,6 +106,7 @@ func increment_wait_time(value : int) -> void:
 	seconds += value
 	seconds_tracker += value
 	milliseconds = 0
+	SignalBus.timer_manipulated.emit()
 
 func set_label() -> void:
 	text = ""

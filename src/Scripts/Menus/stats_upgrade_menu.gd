@@ -229,7 +229,6 @@ func _on_xp_bonus_upgrade_button_button_up() -> void:
 	init_upgrades()
 	update_stats_description()
 
-
 func _on_life_steal_upgrade_button_2_button_up() -> void:
 	PlayerStats.player_stats["Life Steal"] += PlayerStats.stat_levels["Life Steal"]["Interval"]
 	PlayerStats.player_stats["Ability Points"] -= PlayerStats.stat_levels["Life Steal"]["Cost"]

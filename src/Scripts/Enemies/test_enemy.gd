@@ -3,6 +3,7 @@ class_name TestEnemy extends Enemy
 @onready var timer: Timer = $Timer
 
 @onready var skeleton_3d: Skeleton3D = $"rat(2)/rat/Skeleton3D"
+@onready var walk_particles: GPUParticles3D = $WalkParticles
 
 
 @onready var spawn_in_player: AnimationPlayer = $SpawnInPlayer
@@ -40,3 +41,7 @@ func play_walk_animation(animation_name : String) -> void:
 	var random_frame : float = randf_range(0, length)
 	animation_player.play(animation_name)
 	animation_player.seek(random_frame,true)
+
+func emit_walk_particles() -> void:
+	walk_particles.process_material.gravity = global_basis.z
+	walk_particles.emitting = true

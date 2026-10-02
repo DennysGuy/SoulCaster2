@@ -41,6 +41,10 @@ const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
 const GONG_HIT_ROUND_END = preload("uid://cl80qmb3yld4f")
 const ROUND_START = preload("uid://b68fxjxw701up")
 
+const HEART_BEAT = preload("uid://bv2rbnm724y8j")
+const _10_SECOND_BEEP = preload("uid://c82h8rlugajc8")
+
+
 const COUNT_DOWN_BEEP = preload("uid://bceqt2b1aafi6")
 const VOX_ANNOUNCER_COUNT_DOWN__ONE_01 = preload("uid://dleph5i0grnjx")
 const VOX_ANNOUNCER_COUNT_DOWN__SURVIVE_01 = preload("uid://bkqune2h2pnxa")
@@ -88,6 +92,7 @@ var skip_time : float = 15
 const COMBAT_TUTORIAL = preload("uid://h53ha3ah86nd")
 
 @onready var bar_player: AnimationPlayer = $BarPlayer
+@onready var icon_player: AnimationPlayer = $IconPlayer
 
 func _ready() -> void:
 	
@@ -111,6 +116,10 @@ func _ready() -> void:
 	SignalBus.hunt_tutorial_ended.connect(show_hunt_context_panel)
 	SignalBus.combat_tutorial_ended.connect(show_combat_context_panel)
 	SignalBus.boss_cutscene_ended.connect(start_fight)
+	SignalBus.ore_hunt_under_10.connect(play_ore_beat)
+	SignalBus.combat_under_10.connect(play_heart_beat)
+	SignalBus.timer_manipulated.connect(pulse_timer)
+	
 	update_ore_count_label(0)
 	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
@@ -463,10 +472,10 @@ func start_ore_hunt_countdown() -> void:
 	GameManager.ore_hunt_mode_started = true
 	hold_space_notice.show()
 	round_timer_label.set_hunt_round_timer()
+	icon_player.play("OreHuntIdle")
 	animation_player.play("OreHuntCountDown")
 	SignalBus.count_down_ended.emit()
 
-	
 func start_ore_spawn() -> void:
 	SignalBus.count_down_ended.emit()
 
@@ -474,6 +483,7 @@ func start_combat_round() -> void:
 	health_icon.show()
 	hunt_icon.hide()
 	hold_space_notice.hide()
+	icon_player.play("HeartIdle")
 	animation_player.play("RoundCountDown")
 	SignalBus.count_down_ended.emit()
 
@@ -491,3 +501,22 @@ func show_hunt_context_panel() -> void:
 	add_child(hun_context_panel)
 	arena_context_showing = true
 	#get_tree().paused = true
+
+func play_heart_beat() -> void:
+	GameManager.play_sfx(HEART_BEAT)
+	icon_player.play("HeartBeat")
+	pulse_timer()
+
+func play_ore_beat() -> void:
+	GameManager.play_sfx(_10_SECOND_BEEP)
+	icon_player.play("OreBeat")
+	pulse_timer()
+
+func pulse_timer() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(round_timer_label, "scale", Vector2(1.5, 1.5), 0.15)
+	await tween.finished
+
+	var tween_2: Tween = create_tween()
+	tween_2.tween_property(round_timer_label, "scale", Vector2(1.0, 1.0), 0.15)
+	await tween_2.finished

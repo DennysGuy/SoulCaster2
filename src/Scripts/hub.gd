@@ -20,6 +20,7 @@ var stored_selectable : MenuSelectable
 @onready var start_battle_label: Label = $CanvasLayer/StartBattleLabel
 @onready var controls_label: Label = $CanvasLayer/ControlsLabel
 
+@onready var enter_notice: Label = $CanvasLayer/EnterNotice
 
 @onready var home_position: Marker3D = $HomePosition
 
@@ -43,6 +44,8 @@ func _ready() -> void:
 	SignalBus.control_label_revealed.connect(show_controls_label)
 	SignalBus.start_battle_label_revealed.connect(show_start_battle_label)
 	SignalBus.cutscene_ended.connect(spawn_hub_context)
+	SignalBus.shop_hovered_over.connect(show_enter_notice)
+	SignalBus.shop_hover_exited.connect(hide_enter_notice)
 	
 	GameManager.in_arena = false
 	GameManager.in_menu = false
@@ -98,13 +101,15 @@ func _physics_process(delta: float) -> void:
 		var result = space_state.intersect_ray(query)
 
 	
-		if result and result["collider"].get_parent() is MenuSelectable:
+		if result and result["collider"].get_parent() is MenuSelectable and !GameManager.in_cutscene and !GameManager.in_menu:
 			if !stored_selectable:
-				print(result["collider"].get_parent())
 				stored_selectable = result["collider"].get_parent()
+				stored_selectable.set_outline()
 		else:
 			if stored_selectable:
+				stored_selectable.remove_outline()
 				stored_selectable = null
+				
 
 		#SignalBus.reset_combo_meter.emit()
 
@@ -183,3 +188,10 @@ func return_player_to_home_during_intro_cutscene() -> void:
 func unlock_player() -> void:
 	GameManager.can_move = true
 	GameManager.in_cutscene = false
+
+func show_enter_notice(shop_name : String) -> void:
+	enter_notice.text = "Left Click to Enter %s" % shop_name
+	enter_notice.show()
+
+func hide_enter_notice() -> void:
+	enter_notice.hide()

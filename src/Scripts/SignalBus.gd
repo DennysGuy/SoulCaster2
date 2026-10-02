@@ -72,3 +72,11 @@ signal count_down_ended
 signal cutscene_ended
 signal boss_cutscene_ended
 signal combat_tutorial_ended
+
+signal shop_hovered_over(shop_name : String)
+signal shop_hover_exited
+
+signal combat_under_10
+signal ore_hunt_under_10
+
+signal timer_manipulated
