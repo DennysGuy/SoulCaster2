@@ -14,6 +14,7 @@ var prev_state : State
 
 @export_group("Enemy Stats")
 @export var enemy_name : String
+@export var base_move_speed : float = 70
 @export var move_speed  : float = 40
 @export var health : int = 3
 @export var max_enemy_health : int
@@ -27,6 +28,7 @@ var prev_state : State
 
 @export var body_flash_point : Marker3D
 @export var head_flash_point : Marker3D
+
 
 @export_group("Damage States")
 @export var dead_state : State

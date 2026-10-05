@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://co6xvsgt4aawy"]
+
+[ext_resource type="Script" uid="uid://dd8qbdvy3loho" path="res://src/Scenes/PoopOre/crystal_piece.gd" id="1_3yskr"]
+[ext_resource type="Texture2D" uid="uid://bknpfuhuinhll" path="res://Assets/crystal.png" id="1_7irc3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3yskr"]
+size = Vector3(2.4846191, 1.7050781, 2.267456)
+
+[node name="CrystalPiece" type="Node3D" unique_id=827077096]
+script = ExtResource("1_3yskr")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1927920302]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.5738205, 0)
+texture = ExtResource("1_7irc3")
+
+[node name="Timer" type="Timer" parent="." unique_id=712404228]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2017729958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46458423, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=568202730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07385254, 0.35253906, 0.0067749023)
+shape = SubResource("BoxShape3D_3yskr")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

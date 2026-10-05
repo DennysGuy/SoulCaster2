@@ -16,9 +16,9 @@ func _ready() -> void:
 	#print("THIS IS HITS %s " % GameManager.hits)
 	#accuracy.text = "Accuracy: %s" % the_accuracy
 	enemies_killed_label.text = "Enemies Slain: %s" % GameManager.enemies_killed
-	levels_gained_label.text = "Levels Gained: %s/%s" % [GameManager.levels_gained,int(PlayerStats.player_stats["Level"])]
+	levels_gained_label.text = "Levels Gained: %s" % GameManager.levels_gained
 	xp_gained_label.text = "XP Gained: %s" % GameManager.xp_gained
-	ore_acquired_label.text = "Ore Acquired: %s/%s" %[GameManager.ore_acquired, int(PlayerStats.player_stats["Ore"])]
+	ore_acquired_label.text = "Ore Acquired: %s" %GameManager.ore_acquired
 	rounds_completed_label.text = "Rounds Completed: %s" % GameManager.rounds_beaten
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,7 +27,6 @@ func _process(delta: float) -> void:
 
 func _on_go_to_hub_button_button_up() -> void:
 	get_tree().change_scene_to_file("uid://jgsciuanachx")
-
 
 func _on_try_again_button_button_up() -> void:
 	get_tree().change_scene_to_file("uid://c8ok5h5m1ggwb")

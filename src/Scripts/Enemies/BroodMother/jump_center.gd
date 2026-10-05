@@ -6,16 +6,22 @@ class_name JumpCenter extends State
 const BOSS_MOVE_CENTER = preload("uid://deamg45glldt7")
 
 func enter() -> void:
-	#parent.animation_player.play(animation_name)
+	parent.animation_player.speed_scale = 3.5
+	if parent.cur_position == parent.CURRENT_POSITION.RIGHT:
+		parent.animation_player.play("SideStepRight")
+	elif parent.cur_position == parent.CURRENT_POSITION.LEFT:
+		parent.animation_player.play("SideStepLeft")
+
 	parent.cur_position = parent.CURRENT_POSITION.CENTER
 	var tween : Tween = create_tween()
 	var final_position : Vector3 = parent.established_position
 	tween.tween_property(parent, "global_position", final_position, 0.4)
 	parent.timer.wait_time = 1.0
+	parent.timer.start()
 	GameManager.play_sfx(BOSS_MOVE_CENTER)
 
 func exit() -> void:
-	pass
+	parent.animation_player.speed_scale = 1.0
 
 func process_input(_event: InputEvent) -> State:
 	return null

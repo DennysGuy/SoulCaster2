@@ -3,6 +3,7 @@ class_name StateMachine extends Node
 @export var initial_state: State
 
 var current_state: State
+var prev_state : State
 
 func init(parent) -> void:
 	print(parent)
@@ -18,9 +19,7 @@ func change_state(new_state: State) -> void:
 	if current_state:
 		current_state.exit()
 	
-	var cur_parent = get_parent()
-	if cur_parent == Enemy:
-		get_parent().prev_state = current_state
+	prev_state = current_state
 	current_state = new_state
 	current_state.enter()
 		

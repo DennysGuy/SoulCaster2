@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bcgjocuxlw3aa" path="res://src/Scripts/HUD/hud.gd" id="1_ippal"]
 [ext_resource type="PackedScene" uid="uid://digkh4i4y7puv" path="res://src/Scenes/HUD/RoundTimer.tscn" id="2_5ysmx"]
-[ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_t1brt"]
 [ext_resource type="PackedScene" uid="uid://c87ouqp84eqp7" path="res://src/Scenes/HUD/RoundDiamond.tscn" id="4_7pn66"]
+[ext_resource type="Texture2D" uid="uid://bknpfuhuinhll" path="res://Assets/crystal.png" id="4_gx84v"]
 [ext_resource type="StyleBox" uid="uid://5eyxyvcgpq2q" path="res://src/RoundStyle.tres" id="4_wwnsm"]
 [ext_resource type="FontFile" uid="uid://dqo5h1vqnpvsl" path="res://Assets/Fonts/MorrisRoman-Black.ttf" id="5_xs85b"]
 [ext_resource type="Texture2D" uid="uid://dam4v5p51n5b4" path="res://Assets/WaveDiamondEmpty.png" id="6_lkjxp"]
@@ -941,12 +941,13 @@ text = "[10/10]"
 horizontal_alignment = 2
 
 [node name="OreIcon" type="TextureRect" parent="." unique_id=1062039678]
-offset_left = 16.0
+offset_left = 26.0
 offset_top = 21.0
-offset_right = 64.0
+offset_right = 74.0
 offset_bottom = 69.0
-texture = ExtResource("3_t1brt")
-stretch_mode = 2
+pivot_offset = Vector2(25, 23)
+texture = ExtResource("4_gx84v")
+expand_mode = 1
 
 [node name="OreCountLabel" type="Label" parent="." unique_id=2021539283]
 offset_left = 75.0

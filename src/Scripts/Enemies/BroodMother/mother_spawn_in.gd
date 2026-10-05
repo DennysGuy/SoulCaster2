@@ -5,7 +5,7 @@ class_name MotherSpawnIn extends State
 
 func enter() -> void:
 	parent.animation_player.play("SpawnIn")
-	parent.timer.wait_time = 1.0
+	parent.timer.wait_time = 0.3
 	parent.timer.start()
 
 func exit() -> void:

@@ -38,6 +38,7 @@ func exit() -> void:
 		GameManager.ore_acquired += ore_received
 		GameManager.play_sfx(ROCK_DEATH_1)
 		SignalBus.ore_gathered.emit(ore_received)
+		parent.spawn_crystal(ore_received)
 		parent.queue_free()
 
 func process_input(_event: InputEvent) -> State:

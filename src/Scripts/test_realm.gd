@@ -167,7 +167,8 @@ func spawn_ore() -> void:
 	var ore : TestOre = preload("uid://bnujpnfle0d5l").instantiate()
 	var ore_position : Marker3D = get_random_ore_spawn_pos()
 	if ore_position:
-		ore_position.add_child(ore)
+		ore.global_position = ore_position.global_position
+		add_child(ore)
 
 func get_random_ore_spawn_pos() -> Marker3D:
 	var ore_points : Array = ore_spawn_points.get_children()

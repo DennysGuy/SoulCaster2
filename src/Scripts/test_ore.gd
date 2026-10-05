@@ -45,3 +45,11 @@ func hide_lock_on_target(target : Node3D) -> void:
 func spawn_ore_chunks() -> void:
 	var ore_chunk = preload("uid://btse4bogvqwv3").instantiate()
 	ore_chunk_area.add_child(ore_chunk)
+
+func spawn_crystal(amount : int) -> void:
+	for i in range(amount):
+		var crystal : CrystalPiece = preload("uid://co6xvsgt4aawy").instantiate()
+		crystal.global_position = global_position
+		get_parent().add_child(crystal)
+		print(crystal)
+		#await get_tree().create_timer(0.3).timeout

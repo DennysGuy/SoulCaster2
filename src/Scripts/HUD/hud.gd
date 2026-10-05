@@ -74,6 +74,7 @@ var hunt_context_showing : bool = false
 
 var context_pos : int = 0
 @onready var bolts_holder: HBoxContainer = $BoltsHolder
+@onready var ore_icon: TextureRect = $OreIcon
 
 const GRUN_1 = preload("uid://bsofvgd2ah7px")
 const GRUNT_2 = preload("uid://2gj05mllf3ho")
@@ -168,6 +169,7 @@ func _process(delta: float) -> void:
 		quit_time_left = quit_time
 
 func _physics_process(delta: float) -> void:
+	ore_icon.rotation += 0.01
 	if GameManager.ore_hunt_mode_started: 
 		if Input.is_action_pressed("jump"):
 			skip_time_left -= 15 * delta

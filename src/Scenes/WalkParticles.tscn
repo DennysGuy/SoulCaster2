@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ddc88qv4eqp1j"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xgh2c"]
+lifetime_randomness = 0.12
+emission_shape = 1
+emission_sphere_radius = 0.7
+gravity = Vector3(0, 0, 6)
+damping_min = 2.5970001
+damping_max = 5.1940002
+scale_min = 0.29999998
+scale_max = 1.5
+scale_over_velocity_min = 0.29999998
+scale_over_velocity_max = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_ocgvo"]
+radius = 0.15
+height = 0.15
+
+[node name="WalkParticles" type="GPUParticles3D" unique_id=1163675315]
+transform = Transform3D(0.011239725, 0, -0.9999368, 0, 1, 0, 0.9999368, 0, 0.011239725, 0, 0, 0)
+emitting = false
+amount = 24
+amount_ratio = 0.6013
+lifetime = 0.81
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.19
+randomness = 0.19
+process_material = SubResource("ParticleProcessMaterial_xgh2c")
+draw_pass_1 = SubResource("SphereMesh_ocgvo")
