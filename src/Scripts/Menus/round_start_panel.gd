@@ -1,4 +1,4 @@
-class_name StartRoundPanel extends Panel
+class_name StartRoundPanel extends TextureRect
 
 @onready var round_selected_label: Label = $Panel/RoundSelectedLabel
 

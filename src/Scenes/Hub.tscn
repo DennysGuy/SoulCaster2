@@ -10,14 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://b661qq3np83p6" path="res://src/Scenes/Player.tscn" id="9_ulcxc"]
 [ext_resource type="PackedScene" uid="uid://c2ycsc3y5vui7" path="res://src/Scenes/Menus/DebugMenu.tscn" id="10_lhmkk"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="11_ahwup"]
-[ext_resource type="AudioStream" uid="uid://djpctdm7ekscx" path="res://Assets/Audio/HubAmbience.wav" id="12_eysaa"]
 [ext_resource type="Script" uid="uid://v8t52da5rcq" path="res://src/Scripts/fire_place.gd" id="13_4dycr"]
 [ext_resource type="Texture2D" uid="uid://cfy1ajho7rwqe" path="res://Assets/Hub/hub.png" id="13_m0qss"]
 [ext_resource type="Texture2D" uid="uid://cqohnb4n3w2mb" path="res://Assets/Hub/Arena2.png" id="14_lhmkk"]
 [ext_resource type="PackedScene" uid="uid://xjwhti5n3ar8" path="res://src/Scenes/Menus/StatsUpgradeMenu.tscn" id="14_m0qss"]
 [ext_resource type="Texture2D" uid="uid://c7bxu7yhv41qu" path="res://Assets/Hub/arena.png" id="14_rjs8l"]
+[ext_resource type="AudioStream" uid="uid://c2qn0e3b31jvx" path="res://Assets/Audio/HubAmbience2.mp3" id="16_dylb3"]
 [ext_resource type="Shader" uid="uid://bp61plnfa2kpn" path="res://src/Scenes/TestRealm.gdshader" id="16_lhmkk"]
-[ext_resource type="AudioStream" uid="uid://cnssl17ea20eo" path="res://Assets/Audio/Music/HubTheme1.mp3" id="17_dylb3"]
+[ext_resource type="AudioStream" uid="uid://lvh7e6pdroae" path="res://Assets/Audio/Music/HubTheme1.wav" id="17_dylb3"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dylb3"]
 panorama = ExtResource("2_rjs8l")
@@ -6500,7 +6500,7 @@ look_at_point_3 = NodePath("../LookAtPoint4")
 look_at_point_4 = NodePath("../LookAtPoint3")
 
 [node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986638, -0.051094152, -0.05112592, 0.99676466, 0.062018562, 0.047952782, 0.06447825, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.047986634, -0.051094152, -0.051125918, 0.99676466, 0.062018562, 0.047952782, 0.06447825, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="HomePosition" type="Marker3D" parent="." unique_id=603688218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 12, -15)
@@ -7126,7 +7126,7 @@ root_node = NodePath("../CanvasLayer/TopBar")
 libraries/ = SubResource("AnimationLibrary_ahwup")
 
 [node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=795027345]
-stream = ExtResource("12_eysaa")
+stream = ExtResource("16_dylb3")
 autoplay = true
 bus = &"Ambience"
 

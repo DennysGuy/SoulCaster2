@@ -1,23 +1,14 @@
 [gd_scene format=3 uid="uid://noxi046h5l3k"]
 
+[ext_resource type="Texture2D" uid="uid://beqax3cadef1s" path="res://Assets/screen.png" id="1_6mdog"]
 [ext_resource type="Script" uid="uid://6qxqi7u6n7ty" path="res://src/Scripts/Menus/round_start_panel.gd" id="1_fh5w7"]
-[ext_resource type="Texture2D" uid="uid://c6snit0ddyb7j" path="res://Assets/RoundSelectButton.png" id="2_qrsxu"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="2_uxe70"]
-[ext_resource type="Texture2D" uid="uid://bhal15v0uxypj" path="res://Assets/RoundSelectButton_Disabled.png" id="3_ehc16"]
 [ext_resource type="FontFile" uid="uid://dxhfnu6r40cg7" path="res://Assets/Fonts/Mordred.ttf" id="3_vxtus"]
 [ext_resource type="FontFile" uid="uid://bw5o41cdl77cl" path="res://Assets/Fonts/Mordred-Bold.ttf" id="4_6mdog"]
+[ext_resource type="Texture2D" uid="uid://cj6ujdgypwg3d" path="res://Assets/arrow.png" id="6_6mdog"]
+[ext_resource type="Texture2D" uid="uid://1bt4cxsvqlg3" path="res://Assets/arrow_pressed.png" id="7_hyl3v"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxtus"]
-bg_color = Color(0.54502624, 0.27822995, 0.17018282, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-shadow_color = Color(0, 0, 0, 0.5137255)
-shadow_size = 1
-shadow_offset = Vector2(2, 2)
-
-[node name="Panel" type="Panel" unique_id=877606498]
+[node name="Panel" type="TextureRect" unique_id=1670977406]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -29,7 +20,7 @@ offset_right = 144.0
 offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vxtus")
+texture = ExtResource("1_6mdog")
 script = ExtResource("1_fh5w7")
 
 [node name="Label" type="Label" parent="." unique_id=1727462344]
@@ -37,13 +28,14 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -59.5
-offset_top = 44.0
-offset_right = 59.5
-offset_bottom = 70.0
+offset_left = -80.0
+offset_top = 48.0
+offset_right = 80.0
+offset_bottom = 82.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_uxe70")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "Start Combat"
 horizontal_alignment = 1
 
@@ -53,11 +45,13 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -104.0
-offset_top = 94.0
+offset_top = 96.0
 offset_right = 104.0
-offset_bottom = 143.0
+offset_bottom = 145.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_uxe70")
+theme_override_font_sizes/font_size = 20
 text = "Select Round 
 (Unlocks upon entering)"
 horizontal_alignment = 1
@@ -69,10 +63,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = 9.0
-offset_right = 82.0
-offset_bottom = 49.0
+offset_left = -52.0
+offset_top = 33.0
+offset_right = 51.0
+offset_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -100,10 +94,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -35.0
+offset_left = -23.0
 offset_top = -52.0
-offset_right = 29.0
-offset_bottom = -27.0
+offset_right = 26.0
+offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_default_cursor_shape = 2
@@ -117,10 +111,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 114.0
-offset_top = -283.0
-offset_right = 138.0
-offset_bottom = -257.0
+offset_left = 100.0
+offset_top = -271.0
+offset_right = 124.0
+offset_bottom = -245.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_default_cursor_shape = 2
@@ -128,23 +122,27 @@ theme_override_fonts/font = ExtResource("4_6mdog")
 text = "X"
 
 [node name="DecreaseRound" type="TextureButton" parent="." unique_id=766387133]
+modulate = Color(0, 0.85931367, 0.6554155, 1)
 layout_mode = 0
-offset_left = 20.0
-offset_top = 157.0
-offset_right = 60.0
-offset_bottom = 189.0
-texture_normal = ExtResource("2_qrsxu")
-texture_disabled = ExtResource("3_ehc16")
-flip_h = true
+offset_left = 28.0
+offset_top = 161.0
+offset_right = 69.0
+offset_bottom = 222.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_6mdog")
+texture_disabled = ExtResource("7_hyl3v")
 
 [node name="IncreaseRound" type="TextureButton" parent="." unique_id=338412201]
+modulate = Color(0, 0.83343875, 0.59699017, 1)
 layout_mode = 0
-offset_left = 237.0
-offset_top = 157.0
-offset_right = 277.0
-offset_bottom = 189.0
-texture_normal = ExtResource("2_qrsxu")
-texture_disabled = ExtResource("3_ehc16")
+offset_left = 220.0
+offset_top = 162.0
+offset_right = 261.0
+offset_bottom = 223.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_6mdog")
+texture_disabled = ExtResource("7_hyl3v")
+flip_h = true
 
 [connection signal="button_up" from="StartButton" to="." method="_on_start_button_button_up"]
 [connection signal="button_up" from="CloseButton" to="." method="_on_close_button_button_up"]
