@@ -252,10 +252,9 @@ func start_round() -> void:
 		round_progress_bar.value = 0
 		round_progress_bar.max_value = GameManager.round_times[GameManager.round_number]
 		SignalBus.round_started.emit()
+		SignalBus.new_round_started.emit()
 		play_round_start_sfx()
 		play_survive()
-
-	
 
 func load_timer() -> void:
 	round_timer_label.reset_timer()
@@ -522,3 +521,6 @@ func pulse_timer() -> void:
 	var tween_2: Tween = create_tween()
 	tween_2.tween_property(round_timer_label, "scale", Vector2(1.0, 1.0), 0.15)
 	await tween_2.finished
+
+func start_mining_round_music() -> void:
+	SignalBus.mining_round_started.emit()

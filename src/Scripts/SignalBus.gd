@@ -80,3 +80,5 @@ signal combat_under_10
 signal ore_hunt_under_10
 
 signal timer_manipulated
+signal new_round_started
+signal mining_round_started

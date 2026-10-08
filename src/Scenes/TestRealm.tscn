@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dp4t3anradmae" path="res://src/Scenes/EnemySpawnPoint.tscn" id="4_sfhgb"]
 [ext_resource type="Texture2D" uid="uid://b8xkhq31bcoqr" path="res://Assets/Arena/Swamp.png" id="6_uqw8w"]
 [ext_resource type="Texture2D" uid="uid://11ko8ou7pad5" path="res://Assets/Arena/pngwing_com_png.png" id="7_plpmp"]
-[ext_resource type="AudioStream" uid="uid://bbbuoohvoywli" path="res://Assets/Audio/Music/Round1Theme_QuickTest.wav" id="8_uqw8w"]
+[ext_resource type="AudioStream" uid="uid://ltnbfbfkls2x" path="res://Assets/Audio/Music/Round1Theme-Mastered.wav" id="8_uqw8w"]
 [ext_resource type="Texture2D" uid="uid://dd5dsbxw6eimn" path="res://Assets/Arena/pngwing_com_1.png" id="9_gureh"]
 [ext_resource type="Shader" uid="uid://bp61plnfa2kpn" path="res://src/Scenes/TestRealm.gdshader" id="14_cjxld"]
 [ext_resource type="Texture2D" uid="uid://brka4756v2ter" path="res://Assets/Arena/Wispy_Sky-Night_03-1024x512.png" id="15_s5xg8"]
@@ -3705,7 +3705,6 @@ bus = &"Ambience"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=907528117]
 stream = ExtResource("8_uqw8w")
-autoplay = true
 bus = &"Music"
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1559373778]

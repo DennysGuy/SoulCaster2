@@ -20,6 +20,7 @@ const ENEMY_SPAWN_SFX = preload("uid://bfk213an2avam")
 
 @onready var boss_spawn_points: Node3D = $BossSpawnPoints
 
+const MINING_THEME = preload("uid://88vhce7p4n4p")
 
 
 
@@ -61,6 +62,8 @@ func _ready() -> void:
 	SignalBus.arena_ended.connect(stop_arena_battle)
 	SignalBus.mini_round_started.connect(start_mini_round_spawn)
 	SignalBus.count_down_ended.connect(start_ore_spawn_timer)
+	SignalBus.new_round_started.connect(start_music)
+	SignalBus.mining_round_started.connect(start_mining_music)
 	#SignalBus.boss_jumped_out.connect(start_mini_round_spawn)
 	arena_animation_player.play("tide")
 	if GameManager.ore_hunt_mode_started:
@@ -78,10 +81,12 @@ func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
 
 func start_spawn_timer() -> void:
+
 	spawn_enemy()
 	#spawn_timer.start()
 
 func stop_spawn_timer(kill : bool) -> void:
+	stop_music()
 	configs_to_beat = 0
 	waves_to_beat = 0
 	spawn_timer.wait_time = 0
@@ -240,3 +245,11 @@ func start_ore_spawn_timer() -> void:
 
 func stop_ore_spawn_timer() -> void:
 	ore_spawn_timer.stop()
+
+func start_music() -> void:
+	music_player.stream = GameManager.music[GameManager.round_number]
+	music_player.play()
+
+func start_mining_music() -> void:
+	music_player.stream = MINING_THEME
+	music_player.play()

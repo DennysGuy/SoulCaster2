@@ -45,6 +45,14 @@ var round_times : Array[int] = [125, 230, 340]
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,3,3]
 
+const ROUND_1_THEME_MASTERED = preload("uid://ltnbfbfkls2x")
+const ROUND_2_THEME_MASTERED = preload("uid://b4sge4bjcmvl0")
+
+var music :Array[AudioStream] = [
+	ROUND_1_THEME_MASTERED,
+	ROUND_2_THEME_MASTERED
+]
+
 var max_boss_health : int = 3300
 var current_boss_health : int = 3300
 
