@@ -48,9 +48,12 @@ var maximum_spawn : Array[int] = [2,3,3]
 const ROUND_1_THEME_MASTERED = preload("uid://ltnbfbfkls2x")
 const ROUND_2_THEME_MASTERED = preload("uid://b4sge4bjcmvl0")
 
+const ROUND_3_THEME_MASTERED = preload("uid://cxkmoesov7p3k")
+
 var music :Array[AudioStream] = [
 	ROUND_1_THEME_MASTERED,
-	ROUND_2_THEME_MASTERED
+	ROUND_2_THEME_MASTERED,
+	ROUND_3_THEME_MASTERED
 ]
 
 var max_boss_health : int = 3300
