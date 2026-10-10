@@ -5,7 +5,7 @@ class_name TestRealm extends Node3D
 @onready var ore_spawn_points: Node = $OreSpawnPoints
 @onready var ore_spawn_timer: Timer = $OreSpawnTimer
 @onready var boss_spawn_point: Marker3D = $BossSpawnPoints/BossSpawnPoint
-const BOSS_THEME = preload("uid://c4n1b2qik86oq")
+const BOSS_THEME = preload("uid://cu5biet1k3nwu")
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var cut_scene_cam: Camera3D = $CutSceneCam
 @onready var player: Player = $Player
@@ -197,7 +197,6 @@ func stop_music() -> void:
 
 func start_boss_music() -> void:
 	music_player.stream = BOSS_THEME
-	music_player.volume_db = -12.0
 	music_player.play()
 
 func choose_new_spawn_point(chosen_spawn_point : EnemySpawnPoint) -> EnemySpawnPoint:
