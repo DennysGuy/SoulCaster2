@@ -59,8 +59,8 @@ var music :Array[AudioStream] = [
 var max_boss_health : float = 3300
 var current_boss_health : float = 3300
 
-var max_boss_stun : int = 450
-var current_boss_stun : int = 0
+var max_boss_stun : float = 450
+var current_boss_stun : float = 0
 
 var hunt_mode_time : int = 20
 var current_hunt_mode_time : int = 20

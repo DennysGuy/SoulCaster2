@@ -15,16 +15,16 @@ class_name HUD extends CanvasLayer
 const HUNT_ROUND_TUTORIAL = preload("uid://cpgwqckakdvgg")
 const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 
-@onready var enemy_tracker: Panel = $EnemyTracker
+@onready var enemy_tracker: Control = $EnemyTracker
 @onready var enemy_name: Label = $EnemyTracker/EnemyName
-@onready var enemy_hp: ProgressBar = $EnemyTracker/EnemyHP
+@onready var enemy_hp: TextureProgressBar = $EnemyTracker/EnemyHP
 
 @onready var ore_count_label: Label = $OreCountLabel
 
 @onready var bullets_tracker: Label = $BulletsTracker
 
 @onready var round_diamond_container: HBoxContainer = $RoundDiamondContainer
-@onready var boss_stun_progress_bar: ProgressBar = $BossStunProgressBar
+@onready var boss_stun_progress_bar: TextureProgressBar = $BossStunProgressBar
 
 @onready var round_timer_label: WaveTimerLabel = $RoundTimerLabel
 @onready var grenade_count_label: Label = $GrenadeCountLabel
@@ -34,6 +34,7 @@ const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 
 @onready var hunt_context_panel: ArenaContextPanel = $HuntContextPanel
 
+@onready var boss_stun_progress_bar_top: TextureProgressBar = $BossStunProgressBarTop
 
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
@@ -233,11 +234,10 @@ func update_ore_count_label(amount : int) -> void:
 		ore_gathered_lable.label.text = "+%sore" % amount
 		ore_gained_position.add_child(ore_gathered_lable)
 		
-func update_enemy_tracker(enemy_name : String, enemy_health : int, enemy_max_health : int) -> void:
+func update_enemy_tracker(enemy_name : String, enemy_health : float, enemy_max_health : float) -> void:
 	self.enemy_name.text = enemy_name
-	enemy_hp.max_value = enemy_max_health
-	enemy_hp.value = enemy_health
-
+	var percentage : float = enemy_health/enemy_max_health
+	adjust_progress_bar(enemy_hp,percentage)
 
 func start_round() -> void:
 	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
@@ -369,20 +369,20 @@ func update_boss_bar(damage_done : int, value : int, max_value : int) -> void:
 	#round_progress_bar.max_value = GameManager.max_boss_health
 	var percentage : float = GameManager.current_boss_health/GameManager.max_boss_health
 	adjust_progress_bar(round_progress_bar,percentage)
-	var damage : int = damage_done
+	var damage : float = damage_done
 	if !GameManager.boss_was_stunned:
 		
 		if GameManager.boss_in_roll_mode:
 			damage *= 1.6
 		
 		GameManager.current_boss_stun += damage
-		
-		boss_stun_progress_bar.value = GameManager.current_boss_stun
-		var current_boss_stun : int = GameManager.current_boss_stun
-		if current_boss_stun >= GameManager.max_boss_stun:
+		var current_boss_stun : float = GameManager.current_boss_stun
+		var stun_percentage : float = current_boss_stun/GameManager.max_boss_stun
+		adjust_progress_bar(boss_stun_progress_bar, stun_percentage)
+		if stun_percentage >= 1.0:
 			SignalBus.boss_stun_threshold_reached.emit()
 			GameManager.current_boss_stun = 0
-			boss_stun_progress_bar.value = 0
+			adjust_progress_bar(boss_stun_progress_bar, 0.0,0.1)
 		
 func end_fight() -> void:
 	GameManager.round_number = -1
@@ -480,9 +480,8 @@ func start_mini_round_count_down() -> void:
 	animation_player.play("MiniRoundCountDown")
 
 func show_stun_bar() -> void:
-	boss_stun_progress_bar.value = 0
-	boss_stun_progress_bar.max_value = GameManager.max_boss_stun
 	boss_stun_progress_bar.show()
+	boss_stun_progress_bar_top.show()
 
 func play_short_flash() -> void:
 	flash_player.play("ShortFlash")

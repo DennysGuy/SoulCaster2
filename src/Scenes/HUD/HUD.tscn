@@ -4,20 +4,21 @@
 [ext_resource type="PackedScene" uid="uid://digkh4i4y7puv" path="res://src/Scenes/HUD/RoundTimer.tscn" id="2_5ysmx"]
 [ext_resource type="PackedScene" uid="uid://c87ouqp84eqp7" path="res://src/Scenes/HUD/RoundDiamond.tscn" id="4_7pn66"]
 [ext_resource type="Texture2D" uid="uid://bknpfuhuinhll" path="res://Assets/crystal.png" id="4_gx84v"]
+[ext_resource type="Texture2D" uid="uid://3kwavcnysai3" path="res://Assets/ProgressBar/targeting.png" id="5_phtwg"]
 [ext_resource type="FontFile" uid="uid://dqo5h1vqnpvsl" path="res://Assets/Fonts/MorrisRoman-Black.ttf" id="5_xs85b"]
 [ext_resource type="Shader" uid="uid://b7npqdis8xixw" path="res://src/Scripts/HUD/ProgressBar.gdshader" id="6_gx84v"]
-[ext_resource type="Texture2D" uid="uid://dam4v5p51n5b4" path="res://Assets/WaveDiamondEmpty.png" id="6_lkjxp"]
 [ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="6_s42vb"]
-[ext_resource type="Texture2D" uid="uid://d3apwcm4ylvd2" path="res://Assets/WaveDiamondFilled.png" id="7_761it"]
 [ext_resource type="Texture2D" uid="uid://cag5ig8j44hfp" path="res://Assets/ProgressBar/RoundProgressFill.png" id="7_g1kdu"]
-[ext_resource type="Texture2D" uid="uid://dk6iunojkq143" path="res://Assets/BossWaveEmpty.png" id="8_2c58t"]
 [ext_resource type="Texture2D" uid="uid://ejahp6gu4f5c" path="res://Assets/ProgressBar/RoundProgressOver.png" id="8_sx6ht"]
-[ext_resource type="Texture2D" uid="uid://dyrx0x1hwcsdd" path="res://Assets/BossWaveFilled.png" id="9_veicy"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="10_6w4u3"]
+[ext_resource type="Texture2D" uid="uid://b148mdwbx16pg" path="res://Assets/ProgressBar/empty.png" id="11_s42vb"]
 [ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="12_lt1va"]
+[ext_resource type="Texture2D" uid="uid://f4gt1blpi87m" path="res://Assets/ProgressBar/Full.png" id="12_phtwg"]
 [ext_resource type="PackedScene" uid="uid://booyib7rd0el6" path="res://src/Scenes/HUD/BoltHUDIcon.tscn" id="13_xs85b"]
 [ext_resource type="Texture2D" uid="uid://j3bjw76bnnul" path="res://Assets/Arena/CombatMode.png" id="15_g1kdu"]
 [ext_resource type="Texture2D" uid="uid://cljqe5rqldjc6" path="res://Assets/Arena/OreMode.png" id="16_sx6ht"]
+[ext_resource type="Texture2D" uid="uid://byttxlrsgcpny" path="res://Assets/ProgressBar/Stun_bar.png" id="19_phtwg"]
+[ext_resource type="Texture2D" uid="uid://ol05lc5irm0w" path="res://Assets/ProgressBar/Stun_Outer.png" id="20_fmwqo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
 bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
@@ -865,12 +866,23 @@ _data = {
 &"Pulse": SubResource("Animation_3htc5")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1brt"]
-bg_color = Color(1, 0.3287198, 0.38030145, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phtwg"]
+shader = ExtResource("6_gx84v")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = 1.0
+shader_parameter/percentage = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/wave_1_speed = -1.0
+shader_parameter/wave_2_speed = 1.0
+shader_parameter/wave_1_freq = 1.2
+shader_parameter/wave_2_freq = 1.0
+shader_parameter/wave_1_amp = 0.015
+shader_parameter/wave_2_amp = 0.01
+shader_parameter/sun_dir = Vector3(-0.2, 0.4, 1)
+shader_parameter/water_colour = Color(0.49803922, 0.2509804, 0.2509804, 1)
+shader_parameter/foam_colour = Color(0.49019608, 0.34117648, 0.34509805, 1)
+shader_parameter/sky_colour = Color(0.40784314, 0.24313726, 0.24313726, 1)
+shader_parameter/specular_colour = Color(0.62352943, 0.5254902, 0.5254902, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s42vb"]
 bg_color = Color(0.5499595, 0.001865933, 0.76245815, 1)
@@ -883,7 +895,7 @@ corner_radius_bottom_left = 5
 shader = ExtResource("6_gx84v")
 shader_parameter/bg_color = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = 1.0
-shader_parameter/percentage = 0.4590000218025
+shader_parameter/percentage = 0.0
 shader_parameter/speed = 0.2
 shader_parameter/wave_1_speed = 2.0
 shader_parameter/wave_2_speed = 1.5
@@ -897,18 +909,23 @@ shader_parameter/foam_colour = Color(0.42745098, 0.36078432, 0.2627451, 1)
 shader_parameter/sky_colour = Color(0.5019608, 0.32156864, 0.2509804, 1)
 shader_parameter/specular_colour = Color(0.69411767, 0.58431375, 0.5411765, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gx84v"]
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt1va"]
-bg_color = Color(0, 0.71447366, 0.4220186, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3t07"]
+shader = ExtResource("6_gx84v")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = 1.0
+shader_parameter/percentage = 0.0
+shader_parameter/speed = 2.48
+shader_parameter/wave_1_speed = 5.0
+shader_parameter/wave_2_speed = 5.0
+shader_parameter/wave_1_freq = 3.0
+shader_parameter/wave_2_freq = 3.0
+shader_parameter/wave_1_amp = 0.01
+shader_parameter/wave_2_amp = 0.01
+shader_parameter/sun_dir = Vector3(-0.2, 0.4, 1)
+shader_parameter/water_colour = Color(0.62352943, 0.62352943, 0.30980393, 1)
+shader_parameter/foam_colour = Color(0.6666667, 0.6666667, 0.28627452, 1)
+shader_parameter/sky_colour = Color(0.6862745, 0.62352943, 0.18431373, 1)
+shader_parameter/specular_colour = Color(0.8666667, 0.8666667, 0.44313726, 1)
 
 [node name="HUD" type="CanvasLayer" unique_id=1895423373]
 script = ExtResource("1_ippal")
@@ -1025,8 +1042,9 @@ libraries/ = SubResource("AnimationLibrary_3sobq")
 [node name="LowHealthPlayer" type="AnimationPlayer" parent="." unique_id=907890275]
 libraries/ = SubResource("AnimationLibrary_jqtaw")
 
-[node name="EnemyTracker" type="Panel" parent="." unique_id=1205098400]
+[node name="EnemyTracker" type="Control" parent="." unique_id=624011814]
 visible = false
+layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -1036,21 +1054,8 @@ offset_right = 310.0
 offset_bottom = -84.0
 grow_vertical = 0
 
-[node name="EnemyName" type="Label" parent="EnemyTracker" unique_id=934214204]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -92.0
-offset_top = 28.0
-offset_right = 92.0
-offset_bottom = 60.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("5_xs85b")
-theme_override_font_sizes/font_size = 36
-text = "Enemy Name"
-
-[node name="EnemyHP" type="ProgressBar" parent="EnemyTracker" unique_id=1446326015]
+[node name="EnemyHP" type="TextureProgressBar" parent="EnemyTracker" unique_id=1434530198]
+material = SubResource("ShaderMaterial_phtwg")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1058,14 +1063,34 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -119.0
-offset_top = 28.0
-offset_right = 105.0
+offset_top = -50.0
+offset_right = 1441.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_t1brt")
-value = 50.0
-show_percentage = false
+scale = Vector2(0.15, 1)
+value = 100.0
+texture_progress = ExtResource("7_g1kdu")
+
+[node name="EnemyName" type="Label" parent="EnemyTracker" unique_id=934214204]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_top = -34.0
+offset_right = 92.0
+offset_bottom = -2.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_xs85b")
+theme_override_font_sizes/font_size = 36
+
+[node name="TextureRect" type="TextureRect" parent="EnemyTracker" unique_id=957164458]
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 112.0
+texture = ExtResource("5_phtwg")
 
 [node name="RoundTracker" type="Panel" parent="." unique_id=1153659562]
 self_modulate = Color(1, 1, 1, 0.12156863)
@@ -1150,32 +1175,36 @@ texture_progress = ExtResource("7_g1kdu")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -246.0
+offset_left = -224.0
 offset_top = 73.0
-offset_right = 246.0
-offset_bottom = 121.0
+offset_right = 196.0
+offset_bottom = 103.0
 grow_horizontal = 2
 theme_override_constants/separation = 100
 
 [node name="RoundDiamond" parent="RoundDiamondContainer" unique_id=1550612314 instance=ExtResource("4_7pn66")]
 layout_mode = 2
-wave_graphic_unfilled = ExtResource("6_lkjxp")
-wave_graphic_filled = ExtResource("7_761it")
+texture = ExtResource("11_s42vb")
+wave_graphic_unfilled = ExtResource("11_s42vb")
+wave_graphic_filled = ExtResource("12_phtwg")
 
 [node name="RoundDiamond2" parent="RoundDiamondContainer" unique_id=793161586 instance=ExtResource("4_7pn66")]
 layout_mode = 2
-wave_graphic_unfilled = ExtResource("6_lkjxp")
-wave_graphic_filled = ExtResource("7_761it")
+texture = ExtResource("11_s42vb")
+wave_graphic_unfilled = ExtResource("11_s42vb")
+wave_graphic_filled = ExtResource("12_phtwg")
 
 [node name="RoundDiamond3" parent="RoundDiamondContainer" unique_id=1610435108 instance=ExtResource("4_7pn66")]
 layout_mode = 2
-wave_graphic_unfilled = ExtResource("6_lkjxp")
-wave_graphic_filled = ExtResource("7_761it")
+texture = ExtResource("11_s42vb")
+wave_graphic_unfilled = ExtResource("11_s42vb")
+wave_graphic_filled = ExtResource("12_phtwg")
 
 [node name="RoundDiamond4" parent="RoundDiamondContainer" unique_id=279467700 instance=ExtResource("4_7pn66")]
 layout_mode = 2
-wave_graphic_unfilled = ExtResource("8_2c58t")
-wave_graphic_filled = ExtResource("9_veicy")
+texture = ExtResource("11_s42vb")
+wave_graphic_unfilled = ExtResource("11_s42vb")
+wave_graphic_filled = ExtResource("12_phtwg")
 
 [node name="HurtRect" type="ColorRect" parent="." unique_id=295245294]
 modulate = Color(1, 1, 1, 0)
@@ -1333,23 +1362,37 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 540.0
-offset_bottom = 540.00146
+offset_bottom = 540.001
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="BossStunProgressBar" type="ProgressBar" parent="." unique_id=612660325]
+[node name="BossStunProgressBar" type="TextureProgressBar" parent="." unique_id=1371437716]
+visible = false
+material = SubResource("ShaderMaterial_j3t07")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -345.0
+offset_top = 206.0
+offset_right = 357.0
+offset_bottom = 234.0
+grow_horizontal = 2
+max_value = 400.0
+value = 400.0
+texture_progress = ExtResource("19_phtwg")
+
+[node name="BossStunProgressBarTop" type="TextureProgressBar" parent="." unique_id=1761786600]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -345.0
-offset_top = 183.0
+offset_top = 206.0
 offset_right = 357.0
-offset_bottom = 211.0
+offset_bottom = 234.0
 grow_horizontal = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_gx84v")
-theme_override_styles/fill = SubResource("StyleBoxFlat_lt1va")
 max_value = 400.0
+texture_over = ExtResource("20_fmwqo")
 
 [editable path="RoundTimerLabel"]
