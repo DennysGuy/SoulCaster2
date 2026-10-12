@@ -29,6 +29,7 @@ var prev_state : State
 @export var body_flash_point : Marker3D
 @export var head_flash_point : Marker3D
 
+@export var blood_pool : BloodPool
 
 @export_group("Damage States")
 @export var dead_state : State
@@ -125,6 +126,9 @@ func damage_enemy(applied_damage : int = 0) -> void:
 	
 	if blood_spout:
 		spawn_blood_spirt()
+	
+	drop_blood()
+	
 	if skeleton:
 		hit_flash()
 	
@@ -242,3 +246,7 @@ func hide_lock_on_target(target : Node3D) -> void:
 func play_leap() -> void:
 	leap_player.stream = leaps.pick_random()
 	leap_player.play()
+
+func drop_blood() -> void:
+	if blood_pool:
+		blood_pool.drop_at_world_position(global_position)

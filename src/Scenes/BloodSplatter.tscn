@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c4roty8fy7hxb"]
+
+[ext_resource type="Script" uid="uid://b3pjfevjry5jp" path="res://src/Scripts/Enemies/blood_splatter.gd" id="1_8s78o"]
+[ext_resource type="Shader" uid="uid://8rsrb32i5u5v" path="res://src/Scripts/Enemies/BloodSplatter.gdshader" id="1_27bwv"]
+[ext_resource type="Texture2D" uid="uid://k5pn8y07x8cf" path="res://Assets/Blood/floor_roughness.png" id="2_whnhb"]
+[ext_resource type="Texture2D" uid="uid://d0awi7yf3pqqf" path="res://Assets/Blood/floor_height.png" id="3_mxvkm"]
+[ext_resource type="Texture2D" uid="uid://q5uhw0mu7qb6" path="res://Assets/Blood/floor_albedo.png" id="4_jn6ex"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2qi85"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjbeb"]
+render_priority = 0
+shader = ExtResource("1_27bwv")
+shader_parameter/floor_texture = ExtResource("4_jn6ex")
+shader_parameter/floor_heightmap = ExtResource("3_mxvkm")
+shader_parameter/floor_roughnessmap = ExtResource("4_jn6ex")
+shader_parameter/blood_texture = ExtResource("2_whnhb")
+shader_parameter/blood_color = Color(0.7411765, 0, 0, 1)
+shader_parameter/blood_merge_factor = 0.1530000072675
+shader_parameter/blood_density_on_heightmap = true
+shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/scales = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="BloodSplatter" type="MeshInstance3D" unique_id=1666011161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.099021256, 0)
+mesh = SubResource("PlaneMesh_2qi85")
+surface_material_override/0 = SubResource("ShaderMaterial_hjbeb")
+script = ExtResource("1_8s78o")

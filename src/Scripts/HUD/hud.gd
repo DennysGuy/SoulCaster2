@@ -36,6 +36,9 @@ const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 
 @onready var boss_stun_progress_bar_top: TextureProgressBar = $BossStunProgressBarTop
 
+@onready var hurt_rect: ColorRect = $HurtRect
+
+
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
 
@@ -128,6 +131,8 @@ func _ready() -> void:
 	SignalBus.ore_hunt_under_10.connect(play_ore_beat)
 	SignalBus.combat_under_10.connect(play_heart_beat)
 	SignalBus.timer_manipulated.connect(pulse_timer)
+	SignalBus.toggle_hurt_pulse_off.connect(hide_hurt_pulse)
+	SignalBus.toggle_hurt_pulse_on.connect(show_hurt_pulse)
 	
 	update_ore_count_label(0)
 	update_grenade_count()
@@ -610,3 +615,19 @@ func set_round_progress_color() -> void:
 			set_round_progress_as_orange()
 		2:
 			set_round_progress_as_red()
+
+func show_hurt_pulse() -> void:
+	hurt_rect.modulate.a = 1.0
+
+func hide_hurt_pulse() -> void:
+	hurt_rect.modulate.a = 0.0
+
+## Call this when the player takes damage. strength ~0.6–1.0 for a sharp hit,
+## lower for a graze. duration controls how long it takes to fade back out.
+func flash_damage(strength: float, duration: float = 0.6) -> void:
+	var hurt_material :  ShaderMaterial = hurt_rect.material as ShaderMaterial
+	var tw := create_tween()
+	tw.tween_method(
+	   func(): hurt_material.set_shader_parameter("max_alpha", strength),
+	   strength, 0.0, duration
+   ).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

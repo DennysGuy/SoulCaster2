@@ -70,6 +70,8 @@ var in_cutscene : bool = false
 enum COMBAT_TUTORIALS {COMBAT_TUTORIAL, RESOURCE_HUNT_TUTORIAL, BOSS, END}
 var combat_tutorial_state : COMBAT_TUTORIALS = COMBAT_TUTORIALS.COMBAT_TUTORIAL
 
+var last_ten_sec : bool = false
+
 var max_configurations : Dictionary = {
 	0: {
 		ROUND_POINT.BEGINNING:1,

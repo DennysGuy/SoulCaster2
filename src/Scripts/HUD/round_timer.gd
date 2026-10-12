@@ -90,6 +90,18 @@ func decrement_wait_time(value : int) -> void:
 
 	seconds -= value
 	seconds_tracker += value
+	
+	if !GameManager.last_ten_sec:
+		if seconds <= 10:
+			SignalBus.toggle_hurt_pulse_on.emit()
+			GameManager.last_ten_sec = true
+	else:
+		if seconds >= 10:
+			SignalBus.toggle_hurt_pulse_off.emit()
+			GameManager.last_ten_sec = false
+	
+	
+	
 	if seconds < 0:
 		seconds = 0
 	
@@ -100,7 +112,6 @@ func decrement_wait_time(value : int) -> void:
 	#label.time = value
 	#label.position = get_parent().marker_2d.position
 	#get_parent().add_child(label)
-
 
 func increment_wait_time(value : int) -> void:
 	seconds += value

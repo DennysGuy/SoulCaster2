@@ -82,3 +82,6 @@ signal ore_hunt_under_10
 signal timer_manipulated
 signal new_round_started
 signal mining_round_started
+
+signal toggle_hurt_pulse_on
+signal toggle_hurt_pulse_off
