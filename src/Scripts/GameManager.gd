@@ -56,8 +56,8 @@ var music :Array[AudioStream] = [
 	ROUND_3_THEME_MASTERED
 ]
 
-var max_boss_health : int = 3300
-var current_boss_health : int = 3300
+var max_boss_health : float = 3300
+var current_boss_health : float = 3300
 
 var max_boss_stun : int = 450
 var current_boss_stun : int = 0

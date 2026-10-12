@@ -61,7 +61,7 @@ const VOX_BOSS_DIALOGUE_BLASPHEMY_04 = preload("uid://1taeuss8bqxl")
 
 var round_started : bool = false
 var round_ended : bool = false
-@onready var round_progress_bar: ProgressBar = $RoundProgressBar
+@onready var round_progress_bar: TextureProgressBar = $RoundProgressBar
 # Called when the node enters the scene tree for the first time.
 
 @onready var context_panel: ArenaContextPanel = $ContextPanel
@@ -94,6 +94,13 @@ const COMBAT_TUTORIAL = preload("uid://h53ha3ah86nd")
 
 @onready var bar_player: AnimationPlayer = $BarPlayer
 @onready var icon_player: AnimationPlayer = $IconPlayer
+
+var current_progress : float = 0.0
+var displayed_progress_count : float = 0.0
+
+@onready var round_completion_label: Label = $RoundTracker/RoundCompletionLabel
+@onready var round_phase_label: Label = $RoundTracker/RoundPhaseLabel
+
 
 func _ready() -> void:
 	
@@ -219,7 +226,6 @@ func flash_screen_red() -> void:
 	GameManager.play_sfx(grunts.pick_random())
 	animation_player.play("HurtFlash")
 	
-
 func update_ore_count_label(amount : int) -> void:
 	ore_count_label.text = "x%s" % str(int(PlayerStats.player_stats["Ore"]))
 	if amount > 0:
@@ -227,7 +233,6 @@ func update_ore_count_label(amount : int) -> void:
 		ore_gathered_lable.label.text = "+%sore" % amount
 		ore_gained_position.add_child(ore_gathered_lable)
 		
-
 func update_enemy_tracker(enemy_name : String, enemy_health : int, enemy_max_health : int) -> void:
 	self.enemy_name.text = enemy_name
 	enemy_hp.max_value = enemy_max_health
@@ -249,8 +254,13 @@ func start_round() -> void:
 		GameManager.current_round_point = GameManager.ROUND_POINT.BEGINNING
 		
 		round_timer_label.timer_started = true
-		round_progress_bar.value = 0
-		round_progress_bar.max_value = GameManager.round_times[GameManager.round_number]
+		current_progress = 0
+		set_round_progress_color()
+		adjust_progress_bar(round_progress_bar,0.0, 0.15)
+		update_round_phase_label()
+		update_round_completion_count(0)
+		#round_progress_bar.value = 0
+		#round_progress_bar.max_value = GameManager.round_times[GameManager.round_number]
 		SignalBus.round_started.emit()
 		SignalBus.new_round_started.emit()
 		play_round_start_sfx()
@@ -264,7 +274,7 @@ func end_round() -> void:
 	round_ended = true
 	round_started = false
 	round_timer_label.timer_started = false
-	round_progress_bar.value = 0
+	#current_progress = 0
 	SignalBus.round_ended.emit(true)
 	if GameManager.round_number > -1:
 		var round_diamond : RoundDiamond = round_diamond_container.get_child(GameManager.round_number)
@@ -298,24 +308,37 @@ func decrease_time_label(amount : int) -> void:
 	time_gained_position.add_child(time_label)
 	
 func add_progress(amount : float) -> void:
-	round_progress_bar.value += amount * PlayerStats.player_stats["Progress Speed"]
-
-	if !GameManager.first_quarter_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.25):
+	
+	if GameManager.mini_round_started:
+		return
+	
+	var max_progress : float = GameManager.round_times[GameManager.round_number]
+	current_progress += amount * PlayerStats.player_stats["Progress Speed"]
+	var percentage : float = current_progress/max_progress
+	adjust_progress_bar(round_progress_bar,percentage)
+	update_round_completion_count(percentage*100)
+	if !GameManager.first_quarter_point and percentage >= 0.25:
 		GameManager.current_round_point = GameManager.ROUND_POINT.FIRST_QUARTER
 		GameManager.first_quarter_point = true
-	if !GameManager.half_way_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.5):
+		update_round_phase_label()
+	if !GameManager.half_way_point and percentage >= 0.5:
 		GameManager.current_round_point = GameManager.ROUND_POINT.HALF_WAY
 		GameManager.half_way_point = true
-	if !GameManager.three_quarter_way_point and round_progress_bar.value >= int(round_progress_bar.max_value * 0.75):
+		update_round_phase_label()
+	if !GameManager.three_quarter_way_point and percentage >= 0.7:
 		GameManager.current_round_point = GameManager.ROUND_POINT.THREE_QUARTER
 		GameManager.three_quarter_way_point = true
+		update_round_phase_label()
 
-	if round_progress_bar.value >= round_progress_bar.max_value:
+	if percentage >= 1.0:
 		if GameManager.round_number < GameManager.MAX_ROUND and !round_ended:
 			#SignalBus.round_ended.emit(true)
 			end_round()
 
 func start_boss_fight() -> void:
+	#round_progress_bar.max_value = GameManager.max_boss_health
+	adjust_progress_bar(round_progress_bar, 0.0, 0.1)
+	update_round_completion_count(0)
 	round_timer_label.zero_out_timer()
 	SignalBus.face_boss_area.emit()
 	await get_tree().create_timer(2.0).timeout
@@ -323,14 +346,13 @@ func start_boss_fight() -> void:
 	await get_tree().create_timer(2.0).timeout
 	fill_boss_bar()
 	round_timer_label.set_time(90,0)
-	
+	adjust_progress_bar(round_progress_bar, 1.0,3.0)
 	animation_player.play("BossCountDown")
 	
 func fill_boss_bar() -> void:
-	round_progress_bar.add_theme_stylebox_override("fill", BOSS_STYLE)
-	round_progress_bar.max_value = 800
-	var tween : Tween = create_tween()
-	await tween.tween_property(round_progress_bar, "value", round_progress_bar.max_value, 3.0).finished
+	set_round_progress_as_purple()
+	#round_progress_bar.max_value = 800
+	
 
 func start_fight() -> void:
 	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.BOSS:
@@ -344,8 +366,9 @@ func start_fight() -> void:
 	SignalBus.combat_engaged.emit()
 
 func update_boss_bar(damage_done : int, value : int, max_value : int) -> void:
-	round_progress_bar.value = value
-	round_progress_bar.max_value = max_value
+	#round_progress_bar.max_value = GameManager.max_boss_health
+	var percentage : float = GameManager.current_boss_health/GameManager.max_boss_health
+	adjust_progress_bar(round_progress_bar,percentage)
 	var damage : int = damage_done
 	if !GameManager.boss_was_stunned:
 		
@@ -524,3 +547,67 @@ func pulse_timer() -> void:
 
 func start_mining_round_music() -> void:
 	SignalBus.mining_round_started.emit()
+
+func adjust_progress_bar(bar : TextureProgressBar, value : float, speed : float = 0.3) -> void:
+	var progress = bar.material as ShaderMaterial
+	var tween : Tween = create_tween()
+	tween.tween_property(
+		progress,
+		"shader_parameter/percentage",
+		value,
+		speed
+	)
+
+
+func update_round_completion_count(new_count: float) -> void:
+	
+	if new_count > 0:
+		while displayed_progress_count < new_count:
+			displayed_progress_count += 0.1
+			round_completion_label.text = "%s%%" % snappedf(displayed_progress_count,0.1)
+			await get_tree().create_timer(0.012).timeout
+		
+	else:
+		displayed_progress_count = new_count
+		round_completion_label.text = "%s%%" % displayed_progress_count
+
+func update_round_phase_label() -> void:
+	round_phase_label.text ="Round %s\nPhase:%s" % [GameManager.round_number+1,GameManager.current_round_point+1]
+
+
+func set_round_progress_as_purple() -> void:
+	var material = round_progress_bar.material as ShaderMaterial
+	material.set_shader_parameter("water_colour", Color("9b6699"))
+	material.set_shader_parameter("foam_colour", Color("d87ce7"))
+	material.set_shader_parameter("sky_colour", Color("80008c"))
+	material.set_shader_parameter("specular_colour", Color("ffbcff"))
+
+func set_round_progress_as_yellow() -> void:
+	var material = round_progress_bar.material as ShaderMaterial
+	material.set_shader_parameter("water_colour", Color("7f7e3f"))
+	material.set_shader_parameter("foam_colour", Color("7d683e"))
+	material.set_shader_parameter("sky_colour", Color("7d683e"))
+	material.set_shader_parameter("specular_colour", Color("a89d86"))
+	
+func set_round_progress_as_orange() -> void:
+	var material = round_progress_bar.material as ShaderMaterial
+	material.set_shader_parameter("water_colour", Color("7d643e"))
+	material.set_shader_parameter("foam_colour", Color("6d5c43"))
+	material.set_shader_parameter("sky_colour", Color("805240"))
+	material.set_shader_parameter("specular_colour", Color("b1958a"))
+
+func set_round_progress_as_red() -> void:
+	var material = round_progress_bar.material as ShaderMaterial
+	material.set_shader_parameter("water_colour", Color("824343"))
+	material.set_shader_parameter("foam_colour", Color("6d4344"))
+	material.set_shader_parameter("sky_colour", Color("7e3e53"))
+	material.set_shader_parameter("specular_colour", Color("a98792"))
+
+func set_round_progress_color() -> void:
+	match GameManager.round_number:
+		0:
+			set_round_progress_as_yellow()
+		1:
+			set_round_progress_as_orange()
+		2:
+			set_round_progress_as_red()
