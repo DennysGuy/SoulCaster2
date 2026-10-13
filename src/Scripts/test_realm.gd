@@ -64,9 +64,11 @@ func _ready() -> void:
 	SignalBus.count_down_ended.connect(start_ore_spawn_timer)
 	SignalBus.new_round_started.connect(start_music)
 	SignalBus.mining_round_started.connect(start_mining_music)
+	SignalBus.ore_hunt_tutorial_started.connect(spawn_ore_on_start_up)
 	#SignalBus.boss_jumped_out.connect(start_mini_round_spawn)
 	arena_animation_player.play("tide")
 	if GameManager.ore_hunt_mode_started:
+		spawn_ore_on_start_up()
 		start_ore_spawn_timer()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -174,6 +176,11 @@ func spawn_ore() -> void:
 	if ore_position:
 		ore.global_position = ore_position.global_position
 		add_child(ore)
+
+func spawn_ore_on_start_up() -> void:
+	var random_ore_spawn : int = randi_range(2,4)
+	for i in range(0,random_ore_spawn):
+		spawn_ore()
 
 func get_random_ore_spawn_pos() -> Marker3D:
 	var ore_points : Array = ore_spawn_points.get_children()

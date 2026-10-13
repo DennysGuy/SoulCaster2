@@ -85,3 +85,5 @@ signal mining_round_started
 
 signal toggle_hurt_pulse_on
 signal toggle_hurt_pulse_off
+
+signal ore_hunt_tutorial_started

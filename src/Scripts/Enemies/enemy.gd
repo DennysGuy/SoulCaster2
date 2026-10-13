@@ -109,7 +109,6 @@ func damage_enemy(applied_damage : int = 0) -> void:
 	if hurt_1_state:
 		state_machine.change_state(hurt_1_state)
 	
-	
 	var damage : int 
 	
 	if applied_damage <= 0:
@@ -187,11 +186,6 @@ func attack_player() -> void:
 	SignalBus.shake_camera.emit(1.0)
 	SignalBus.player_damaged.emit()
 
-
-func spawn_blood_spirt() -> void:
-	var blood_spirt : BloodSpirt = preload("uid://e2pwh1u4lv32").instantiate()
-	blood_spout.add_child(blood_spirt)
-
 func hit_flash() -> void:
 	for child in skeleton.get_children():
 		if child is BoneAttachment3D:
@@ -248,5 +242,10 @@ func play_leap() -> void:
 	leap_player.play()
 
 func drop_blood() -> void:
-	if blood_pool:
-		blood_pool.drop_at_world_position(global_position)
+	var blood : BloodSplat = preload("uid://bvju5xcpnhgm8").instantiate()
+	get_parent().get_parent().get_parent().add_child(blood)
+	blood.global_position = global_position
+
+func spawn_blood_spirt() -> void:
+	var blood_spirt : BloodSpirt = preload("uid://e2pwh1u4lv32").instantiate()
+	blood_spout.add_child(blood_spirt)

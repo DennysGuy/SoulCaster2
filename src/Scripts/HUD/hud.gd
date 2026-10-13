@@ -161,6 +161,7 @@ func _ready() -> void:
 		if GameManager.combat_tutorial_state != GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
 			if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL:
 				GameManager.in_cutscene = true
+				SignalBus.ore_hunt_tutorial_started.emit()
 				Dialogic.start(HUNT_ROUND_TUTORIAL)
 				
 			else:

@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c8q2s2ne1d186"]
+
+[ext_resource type="Texture2D" uid="uid://cocu4igcyf0iy" path="res://Assets/Blood/blood3.png" id="1_w3bys"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_w3bys")

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k5pn8y07x8cf"
-path.s3tc="res://.godot/imported/floor_roughness.png-bfc90afad99114a336075878af409f67.s3tc.ctex"
+uid="uid://cocu4igcyf0iy"
+path.s3tc="res://.godot/imported/blood3.png-fbe736b2ac32a7256749c67056b2f2f6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Blood/floor_roughness.png"
-dest_files=["res://.godot/imported/floor_roughness.png-bfc90afad99114a336075878af409f67.s3tc.ctex"]
+source_file="res://Assets/Blood/blood3.png"
+dest_files=["res://.godot/imported/blood3.png-fbe736b2ac32a7256749c67056b2f2f6.s3tc.ctex"]
 
 [params]
 

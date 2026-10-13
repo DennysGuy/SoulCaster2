@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q5uhw0mu7qb6"
-path.s3tc="res://.godot/imported/floor_albedo.png-f28cce327c8b1dc7705ff6d5ca89e354.s3tc.ctex"
+uid="uid://b8eyg3hxxn8c7"
+path.s3tc="res://.godot/imported/blood4.png-49f29dfec077ac7461ed021e1612bd19.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Blood/floor_albedo.png"
-dest_files=["res://.godot/imported/floor_albedo.png-f28cce327c8b1dc7705ff6d5ca89e354.s3tc.ctex"]
+source_file="res://Assets/Blood/blood4.png"
+dest_files=["res://.godot/imported/blood4.png-49f29dfec077ac7461ed021e1612bd19.s3tc.ctex"]
 
 [params]
 

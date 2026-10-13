@@ -12,14 +12,9 @@
 [ext_resource type="Script" uid="uid://bfjj6wufm7403" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_dead.gd" id="6_0opyq"]
 [ext_resource type="Shader" uid="uid://dckiap2vdruhu" path="res://src/Scenes/hitflash.gdshader" id="6_xgh2c"]
 [ext_resource type="Script" uid="uid://b577hi4520t0u" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_attack.gd" id="7_nlc7f"]
-[ext_resource type="PackedScene" uid="uid://c4roty8fy7hxb" path="res://src/Scenes/BloodSplatter.tscn" id="8_lxjgp"]
 [ext_resource type="Script" uid="uid://bexjwrt4l1qrd" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_head_shot.gd" id="8_oqn32"]
 [ext_resource type="PackedScene" uid="uid://br762gfi4u8o3" path="res://src/Scenes/BoltPierce.tscn" id="8_povfk"]
-[ext_resource type="Shader" uid="uid://8rsrb32i5u5v" path="res://src/Scripts/Enemies/BloodSplatter.gdshader" id="9_ns0wp"]
 [ext_resource type="PackedScene" uid="uid://ri2g3xgvuq8y" path="res://src/Scenes/BodyCollider.tscn" id="10_b3u6r"]
-[ext_resource type="Texture2D" uid="uid://k5pn8y07x8cf" path="res://Assets/Blood/floor_roughness.png" id="10_dkxa2"]
-[ext_resource type="Texture2D" uid="uid://d0awi7yf3pqqf" path="res://Assets/Blood/floor_height.png" id="11_4c8nk"]
-[ext_resource type="Texture2D" uid="uid://q5uhw0mu7qb6" path="res://Assets/Blood/floor_albedo.png" id="12_mep5p"]
 [ext_resource type="Script" uid="uid://ctt8ybalxq2q6" path="res://src/Scripts/Statemachine/EnemyGenericStates/enemy_dig.gd" id="15_pnynp"]
 [ext_resource type="Texture2D" uid="uid://cka7fptq1om1q" path="res://Assets/Shadow.png" id="16_povfk"]
 [ext_resource type="AudioStream" uid="uid://bwugrxcy6phix" path="res://Assets/Audio/RatLeap.wav" id="17_vxdn8"]
@@ -2816,19 +2811,6 @@ _data = {
 &"kill 3": SubResource("Animation_y6g8s")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7vqy"]
-render_priority = 0
-shader = ExtResource("9_ns0wp")
-shader_parameter/floor_texture = ExtResource("12_mep5p")
-shader_parameter/floor_heightmap = ExtResource("11_4c8nk")
-shader_parameter/floor_roughnessmap = ExtResource("12_mep5p")
-shader_parameter/blood_texture = ExtResource("10_dkxa2")
-shader_parameter/blood_color = Color(0.7411765, 0, 0, 1)
-shader_parameter/blood_merge_factor = 0.1530000072675
-shader_parameter/blood_density_on_heightmap = true
-shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/scales = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_n8flt"]
 size = Vector3(1, 1.7495728, 3.078125)
 
@@ -2852,7 +2834,7 @@ transparency = 1
 no_depth_test = true
 albedo_texture = ExtResource("16_povfk")
 
-[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "arrow_hits", "bolt_position", "lock_on_target", "leap_player", "blood_pool", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
+[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "arrow_hits", "bolt_position", "lock_on_target", "leap_player", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_3gpk3")
 animation_player = NodePath("rat(1)/AnimationPlayer")
@@ -2871,7 +2853,6 @@ attack_damage = 3
 progress_amount = 6.0
 xp = 5
 hit_stop_time = 0.04
-blood_pool = NodePath("BloodSplatter")
 dead_state = NodePath("StateMachine/Dead")
 attack_state = NodePath("StateMachine/Attack")
 hurt_1_state = NodePath("StateMachine/Hurt1")
@@ -3168,10 +3149,6 @@ transform = Transform3D(-1.021128, -0.5963094, 0.5401043, 0.6969289, -0.21956137
 [node name="AnimationPlayer" type="AnimationPlayer" parent="rat(1)" unique_id=2014310925]
 libraries/ = SubResource("AnimationLibrary_b3ige")
 playback_default_blend_time = 0.3
-
-[node name="BloodSplatter" parent="." unique_id=1666011161 instance=ExtResource("8_lxjgp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.024351805, 0)
-surface_material_override/0 = SubResource("ShaderMaterial_g7vqy")
 
 [node name="StateMachine" type="Node" parent="." unique_id=988515247 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_bltgf")
