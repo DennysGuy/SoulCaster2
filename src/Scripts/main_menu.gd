@@ -13,3 +13,8 @@ func _process(delta: float) -> void:
 
 func _on_button_button_up() -> void:
 	get_tree().change_scene_to_file("uid://jgsciuanachx")
+
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	GameManager.cut_scenes_disabled = toggled_on
+	print(GameManager.cut_scenes_disabled)

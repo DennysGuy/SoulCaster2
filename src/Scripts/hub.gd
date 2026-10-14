@@ -50,16 +50,21 @@ func _ready() -> void:
 	GameManager.in_arena = false
 	GameManager.in_menu = false
 	player.gun_arm.hide()
-	if !GameManager.hub_instructions_shown:
-		progress_bar.hide()
-		start_battle_label.hide()
-		controls_label.hide()
-		GameManager.can_move = false
-		GameManager.in_cutscene = true
-		Dialogic.start(INTRO)
-		GameManager.hub_instructions_shown = true
-		#spawn_hub_context()
-	
+	if !GameManager.cut_scenes_disabled:
+		if !GameManager.hub_instructions_shown:
+			progress_bar.hide()
+			start_battle_label.hide()
+			controls_label.hide()
+			GameManager.can_move = false
+			GameManager.in_cutscene = true
+			Dialogic.start(INTRO)
+			GameManager.hub_instructions_shown = true
+			#spawn_hub_context()
+	else:
+		if !GameManager.hub_instructions_shown:
+			show_start_combat_label()
+			GameManager.hub_instructions_shown = true
+		
 	progress_bar.max_value = PlayerStats.player_stats["Needed XP"]
 	progress_bar.value = PlayerStats.player_stats["Current XP"]
 	xp.text = "[%s/%s]" % [int(PlayerStats.player_stats["Current XP"]),int(PlayerStats.player_stats["Needed XP"])]

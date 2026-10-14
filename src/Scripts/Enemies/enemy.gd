@@ -147,7 +147,6 @@ func damage_enemy(applied_damage : int = 0) -> void:
 		SignalBus.boss_damaged.emit(damage, GameManager.current_boss_health, GameManager.max_boss_health)
 		if GameManager.current_boss_health <= 0:
 			kill_enemy()
-			GameManager.play_sfx(RAT_DEATH_1)
 		else:
 			GameManager.play_sfx(hurts.pick_random())
 	else:
@@ -156,7 +155,6 @@ func damage_enemy(applied_damage : int = 0) -> void:
 	
 		if health <= 0:
 			kill_enemy()
-			GameManager.play_sfx(RAT_DEATH_1)
 		else:
 			GameManager.play_sfx(hurts.pick_random())
 

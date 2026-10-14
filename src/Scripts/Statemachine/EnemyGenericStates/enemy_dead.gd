@@ -6,6 +6,8 @@ class_name Dead extends State
 
 @export var kill_animations : Array[String]
 
+@export var dead_sfx : AudioStream
+
 func enter() -> void:
 	parent.alive = false
 	GameManager.enemies_killed += 1
@@ -19,16 +21,11 @@ func enter() -> void:
 	var added_time : int = PlayerStats.player_stats["Life Steal"]
 	if parent.enemy_name == "Rabid Rat Cronie":
 		added_time += 1
-		
+	
+	GameManager.play_sfx(dead_sfx)
 	SignalBus.time_added.emit(added_time)
 	if !parent.round_ended:
 		SignalBus.progress_added.emit(parent.progress_amount)
-	#if parent is WalkerEnemy and parent.is_greeter:
-		#AudioManager.play_sfx(AudioManager.CROWD_GASP)
-		#AudioManager.stop_music_player()
-	
-	#if GameManager.player_current_health < GameManager.PLAYER_MAX_HEALTH:
-		#parent.spawn_health_drop()
 	
 	parent.timer.wait_time = 1.8
 	parent.timer.start()

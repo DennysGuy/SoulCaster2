@@ -4,6 +4,8 @@
 [ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="2_jlbbt"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="3_1nasp"]
 [ext_resource type="AudioStream" uid="uid://dsifj0u8coxpv" path="res://Assets/Audio/Music/MainTheme-Mastered.wav" id="4_1nasp"]
+[ext_resource type="Texture2D" uid="uid://ge7oksa3yf1" path="res://Assets/CheckBox_Checked.png" id="5_81l7e"]
+[ext_resource type="Texture2D" uid="uid://coalws0sutj7j" path="res://Assets/CheckBox.png" id="6_fc7xl"]
 
 [node name="MainMenu" type="Control" unique_id=1734805055]
 layout_mode = 3
@@ -35,7 +37,7 @@ offset_bottom = 151.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_jlbbt")
 theme_override_font_sizes/font_size = 86
-text = "Soul Caster 2"
+text = "Vermin Scrapers"
 
 [node name="Button" type="Button" parent="." unique_id=1036980298]
 layout_mode = 1
@@ -104,4 +106,39 @@ stream = ExtResource("4_1nasp")
 autoplay = true
 bus = &"Music"
 
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=386681850]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = 255.0
+offset_right = 166.5
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4892922, 0.11778665, 0, 1)
+
+[node name="CheckBox" type="CheckBox" parent="ColorRect2" unique_id=238392614]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.5
+offset_top = -36.0
+offset_right = 164.5
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_jlbbt")
+theme_override_font_sizes/font_size = 40
+theme_override_icons/checked = ExtResource("5_81l7e")
+theme_override_icons/unchecked = ExtResource("6_fc7xl")
+text = "Disable Cutscenes"
+
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="toggled" from="ColorRect2/CheckBox" to="." method="_on_check_box_toggled"]

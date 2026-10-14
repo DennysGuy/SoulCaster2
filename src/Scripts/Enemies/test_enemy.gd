@@ -4,6 +4,9 @@ class_name TestEnemy extends Enemy
 
 @onready var skeleton_3d: Skeleton3D = $"rat(2)/rat/Skeleton3D"
 @onready var walk_particles: GPUParticles3D = $WalkParticles
+@onready var walk_particles_2: GPUParticles3D = $WalkParticles2
+const DEEP_FOOT_STEP_1 = preload("uid://iq5dsaia0662")
+const DEEP_FOOT_STEP_2 = preload("uid://d14qp1vn7dqfk")
 
 
 @onready var spawn_in_player: AnimationPlayer = $SpawnInPlayer
@@ -45,3 +48,15 @@ func play_walk_animation(animation_name : String) -> void:
 func emit_walk_particles() -> void:
 	walk_particles.process_material.gravity = global_basis.z
 	walk_particles.emitting = true
+
+func emit_walk_particles_2() -> void:
+	walk_particles_2.process_material.gravity = global_basis.z
+	walk_particles_2.emitting = true
+
+func play_foot_step_1() -> void:
+	leap_player.stream = DEEP_FOOT_STEP_1
+	leap_player.play()
+
+func play_foot_step_2() -> void:
+	leap_player.stream = DEEP_FOOT_STEP_2
+	leap_player.play()

@@ -21,8 +21,23 @@
 [ext_resource type="Texture2D" uid="uid://byttxlrsgcpny" path="res://Assets/ProgressBar/Stun_bar.png" id="19_phtwg"]
 [ext_resource type="Texture2D" uid="uid://ol05lc5irm0w" path="res://Assets/ProgressBar/Stun_Outer.png" id="20_fmwqo"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rty5i"]
-bg_color = Color(0.5868668, 0.63873446, 0.18778574, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fmwqo"]
+shader = ExtResource("6_gx84v")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = 1.0
+shader_parameter/percentage = 0.326000015485
+shader_parameter/speed = 1.0
+shader_parameter/wave_1_speed = -1.0
+shader_parameter/wave_2_speed = 1.0
+shader_parameter/wave_1_freq = 1.2
+shader_parameter/wave_2_freq = 1.0
+shader_parameter/wave_1_amp = 0.015
+shader_parameter/wave_2_amp = 0.01
+shader_parameter/sun_dir = Vector3(1, 0.4, 1)
+shader_parameter/water_colour = Color(0.7396604, 0.6849991, 7.70092e-07, 1)
+shader_parameter/foam_colour = Color(0.90843636, 0.93359184, 0, 1)
+shader_parameter/sky_colour = Color(0.8483798, 0.7496115, 1.1551381e-06, 1)
+shader_parameter/specular_colour = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_7pn66"]
 resource_name = "BossCountDown"
@@ -964,52 +979,54 @@ position = Vector2(958, 1034)
 [node name="ContextPosition" type="Marker2D" parent="." unique_id=259892999]
 position = Vector2(970, 542)
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1962971616]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -930.0
-offset_top = -36.0
-offset_right = 936.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/fill = SubResource("StyleBoxFlat_rty5i")
-
-[node name="Level" type="Label" parent="ProgressBar" unique_id=938808094]
-layout_mode = 0
-offset_top = -34.0
-offset_right = 123.0
+[node name="Level" type="Label" parent="." unique_id=938808094]
+offset_left = 181.0
+offset_top = 993.0
+offset_right = 304.0
+offset_bottom = 1027.0
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 32
 text = "Level: 1"
 
-[node name="AP" type="Label" parent="ProgressBar" unique_id=507976309]
-layout_mode = 0
-offset_left = 128.0
-offset_top = -33.0
-offset_right = 251.0
-offset_bottom = 1.0
+[node name="AP" type="Label" parent="." unique_id=507976309]
+offset_left = 309.0
+offset_top = 993.3
+offset_right = 432.0
+offset_bottom = 1027.3
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 32
 text = "AP: 0"
 
-[node name="XP" type="Label" parent="ProgressBar" unique_id=1904144712]
-layout_mode = 1
+[node name="XP" type="Label" parent="." unique_id=1904144712]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -114.0
-offset_top = -30.0
-offset_right = -16.323486
-offset_bottom = -3.0
+offset_left = -280.0
+offset_top = 1007.0
+offset_right = -182.32349
+offset_bottom = 1034.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 26
 text = "[10/10]"
 horizontal_alignment = 2
+
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=571338495]
+material = SubResource("ShaderMaterial_fmwqo")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -780.0
+offset_top = -44.0
+offset_right = 780.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 0.3)
+value = 100.0
+texture_progress = ExtResource("7_g1kdu")
 
 [node name="OreIcon" type="TextureRect" parent="." unique_id=1062039678]
 offset_left = 26.0
@@ -1374,7 +1391,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 540.0
-offset_bottom = 540.001
+offset_bottom = 540.00073
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)

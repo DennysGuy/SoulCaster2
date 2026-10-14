@@ -2,10 +2,10 @@ class_name HUD extends CanvasLayer
 
 @onready var round_timer: Timer = $RoundTimer
 @onready var timer_label: Label = $RoundTimerTitle/TimerLabel
-@onready var progress_bar: ProgressBar = $ProgressBar
-@onready var level: Label = $ProgressBar/Level
-@onready var xp: Label = $ProgressBar/XP
-@onready var ap: Label = $ProgressBar/AP
+@onready var progress_bar: TextureProgressBar = $ProgressBar
+@onready var level: Label = $Level
+@onready var xp: Label = $XP
+@onready var ap: Label = $AP
 @onready var context_position: Marker2D = $ContextPosition
 
 @onready var xp_gained_position: Marker2D = $XPGainedPosition
@@ -138,7 +138,7 @@ func _ready() -> void:
 	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
 	#round_timer.start()
-	update_level()
+	update_level(false)
 	update_bolts_holder()
 	if GameManager.enemy_tracker_owned:
 		enemy_tracker.show()
@@ -159,7 +159,7 @@ func _ready() -> void:
 		start_boss_fight()
 	else:
 		if GameManager.combat_tutorial_state != GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
-			if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL:
+			if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL and !GameManager.cut_scenes_disabled:
 				GameManager.in_cutscene = true
 				SignalBus.ore_hunt_tutorial_started.emit()
 				Dialogic.start(HUNT_ROUND_TUTORIAL)
@@ -201,12 +201,13 @@ func _physics_process(delta: float) -> void:
 			close_hunt_context_panel()
 			GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.BOSS
 
-func update_level() -> void:
-	level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
+func update_level(level_up : bool) -> void:
+	if level_up:
+		level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
+		adjust_progress_bar(progress_bar,0.0,0.01)
 	xp.text = "[%s/%s]" % [int(PlayerStats.player_stats["Current XP"]), int(PlayerStats.player_stats["Needed XP"])]
 	ap.text = "AP: %s" % [int(PlayerStats.player_stats["Ability Points"])]
-	progress_bar.value = int(PlayerStats.player_stats["Current XP"])
-	progress_bar.max_value = int(PlayerStats.player_stats["Needed XP"])
+	
 	
 
 func level_up() -> void:
@@ -217,14 +218,15 @@ func level_up() -> void:
 	PlayerStats.player_stats["Ability Points"] += PlayerStats.player_stats["AP Amount"]
 	GameManager.play_sfx(LEVEL_UP)
 	notification_player.play("LevelUp")
-	update_level()
+	update_level(true)
 
 func add_xp(amount : int) -> void:
 	GameManager.xp_gained += amount
 	PlayerStats.player_stats["Current XP"] += amount
 	add_xp_label(amount)
-	progress_bar.value = PlayerStats.player_stats["Current XP"]
-	update_level()
+	var percentage : float = PlayerStats.player_stats["Current XP"]/PlayerStats.player_stats["Needed XP"]
+	adjust_progress_bar(progress_bar,percentage)
+	update_level(false)
 	
 	if PlayerStats.player_stats["Current XP"] >= PlayerStats.player_stats["Needed XP"] and !round_ended:
 		level_up()
@@ -246,7 +248,7 @@ func update_enemy_tracker(enemy_name : String, enemy_health : float, enemy_max_h
 	adjust_progress_bar(enemy_hp,percentage)
 
 func start_round() -> void:
-	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
+	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL and !GameManager.cut_scenes_disabled:
 		GameManager.in_cutscene = true
 		Dialogic.start(COMBAT_TUTORIAL)
 	else:
@@ -359,16 +361,14 @@ func fill_boss_bar() -> void:
 	set_round_progress_as_purple()
 	#round_progress_bar.max_value = 800
 	
-
 func start_fight() -> void:
-	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.BOSS:
+	if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.BOSS and !GameManager.cut_scenes_disabled:
 		Dialogic.start(BOSS_INTRO)
 		GameManager.combat_tutorial_state = GameManager.COMBAT_TUTORIALS.END
 		return
 		
 	GameManager.can_move = true
 	round_timer_label.start_timer()
-
 	SignalBus.combat_engaged.emit()
 
 func update_boss_bar(damage_done : int, value : int, max_value : int) -> void:

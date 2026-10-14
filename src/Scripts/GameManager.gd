@@ -67,6 +67,8 @@ var current_hunt_mode_time : int = 20
 
 var in_cutscene : bool = false
 
+var cut_scenes_disabled : bool = false
+
 enum COMBAT_TUTORIALS {COMBAT_TUTORIAL, RESOURCE_HUNT_TUTORIAL, BOSS, END}
 var combat_tutorial_state : COMBAT_TUTORIALS = COMBAT_TUTORIALS.COMBAT_TUTORIAL
 
