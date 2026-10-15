@@ -1,18 +1,20 @@
 do GameManager.lock_player()
 do CutSceneManager.start_cutscene()
-ShopMan: Hey you made it! Welcome to the Combat Arena. This is where the brunt of the job will take place.
-ShopMan: We're located smack dab in the middle of the infestation. It's the most efficient way to do things, I'm afraid.
-ShopMan: But no need to fear! We got this! Just like my predecessors always have said - like a splinter, let them naturally work their way out.
-ShopMan: Rather than coming to them, let them come to you - 50% of the work is done. Now this is where you'll truly show if you have what it takes.
-ShopMan: Now for advice..
-ShopMan: Here in just a moment, them mutant bastards will start charging you in all four directions. Keep a keen eye out and don't let them get to close or its PAINVILLE! use WASD to rotate in one of our cardinal directions. Likewise, pressing 'S' on the keyboard will rotate you to the opposite direction your facing. Comes hand in a pinch. Ensure you're checking all positions.. to be as safe as possible.
-ShopMan: Press 'Left Click' to fire your trusty CROSSBOW - it is limited right now, it is all I have for now. Sorry about that, but  you can come to my shope when you've collected enough RESOURCES to upgrade.
-ShopMan: Once you've purchased some grenades from me, you can press 'RIGHT CLICK' to toss them in the direction your facing.
+ShopMan: Hey, you made it! Welcome to the Combat Arena. This is where the brunt of the job takes place.
+ShopMan: We're smack-dab in the middle of the infestation. Most efficient way to do things, I'm afraid!
+ShopMan: But no need to worry! We've got this. As my predecessors always said... like a splinter, let 'em work their way out!
+ShopMan: That's right, Rookie. Rather than chasing them down, let them come to you! Half the work's already done.
+ShopMan: Now, pay attention! Those mutant bastards will be charging at you from all four directions. Let 'em get too close, and you'll be in PAINVILLE!
+ShopMan: Use WASD to rotate and face the incoming rats. Pressing S will turn you to face the opposite direction in a pinch. Keep your eyes peeled, and don't let 'em sneak up on you!
+ShopMan: Now, let's give 'em a taste of your trusty CROSSBOW! Press LEFT CLICK to fire. It's a little basic, I know... it's all I've got for now. Once you've collected enough resources, stop by my shop for some upgrades!
 do CutSceneManager.end_cutscene()
-ShopMan: Finally, look up at the top, you have right there is a 'PROGRESS BAR' that progress bar will fill as you kil rats.. this shows the current completion of the job. Below them are waves.. looks like for this one, you'll need to fight through 3 WAVES of enemies.. before facing a boss.
-ShopMan: Below the progress bar, you have a TIMER. As we don't want to die now, we set limits on how long we can hang at the heart of the infestation, when the TIMER runs out you'll be yanked out of the ARENA and sent back to the HUB.
-ShopMan: Finally, at the bottom, is you XP bar - kill RATs to acquire "XP", gain enough XP and you'll LEVEL UP and rewarded AP. AP can be spent at the CAMPFIRE to strengthen your abilities as an EXTERMINATOR.
-ShopMan: Well, Rookie. That's about it. Good Luck!
+ShopMan: You can also purchase grenades from me. Press RIGHT CLICK to toss one in the direction you're facing. Nothing like a little explosive persuasion!
+ShopMan: Now, take a look at the top of your screen. See that PROGRESS BAR? Every rat you kill brings you closer to completing the job. You'll need to clear 3 WAVES of enemies before facing the boss!
+ShopMan: Just below that is your TIMER. We can't have you spending all day in the heart of the infestation! When time runs out, you'll be pulled back to the Hub. So make every second count!
+ShopMan: And finally, your XP BAR! Kill rats, earn XP, and level up to gain ABILITY POINTS (AP). Spend those at the Character Campfire to strengthen your abilities and become a better exterminator!
+ShopMan: Well, Rookie, that about covers it!
+ShopMan: Now get out there and show those rats who's boss!
+ShopMan: Good luck! You're gonna need it!
 do GameManager.unlock_player()
 [wait time="1.0"]
 do CutSceneManager.start_combat_round()

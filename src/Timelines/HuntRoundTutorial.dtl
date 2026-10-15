@@ -1,11 +1,14 @@
 do GameManager.lock_player()
 do CutSceneManager.start_cutscene()
-ShopMan: Not bad for your first run, kid.
-ShopMan: I hate to admit this, but being an exterminator is not all sunshine and rainbows. It's not all glory as one might think.
-ShopMan: There's a... less desirable part folks don't really mention, and that is cleaning up after the Vermin. Yes, it's not the more desirable part of the job, but it must be done.
-ShopMan: but hey there's a very very bright side to this! LUCRATIVE! You'll get the opportunity to earn some extra cash.
-ShopMan: Destroy those 'Mounds' that have been popping up over town, and bring those green crystals to me! They ain't toxic I swear.. You can trade them for weapon upgrades.. it's the right of passage every rookie Exterminator has to go through!
-ShopMan: Hurry! Go before time runs out!
+ShopMan: Not bad for your first run, kid!
+ShopMan: But listen, there's something they don't tell you about the extermination business. It ain't all glory and heroics. Sometimes, you've gotta do the dirty work.
+ShopMan: Literally.
+ShopMan: Those Vermin have been leaving Mounds all over town, and someone's gotta clean 'em up. Unfortunately, that someone is you!
+ShopMan: But don't look so glum! There's a bright side to all this...
+ShopMan: IT'S LUCRATIVE!
+ShopMan: Destroy those Mounds and bring me the green crystals inside. They're perfectly safe, by the way. Probably.
+ShopMan: You can trade 'em in for some nice weapon upgrades. It's a rite of passage for every rookie exterminator!
+ShopMan: Now hurry! We've got a town to clean, and that timer ain't gonna wait!
 [wait time="1.0"]
 do CutSceneManager.end_cutscene()
 do GameManager.unlock_player()

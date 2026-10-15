@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dd5dsbxw6eimn" path="res://Assets/Arena/pngwing_com_1.png" id="9_gureh"]
 [ext_resource type="Shader" uid="uid://bp61plnfa2kpn" path="res://src/Scenes/TestRealm.gdshader" id="14_cjxld"]
 [ext_resource type="Texture2D" uid="uid://brka4756v2ter" path="res://Assets/Arena/Wispy_Sky-Night_03-1024x512.png" id="15_s5xg8"]
+[ext_resource type="PackedScene" uid="uid://wxw381bcuo71" path="res://Assets/Arena/Backdrop.blend" id="17_wlpid"]
+[ext_resource type="Texture2D" uid="uid://bcrb23tssocd1" path="res://Assets/Back.png" id="18_gureh"]
 [ext_resource type="Texture2D" uid="uid://djxf465wac4pu" path="res://Assets/Arena/1.png" id="23_v4c23"]
 [ext_resource type="AudioStream" uid="uid://60cd01e6tpy2" path="res://Assets/Audio/ArenaAmbience.mp3" id="25_v4c23"]
 [ext_resource type="Texture2D" uid="uid://cjssl20fhfw75" path="res://Assets/Arena/pngwing_com_2.png" id="27_sdv3x"]
@@ -3528,6 +3530,12 @@ _data = {
 &"tide": SubResource("Animation_tnc8t")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4rji"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("18_gureh")
+
 [node name="TestRealm" type="Node3D" unique_id=290320890 groups=["Arena"]]
 script = ExtResource("1_ca2mb")
 
@@ -3540,7 +3548,7 @@ look_at_point_3 = NodePath("../CameraPoint4")
 look_at_point_4 = NodePath("../CameraPoint3")
 
 [node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986675, -0.051094152, -0.051125955, 0.99676466, 0.06201849, 0.047952786, 0.06447818, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.04798667, -0.051094152, -0.05112595, 0.99676466, 0.06201849, 0.047952786, 0.06447818, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="PlayerSprite" type="CSGBox3D" parent="." unique_id=1774175450]
 transform = Transform3D(1, 0, 0, 0, 0.016283223, 0.9998674, 0, -0.9998673, 0.016283223, -5.6775446, 2.013178, -5.0043445)
@@ -4275,7 +4283,15 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lus5e")
 [node name="ArenaAnimationPlayer" type="AnimationPlayer" parent="Arena2" unique_id=493273254]
 libraries/ = SubResource("AnimationLibrary_gxtpt")
 
+[node name="Backdrop" parent="." unique_id=1069505727 instance=ExtResource("17_wlpid")]
+transform = Transform3D(0.39204818, 0, 0.91994464, 0, 1, 0, -0.91994464, 0, 0.39204818, -32.502205, 0, 0)
+
+[node name="Back" parent="Backdrop" index="0" unique_id=1993415606]
+transform = Transform3D(20.91521, 0.04723978, -3.088452e-07, -3.116614e-07, 1.2466458e-06, -20.915243, -0.04723978, 20.91521, 1.2473481e-06, 25.464848, 15.241859, 4.684351)
+surface_material_override/0 = SubResource("StandardMaterial3D_e4rji")
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="OreSpawnTimer" to="." method="_on_ore_spawn_timer_timeout"]
 
 [editable path="Player"]
+[editable path="Backdrop"]

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b4g2111f0nvqu"]
+
+[ext_resource type="PackedScene" uid="uid://c5c5gwvbamal3" path="res://src/Scenes/ShopKeeper/ShopKeeperPortrait.tscn" id="1_h70m0"]
+
+[node name="ShopKeeperViewPort" type="Control" unique_id=1921601719]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=52435062]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=748001212]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2113745114]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="ShopKeeperPortrait" parent="SubViewportContainer/SubViewport" unique_id=1966475894 instance=ExtResource("1_h70m0")]
