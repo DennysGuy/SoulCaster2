@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://digkh4i4y7puv" path="res://src/Scenes/HUD/RoundTimer.tscn" id="2_5ysmx"]
 [ext_resource type="PackedScene" uid="uid://c87ouqp84eqp7" path="res://src/Scenes/HUD/RoundDiamond.tscn" id="4_7pn66"]
 [ext_resource type="Texture2D" uid="uid://bknpfuhuinhll" path="res://Assets/crystal.png" id="4_gx84v"]
+[ext_resource type="PackedScene" uid="uid://dl0sjd5yrphdx" path="res://src/Scenes/HUD/XPBar.tscn" id="4_j3t07"]
 [ext_resource type="Texture2D" uid="uid://3kwavcnysai3" path="res://Assets/ProgressBar/targeting.png" id="5_phtwg"]
 [ext_resource type="FontFile" uid="uid://dqo5h1vqnpvsl" path="res://Assets/Fonts/MorrisRoman-Black.ttf" id="5_xs85b"]
 [ext_resource type="Shader" uid="uid://b7npqdis8xixw" path="res://src/Scripts/HUD/ProgressBar.gdshader" id="6_gx84v"]
@@ -20,24 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://cljqe5rqldjc6" path="res://Assets/Arena/OreMode.png" id="16_sx6ht"]
 [ext_resource type="Texture2D" uid="uid://byttxlrsgcpny" path="res://Assets/ProgressBar/Stun_bar.png" id="19_phtwg"]
 [ext_resource type="Texture2D" uid="uid://ol05lc5irm0w" path="res://Assets/ProgressBar/Stun_Outer.png" id="20_fmwqo"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fmwqo"]
-shader = ExtResource("6_gx84v")
-shader_parameter/bg_color = Color(0, 0, 0, 1)
-shader_parameter/uv_scale = 1.0
-shader_parameter/percentage = 0.326000015485
-shader_parameter/speed = 1.0
-shader_parameter/wave_1_speed = -1.0
-shader_parameter/wave_2_speed = 1.0
-shader_parameter/wave_1_freq = 1.2
-shader_parameter/wave_2_freq = 1.0
-shader_parameter/wave_1_amp = 0.015
-shader_parameter/wave_2_amp = 0.01
-shader_parameter/sun_dir = Vector3(1, 0.4, 1)
-shader_parameter/water_colour = Color(0.7396604, 0.6849991, 7.70092e-07, 1)
-shader_parameter/foam_colour = Color(0.90843636, 0.93359184, 0, 1)
-shader_parameter/sky_colour = Color(0.8483798, 0.7496115, 1.1551381e-06, 1)
-shader_parameter/specular_colour = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_7pn66"]
 resource_name = "BossCountDown"
@@ -1011,22 +994,7 @@ theme_override_font_sizes/font_size = 26
 text = "[10/10]"
 horizontal_alignment = 2
 
-[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=571338495]
-material = SubResource("ShaderMaterial_fmwqo")
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -780.0
-offset_top = -44.0
-offset_right = 780.0
-offset_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(1, 0.3)
-value = 100.0
-texture_progress = ExtResource("7_g1kdu")
+[node name="ProgressBar" parent="." unique_id=738751031 instance=ExtResource("4_j3t07")]
 
 [node name="OreIcon" type="TextureRect" parent="." unique_id=1062039678]
 offset_left = 26.0

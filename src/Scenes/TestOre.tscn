@@ -497,10 +497,73 @@ shadow_mesh = SubResource("ArrayMesh_o3h6p")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54fgj"]
 transparency = 1
+cull_mode = 2
 albedo_texture = ExtResource("3_y88dp")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_m1sm3"]
 radius = 0.85458857
+
+[sub_resource type="Animation" id="Animation_y88dp"]
+resource_name = "Bob"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ore/fliez:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(4.095122, 4.095122, 4.095122), Vector3(5.055, 5.055, 5.055), Vector3(4.095122, 4.095122, 4.095122), Vector3(5.055, 5.055, 5.055)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ore/fliez:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.4935198, 2.9800138, -1.610368), Vector3(1.5201818, 2.9792771, -1.6109389), Vector3(1.4935198, 2.9800138, -1.610368), Vector3(1.2287118, 2.9792771, -1.6109389)]
+}
+
+[sub_resource type="Animation" id="Animation_54fgj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ore/fliez:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.095122, 4.095122, 4.095122)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ore/fliez:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.4935198, 2.9800138, -1.610368)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_py8ju"]
+_data = {
+&"Bob": SubResource("Animation_y88dp"),
+&"RESET": SubResource("Animation_54fgj")
+}
 
 [node name="TestOre" type="Node3D" unique_id=519608720 node_paths=PackedStringArray("bolt_position", "hurt_state") groups=["Ore"]]
 script = ExtResource("1_0oabc")
@@ -554,7 +617,7 @@ transform = Transform3D(0.079772644, 0.23201402, -0.51606035, 0.5526807, 0.07969
 mesh = SubResource("ArrayMesh_r7u04")
 
 [node name="fliez" type="MeshInstance3D" parent="Ore" unique_id=509894695]
-transform = Transform3D(-0.49643067, -4.0646024, 0.050860155, -0.31589648, -0.012507069, -4.0829005, 4.0526276, -0.49887246, -0.31202608, -0.4265203, 1.6905714, -0.15460216)
+transform = Transform3D(-0.49643075, -4.0646024, 0.050859865, -0.31589448, -0.012507007, -4.0829005, 4.0526276, -0.49887255, -0.3120241, -0.42652032, 1.6905714, -0.15460216)
 mesh = SubResource("ArrayMesh_yvwij")
 surface_material_override/0 = SubResource("StandardMaterial3D_54fgj")
 
@@ -593,3 +656,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3531791, -0.51615715)
 [node name="LockOnTarget" parent="." unique_id=1632178840 instance=ExtResource("8_3uaae")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.069221854, 0.46873048, -0.9066666)
 visible = false
+
+[node name="FliesPlayer" type="AnimationPlayer" parent="." unique_id=837091689]
+libraries/ = SubResource("AnimationLibrary_py8ju")

@@ -38,14 +38,18 @@ const OPEN_BAG = preload("uid://ejc6kkycvlb0")
 const UPGRADE_STAT = preload("uid://fgjyaai5w5pk")
 
 var pitch : float = 1.0
+const FIRE_START = preload("uid://ca1obecalm6kn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameManager.play_sfx(OPEN_BAG)
+	GameManager.play_sfx(FIRE_START)
+	SignalBus.upgrade_station_accessed.emit()
 	animation_player.play("SpawnIn")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	init_upgrades()
 	update_stats_description()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -203,6 +207,7 @@ func _on_button_button_up() -> void:
 	SignalBus.menu_exited.emit()
 	GameManager.play_sfx(CLOSE_BAG)
 	animation_player.play("SpawnOut")
+	SignalBus.upgrade_station_exited.emit()
 	await animation_player.animation_finished
 	queue_free()
 

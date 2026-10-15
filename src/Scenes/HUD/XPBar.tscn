@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dl0sjd5yrphdx"]
+
+[ext_resource type="Shader" uid="uid://b7npqdis8xixw" path="res://src/Scripts/HUD/ProgressBar.gdshader" id="1_2vpw4"]
+[ext_resource type="Texture2D" uid="uid://cag5ig8j44hfp" path="res://Assets/ProgressBar/RoundProgressFill.png" id="2_f6nw8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fmwqo"]
+shader = ExtResource("1_2vpw4")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = 1.0
+shader_parameter/percentage = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/wave_1_speed = -1.0
+shader_parameter/wave_2_speed = 1.0
+shader_parameter/wave_1_freq = 1.2
+shader_parameter/wave_2_freq = 1.0
+shader_parameter/wave_1_amp = 0.015
+shader_parameter/wave_2_amp = 0.01
+shader_parameter/sun_dir = Vector3(1, 0.4, 1)
+shader_parameter/water_colour = Color(0.7396604, 0.6849991, 7.70092e-07, 1)
+shader_parameter/foam_colour = Color(0.90843636, 0.93359184, 0, 1)
+shader_parameter/sky_colour = Color(0.8483798, 0.7496115, 1.1551381e-06, 1)
+shader_parameter/specular_colour = Color(1, 1, 1, 1)
+
+[node name="ProgressBar" type="TextureProgressBar" unique_id=738751031]
+material = SubResource("ShaderMaterial_fmwqo")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -780.0
+offset_top = -44.0
+offset_right = 780.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 0.3)
+value = 100.0
+texture_progress = ExtResource("2_f6nw8")

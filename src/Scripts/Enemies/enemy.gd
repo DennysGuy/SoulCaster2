@@ -72,7 +72,7 @@ var selected_speed_scale : float = 0.7
 
 func _ready() -> void:
 	SignalBus.round_ended.connect(kill_enemy)
-	SignalBus.enemy_hit.connect(hide_lock_on_target)
+	#SignalBus.enemy_hit.connect(hide_lock_on_target)
 	var rand_num : int = randi_range(0,100)
 	var selected_value : int = select_speed(rand_num)
 	selected_move_speed = move_speeds[selected_value][0]
@@ -138,7 +138,7 @@ func damage_enemy(applied_damage : int = 0) -> void:
 			bolt.show()
 		arrow_hits.remove_at(rand_num)
 	
-	show_lock_on_target()
+	#show_lock_on_target()
 	SignalBus.enemy_hit.emit(self)
 	spawn_damage_label(damage, is_crit)
 	
@@ -228,10 +228,7 @@ func show_lock_on_target() -> void:
 	if lock_on_target:
 		lock_on_target.show()
 
-func hide_lock_on_target(target : Node3D) -> void:
-	if target == self:
-		return
-	
+func hide_lock_on_target() -> void:
 	if lock_on_target:
 		lock_on_target.hide()
 
@@ -241,7 +238,8 @@ func play_leap() -> void:
 
 func drop_blood() -> void:
 	var blood : BloodSplat = preload("uid://bvju5xcpnhgm8").instantiate()
-	get_parent().get_parent().get_parent().add_child(blood)
+	if self is TestEnemy:
+		get_parent().get_parent().get_parent().add_child(blood)
 	blood.global_position = global_position
 
 func spawn_blood_spirt() -> void:

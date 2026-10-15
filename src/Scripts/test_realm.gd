@@ -22,7 +22,9 @@ const ENEMY_SPAWN_SFX = preload("uid://bfk213an2avam")
 
 const MINING_THEME = preload("uid://88vhce7p4n4p")
 
+@onready var camera: Camera3D = $Player/Head/Camera
 
+var stored_target : Node3D
 
 @onready var available_spawn_points : Array = [
 	{"spawn point": spawn_point_1, "occupied": false, "index": 0 },
@@ -77,7 +79,30 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	pass
+	var mouse_pos = get_viewport().get_mouse_position()
+	var from = camera.project_ray_origin(mouse_pos)
+	var to = from + camera.project_ray_normal(mouse_pos) * 15000
+
+	var space_state = get_world_3d().direct_space_state
+		
+	# Create ray query and set collision mask to layer 6
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.collision_mask = 1 << 5  # layer 6 (layers are 0-indexed)
+		
+	var result = space_state.intersect_ray(query)
+
+	if result:
+		var collider = result["collider"]
+		if collider:
+			var target = collider.get_parent()
+			if target is Enemy or target is TestOre:
+				if !stored_target:
+					stored_target = result["collider"].get_parent()
+					stored_target.show_lock_on_target()
+	else:
+		if stored_target:
+			stored_target.hide_lock_on_target()
+			stored_target = null
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()

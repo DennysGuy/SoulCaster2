@@ -158,7 +158,11 @@ func _ready() -> void:
 	if GameManager.round_number >= 3:
 		start_boss_fight()
 	else:
-		if GameManager.combat_tutorial_state != GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
+		if GameManager.cut_scenes_disabled:
+			SignalBus.count_down_ended.emit()
+			start_ore_hunt_countdown()
+			
+		elif GameManager.combat_tutorial_state != GameManager.COMBAT_TUTORIALS.COMBAT_TUTORIAL:
 			if GameManager.combat_tutorial_state == GameManager.COMBAT_TUTORIALS.RESOURCE_HUNT_TUTORIAL and !GameManager.cut_scenes_disabled:
 				GameManager.in_cutscene = true
 				SignalBus.ore_hunt_tutorial_started.emit()
@@ -168,6 +172,7 @@ func _ready() -> void:
 				SignalBus.count_down_ended.emit()
 				start_ore_hunt_countdown()
 		else:
+			
 			start_combat_round()
 	bar_player.play("CloseIn")
 
@@ -204,7 +209,7 @@ func _physics_process(delta: float) -> void:
 func update_level(level_up : bool) -> void:
 	if level_up:
 		level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
-		adjust_progress_bar(progress_bar,0.0,0.01)
+		adjust_progress_bar(progress_bar,0.0,0.03)
 	xp.text = "[%s/%s]" % [int(PlayerStats.player_stats["Current XP"]), int(PlayerStats.player_stats["Needed XP"])]
 	ap.text = "AP: %s" % [int(PlayerStats.player_stats["Ability Points"])]
 	
@@ -213,8 +218,8 @@ func update_level(level_up : bool) -> void:
 func level_up() -> void:
 	GameManager.levels_gained += 1
 	PlayerStats.player_stats["Level"] += 1
-	PlayerStats.player_stats["Current XP"] = abs(int(PlayerStats.player_stats["Current XP"] - PlayerStats.player_stats["Needed XP"]))
-	PlayerStats.player_stats["Needed XP"] = int(BASE_XP_AMOUNT * pow(XP_MULTIPLIER_FACTOR, PlayerStats.player_stats["Level"]))
+	PlayerStats.player_stats["Current XP"] = abs(float(PlayerStats.player_stats["Current XP"] - PlayerStats.player_stats["Needed XP"]))
+	PlayerStats.player_stats["Needed XP"] = float(BASE_XP_AMOUNT * pow(XP_MULTIPLIER_FACTOR, PlayerStats.player_stats["Level"]))
 	PlayerStats.player_stats["Ability Points"] += PlayerStats.player_stats["AP Amount"]
 	GameManager.play_sfx(LEVEL_UP)
 	notification_player.play("LevelUp")
@@ -223,13 +228,16 @@ func level_up() -> void:
 func add_xp(amount : int) -> void:
 	GameManager.xp_gained += amount
 	PlayerStats.player_stats["Current XP"] += amount
-	add_xp_label(amount)
-	var percentage : float = PlayerStats.player_stats["Current XP"]/PlayerStats.player_stats["Needed XP"]
-	adjust_progress_bar(progress_bar,percentage)
-	update_level(false)
-	
 	if PlayerStats.player_stats["Current XP"] >= PlayerStats.player_stats["Needed XP"] and !round_ended:
 		level_up()
+	else:
+		add_xp_label(amount)
+		var percentage : float = PlayerStats.player_stats["Current XP"]/PlayerStats.player_stats["Needed XP"]
+		print(PlayerStats.player_stats["Current XP"])
+		print(PlayerStats.player_stats["Needed XP"])
+		print(percentage)
+		adjust_progress_bar(progress_bar,percentage)
+		update_level(false)
 	
 func flash_screen_red() -> void:
 	GameManager.play_sfx(grunts.pick_random())

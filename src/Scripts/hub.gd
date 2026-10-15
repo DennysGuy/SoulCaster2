@@ -5,14 +5,16 @@ var start_round_timer : float = 15
 var start_round_timer_wait_time : float = 15
 @onready var camera: Camera3D = $Player/Head/Camera
 
-@onready var progress_bar: ProgressBar = $CanvasLayer/ProgressBar
-@onready var level: Label = $CanvasLayer/ProgressBar/Level
-@onready var ap: Label = $CanvasLayer/ProgressBar/AP
-@onready var xp: Label = $CanvasLayer/ProgressBar/XP
+@onready var progress_bar: TextureProgressBar = $CanvasLayer/ProgressBar
+@onready var level: Label = $CanvasLayer/Level
+@onready var ap: Label = $CanvasLayer/AP
+@onready var xp: Label = $CanvasLayer/XP
 
 @onready var hud_animation_player: AnimationPlayer = $HUDAnimationPlayer
 const START_FIGHT = preload("uid://pf7s6r3v0oal")
 @onready var music: AudioStreamPlayer = $Music
+@onready var flames: AudioStreamPlayer = $Flames
+@onready var fire: MeshInstance3D = $FirePlace/Fire
 
 var stored_selectable : MenuSelectable
 @onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
@@ -28,6 +30,7 @@ var stored_selectable : MenuSelectable
 
 var debug_menu_showing : bool = false
 const INTRO = preload("uid://cdqmidl7aawcp")
+const FIRE_PUT_OUT = preload("uid://cvst6wwmikuhq")
 
 @onready var merchant_animator: AnimationPlayer = $Cart/Cart/MerchantAnimator
 @onready var shop_keeper_talk_position: Marker3D = $ShopKeeperTalkPosition
@@ -46,6 +49,8 @@ func _ready() -> void:
 	SignalBus.cutscene_ended.connect(spawn_hub_context)
 	SignalBus.shop_hovered_over.connect(show_enter_notice)
 	SignalBus.shop_hover_exited.connect(hide_enter_notice)
+	SignalBus.upgrade_station_accessed.connect(start_campfire)
+	SignalBus.upgrade_station_exited.connect(stop_campfire)
 	
 	GameManager.in_arena = false
 	GameManager.in_menu = false
@@ -64,11 +69,12 @@ func _ready() -> void:
 		if !GameManager.hub_instructions_shown:
 			show_start_combat_label()
 			GameManager.hub_instructions_shown = true
-		
-	progress_bar.max_value = PlayerStats.player_stats["Needed XP"]
-	progress_bar.value = PlayerStats.player_stats["Current XP"]
+	
+	var percentage : float = PlayerStats.player_stats["Current XP"]/PlayerStats.player_stats["Needed XP"]
+	adjust_progress_bar(progress_bar, percentage)
 	xp.text = "[%s/%s]" % [int(PlayerStats.player_stats["Current XP"]),int(PlayerStats.player_stats["Needed XP"])]
 	ap.text = "AP: %s" % int(PlayerStats.player_stats["Ability Points"])
+	level.text = "Level %s" % int(PlayerStats.player_stats["Level"])
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -200,3 +206,33 @@ func show_enter_notice(shop_name : String) -> void:
 
 func hide_enter_notice() -> void:
 	enter_notice.hide()
+
+func adjust_progress_bar(bar : TextureProgressBar, value : float, speed : float = 0.3) -> void:
+	var progress = bar.material as ShaderMaterial
+	var tween : Tween = create_tween()
+	tween.tween_property(
+		progress,
+		"shader_parameter/percentage",
+		value,
+		speed
+	)
+
+func start_campfire() -> void:
+	flames.play()
+	adjust_fire(4.85,0.3)
+
+func stop_campfire() -> void:
+	flames.stop()
+	GameManager.play_sfx(FIRE_PUT_OUT)
+	adjust_fire(0.0,0.1)
+
+
+func adjust_fire(value : float, speed : float = 0.3) -> void:
+	var fire = fire.get_surface_override_material(0) as ShaderMaterial
+	var tween : Tween = create_tween()
+	tween.tween_property(
+		fire,
+		"shader_parameter/fire_height",
+		value,
+		speed
+	)

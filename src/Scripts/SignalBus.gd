@@ -87,3 +87,5 @@ signal toggle_hurt_pulse_on
 signal toggle_hurt_pulse_off
 
 signal ore_hunt_tutorial_started
+signal upgrade_station_accessed
+signal upgrade_station_exited

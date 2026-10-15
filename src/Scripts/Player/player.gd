@@ -82,6 +82,8 @@ var can_hurt : bool = true
 var tracked_enemy : Node3D
 const GRENADE_TOSS = preload("uid://br5xvc8wkgq8a")
 
+var stored_target : Node3D = null
+
 @onready var look_at_points : Dictionary[String,Marker3D] = {
 	"point 1" : look_at_point_1,
 	"point 2" : look_at_point_2,

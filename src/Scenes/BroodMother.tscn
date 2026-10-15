@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://bi4b2qt8jomtn" path="res://src/Scripts/Enemies/BroodMother/jump_left.gd" id="15_88l1p"]
 [ext_resource type="Script" uid="uid://bi012pj1d0hei" path="res://src/Scripts/Enemies/BroodMother/jump_right.gd" id="16_rmk1k"]
 [ext_resource type="Script" uid="uid://insrhga17dqv" path="res://src/Scripts/Enemies/BroodMother/jump_center.gd" id="17_hdv7e"]
+[ext_resource type="PackedScene" uid="uid://dhjj6ow3afw3p" path="res://src/Scenes/HUD/LockOnTarget.tscn" id="22_rc2ya"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjmqo"]
 size = Vector3(3.5795288, 4.8329773, 2.8815918)
@@ -3821,7 +3822,7 @@ _data = {
 &"HitFlash": SubResource("Animation_j7kl6")
 }
 
-[node name="BroodMother" type="CharacterBody3D" unique_id=1385822236 node_paths=PackedStringArray("true_idle_state", "stun_state", "animation_player", "damage_label_position", "blood_spout", "skeleton", "bolt_position", "dead_state")]
+[node name="BroodMother" type="CharacterBody3D" unique_id=1385822236 node_paths=PackedStringArray("true_idle_state", "stun_state", "animation_player", "damage_label_position", "blood_spout", "skeleton", "bolt_position", "lock_on_target", "dead_state")]
 script = ExtResource("1_yjmqo")
 true_idle_state = NodePath("StateMachine/TrueIdle")
 stun_state = NodePath("StateMachine/Stun")
@@ -3830,6 +3831,7 @@ damage_label_position = NodePath("Marker3D")
 blood_spout = NodePath("BirthArea")
 skeleton = NodePath("RatMother/Brood/Skeleton3D")
 bolt_position = NodePath("BoltPosition")
+lock_on_target = NodePath("LockOnTarget")
 enemy_name = "Brood Mother"
 health = 2000
 max_enemy_health = 2000
@@ -4169,3 +4171,7 @@ libraries/ = SubResource("AnimationLibrary_r8vr8")
 
 [node name="BoltPosition" type="Marker3D" parent="." unique_id=873822995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1404843, 0)
+
+[node name="LockOnTarget" parent="." unique_id=1632178840 instance=ExtResource("22_rc2ya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12510014, 2.119153, 0)
+visible = false

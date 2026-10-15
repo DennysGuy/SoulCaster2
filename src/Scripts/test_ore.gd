@@ -9,6 +9,7 @@ class_name TestOre extends Node3D
 
 @onready var lock_on_target: LockOnTarget = $LockOnTarget
 
+@onready var flies_player: AnimationPlayer = $FliesPlayer
 
 var can_hit : bool = false
 @onready var ore_chunk_area: Marker3D = $OreChunkArea
@@ -16,7 +17,8 @@ var can_hit : bool = false
 func _ready() -> void:
 	var player = get_tree().get_first_node_in_group("Player")
 	look_at(player.global_transform.origin, Vector3.UP)
-	SignalBus.enemy_hit.connect(hide_lock_on_target)
+	#SignalBus.enemy_hit.connect(hide_lock_on_target)
+	flies_player.play("Bob")
 	state_machine.init(self)
 
 func _process(delta: float) -> void:
@@ -36,10 +38,7 @@ func damage_ore() -> void:
 func show_lock_on_target() -> void:
 	lock_on_target.show()
 
-func hide_lock_on_target(target : Node3D) -> void:
-	if target == self:
-		return
-	
+func hide_lock_on_target() -> void:
 	lock_on_target.hide()
 	
 func spawn_ore_chunks() -> void:
