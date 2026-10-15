@@ -6,7 +6,6 @@ extends Node
 func show_hub_hud() -> void:
 	SignalBus.hub_context_menu_closed.emit()
 
-
 func start_intro_cutscene() -> void:
 	SignalBus.intro_cutscene_started.emit()
 
@@ -36,3 +35,6 @@ func end_cutscene() -> void:
 
 func start_boss_fight() -> void:
 	SignalBus.boss_cutscene_ended.emit()
+
+func start_cutscene() -> void:
+	SignalBus.cutscene_started.emit()

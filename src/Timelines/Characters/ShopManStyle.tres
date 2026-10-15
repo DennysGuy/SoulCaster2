@@ -15,6 +15,9 @@
 [sub_resource type="Resource" id="Resource_22lar"]
 script = ExtResource("2_2if4h")
 scene = ExtResource("1_ehufj")
+overrides = {
+"canvas_layer": "9999.0"
+}
 
 [sub_resource type="Resource" id="Resource_s0jp4"]
 script = ExtResource("2_2if4h")
@@ -83,4 +86,4 @@ layer_info = {
 "16": SubResource("Resource_sej1o"),
 "17": SubResource("Resource_fs0qg")
 }
-metadata/_latest_layer = "13"
+metadata/_latest_layer = ""

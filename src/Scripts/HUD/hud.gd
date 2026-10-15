@@ -38,6 +38,9 @@ const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 
 @onready var hurt_rect: ColorRect = $HurtRect
 
+@onready var top_bar: ColorRect = $TopBar
+@onready var bot_bar: ColorRect = $BotBar
+
 
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
@@ -133,6 +136,8 @@ func _ready() -> void:
 	SignalBus.timer_manipulated.connect(pulse_timer)
 	SignalBus.toggle_hurt_pulse_off.connect(hide_hurt_pulse)
 	SignalBus.toggle_hurt_pulse_on.connect(show_hurt_pulse)
+	SignalBus.cutscene_ended.connect(hide_letter_box)
+	SignalBus.cutscene_started.connect(show_letter_box)
 	
 	update_ore_count_label(0)
 	update_grenade_count()
@@ -640,3 +645,16 @@ func flash_damage(strength: float, duration: float = 0.6) -> void:
 	   func(): hurt_material.set_shader_parameter("max_alpha", strength),
 	   strength, 0.0, duration
    ).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+
+func show_letter_box() -> void:
+	var tween_1 : Tween = create_tween()
+	tween_1.tween_property(top_bar, "position:y", -980,0.3)
+	var tween_2 : Tween = create_tween()
+	tween_2.tween_property(bot_bar, "position:y", 980,0.3)
+
+func hide_letter_box() -> void:
+	var tween_1 : Tween = create_tween()
+	tween_1.tween_property(top_bar, "position:y", -1080,0.3)
+	var tween_2 : Tween = create_tween()
+	tween_2.tween_property(bot_bar, "position:y", 1080,0.3)

@@ -16,6 +16,7 @@
 script = ExtResource("2_ajf4w")
 scene = ExtResource("1_pfq3d")
 overrides = {
+"canvas_layer": "9999.0",
 "global_bg_color": "Color(0.7607843, 0.6431373, 0.7294118, 1)",
 "global_font": "\"res://Assets/Fonts/Endalian Script.ttf\"",
 "global_font_color": "Color(0.13671875, 0.13671875, 0.13671875, 1)",
@@ -79,4 +80,4 @@ layer_info = {
 "16": SubResource("Resource_j0nr2"),
 "17": SubResource("Resource_k3fdw")
 }
-metadata/_latest_layer = "13"
+metadata/_latest_layer = ""

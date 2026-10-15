@@ -28,11 +28,15 @@ var stored_selectable : MenuSelectable
 
 @onready var debug_menu: DebugMenu = $CanvasLayer/DebugMenu
 
+@onready var top_bar: ColorRect = $CanvasLayer/TopBar
+@onready var bot_bar: ColorRect = $CanvasLayer/BotBar
+
+
 var debug_menu_showing : bool = false
 const INTRO = preload("uid://cdqmidl7aawcp")
 const FIRE_PUT_OUT = preload("uid://cvst6wwmikuhq")
 
-@onready var merchant_animator: AnimationPlayer = $Cart/Cart/MerchantAnimator
+@onready var merchant_animator: AnimationPlayer = $Cart/Cart/AnimationPlayer
 @onready var shop_keeper_talk_position: Marker3D = $ShopKeeperTalkPosition
 
 
@@ -51,6 +55,8 @@ func _ready() -> void:
 	SignalBus.shop_hover_exited.connect(hide_enter_notice)
 	SignalBus.upgrade_station_accessed.connect(start_campfire)
 	SignalBus.upgrade_station_exited.connect(stop_campfire)
+	SignalBus.cutscene_ended.connect(hide_letter_box)
+	SignalBus.cutscene_started.connect(show_letter_box)
 	
 	GameManager.in_arena = false
 	GameManager.in_menu = false
@@ -58,6 +64,9 @@ func _ready() -> void:
 	if !GameManager.cut_scenes_disabled:
 		if !GameManager.hub_instructions_shown:
 			progress_bar.hide()
+			ap.hide()
+			level.hide()
+			xp.hide()
 			start_battle_label.hide()
 			controls_label.hide()
 			GameManager.can_move = false
@@ -141,6 +150,9 @@ func show_start_combat_label() -> void:
 	start_battle_label.show()
 	controls_label.show()
 	progress_bar.show()
+	ap.show()
+	level.show()
+	xp.show()
 
 func show_start_battle_label() -> void:
 	start_battle_label.show()
@@ -236,3 +248,15 @@ func adjust_fire(value : float, speed : float = 0.3) -> void:
 		value,
 		speed
 	)
+
+func show_letter_box() -> void:
+	var tween_1 : Tween = create_tween()
+	tween_1.tween_property(top_bar, "position:y", -980,0.3)
+	var tween_2 : Tween = create_tween()
+	tween_2.tween_property(bot_bar, "position:y", 980,0.3)
+
+func hide_letter_box() -> void:
+	var tween_1 : Tween = create_tween()
+	tween_1.tween_property(top_bar, "position:y", -1080,0.3)
+	var tween_2 : Tween = create_tween()
+	tween_2.tween_property(bot_bar, "position:y", 1080,0.3)

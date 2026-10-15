@@ -1,11 +1,13 @@
 do GameManager.lock_player()
-ShopMan: That was... more than I expected. Looks like we got a real case on our hands, kid.
-ShopMan: NOT your fault. Don't blame yourself for this one. It's on me this time!
-ShopMan: I need to layout out for you rookie, this is only going to get harder from here on out.
-ShopMan: BUT
-ShopMan: I might be able to, you know, take the edge off things a little bit so to speak.
-ShopMan: From my brief analysis, there appears to be windows of opportunities to get in while there are no rats around.  It may be brief, but you should be able to excavate some of those nasty piles of... garabage... popping up all over. They contain valuable materials that you can bring to me in exchange for Weapon upgrades..
+do CutSceneManager.start_cutscene()
+ShopMan: Not bad for your first run, kid.
+ShopMan: I hate to admit this, but being an exterminator is not all sunshine and rainbows. It's not all glory as one might think.
+ShopMan: There's a... less desirable part folks don't really mention, and that is cleaning up after the Vermin. Yes, it's not the more desirable part of the job, but it must be done.
+ShopMan: but hey there's a very very bright side to this! LUCRATIVE! You'll get the opportunity to earn some extra cash.
+ShopMan: Destroy those 'Mounds' that have been popping up over town, and bring those green crystals to me! They ain't toxic I swear.. You can trade them for weapon upgrades.. it's the right of passage every rookie Exterminator has to go through!
 ShopMan: Hurry! Go before time runs out!
 [wait time="1.0"]
+do CutSceneManager.end_cutscene()
 do GameManager.unlock_player()
+[wait time="1.2"]
 do CutSceneManager.start_hunt_countdown()

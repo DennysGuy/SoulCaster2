@@ -1,6 +1,7 @@
 do GameManager.lock_player()
-[wait time="2.0"]
+[wait time="1.5"]
 do CutSceneManager.start_intro_cutscene()
+do CutSceneManager.start_cutscene()
 ShopMan: Hello there!
 ShopMan: The fresh meat.. erm, the new rookie has arrived!
 ShopMan: Pardon me, where are my manners? It's quite the pleasure to have you. You read the advertisement thoroughly..
