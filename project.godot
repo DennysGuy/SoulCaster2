@@ -37,6 +37,7 @@ directories/dch_directory={
 directories/dtl_directory={
 "BossIntro": "res://src/Timelines/BossIntro.dtl",
 "CombatTutorial": "res://src/Timelines/CombatTutorial.dtl",
+"FinalCutscene": "res://src/Timelines/FinalCutscene.dtl",
 "HuntRoundTutorial": "res://src/Timelines/HuntRoundTutorial.dtl",
 "Intro": "res://src/Timelines/Intro.dtl"
 }

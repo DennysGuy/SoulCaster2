@@ -57,6 +57,9 @@ func _ready() -> void:
 	SignalBus.upgrade_station_exited.connect(stop_campfire)
 	SignalBus.cutscene_ended.connect(hide_letter_box)
 	SignalBus.cutscene_started.connect(show_letter_box)
+	SignalBus.merchant_talked.connect(play_merchant_talk_1)
+	SignalBus.merchant_talked_2.connect(play_merchant_talk_2)
+	SignalBus.merchant_talked_dissapointed.connect(play_merchant_talk_3)
 	
 	GameManager.in_arena = false
 	GameManager.in_menu = false
@@ -199,6 +202,12 @@ func show_debug_menu() -> void:
 
 func play_merchant_talk_1() -> void:
 	merchant_animator.play("talk 1")
+
+func play_merchant_talk_2() -> void:
+	merchant_animator.play("talk 2")
+
+func play_merchant_talk_3() -> void:
+	merchant_animator.play("talk disappointed")
 
 func play_starting_cutscene() -> void:
 	GameManager.can_move = false

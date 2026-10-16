@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://d5xympptasoc"]
 
 [ext_resource type="Script" uid="uid://bnnqvq4k4wjid" path="res://src/Scripts/main_menu.gd" id="1_814sq"]
+[ext_resource type="PackedScene" uid="uid://cp4aa18x3ckpd" path="res://src/Scenes/TestRealmDemo.tscn" id="2_81l7e"]
 [ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="2_jlbbt"]
-[ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="3_1nasp"]
+[ext_resource type="Texture2D" uid="uid://f17ge23g6qx0" path="res://Assets/Logo.png" id="3_fc7xl"]
 [ext_resource type="AudioStream" uid="uid://dsifj0u8coxpv" path="res://Assets/Audio/Music/MainTheme-Mastered.wav" id="4_1nasp"]
 [ext_resource type="Texture2D" uid="uid://ge7oksa3yf1" path="res://Assets/CheckBox_Checked.png" id="5_81l7e"]
 [ext_resource type="Texture2D" uid="uid://coalws0sutj7j" path="res://Assets/CheckBox.png" id="6_fc7xl"]
@@ -16,28 +17,36 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_814sq")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1856662108]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1707530136]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="." unique_id=383122590]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1769499449]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="TestRealm" parent="SubViewportContainer/SubViewport" unique_id=290320890 instance=ExtResource("2_81l7e")]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1604339801]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -200.5
-offset_top = 63.0
-offset_right = 200.5
-offset_bottom = 151.0
+anchor_bottom = 0.5
+offset_left = -749.5
+offset_top = -487.5
+offset_right = 749.5
+offset_bottom = 487.5
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_jlbbt")
-theme_override_font_sizes/font_size = 86
-text = "Vermin Scrapers"
+grow_vertical = 2
+texture = ExtResource("3_fc7xl")
+stretch_mode = 2
 
 [node name="Button" type="Button" parent="." unique_id=1036980298]
 layout_mode = 1
@@ -46,60 +55,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = 123.0
-offset_right = 40.0
-offset_bottom = 181.0
+offset_left = 390.0
+offset_top = -228.0
+offset_right = 532.0
+offset_bottom = -138.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("2_jlbbt")
 theme_override_font_sizes/font_size = 82
 text = "Play"
-
-[node name="Label2" type="Label" parent="." unique_id=1812189221]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 140.0
-offset_top = 289.0
-offset_right = 265.0
-offset_bottom = 330.0
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_1nasp")
-theme_override_font_sizes/font_size = 40
-text = "Controls"
-
-[node name="Label4" type="Label" parent="." unique_id=1197174869]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -215.5
-offset_top = -367.0
-offset_right = 215.5
-offset_bottom = -322.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_1nasp")
-theme_override_font_sizes/font_size = 32
-text = "** NO SAVE FEATURE YET!**"
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="." unique_id=2080987697]
-layout_mode = 0
-offset_left = 37.0
-offset_top = 913.0
-offset_right = 554.0
-offset_bottom = 1030.0
-theme_override_fonts/font = ExtResource("3_1nasp")
-theme_override_font_sizes/font_size = 36
-text = "WASD - Move Camera
-Left Click - Shoot Enemy/Select Menu
-R - Reload Weapon"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2040277561]
 stream = ExtResource("4_1nasp")
@@ -113,10 +78,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -174.0
-offset_top = 255.0
-offset_right = 166.5
-offset_bottom = 316.0
+offset_left = 310.0
+offset_top = -92.0
+offset_right = 650.5
+offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4892922, 0.11778665, 0, 1)
@@ -139,6 +104,24 @@ theme_override_font_sizes/font_size = 40
 theme_override_icons/checked = ExtResource("5_81l7e")
 theme_override_icons/unchecked = ExtResource("6_fc7xl")
 text = "Disable Cutscenes"
+
+[node name="Label" type="Label" parent="." unique_id=240412946]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -776.0
+offset_top = 25.0
+offset_right = -39.0
+offset_bottom = 150.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_jlbbt")
+theme_override_font_sizes/font_size = 28
+text = "Credits
+
+Artwork, Story, and Character Concepts - Rottenflash
+Programming, Game Design, Story, and Music Composition - Denny'sGuy"
+horizontal_alignment = 1
 
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
 [connection signal="toggled" from="ColorRect2/CheckBox" to="." method="_on_check_box_toggled"]

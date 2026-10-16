@@ -51,6 +51,7 @@ const ROUND_START = preload("uid://b68fxjxw701up")
 const HEART_BEAT = preload("uid://bv2rbnm724y8j")
 const _10_SECOND_BEEP = preload("uid://c82h8rlugajc8")
 
+const FINAL_CUTSCENE = preload("uid://bp3j2p4067ams")
 
 const COUNT_DOWN_BEEP = preload("uid://bceqt2b1aafi6")
 const VOX_ANNOUNCER_COUNT_DOWN__ONE_01 = preload("uid://dleph5i0grnjx")
@@ -138,12 +139,15 @@ func _ready() -> void:
 	SignalBus.toggle_hurt_pulse_on.connect(show_hurt_pulse)
 	SignalBus.cutscene_ended.connect(hide_letter_box)
 	SignalBus.cutscene_started.connect(show_letter_box)
+	SignalBus.shop_guy_entered.connect(add_shop_guy_portrait)
+	SignalBus.boss_entered.connect(add_boss_portrait)
+	SignalBus.game_ended.connect(play_fade_out)
 	
 	update_ore_count_label(0)
 	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
 	#round_timer.start()
-	update_level(false)
+	update_level(true)
 	update_bolts_holder()
 	if GameManager.enemy_tracker_owned:
 		enemy_tracker.show()
@@ -214,7 +218,8 @@ func _physics_process(delta: float) -> void:
 func update_level(level_up : bool) -> void:
 	if level_up:
 		level.text = "Level: %s" % int(PlayerStats.player_stats["Level"])
-		adjust_progress_bar(progress_bar,0.0,0.03)
+		var percentage : float = PlayerStats.player_stats["Current XP"]/PlayerStats.player_stats["Needed XP"]
+		adjust_progress_bar(progress_bar,percentage,0.03)
 	xp.text = "[%s/%s]" % [int(PlayerStats.player_stats["Current XP"]), int(PlayerStats.player_stats["Needed XP"])]
 	ap.text = "AP: %s" % [int(PlayerStats.player_stats["Ability Points"])]
 	
@@ -406,8 +411,9 @@ func update_boss_bar(damage_done : int, value : int, max_value : int) -> void:
 func end_fight() -> void:
 	GameManager.round_number = -1
 	round_timer_label.pause_timer()
-	animation_player.play("YouWin")
-
+	if Dialogic.current_timeline == null:
+		Dialogic.start(FINAL_CUTSCENE)
+	
 func go_to_hub() -> void:
 	bar_player.play("CloseOut")
 	GameManager.mini_round_started = false
@@ -658,3 +664,17 @@ func hide_letter_box() -> void:
 	tween_1.tween_property(top_bar, "position:y", -1080,0.3)
 	var tween_2 : Tween = create_tween()
 	tween_2.tween_property(bot_bar, "position:y", 1080,0.3)
+
+func add_shop_guy_portrait() -> void:
+	var shop_guy_portrait : ShopKeeperViewPort = preload("uid://b4g2111f0nvqu").instantiate()
+	add_child(shop_guy_portrait)
+
+func add_boss_portrait() -> void:
+	var boss_portrait : ShopKeeperViewPort = preload("uid://rbpaoi0ggkme").instantiate()
+	add_child(boss_portrait)
+
+func play_fade_out() -> void:
+	bar_player.play("FadeOut")
+
+func go_to_end_credits_pane() -> void:
+	get_tree().change_scene_to_file("res://src/Scenes/Menus/EndingPanel.tscn")

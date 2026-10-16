@@ -91,3 +91,13 @@ signal upgrade_station_accessed
 signal upgrade_station_exited
 
 signal cutscene_started
+signal shop_guy_entered
+signal shop_guy_exited
+
+signal boss_entered
+signal stop_music
+signal game_ended
+
+signal merchant_talked
+signal merchant_talked_2
+signal merchant_talked_dissapointed

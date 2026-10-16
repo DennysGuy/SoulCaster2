@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cyfle3qq8i4ts" path="res://src/Scripts/Menus/shop_menu.gd" id="1_gllw4"]
 [ext_resource type="FontFile" uid="uid://b1a36g4iebhyo" path="res://Assets/Fonts/GoudyMediaeval-DemiBold.ttf" id="2_4ymfw"]
 [ext_resource type="Texture2D" uid="uid://drhm8q5e2k0mv" path="res://Assets/Hub/upperboltomatic.png" id="2_jkh00"]
-[ext_resource type="Texture2D" uid="uid://bll60b8a6tqmv" path="res://Assets/OreIcon.png" id="3_bt663"]
 [ext_resource type="FontFile" uid="uid://bcrsewr5c6yhk" path="res://Assets/Fonts/GoudyMediaeval-Regular.ttf" id="3_tt1ee"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="4_tt1ee"]
 [ext_resource type="PackedScene" uid="uid://b5qnmgtliwnmu" path="res://src/Scenes/Menus/BoltOMaticPreview.tscn" id="5_8mxox"]
@@ -215,12 +214,13 @@ vertical_alignment = 1
 
 [node name="OreIcon" type="TextureRect" parent="WeaponPanel" unique_id=808567126]
 layout_mode = 0
-offset_left = 444.0
-offset_top = 335.0
+offset_left = 441.0
+offset_top = 325.0
 offset_right = 528.0
-offset_bottom = 419.0
+offset_bottom = 434.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bt663")
+texture = ExtResource("8_appjw")
+stretch_mode = 2
 
 [node name="WeaponPreviewPanel" type="Panel" parent="WeaponPanel" unique_id=1339608145]
 layout_mode = 1

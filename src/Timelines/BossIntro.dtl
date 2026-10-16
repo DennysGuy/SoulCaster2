@@ -1,5 +1,7 @@
 do GameManager.lock_player()
 do CutSceneManager.start_cutscene()
+do CutSceneManager.add_boss_portrait()
+[wait time="0.5"]
 Boss: HA! HA! HA!
 Boss: Now, who do we have here? Quite the small specimen.
 Boss: A human exterminator, I presume? How precious.
@@ -8,10 +10,14 @@ Boss: Unfortunately, I cannot allow you to continue. The Age of the RAT is upon 
 Boss: Oh, do try to look excited! Take it as a compliment, dear. Few are granted the honor of facing me in combat. You are about to witness perfection incarnate!
 Boss: And now, dear human... prepare yourself for a SLOW... PAINFUL... DEMISE!
 Boss: HA! HA! HA!
+do CutSceneManager.remove_shop_guy_portrait()
+[wait time="0.6"]
+do CutSceneManager.add_shop_guy_portrait()
 ShopMan: What in tarnation...? I've seen my fair share of mutant beasts, Rookie, but never in all my years have I seen a rat display this kind of sapience.
 ShopMan: This is... troubling. Something's not right here.
 ShopMan: Whatever's going on, it's bigger than a nest of oversized rodents. Something's stirring out there... something we don't yet understand.
 ShopMan: Be on your guard, Rookie. This ain't gonna be a cakewalk.
+do CutSceneManager.remove_shop_guy_portrait()
 do GameManager.unlock_player()
 do CutSceneManager.end_cutscene()
 [wait time="1.0"]

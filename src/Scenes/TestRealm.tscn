@@ -3548,7 +3548,7 @@ look_at_point_3 = NodePath("../CameraPoint4")
 look_at_point_4 = NodePath("../CameraPoint3")
 
 [node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.04798667, -0.051094152, -0.05112595, 0.99676466, 0.06201849, 0.047952786, 0.06447818, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.047986664, -0.051094152, -0.051125944, 0.99676466, 0.06201849, 0.047952786, 0.06447818, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="PlayerSprite" type="CSGBox3D" parent="." unique_id=1774175450]
 transform = Transform3D(1, 0, 0, 0, 0.016283223, 0.9998674, 0, -0.9998673, 0.016283223, -5.6775446, 2.013178, -5.0043445)
@@ -4287,7 +4287,7 @@ libraries/ = SubResource("AnimationLibrary_gxtpt")
 transform = Transform3D(0.39204818, 0, 0.91994464, 0, 1, 0, -0.91994464, 0, 0.39204818, -32.502205, 0, 0)
 
 [node name="Back" parent="Backdrop" index="0" unique_id=1993415606]
-transform = Transform3D(20.91521, 0.04723978, -3.088452e-07, -3.116614e-07, 1.2466458e-06, -20.915243, -0.04723978, 20.91521, 1.2473481e-06, 25.464848, 15.241859, 4.684351)
+transform = Transform3D(20.91521, 0.04723978, -3.0884524e-07, -3.116614e-07, 1.2466458e-06, -20.915243, -0.04723978, 20.91521, 1.2473481e-06, 25.464851, 14.787933, 4.684351)
 surface_material_override/0 = SubResource("StandardMaterial3D_e4rji")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://dn1y8dv0uem2x"]
+
+[ext_resource type="Script" uid="uid://8tvgp0y5q4rc" path="res://src/Scripts/ending_panel.gd" id="1_v1fa3"]
+[ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="2_24pii"]
+
+[sub_resource type="Animation" id="Animation_24pii"]
+resource_name = "FadeIn"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeInRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r0mfa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeInRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pq26r"]
+_data = {
+&"FadeIn": SubResource("Animation_24pii"),
+&"RESET": SubResource("Animation_r0mfa")
+}
+
+[node name="EndingPanel" type="Control" unique_id=815751938]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v1fa3")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=943784962]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1423074930]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.0
+offset_top = -363.0
+offset_right = 268.0
+offset_bottom = -282.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_24pii")
+theme_override_font_sizes/font_size = 80
+text = "Congratulations!"
+
+[node name="Label2" type="Label" parent="." unique_id=794116454]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -701.5
+offset_top = -166.5
+offset_right = 701.5
+offset_bottom = 166.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_24pii")
+theme_override_font_sizes/font_size = 52
+text = "This build is a small proof of concept for a much bigger game. Your feedback will help us decide whether to take it further!
+
+Thanks for playing!
+
+**Want to start over?** Close and reopen the game to begin a new run."
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="." unique_id=1977399898]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -701.5
+offset_top = 269.0
+offset_right = 701.5
+offset_bottom = 501.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_24pii")
+theme_override_font_sizes/font_size = 52
+text = "Credits:
+
+Artwork, Story, and Character Concepts - Rottenflash
+Programming, Game Design, Story, and Music Composition - Denny'sGuy"
+autowrap_mode = 3
+
+[node name="FadeInRect" type="ColorRect" parent="." unique_id=2019711897]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1433184293]
+libraries/ = SubResource("AnimationLibrary_pq26r")

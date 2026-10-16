@@ -22,5 +22,6 @@ func process_physics(_delta: float) -> State:
 	
 	if parent.timer.time_left <= 0:
 		SignalBus.boss_defeated.emit()
+		parent.queue_free()
 	
 	return null

@@ -1,8 +1,5 @@
 extends Node
 
-
-
-
 func show_hub_hud() -> void:
 	SignalBus.hub_context_menu_closed.emit()
 
@@ -38,3 +35,27 @@ func start_boss_fight() -> void:
 
 func start_cutscene() -> void:
 	SignalBus.cutscene_started.emit()
+
+func add_shop_guy_portrait() -> void:
+	SignalBus.shop_guy_entered.emit()
+
+func remove_shop_guy_portrait() -> void:
+	SignalBus.shop_guy_exited.emit()
+
+func add_boss_portrait() -> void:
+	SignalBus.boss_entered.emit()
+
+func stop_music() -> void:
+	SignalBus.stop_music.emit()
+
+func play_fade_out() -> void:
+	SignalBus.game_ended.emit()
+
+func play_merchant_talk_1() -> void:
+	SignalBus.merchant_talked.emit()
+
+func play_merchant_talk_2() -> void:
+	SignalBus.merchant_talked_2.emit()
+
+func play_merchant_talk_3() -> void:
+	SignalBus.merchant_talked_dissapointed.emit()

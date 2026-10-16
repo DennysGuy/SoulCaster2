@@ -1,5 +1,6 @@
 do GameManager.lock_player()
 do CutSceneManager.start_cutscene()
+do CutSceneManager.add_shop_guy_portrait()
 ShopMan: Not bad for your first run, kid!
 ShopMan: But listen, there's something they don't tell you about the extermination business. It ain't all glory and heroics. Sometimes, you've gotta do the dirty work.
 ShopMan: Literally.
@@ -9,6 +10,7 @@ ShopMan: IT'S LUCRATIVE!
 ShopMan: Destroy those Mounds and bring me the green crystals inside. They're perfectly safe, by the way. Probably.
 ShopMan: You can trade 'em in for some nice weapon upgrades. It's a rite of passage for every rookie exterminator!
 ShopMan: Now hurry! We've got a town to clean, and that timer ain't gonna wait!
+do CutSceneManager.remove_shop_guy_portrait()
 [wait time="1.0"]
 do CutSceneManager.end_cutscene()
 do GameManager.unlock_player()

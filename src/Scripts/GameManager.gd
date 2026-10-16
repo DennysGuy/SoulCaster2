@@ -71,6 +71,7 @@ var cut_scenes_disabled : bool = false
 
 enum COMBAT_TUTORIALS {COMBAT_TUTORIAL, RESOURCE_HUNT_TUTORIAL, BOSS, END}
 var combat_tutorial_state : COMBAT_TUTORIALS = COMBAT_TUTORIALS.COMBAT_TUTORIAL
+const MAIN_THEME_MASTERED = preload("uid://dsifj0u8coxpv")
 
 var last_ten_sec : bool = false
 
@@ -816,3 +817,6 @@ func unlock_player() -> void:
 	can_move = true
 	in_cutscene = false
 	
+
+func play_theme_song() -> void:
+	play_sfx(MAIN_THEME_MASTERED)

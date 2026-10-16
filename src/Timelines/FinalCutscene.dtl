@@ -1,0 +1,10 @@
+do CutSceneManager.stop_music()
+do GameManager.play_theme_song()
+do CutSceneManager.add_shop_guy_portrait()
+do 
+ShopMan: Well, I'll be! Color me surprised!
+ShopMan: You really pulled through on that one there, Rookie. I almost thought you didn't have it in ya!
+ShopMan: You showed that Rat Mother who's boss, and ya made an example out of 'em minions. It was kinda sick don't you think?
+ShopMan: Congratualations, I think you can officially be absolved of that rookie title, and you're now a Bonafind Vermine Exterminator.
+ShopMan: Welcome to the team!
+do CutSceneManager.play_fade_out()

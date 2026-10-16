@@ -1,5 +1,6 @@
 do GameManager.lock_player()
 do CutSceneManager.start_cutscene()
+do CutSceneManager.add_shop_guy_portrait()
 ShopMan: Hey, you made it! Welcome to the Combat Arena. This is where the brunt of the job takes place.
 ShopMan: We're smack-dab in the middle of the infestation. Most efficient way to do things, I'm afraid!
 ShopMan: But no need to worry! We've got this. As my predecessors always said... like a splinter, let 'em work their way out!
@@ -7,8 +8,9 @@ ShopMan: That's right, Rookie. Rather than chasing them down, let them come to y
 ShopMan: Now, pay attention! Those mutant bastards will be charging at you from all four directions. Let 'em get too close, and you'll be in PAINVILLE!
 ShopMan: Use WASD to rotate and face the incoming rats. Pressing S will turn you to face the opposite direction in a pinch. Keep your eyes peeled, and don't let 'em sneak up on you!
 ShopMan: Now, let's give 'em a taste of your trusty CROSSBOW! Press LEFT CLICK to fire. It's a little basic, I know... it's all I've got for now. Once you've collected enough resources, stop by my shop for some upgrades!
-do CutSceneManager.end_cutscene()
 ShopMan: You can also purchase grenades from me. Press RIGHT CLICK to toss one in the direction you're facing. Nothing like a little explosive persuasion!
+do CutSceneManager.remove_shop_guy_portrait()
+do CutSceneManager.end_cutscene()
 ShopMan: Now, take a look at the top of your screen. See that PROGRESS BAR? Every rat you kill brings you closer to completing the job. You'll need to clear 3 WAVES of enemies before facing the boss!
 ShopMan: Just below that is your TIMER. We can't have you spending all day in the heart of the infestation! When time runs out, you'll be pulled back to the Hub. So make every second count!
 ShopMan: And finally, your XP BAR! Kill rats, earn XP, and level up to gain ABILITY POINTS (AP). Spend those at the Character Campfire to strengthen your abilities and become a better exterminator!

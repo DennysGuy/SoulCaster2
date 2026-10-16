@@ -6,6 +6,8 @@ class_name TestRealm extends Node3D
 @onready var ore_spawn_timer: Timer = $OreSpawnTimer
 @onready var boss_spawn_point: Marker3D = $BossSpawnPoints/BossSpawnPoint
 const BOSS_THEME = preload("uid://cu5biet1k3nwu")
+const MEET_MOTHER = preload("uid://b57auqfc3wb37")
+
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var cut_scene_cam: Camera3D = $CutSceneCam
 @onready var player: Player = $Player
@@ -67,6 +69,8 @@ func _ready() -> void:
 	SignalBus.new_round_started.connect(start_music)
 	SignalBus.mining_round_started.connect(start_mining_music)
 	SignalBus.ore_hunt_tutorial_started.connect(spawn_ore_on_start_up)
+	SignalBus.stop_music.connect(stop_music)
+	SignalBus.boss_entered.connect(start_boss_intro_music)
 	#SignalBus.boss_jumped_out.connect(start_mini_round_spawn)
 	arena_animation_player.play("tide")
 	if GameManager.ore_hunt_mode_started:
@@ -283,4 +287,8 @@ func start_music() -> void:
 
 func start_mining_music() -> void:
 	music_player.stream = MINING_THEME
+	music_player.play()
+
+func start_boss_intro_music() -> void:
+	music_player.stream = MEET_MOTHER
 	music_player.play()

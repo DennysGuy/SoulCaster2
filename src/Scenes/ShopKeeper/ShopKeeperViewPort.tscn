@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b4g2111f0nvqu"]
 
 [ext_resource type="PackedScene" uid="uid://c5c5gwvbamal3" path="res://src/Scenes/ShopKeeper/ShopKeeperPortrait.tscn" id="1_h70m0"]
+[ext_resource type="Script" uid="uid://clg5pxa03k0gl" path="res://src/Scripts/HUD/shop_keeper_view_port.gd" id="1_ol1by"]
 
 [node name="ShopKeeperViewPort" type="Control" unique_id=1921601719]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ol1by")
 
 [node name="Panel" type="Panel" parent="." unique_id=52435062]
 layout_mode = 1
@@ -23,6 +25,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1080.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
