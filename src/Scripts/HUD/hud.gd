@@ -198,6 +198,10 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	ore_icon.rotation += 0.01
+	
+	if Input.is_action_just_pressed("close_menu") and !GameManager.in_cutscene:
+		spawn_pause_menu()
+	
 	if GameManager.ore_hunt_mode_started: 
 		if Input.is_action_pressed("jump"):
 			skip_time_left -= 15 * delta
@@ -678,3 +682,7 @@ func play_fade_out() -> void:
 
 func go_to_end_credits_pane() -> void:
 	get_tree().change_scene_to_file("res://src/Scenes/Menus/EndingPanel.tscn")
+
+func spawn_pause_menu() -> void:
+	var pause_menu : PauseMenu = preload("uid://b3fjukg0yqsop").instantiate()
+	add_child(pause_menu)

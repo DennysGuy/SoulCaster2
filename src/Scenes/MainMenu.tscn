@@ -119,7 +119,7 @@ theme_override_fonts/font = ExtResource("2_jlbbt")
 theme_override_font_sizes/font_size = 28
 text = "Credits
 
-Artwork, Story, and Character Concepts - Rottenflash
+Artwork, Story, and Character Concepts - Rottenflassh
 Programming, Game Design, Story, and Music Composition - Denny'sGuy"
 horizontal_alignment = 1
 

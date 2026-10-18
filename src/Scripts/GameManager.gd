@@ -50,6 +50,13 @@ const ROUND_2_THEME_MASTERED = preload("uid://b4sge4bjcmvl0")
 
 const ROUND_3_THEME_MASTERED = preload("uid://cxkmoesov7p3k")
 
+var master_volume : float = -5.0
+var sfx_volume : float = -2.0
+var music_volume : float = -5.0
+var ambience_volume : float = -6.0
+
+var target_crosshair_visible : bool = true
+
 var music :Array[AudioStream] = [
 	ROUND_1_THEME_MASTERED,
 	ROUND_2_THEME_MASTERED,

@@ -99,12 +99,13 @@ func _physics_process(delta: float) -> void:
 		var collider = result["collider"]
 		if collider:
 			var target = collider.get_parent()
-			if target is Enemy or target is TestOre:
-				if !stored_target:
-					stored_target = result["collider"].get_parent()
-					stored_target.show_lock_on_target()
+			if GameManager.target_crosshair_visible:
+				if target is Enemy or target is TestOre:
+					if !stored_target:
+						stored_target = result["collider"].get_parent()
+						stored_target.show_lock_on_target()
 	else:
-		if stored_target:
+		if stored_target and GameManager.target_crosshair_visible:
 			stored_target.hide_lock_on_target()
 			stored_target = null
 
@@ -112,7 +113,6 @@ func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
 
 func start_spawn_timer() -> void:
-
 	spawn_enemy()
 	#spawn_timer.start()
 

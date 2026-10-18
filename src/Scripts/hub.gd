@@ -31,6 +31,7 @@ var stored_selectable : MenuSelectable
 @onready var top_bar: ColorRect = $CanvasLayer/TopBar
 @onready var bot_bar: ColorRect = $CanvasLayer/BotBar
 
+@onready var spend_ap_label: Label = $CanvasLayer/SpendAPLabel
 
 var debug_menu_showing : bool = false
 const INTRO = preload("uid://cdqmidl7aawcp")
@@ -61,6 +62,7 @@ func _ready() -> void:
 	SignalBus.merchant_talked_2.connect(play_merchant_talk_2)
 	SignalBus.merchant_talked_dissapointed.connect(play_merchant_talk_3)
 	
+	
 	GameManager.in_arena = false
 	GameManager.in_menu = false
 	player.gun_arm.hide()
@@ -85,9 +87,8 @@ func _ready() -> void:
 	var percentage : float = PlayerStats.player_stats["Current XP"]/PlayerStats.player_stats["Needed XP"]
 	adjust_progress_bar(progress_bar, percentage)
 	xp.text = "[%s/%s]" % [int(PlayerStats.player_stats["Current XP"]),int(PlayerStats.player_stats["Needed XP"])]
-	ap.text = "AP: %s" % int(PlayerStats.player_stats["Ability Points"])
 	level.text = "Level %s" % int(PlayerStats.player_stats["Level"])
-	
+	check_for_remaining_ap()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -103,7 +104,10 @@ func _physics_process(delta: float) -> void:
 			hide_debug_menu()
 		
 		debug_menu_showing = !debug_menu_showing
-		
+	
+	if Input.is_action_just_pressed("close_menu") and !GameManager.in_menu and Input.is_action_just_pressed("close_menu") and !GameManager.in_cutscene:
+		spawn_pause_menu()
+		GameManager.in_menu = true
 	
 	if Input.is_action_just_pressed("start_round"):
 		spawn_round_select_menu()
@@ -169,6 +173,7 @@ func spawn_round_select_menu() -> void:
 	canvas_layer.add_child(round_select_menu)
 
 func move_player_to_shop(marker : Marker3D, move_speed : float) -> void:
+	GameManager.in_menu = true
 	GameManager.can_move = false
 	var tween : Tween = create_tween()
 	tween.tween_property(player, "global_position",marker.global_position,move_speed)
@@ -243,6 +248,7 @@ func start_campfire() -> void:
 	adjust_fire(4.85,0.3)
 
 func stop_campfire() -> void:
+	check_for_remaining_ap()
 	flames.stop()
 	GameManager.play_sfx(FIRE_PUT_OUT)
 	adjust_fire(0.0,0.1)
@@ -269,3 +275,14 @@ func hide_letter_box() -> void:
 	tween_1.tween_property(top_bar, "position:y", -1080,0.3)
 	var tween_2 : Tween = create_tween()
 	tween_2.tween_property(bot_bar, "position:y", 1080,0.3)
+
+func spawn_pause_menu() -> void:
+	var pause_menu : PauseMenu = preload("uid://b3fjukg0yqsop").instantiate()
+	canvas_layer.add_child(pause_menu)
+
+func check_for_remaining_ap() -> void:
+	ap.text = "AP: %s" % int(PlayerStats.player_stats["Ability Points"])
+	if PlayerStats.player_stats["Ability Points"] > 0:
+		spend_ap_label.show()
+	else:
+		spend_ap_label.hide()

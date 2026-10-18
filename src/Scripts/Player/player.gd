@@ -511,7 +511,7 @@ func spawn_cross_bow_bolt(bolt_position : Marker3D) -> void:
 		cross_bow_bolt.direction = direction
 	else:
 		if tracked_enemy.has_method("show_lock_on_target"):
-			tracked_enemy.show_lock_on_target()
+			#tracked_enemy.show_lock_on_target()
 			SignalBus.enemy_hit.emit(tracked_enemy)
 		#print("Distance: ",bolt_position.global_position.distance_to(tracked_enemy.bolt_position.global_position))
 	get_parent().add_child(sparks)

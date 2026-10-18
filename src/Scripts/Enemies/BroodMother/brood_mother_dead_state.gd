@@ -3,9 +3,9 @@ class_name BroodMotherDead extends State
 @export var death_sfx : AudioStream
 
 func enter() -> void:
-	HitStopManager.freeze(0.3,0.05,0.1,0.1)
+	HitStopManager.freeze(0.3,0.2,0.1,0.1)
 	parent.animation_player.play("death")
-	parent.timer.wait_time = 3.0
+	parent.timer.wait_time = 7.0
 	parent.timer.start()
 	GameManager.play_sfx(death_sfx)
 

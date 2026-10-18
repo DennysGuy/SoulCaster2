@@ -2797,7 +2797,7 @@ material = SubResource("StandardMaterial3D_nbx1m")
 size = Vector2(0.6, 0.6)
 orientation = 0
 
-[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "arrow_hits", "bolt_position", "lock_on_target", "leap_player", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
+[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "arrow_hits", "bolt_position", "lock_on_target", "leap_player", "sfx_player", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_60yqc")
 animation_player = NodePath("Fatrat/AnimationPlayer")
@@ -2808,6 +2808,7 @@ arrow_hits = [NodePath("Fatrat/rat/Skeleton3D/BoneAttachment3D/BoltPierce1"), No
 bolt_position = NodePath("BoltPosition")
 lock_on_target = NodePath("LockOnTarget")
 leap_player = NodePath("AudioStreamPlayer3D")
+sfx_player = NodePath("SfxPlayer")
 enemy_name = "Rabid Rat Cronie"
 base_move_speed = 40.0
 health = 90
@@ -3172,7 +3173,8 @@ visible = false
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=940539670]
 volume_db = 3.0
-max_distance = 130.0
+max_distance = 3000.0
+bus = &"SFX"
 
 [node name="WalkParticles" type="GPUParticles3D" parent="." unique_id=1163675315]
 transform = Transform3D(0.011239725, 0, -0.9999368, 0, 1, 0, 0.9999368, 0, 0.011239725, 0.7412311, 0.630407, 1.1249336)
@@ -3201,5 +3203,10 @@ explosiveness = 0.19
 randomness = 0.19
 process_material = SubResource("ParticleProcessMaterial_xgh2c")
 draw_pass_1 = SubResource("QuadMesh_gkopp")
+
+[node name="SfxPlayer" type="AudioStreamPlayer3D" parent="." unique_id=296579015]
+unit_size = 18.0
+max_distance = 1000.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="PlayerSensor" to="." method="_on_player_sensor_body_entered"]

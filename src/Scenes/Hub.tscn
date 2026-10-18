@@ -20,6 +20,7 @@
 [ext_resource type="Shader" uid="uid://bp61plnfa2kpn" path="res://src/Scenes/TestRealm.gdshader" id="16_lhmkk"]
 [ext_resource type="PackedScene" uid="uid://dl0sjd5yrphdx" path="res://src/Scenes/HUD/XPBar.tscn" id="16_ubcf4"]
 [ext_resource type="AudioStream" uid="uid://lvh7e6pdroae" path="res://Assets/Audio/Music/HubTheme1.wav" id="17_dylb3"]
+[ext_resource type="PackedScene" uid="uid://do3peuxb4can1" path="res://src/Scenes/SpendAPLevel.tscn" id="17_i04xh"]
 [ext_resource type="AudioStream" uid="uid://caoda0ltu6ixm" path="res://Assets/Audio/Flames.mp3" id="21_6sioe"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dylb3"]
@@ -8576,7 +8577,7 @@ look_at_point_3 = NodePath("../LookAtPoint4")
 look_at_point_4 = NodePath("../LookAtPoint3")
 
 [node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.04798661, -0.051094152, -0.051125895, 0.99676466, 0.062018555, 0.047952786, 0.06447824, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.047986608, -0.051094152, -0.05112589, 0.99676466, 0.062018555, 0.047952786, 0.06447824, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="HomePosition" type="Marker3D" parent="." unique_id=603688218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 12, -15)
@@ -9100,6 +9101,22 @@ theme_override_font_sizes/font_size = 32
 text = "Rotate Camera: WASD
 Select  Menu: Left Click on Station"
 
+[node name="PauseLabel" type="Label" parent="CanvasLayer" unique_id=2035683638]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 54.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_ahwup")
+theme_override_font_sizes/font_size = 32
+text = "Press 'ESC' or 'P' to Open Settings"
+
+[node name="SpendAPLabel" parent="CanvasLayer" unique_id=279692615 instance=ExtResource("17_i04xh")]
+
 [node name="DebugMenu" parent="CanvasLayer" unique_id=942155374 instance=ExtResource("10_lhmkk")]
 anchors_preset = 6
 anchor_left = 1.0
@@ -9114,8 +9131,8 @@ z_index = 4096
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 540.0
-offset_bottom = 540.0
+offset_top = -1080.0
+offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
@@ -9125,8 +9142,8 @@ z_index = 4096
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -540.0
-offset_bottom = -540.0
+offset_top = 1080.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
@@ -9136,11 +9153,13 @@ root_node = NodePath("../CanvasLayer/TopBar")
 libraries/ = SubResource("AnimationLibrary_ahwup")
 
 [node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=795027345]
+process_mode = 3
 stream = ExtResource("16_dylb3")
 autoplay = true
 bus = &"Ambience"
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1109431018]
+process_mode = 3
 stream = ExtResource("17_dylb3")
 volume_db = -5.0
 autoplay = true

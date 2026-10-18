@@ -2849,7 +2849,7 @@ transparency = 1
 no_depth_test = true
 albedo_texture = ExtResource("16_povfk")
 
-[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "arrow_hits", "bolt_position", "lock_on_target", "leap_player", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
+[node name="TestEnemy" type="CharacterBody3D" unique_id=486612471 node_paths=PackedStringArray("animation_player", "damage_label_position", "blood_spout", "skeleton", "arrow_hits", "bolt_position", "lock_on_target", "leap_player", "sfx_player", "dead_state", "attack_state", "hurt_1_state", "hurt_2_state", "head_shot_dead") groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_3gpk3")
 animation_player = NodePath("rat(1)/AnimationPlayer")
@@ -2860,6 +2860,7 @@ arrow_hits = [NodePath("rat(1)/rat/Skeleton3D/BoneAttachment3D/BoltPierce1"), No
 bolt_position = NodePath("BoltPosition")
 lock_on_target = NodePath("LockOnTarget")
 leap_player = NodePath("AudioStreamPlayer3D")
+sfx_player = NodePath("SfxPlayer")
 enemy_name = "Rat Cronie"
 move_speed = 70.0
 health = 25
@@ -3240,10 +3241,16 @@ material = SubResource("StandardMaterial3D_povfk")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2089281420]
 stream = ExtResource("17_vxdn8")
 volume_db = 3.0
-max_distance = 130.0
+unit_size = 22.0
+max_distance = 1000.0
 bus = &"SFX"
 
 [node name="WalkParticles" parent="." unique_id=1163675315 instance=ExtResource("19_ocgvo")]
 transform = Transform3D(0.011239724, 0, -0.99993676, 0, 1, 0, 0.99993676, 0, 0.011239724, 0, 0.22895306, -0.33676505)
+
+[node name="SfxPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1063474791]
+unit_size = 22.0
+max_distance = 1000.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="PlayerSensor" to="." method="_on_player_sensor_body_entered"]

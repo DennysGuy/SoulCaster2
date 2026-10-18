@@ -5,7 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://drhm8q5e2k0mv" path="res://Assets/Hub/upperboltomatic.png" id="2_jkh00"]
 [ext_resource type="FontFile" uid="uid://bcrsewr5c6yhk" path="res://Assets/Fonts/GoudyMediaeval-Regular.ttf" id="3_tt1ee"]
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="4_tt1ee"]
+[ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="4_u6w4y"]
 [ext_resource type="PackedScene" uid="uid://b5qnmgtliwnmu" path="res://src/Scenes/Menus/BoltOMaticPreview.tscn" id="5_8mxox"]
+[ext_resource type="StyleBox" uid="uid://b81vauesdl25q" path="res://src/ButtonNormal.tres" id="6_appjw"]
+[ext_resource type="StyleBox" uid="uid://cxc37ghsbrgyg" path="res://src/ButtonHover.tres" id="7_05gbt"]
 [ext_resource type="Texture2D" uid="uid://qw7nygk3cub2" path="res://Assets/ShopMenu/reload_upgrade.png" id="7_tf7al"]
 [ext_resource type="Texture2D" uid="uid://bknpfuhuinhll" path="res://Assets/crystal.png" id="8_appjw"]
 [ext_resource type="Texture2D" uid="uid://7rtabl6yh3k3" path="res://Assets/ShopMenu/mining_bolt1.png" id="8_l2xwa"]
@@ -15,6 +18,26 @@
 [ext_resource type="Texture2D" uid="uid://clt28k4c6j7kp" path="res://Assets/Arena/radar2.png" id="11_tf7al"]
 [ext_resource type="Texture2D" uid="uid://cgkslt3ubg254" path="res://Assets/Arena/amulethealthtracker.png" id="12_l2xwa"]
 [ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="13_tf7al"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sowbe"]
+bg_color = Color(0.65001917, 0.19913083, 0.46035814, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gp2g1"]
+bg_color = Color(0.40712208, 0.103364, 0.27943724, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(-2, -2)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_appjw"]
 
@@ -37,6 +60,66 @@ corner_radius_bottom_left = 8
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jkh00"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u6w4y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05gbt"]
+bg_color = Color(1.8289685e-06, 0.6141034, 0.5473982, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3m10n"]
+bg_color = Color(1.3957917e-06, 0.38933945, 0.34517172, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(-2, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hl2q"]
+bg_color = Color(0.6958667, 0.6305169, 5.7756904e-07, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxopb"]
+bg_color = Color(0.47496456, 0.4305754, 5.7756904e-07, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(-2, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihxn1"]
+bg_color = Color(0.745641, 0, 0.27120095, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjrxx"]
+bg_color = Color(0.446002, 0, 0.14887452, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(-2, -2)
 
 [sub_resource type="Animation" id="Animation_yh3m8"]
 length = 0.001
@@ -165,6 +248,22 @@ theme_override_fonts/font = ExtResource("2_4ymfw")
 theme_override_font_sizes/font_size = 56
 text = "Shop"
 
+[node name="Title2" type="Label" parent="WeaponPanel" unique_id=746812846]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 184.5
+offset_top = 27.0
+offset_right = 356.5
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_u6w4y")
+theme_override_font_sizes/font_size = 24
+text = "ESC or P to Close"
+horizontal_alignment = 1
+
 [node name="PurchaseRifleButton" type="Button" parent="WeaponPanel" unique_id=1390619159]
 layout_mode = 1
 anchors_preset = 7
@@ -172,14 +271,16 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -155.5
+offset_left = -109.5
 offset_top = -67.0
-offset_right = -48.5
+offset_right = -2.5
 offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("6_appjw")
+theme_override_styles/hover = ExtResource("7_05gbt")
 text = "Purchase"
 
 [node name="CloseMenu" type="Button" parent="WeaponPanel" unique_id=500307679]
@@ -192,8 +293,11 @@ offset_top = 14.0
 offset_right = -12.0
 offset_bottom = 45.0
 grow_horizontal = 0
+mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_sowbe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gp2g1")
 text = "X"
 
 [node name="RifleCost" type="Label" parent="WeaponPanel" unique_id=1545838671]
@@ -201,10 +305,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 78.5
-offset_top = 329.0
-offset_right = 166.5
-offset_bottom = 373.0
+offset_left = 68.5
+offset_top = 333.0
+offset_right = 156.5
+offset_bottom = 377.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 42
@@ -214,10 +318,10 @@ vertical_alignment = 1
 
 [node name="OreIcon" type="TextureRect" parent="WeaponPanel" unique_id=808567126]
 layout_mode = 0
-offset_left = 441.0
-offset_top = 325.0
-offset_right = 528.0
-offset_bottom = 434.0
+offset_left = 433.0
+offset_top = 330.0
+offset_right = 520.0
+offset_bottom = 439.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_appjw")
 stretch_mode = 2
@@ -1056,9 +1160,9 @@ text = "Special Weapons"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UpgradesPanel" unique_id=2147352933]
 layout_mode = 0
-offset_left = 18.0
+offset_left = 58.0
 offset_top = 53.0
-offset_right = 277.0
+offset_right = 472.0
 offset_bottom = 93.0
 theme_override_constants/separation = 16
 
@@ -1067,6 +1171,8 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_tt1ee")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_05gbt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3m10n")
 text = "Weapon Upgrades"
 
 [node name="AmuletsButton" type="Button" parent="UpgradesPanel/HBoxContainer" unique_id=588090775]
@@ -1074,6 +1180,8 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_tt1ee")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_4hl2q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yxopb")
 text = "Amulets"
 
 [node name="SpecialWeaponsButton" type="Button" parent="UpgradesPanel/HBoxContainer" unique_id=427459789]
@@ -1081,6 +1189,8 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_tt1ee")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ihxn1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yjrxx")
 text = "Special Weapons"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1585083139]

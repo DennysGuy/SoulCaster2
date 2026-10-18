@@ -53,7 +53,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("close_menu"):
+		close_menu()
 
 func _on_attack_damage_upgrade_button_button_up() -> void:
 	PlayerStats.player_stats["Attack Damage"] += PlayerStats.stat_levels["Attack Damage"]["Interval"]
@@ -211,6 +212,15 @@ func _on_button_button_up() -> void:
 	await animation_player.animation_finished
 	queue_free()
 
+func close_menu() -> void:
+	GameManager.in_menu = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	SignalBus.menu_exited.emit()
+	GameManager.play_sfx(CLOSE_BAG)
+	animation_player.play("SpawnOut")
+	SignalBus.upgrade_station_exited.emit()
+	await animation_player.animation_finished
+	queue_free()	
 
 func _on_ap_amountupgrade_button_button_up() -> void:
 	PlayerStats.player_stats["AP Amount"] += PlayerStats.stat_levels["AP Amount"]["Interval"]

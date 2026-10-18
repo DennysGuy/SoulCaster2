@@ -1304,7 +1304,7 @@ grow_vertical = 2
 pivot_offset = Vector2(177, 70)
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 128
-text = "Clean!"
+text = "3"
 horizontal_alignment = 1
 
 [node name="HoldSpaceNotice" type="Label" parent="." unique_id=2142271763]
@@ -1384,6 +1384,15 @@ offset_bottom = 118.0
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 24
 text = "Hold 'Q' to Exit Combat"
+
+[node name="Label2" type="Label" parent="." unique_id=218168290]
+offset_left = 15.0
+offset_top = 122.0
+offset_right = 227.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("10_6w4u3")
+theme_override_font_sizes/font_size = 24
+text = "'ESC' or 'P' to Open Settings"
 
 [node name="BoltsHolder" type="HBoxContainer" parent="." unique_id=548677851]
 offset_left = 1317.0

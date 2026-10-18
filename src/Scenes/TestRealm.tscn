@@ -3548,7 +3548,7 @@ look_at_point_3 = NodePath("../CameraPoint4")
 look_at_point_4 = NodePath("../CameraPoint3")
 
 [node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986664, -0.051094152, -0.051125944, 0.99676466, 0.06201849, 0.047952786, 0.06447818, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.047986653, -0.051094152, -0.051125932, 0.99676466, 0.062018484, 0.047952786, 0.064478174, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="PlayerSprite" type="CSGBox3D" parent="." unique_id=1774175450]
 transform = Transform3D(1, 0, 0, 0, 0.016283223, 0.9998674, 0, -0.9998673, 0.016283223, -5.6775446, 2.013178, -5.0043445)
@@ -3709,12 +3709,14 @@ one_shot = true
 [node name="HUD" parent="." unique_id=1895423373 instance=ExtResource("4_mocxq")]
 
 [node name="AmbiencePlayer" type="AudioStreamPlayer" parent="." unique_id=1172639727]
+process_mode = 3
 stream = ExtResource("25_v4c23")
 volume_db = 6.0
 autoplay = true
 bus = &"Ambience"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=907528117]
+process_mode = 3
 stream = ExtResource("8_uqw8w")
 bus = &"Music"
 

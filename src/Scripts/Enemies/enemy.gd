@@ -11,6 +11,7 @@ var prev_state : State
 @export var bolt_position : Marker3D
 @export var lock_on_target : Sprite3D
 @export var leap_player : AudioStreamPlayer3D
+@export var sfx_player : AudioStreamPlayer3D
 
 @export_group("Enemy Stats")
 @export var enemy_name : String
@@ -55,7 +56,6 @@ const RAT_LEAP_2 = preload("uid://cf6dtnrcoij5i")
 const RAT_LEAP_3 = preload("uid://by242hcdg8ma4")
 
 @onready var leaps : Array[AudioStream] = [RAT_LEAP_1,RAT_LEAP_2,RAT_LEAP_3]
-
 
 var round_ended : bool = false
 
@@ -148,7 +148,9 @@ func damage_enemy(applied_damage : int = 0) -> void:
 		if GameManager.current_boss_health <= 0:
 			kill_enemy()
 		else:
-			GameManager.play_sfx(hurts.pick_random())
+			if sfx_player:
+				sfx_player.stream = hurts.pick_random()
+				sfx_player.play()
 	else:
 		health -= damage
 		SignalBus.enemy_found.emit(enemy_name, health, max_enemy_health)
@@ -156,7 +158,9 @@ func damage_enemy(applied_damage : int = 0) -> void:
 		if health <= 0:
 			kill_enemy()
 		else:
-			GameManager.play_sfx(hurts.pick_random())
+			if sfx_player:
+				sfx_player.stream = hurts.pick_random()
+				sfx_player.play()
 
 func spawn_damage_label(damage : int, is_crit : bool) -> void:
 	var damage_label : DamageLabel = preload("uid://blcs0f2y7cia2").instantiate()

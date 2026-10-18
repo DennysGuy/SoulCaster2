@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://cbe81thfchvtl" path="res://Assets/UpgradeMenu/xp.png" id="8_oaid5"]
 [ext_resource type="Texture2D" uid="uid://bnehomc317oya" path="res://Assets/UpgradeMenu/spd.png" id="9_oaid5"]
 [ext_resource type="Texture2D" uid="uid://gi0rgykeyg4l" path="res://Assets/UpgradeMenu/moreAp.png" id="9_yw0ye"]
+[ext_resource type="StyleBox" uid="uid://b81vauesdl25q" path="res://src/ButtonNormal.tres" id="16_bwnhy"]
+[ext_resource type="StyleBox" uid="uid://cxc37ghsbrgyg" path="res://src/ButtonHover.tres" id="17_oc4ad"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bwnhy"]
 
@@ -200,14 +202,30 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -148.0
-offset_top = 37.0
-offset_right = 166.0
-offset_bottom = 82.0
+offset_top = 22.0
+offset_right = 162.0
+offset_bottom = 57.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 32
 text = "Stats Upgrade Menu"
+
+[node name="Label3" type="Label" parent="Panel" unique_id=818681763]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_top = 64.0
+offset_right = 135.0
+offset_bottom = 88.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_mju0n")
+theme_override_font_sizes/font_size = 22
+text = "'ESC' or 'P' to Close Menu"
+horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="Panel" unique_id=60897687]
 layout_mode = 1
@@ -422,6 +440,78 @@ theme_override_fonts/font = ExtResource("2_mju0n")
 theme_override_font_sizes/font_size = 18
 text = "Upgrade (1)"
 
+[node name="ColorRect" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=1116795381]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 42.0
+offset_right = 136.0
+offset_bottom = 126.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=1505329422]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 42.0
+offset_right = 488.0
+offset_bottom = 126.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=777412130]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 182.0
+offset_right = 488.0
+offset_bottom = 266.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=11295433]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 317.0
+offset_right = 488.0
+offset_bottom = 401.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=1733046334]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 456.0
+offset_right = 488.0
+offset_bottom = 540.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=1218417413]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 184.0
+offset_right = 136.0
+offset_bottom = 268.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=182878173]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 321.0
+offset_right = 136.0
+offset_bottom = 405.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=742114004]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 453.0
+offset_right = 136.0
+offset_bottom = 537.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Panel/StatsUpgradePanel" unique_id=55929634]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 591.0
+offset_right = 136.0
+offset_bottom = 675.0
+color = Color(0, 0, 0, 1)
+
 [node name="Icon1" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=430507831]
 layout_mode = 0
 offset_left = 57.0
@@ -469,27 +559,27 @@ expand_mode = 1
 
 [node name="Icon8" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=2069212415]
 layout_mode = 0
-offset_left = 411.0
+offset_left = 409.0
 offset_top = 461.0
-offset_right = 485.0
+offset_right = 483.0
 offset_bottom = 535.0
 texture = ExtResource("9_yw0ye")
 expand_mode = 1
 
 [node name="Icon6" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=283015837]
 layout_mode = 0
-offset_left = 412.0
+offset_left = 409.0
 offset_top = 322.0
-offset_right = 486.0
+offset_right = 483.0
 offset_bottom = 396.0
 texture = ExtResource("7_sky01")
 expand_mode = 1
 
 [node name="Icon4" type="TextureRect" parent="Panel/StatsUpgradePanel" unique_id=2034622669]
 layout_mode = 0
-offset_left = 411.0
+offset_left = 409.0
 offset_top = 187.0
-offset_right = 485.0
+offset_right = 483.0
 offset_bottom = 261.0
 texture = ExtResource("8_g0t1s")
 expand_mode = 1
@@ -499,9 +589,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 40.5
+offset_left = 34.5
 offset_top = 48.0
-offset_right = 114.5
+offset_right = 108.5
 offset_bottom = 122.0
 grow_horizontal = 2
 texture = ExtResource("9_oaid5")
@@ -526,11 +616,16 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -55.0
+offset_left = -67.0
 offset_top = 12.0
 offset_right = -16.0
-offset_bottom = 43.0
+offset_bottom = 59.0
 grow_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_g0t1s")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = ExtResource("16_bwnhy")
+theme_override_styles/hover = ExtResource("17_oc4ad")
 text = "X"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1443163094]

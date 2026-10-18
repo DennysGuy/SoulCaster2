@@ -63,7 +63,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("close_menu"):
+		close_menu()
 
 func _on_purchase_rifle_button_button_up() -> void:
 	PlayerStats.player_stats["Ore"] -= 130
@@ -92,6 +93,9 @@ func _on_purchase_radar_button_button_up() -> void:
 	update_menu()
 
 func _on_close_menu_button_up() -> void:
+	close_menu()
+
+func close_menu() -> void:
 	GameManager.in_menu = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	SignalBus.shop_exited.emit()

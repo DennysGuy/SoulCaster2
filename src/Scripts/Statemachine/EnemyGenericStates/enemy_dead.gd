@@ -22,7 +22,10 @@ func enter() -> void:
 	if parent.enemy_name == "Rabid Rat Cronie":
 		added_time += 1
 	
-	GameManager.play_sfx(dead_sfx)
+	if !parent.round_ended:
+		parent.sfx_player.stream = dead_sfx
+		parent.sfx_player.play()
+	
 	SignalBus.time_added.emit(added_time)
 	if !parent.round_ended:
 		SignalBus.progress_added.emit(parent.progress_amount)
