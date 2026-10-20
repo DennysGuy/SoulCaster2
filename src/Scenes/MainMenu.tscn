@@ -120,7 +120,7 @@ theme_override_font_sizes/font_size = 28
 text = "Credits
 
 Artwork, Story, and Character Concepts - Rottenflassh
-Programming, Game Design, Story, and Music Composition - Denny'sGuy"
+Programming, Game Design, Story, Sound Design, and Music Composition - Denny'sGuy"
 horizontal_alignment = 1
 
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

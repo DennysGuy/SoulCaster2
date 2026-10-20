@@ -131,8 +131,6 @@ func _ready() -> void:
 	alert_arrow.visible = false
 	alert_arrow_2.visible = false
 
-	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
@@ -153,6 +151,9 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("throw_grenade") and GameManager.grenades_owned > 0:
 			spawn_grenade()
+		
+		if Input.is_action_just_pressed("jump") and GameManager.super_shot_cost and GameManager.can_use_super_shot:
+			SignalBus.super_shot_unleashed.emit()
 		
 		if Input.is_action_just_pressed("reload") and GameManager.in_arena:
 			shooting = true

@@ -114,3 +114,5 @@ signal gate_exited
 
 signal item_purchased
 signal intro_ended
+
+signal super_shot_unleashed

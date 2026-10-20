@@ -54,6 +54,5 @@ func _on_static_body_3d_body_entered(body: Node3D) -> void:
 			body_parent.damage_ore()
 			queue_free()
 
-
 func _on_timer_timeout() -> void:
 	queue_free()

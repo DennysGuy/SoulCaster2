@@ -18,6 +18,9 @@
 [ext_resource type="Shader" uid="uid://dlwe4p5tl2jbq" path="res://src/Scripts/DamagePulse.gdshader" id="14_fmwqo"]
 [ext_resource type="Texture2D" uid="uid://j3bjw76bnnul" path="res://Assets/Arena/CombatMode.png" id="15_g1kdu"]
 [ext_resource type="Texture2D" uid="uid://cljqe5rqldjc6" path="res://Assets/Arena/OreMode.png" id="16_sx6ht"]
+[ext_resource type="Texture2D" uid="uid://b3cwcmvyyaqmh" path="res://Assets/ShopMenu/SuperShot.png" id="18_153o4"]
+[ext_resource type="PackedScene" uid="uid://bkooyam0t8hfy" path="res://src/Scenes/HUD/SuperShotNotice.tscn" id="18_j3t07"]
+[ext_resource type="FontFile" uid="uid://bcrsewr5c6yhk" path="res://Assets/Fonts/GoudyMediaeval-Regular.ttf" id="19_2a26m"]
 [ext_resource type="Texture2D" uid="uid://byttxlrsgcpny" path="res://Assets/ProgressBar/Stun_bar.png" id="19_phtwg"]
 [ext_resource type="Texture2D" uid="uid://ol05lc5irm0w" path="res://Assets/ProgressBar/Stun_Outer.png" id="20_fmwqo"]
 
@@ -1296,7 +1299,7 @@ grow_vertical = 2
 pivot_offset = Vector2(177, 70)
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 128
-text = "Survive!"
+text = "3"
 horizontal_alignment = 1
 
 [node name="HoldSpaceNotice" type="Label" parent="." unique_id=2142271763]
@@ -1350,6 +1353,52 @@ grow_vertical = 2
 texture = ExtResource("12_lt1va")
 expand_mode = 1
 
+[node name="SuperShotCoolDownIcon" type="TextureRect" parent="." unique_id=1033154282]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = 265.0
+offset_right = 92.0
+offset_bottom = 329.0
+grow_vertical = 2
+texture = ExtResource("18_153o4")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="SuperShotCoolDownIcon" unique_id=283337999]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -30.0
+offset_right = 32.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SuperShotCoolDownLabel" type="Label" parent="SuperShotCoolDownIcon" unique_id=1977890019]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -36.0
+offset_right = 25.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("19_2a26m")
+theme_override_font_sizes/font_size = 46
+text = "30"
+horizontal_alignment = 1
+
 [node name="GrenadeCountLabel" type="Label" parent="." unique_id=780836397]
 offset_left = 93.0
 offset_top = 709.0
@@ -1367,6 +1416,11 @@ offset_bottom = 694.0
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 52
 text = "RMB"
+
+[node name="SuperShotNotice" parent="." unique_id=400304387 instance=ExtResource("18_j3t07")]
+visible = false
+offset_top = 375.0
+offset_bottom = 429.0
 
 [node name="Label" type="Label" parent="." unique_id=1111943450]
 offset_left = 15.0
@@ -1446,6 +1500,7 @@ max_value = 400.0
 texture_over = ExtResource("20_fmwqo")
 
 [node name="FadeOutRect" type="ColorRect" parent="." unique_id=1509932320]
+visible = false
 z_index = 4096
 anchors_preset = 15
 anchor_right = 1.0
@@ -1454,5 +1509,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="SuperShotCoolDownTimer" type="Timer" parent="." unique_id=1557546464]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="SuperShotCoolDownTimer" to="." method="_on_super_shot_cool_down_timer_timeout"]
 
 [editable path="RoundTimerLabel"]

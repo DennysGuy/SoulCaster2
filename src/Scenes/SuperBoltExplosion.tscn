@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://2bmd4oij3kmi"]
+
+[ext_resource type="Script" uid="uid://bt75o7pjl1eku" path="res://src/Scripts/super_bolt_explosion.gd" id="1_8br07"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8br07"]
+
+[node name="SuperBoltExplosion" type="Node3D" unique_id=1427841954]
+script = ExtResource("1_8br07")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=76111272]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1047772110]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("BoxShape3D_8br07")
+
+[node name="Timer" type="Timer" parent="." unique_id=580624575]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

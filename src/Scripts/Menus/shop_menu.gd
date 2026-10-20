@@ -43,6 +43,10 @@ class_name ShopMenu extends Control
 @onready var grenade_title: Label = $UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet/GrenadeTitle
 @onready var grenade_purchase_button: Button = $UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet/GrenadePurchaseButton
 @onready var special_weapons: Panel = $UpgradesPanel/MarginContainer/SpecialWeapons
+
+@onready var over_heat_purchase_button: Button = $UpgradesPanel/MarginContainer/SpecialWeapons/OverHeatSpecial/OverHeatPurchaseButton
+
+
 const PURCHASE_WEAPON_SFX = preload("uid://blxprphbhkx5d")
 const BOLT_O_BUY = preload("uid://dxf67h553mrn1")
 const OPEN_MENU = preload("uid://0nxshah4wsng")
@@ -305,6 +309,17 @@ func update_special_weapons_menu() -> void:
 	else:
 		grenade_purchase_button.disabled = true
 		grenade_purchase_button.text = "Insufficient Ore"
+	
+	if GameManager.rifle_owned:
+		if PlayerStats.player_stats["Ore"] >= GameManager.super_shot_cost:
+			over_heat_purchase_button.disabled = false
+			over_heat_purchase_button.text = "Purchase!"
+		else:
+			over_heat_purchase_button.disabled = true
+			over_heat_purchase_button.text = "Insufficient Ore"
+	else:
+		over_heat_purchase_button.disabled = true
+		over_heat_purchase_button.text = "Can't Purchase"
 
 func _on_special_weapons_button_button_up() -> void:
 	weapon_upgrades_panel.hide()
@@ -324,7 +339,7 @@ func notice_checks() -> void:
 	else:
 		amulets_purchase_notice.hide()
 	
-	if PlayerStats.player_stats["Ore"] >= 8:
+	if PlayerStats.player_stats["Ore"] >= 8 or GameManager.rifle_owned and PlayerStats.player_stats["Ore"] >= GameManager.super_shot_cost:
 		special_weapons_notice.show()
 	else:
 		special_weapons_notice.hide()
@@ -336,3 +351,11 @@ func notice_checks() -> void:
 	
 func check_upgrades() -> bool:
 	return PlayerStats.player_stats["Ore"] >= GameManager.pistol_mag_cost or PlayerStats.player_stats["Ore"] >= GameManager.rifle_mag_cost and GameManager.rifle_owned or PlayerStats.player_stats["Ore"] >= GameManager.fortified_pistol_bullets_cost and !GameManager.fortified_pistol_bullets or PlayerStats.player_stats["Ore"] >= GameManager.fortified_pistol_rifle_cost and !GameManager.fortified_rifle_bullets and GameManager.rifle_owned 
+
+func _on_over_heat_purchase_button_button_up() -> void:
+	PlayerStats.player_stats["Ore"] -= GameManager.super_shot_cost
+	GameManager.super_shot_unlocked = true
+	update_special_weapons_menu()
+	update_menu()
+	CutSceneManager.play_merchant_idle_in_cart_1()
+	GameManager.play_sfx(PURCHASE_WEAPON_SFX)

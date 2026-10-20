@@ -17,6 +17,7 @@ var boss_was_stunned : bool = false
 var boss_in_roll_mode : bool = false
 
 var ore_hunt_mode_started : bool = false
+var can_use_super_shot : bool = true
 
 var bullets_left : int = 32
 var pistol_magazine_size : int = 1
@@ -26,6 +27,7 @@ var magazine : int = 0
 var just_spawned_mini_round : bool = false
 var pistol_mag_cost : int = 5
 var rifle_mag_cost: int = 20
+var super_shot_cost : int = 150
 
 var round_number : int = -1
 const MAX_ROUND : int = 3
@@ -57,6 +59,7 @@ var ambience_volume : float = -6.0
 
 var target_crosshair_visible : bool = true
 var not_in_shop : bool = false
+var super_shot_unlocked : bool = false
 
 var music :Array[AudioStream] = [
 	ROUND_1_THEME_MASTERED,

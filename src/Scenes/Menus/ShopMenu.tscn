@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cgkslt3ubg254" path="res://Assets/Arena/amulethealthtracker.png" id="12_l2xwa"]
 [ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="13_tf7al"]
 [ext_resource type="Texture2D" uid="uid://dx8de7koaa2fx" path="res://Assets/PurchaseNotice.png" id="19_3m10n"]
+[ext_resource type="Texture2D" uid="uid://b3cwcmvyyaqmh" path="res://Assets/ShopMenu/SuperShot.png" id="19_4hl2q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sowbe"]
 bg_color = Color(0.65001917, 0.19913083, 0.46035814, 1)
@@ -444,6 +445,7 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
 [node name="WeaponUpgradesPanel" type="Panel" parent="UpgradesPanel/MarginContainer" unique_id=686157222]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_05gbt")
 
@@ -1047,7 +1049,6 @@ theme_override_font_sizes/font_size = 48
 text = "Amulets"
 
 [node name="SpecialWeapons" type="Panel" parent="UpgradesPanel/MarginContainer" unique_id=515192718]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_u6w4y")
 
@@ -1059,9 +1060,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -176.5
-offset_top = -64.65842
+offset_top = -122.99997
 offset_right = 176.5
-offset_bottom = 64.65842
+offset_bottom = 6.316864
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yh3m8")
@@ -1134,6 +1135,105 @@ theme_override_font_sizes/font_size = 24
 text = "x 8"
 
 [node name="GrenadePurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet" unique_id=290708639]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 44.5
+offset_top = -5.6584473
+offset_right = 120.5
+offset_bottom = 27.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 28
+text = "Purchase"
+
+[node name="OverHeatSpecial" type="Panel" parent="UpgradesPanel/MarginContainer/SpecialWeapons" unique_id=1039510672]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.5
+offset_top = 25.00003
+offset_right = 176.5
+offset_bottom = 154.31686
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yh3m8")
+
+[node name="OverHeatIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/SpecialWeapons/OverHeatSpecial" unique_id=248961162]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -32.658447
+offset_right = 76.0
+offset_bottom = 28.341553
+grow_vertical = 2
+tooltip_text = "The Super Shot Mod is an add on to the Bolt-O-Matic 8000. Press 'Space Bar' to unleash a \"Super Shot Bolt\", a special shot that  applies a multiplier (+25% base damage) for each remaining bolt. Ammunition is completed depleted, and the Bolt-O-Matic will be on a 30 second cooldown, so you'll need to think about when the best moment will be to unleash this powerful attack."
+texture = ExtResource("19_4hl2q")
+expand_mode = 1
+
+[node name="OreIcon" type="TextureRect" parent="UpgradesPanel/MarginContainer/SpecialWeapons/OverHeatSpecial" unique_id=471809996]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -18.658447
+offset_right = -36.5
+offset_bottom = 29.341553
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_appjw")
+expand_mode = 1
+
+[node name="OverHeatTitle" type="Label" parent="UpgradesPanel/MarginContainer/SpecialWeapons/OverHeatSpecial" unique_id=1859615685]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -58.658447
+offset_right = 117.5
+offset_bottom = -32.658447
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "Super Shot Mod"
+horizontal_alignment = 1
+
+[node name="OverHeatCost" type="Label" parent="UpgradesPanel/MarginContainer/SpecialWeapons/OverHeatSpecial" unique_id=851363474]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -6.6584473
+offset_right = 15.5
+offset_bottom = 19.341553
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_tt1ee")
+theme_override_font_sizes/font_size = 24
+text = "x 150"
+
+[node name="OverHeatPurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/SpecialWeapons/OverHeatSpecial" unique_id=909390091]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1244,6 +1344,7 @@ libraries/ = SubResource("AnimationLibrary_jkh00")
 [connection signal="button_up" from="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet/RadarPurchaseButton" to="." method="_on_radar_purchase_button_button_up"]
 [connection signal="button_up" from="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet/TrackerPuchaseButton" to="." method="_on_tracker_puchase_button_button_up"]
 [connection signal="button_up" from="UpgradesPanel/MarginContainer/SpecialWeapons/RadarAmulet/GrenadePurchaseButton" to="." method="_on_grenade_purchase_button_button_up"]
+[connection signal="button_up" from="UpgradesPanel/MarginContainer/SpecialWeapons/OverHeatSpecial/OverHeatPurchaseButton" to="." method="_on_over_heat_purchase_button_button_up"]
 [connection signal="button_up" from="UpgradesPanel/HBoxContainer/WeaponUpgradesButton" to="." method="_on_weapon_upgrades_button_button_up"]
 [connection signal="button_up" from="UpgradesPanel/HBoxContainer/AmuletsButton" to="." method="_on_amulets_button_button_up"]
 [connection signal="button_up" from="UpgradesPanel/HBoxContainer/SpecialWeaponsButton" to="." method="_on_special_weapons_button_button_up"]

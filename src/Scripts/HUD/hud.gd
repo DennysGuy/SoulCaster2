@@ -40,6 +40,7 @@ class_name HUD extends CanvasLayer
 
 @onready var top_bar: ColorRect = $TopBar
 @onready var bot_bar: ColorRect = $BotBar
+@onready var super_shot_notice: SuperShotNotice = $SuperShotNotice
 
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
@@ -89,6 +90,7 @@ const GRUNT_2 = preload("uid://2gj05mllf3ho")
 const GRUNT_3 = preload("uid://bsg37rag4j8qx")
 const LEVEL_UP = preload("uid://crxa0sswpnn7g")
 @onready var notification_player: AnimationPlayer = $NotificationPlayer
+@onready var super_shot_cool_down_timer: Timer = $SuperShotCoolDownTimer
 
 @onready var grunts : Array[AudioStream] = [GRUNT_2, GRUN_1, GRUNT_3]
 
@@ -109,6 +111,9 @@ var displayed_progress_count : float = 0.0
 
 @onready var round_completion_label: Label = $RoundTracker/RoundCompletionLabel
 @onready var round_phase_label: Label = $RoundTracker/RoundPhaseLabel
+
+@onready var super_shot_cool_down_icon: TextureRect = $SuperShotCoolDownIcon
+@onready var super_shot_cool_down_label: Label = $SuperShotCoolDownIcon/SuperShotCoolDownLabel
 
 func _ready() -> void:
 	
@@ -142,7 +147,7 @@ func _ready() -> void:
 	SignalBus.shop_guy_entered.connect(add_shop_guy_portrait)
 	SignalBus.boss_entered.connect(add_boss_portrait)
 	SignalBus.game_ended.connect(play_fade_out)
-	
+	SignalBus.super_shot_unleashed.connect(start_super_shot_cool_down)
 	update_ore_count_label(0)
 	update_grenade_count()
 	#round_timer.wait_time = PlayerStats.player_stats["Starting Timer"]
@@ -182,6 +187,15 @@ func _ready() -> void:
 				start_ore_hunt_countdown()
 		else:
 			start_combat_round()
+	
+	if GameManager.rifle_owned and GameManager.super_shot_unlocked:
+		show_super_shot_notice()
+	else:
+		hide_super_shot_notice()
+		
+	
+	
+	GameManager.can_use_super_shot = true
 	bar_player.play("CloseIn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -200,6 +214,9 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("close_menu") and !GameManager.in_cutscene:
 		spawn_pause_menu()
+	
+	if super_shot_cool_down_icon.visible:
+		super_shot_cool_down_label.text = str(int(super_shot_cool_down_timer.time_left))
 	
 	if GameManager.ore_hunt_mode_started: 
 		if Input.is_action_pressed("jump"):
@@ -686,3 +703,22 @@ func go_to_end_credits_pane() -> void:
 func spawn_pause_menu() -> void:
 	var pause_menu : PauseMenu = preload("uid://b3fjukg0yqsop").instantiate()
 	add_child(pause_menu)
+
+func show_super_shot_notice() -> void:
+	GameManager.can_use_super_shot = true
+	super_shot_notice.show()
+
+func hide_super_shot_notice() -> void:
+	GameManager.can_use_super_shot = false
+	super_shot_notice.hide()
+
+func start_super_shot_cool_down() -> void:
+	hide_super_shot_notice()
+	super_shot_cool_down_timer.wait_time = 30
+	super_shot_cool_down_timer.start()
+	super_shot_cool_down_icon.show()
+	
+
+func _on_super_shot_cool_down_timer_timeout() -> void:
+	show_super_shot_notice()
+	super_shot_cool_down_icon.hide()
