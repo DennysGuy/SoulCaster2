@@ -51,7 +51,9 @@ func _on_static_body_3d_body_entered(body: Node3D) -> void:
 				spawn_explosion()
 				queue_free()
 			spawn_explosion()
-			body_parent.damage_enemy()
+			var multiplier : float = 0.25 * bolts_in_mag
+			var super_damage : int = randi_range(PlayerStats.player_stats["Attack Damage"] * multiplier-5,PlayerStats.player_stats["Attack Damage"] * multiplier)
+			body_parent.damage_enemy(super_damage)
 			queue_free()
 
 func _on_timer_timeout() -> void:
