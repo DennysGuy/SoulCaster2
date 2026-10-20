@@ -31,7 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
 func damage_ore() -> void:
-	lock_on_target.show()
+	#lock_on_target.show()
 	SignalBus.enemy_hit.emit(self)
 	state_machine.change_state(hurt_state)
 

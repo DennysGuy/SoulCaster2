@@ -6,7 +6,9 @@
 [ext_resource type="FontFile" uid="uid://dxhfnu6r40cg7" path="res://Assets/Fonts/Mordred.ttf" id="3_vxtus"]
 [ext_resource type="FontFile" uid="uid://bw5o41cdl77cl" path="res://Assets/Fonts/Mordred-Bold.ttf" id="4_6mdog"]
 [ext_resource type="Texture2D" uid="uid://cj6ujdgypwg3d" path="res://Assets/arrow.png" id="6_6mdog"]
+[ext_resource type="StyleBox" uid="uid://b81vauesdl25q" path="res://src/ButtonNormal.tres" id="6_hyl3v"]
 [ext_resource type="Texture2D" uid="uid://1bt4cxsvqlg3" path="res://Assets/arrow_pressed.png" id="7_hyl3v"]
+[ext_resource type="StyleBox" uid="uid://cxc37ghsbrgyg" path="res://src/ButtonHover.tres" id="7_uqsd5"]
 
 [node name="Panel" type="TextureRect" unique_id=1670977406]
 anchors_preset = 8
@@ -94,32 +96,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -52.0
-offset_right = 26.0
-offset_bottom = -26.0
+offset_left = -24.0
+offset_top = -55.0
+offset_right = 25.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("4_6mdog")
+theme_override_styles/normal = ExtResource("6_hyl3v")
+theme_override_styles/hover = ExtResource("7_uqsd5")
 text = "Go!"
-
-[node name="CloseButton" type="Button" parent="." unique_id=1577832096]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = -271.0
-offset_right = 124.0
-offset_bottom = -245.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("4_6mdog")
-text = "X"
 
 [node name="DecreaseRound" type="TextureButton" parent="." unique_id=766387133]
 modulate = Color(0, 0.85931367, 0.6554155, 1)
@@ -145,6 +132,5 @@ texture_disabled = ExtResource("7_hyl3v")
 flip_h = true
 
 [connection signal="button_up" from="StartButton" to="." method="_on_start_button_button_up"]
-[connection signal="button_up" from="CloseButton" to="." method="_on_close_button_button_up"]
 [connection signal="button_up" from="DecreaseRound" to="." method="_on_decrease_round_button_up"]
 [connection signal="button_up" from="IncreaseRound" to="." method="_on_increase_round_button_up"]

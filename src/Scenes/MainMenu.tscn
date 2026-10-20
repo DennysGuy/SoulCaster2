@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cp4aa18x3ckpd" path="res://src/Scenes/TestRealmDemo.tscn" id="2_81l7e"]
 [ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="2_jlbbt"]
 [ext_resource type="Texture2D" uid="uid://f17ge23g6qx0" path="res://Assets/Logo.png" id="3_fc7xl"]
-[ext_resource type="AudioStream" uid="uid://dsifj0u8coxpv" path="res://Assets/Audio/Music/MainTheme-Mastered.wav" id="4_1nasp"]
 [ext_resource type="Texture2D" uid="uid://ge7oksa3yf1" path="res://Assets/CheckBox_Checked.png" id="5_81l7e"]
+[ext_resource type="AudioStream" uid="uid://ce3qwh1iad2lj" path="res://Assets/Audio/Music/MainTheme-Mastered.ogg" id="5_fc7xl"]
 [ext_resource type="Texture2D" uid="uid://coalws0sutj7j" path="res://Assets/CheckBox.png" id="6_fc7xl"]
 
 [node name="MainMenu" type="Control" unique_id=1734805055]
@@ -67,7 +67,7 @@ theme_override_font_sizes/font_size = 82
 text = "Play"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2040277561]
-stream = ExtResource("4_1nasp")
+stream = ExtResource("5_fc7xl")
 autoplay = true
 bus = &"Music"
 

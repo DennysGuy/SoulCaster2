@@ -25,7 +25,7 @@ var bullets_in_clip : int = 6
 var magazine : int = 0
 var just_spawned_mini_round : bool = false
 var pistol_mag_cost : int = 5
-var rifle_mag_cost: int = 10
+var rifle_mag_cost: int = 20
 
 var round_number : int = -1
 const MAX_ROUND : int = 3
@@ -45,10 +45,10 @@ var round_times : Array[int] = [125, 230, 340]
 var minimum_spawn : Array[int] = [1,1,2]
 var maximum_spawn : Array[int] = [2,3,3]
 
-const ROUND_1_THEME_MASTERED = preload("uid://ltnbfbfkls2x")
-const ROUND_2_THEME_MASTERED = preload("uid://b4sge4bjcmvl0")
+const ROUND_1_THEME_MASTERED = preload("uid://borime2co2w8s")
+const ROUND_2_THEME_MASTERED = preload("uid://c71s1mxllf52m")
 
-const ROUND_3_THEME_MASTERED = preload("uid://cxkmoesov7p3k")
+const ROUND_3_THEME_MASTERED = preload("uid://cj5j2vcx3kq5k")
 
 var master_volume : float = -5.0
 var sfx_volume : float = -2.0
@@ -56,6 +56,7 @@ var music_volume : float = -5.0
 var ambience_volume : float = -6.0
 
 var target_crosshair_visible : bool = true
+var not_in_shop : bool = false
 
 var music :Array[AudioStream] = [
 	ROUND_1_THEME_MASTERED,
@@ -78,7 +79,7 @@ var cut_scenes_disabled : bool = false
 
 enum COMBAT_TUTORIALS {COMBAT_TUTORIAL, RESOURCE_HUNT_TUTORIAL, BOSS, END}
 var combat_tutorial_state : COMBAT_TUTORIALS = COMBAT_TUTORIALS.COMBAT_TUTORIAL
-const MAIN_THEME_MASTERED = preload("uid://dsifj0u8coxpv")
+const MAIN_THEME_MASTERED = preload("uid://ce3qwh1iad2lj")
 
 var last_ten_sec : bool = false
 

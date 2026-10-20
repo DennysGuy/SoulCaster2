@@ -5,8 +5,8 @@ class_name TestRealm extends Node3D
 @onready var ore_spawn_points: Node = $OreSpawnPoints
 @onready var ore_spawn_timer: Timer = $OreSpawnTimer
 @onready var boss_spawn_point: Marker3D = $BossSpawnPoints/BossSpawnPoint
-const BOSS_THEME = preload("uid://cu5biet1k3nwu")
-const MEET_MOTHER = preload("uid://b57auqfc3wb37")
+const BOSS_THEME = preload("uid://dn6sy3mht1w4v")
+const MEET_MOTHER = preload("uid://51gyut6yrgq2")
 
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var cut_scene_cam: Camera3D = $CutSceneCam
@@ -22,7 +22,7 @@ const ENEMY_SPAWN_SFX = preload("uid://bfk213an2avam")
 
 @onready var boss_spawn_points: Node3D = $BossSpawnPoints
 
-const MINING_THEME = preload("uid://88vhce7p4n4p")
+const MINING_THEME = preload("uid://bwido0wpf60us")
 
 @onready var camera: Camera3D = $Player/Head/Camera
 

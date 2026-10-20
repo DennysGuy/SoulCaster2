@@ -12,12 +12,12 @@ sky_material = SubResource("ProceduralSkyMaterial_dyv72")
 
 [sub_resource type="Environment" id="Environment_nwxvb"]
 background_mode = 1
-background_color = Color(0, 0, 0, 0.73333335)
-background_energy_multiplier = 0.95
+background_color = Color(0, 0, 0, 0.77254903)
+background_energy_multiplier = 0.3
 sky = SubResource("Sky_pr50r")
 ambient_light_source = 2
-ambient_light_color = Color(0.37254903, 0.37254903, 0.37254903, 1)
-ambient_light_energy = 1.76
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.3
 reflected_light_source = 1
 tonemap_mode = 2
 glow_enabled = true

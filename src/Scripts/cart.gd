@@ -13,7 +13,9 @@ func _process(delta: float) -> void:
 func play_activation_animation() -> void:
 	animation_player.speed_scale = 2.5
 	animation_player.play("climb in")
+	SignalBus.shop_entered.emit()
+	
 
 func play_deactivation_animation() -> void:
-	animation_player.speed_scale = 1.0
+	animation_player.speed_scale = 2.0
 	animation_player.play("Climb out")

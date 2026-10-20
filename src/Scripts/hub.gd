@@ -4,6 +4,7 @@ class_name Hub extends Node3D
 var start_round_timer : float = 15
 var start_round_timer_wait_time : float = 15
 @onready var camera: Camera3D = $Player/Head/Camera
+@onready var timer: Timer = $Timer
 
 @onready var progress_bar: TextureProgressBar = $CanvasLayer/ProgressBar
 @onready var level: Label = $CanvasLayer/Level
@@ -19,7 +20,6 @@ const START_FIGHT = preload("uid://pf7s6r3v0oal")
 var stored_selectable : MenuSelectable
 @onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
-@onready var start_battle_label: Label = $CanvasLayer/StartBattleLabel
 @onready var controls_label: Label = $CanvasLayer/ControlsLabel
 
 @onready var enter_notice: Label = $CanvasLayer/EnterNotice
@@ -50,7 +50,6 @@ func _ready() -> void:
 	SignalBus.intro_cutscene_started.connect(play_starting_cutscene)
 	SignalBus.intro_cutscene_player_return.connect(return_player_to_home_during_intro_cutscene)
 	SignalBus.control_label_revealed.connect(show_controls_label)
-	SignalBus.start_battle_label_revealed.connect(show_start_battle_label)
 	SignalBus.cutscene_ended.connect(spawn_hub_context)
 	SignalBus.shop_hovered_over.connect(show_enter_notice)
 	SignalBus.shop_hover_exited.connect(hide_enter_notice)
@@ -58,10 +57,16 @@ func _ready() -> void:
 	SignalBus.upgrade_station_exited.connect(stop_campfire)
 	SignalBus.cutscene_ended.connect(hide_letter_box)
 	SignalBus.cutscene_started.connect(show_letter_box)
+	SignalBus.merchant_idled_1.connect(play_merchant_idle)
+	SignalBus.merchant_idled_2.connect(play_merchant_idle_2)
+	SignalBus.merchant_idle_in_cart_1.connect(play_merchant_idle_inside_1)
 	SignalBus.merchant_talked.connect(play_merchant_talk_1)
 	SignalBus.merchant_talked_2.connect(play_merchant_talk_2)
 	SignalBus.merchant_talked_dissapointed.connect(play_merchant_talk_3)
-	
+	SignalBus.gate_faced.connect(spawn_round_select_menu)
+	SignalBus.shop_entered.connect(stop_idle_timer)
+	#SignalBus.shop_exited.connect(start_idle_timer)
+	SignalBus.intro_ended.connect(start_idle_timer)
 	
 	GameManager.in_arena = false
 	GameManager.in_menu = false
@@ -72,7 +77,6 @@ func _ready() -> void:
 			ap.hide()
 			level.hide()
 			xp.hide()
-			start_battle_label.hide()
 			controls_label.hide()
 			GameManager.can_move = false
 			GameManager.in_cutscene = true
@@ -80,8 +84,10 @@ func _ready() -> void:
 			GameManager.hub_instructions_shown = true
 			#spawn_hub_context()
 	else:
+		start_idle_timer()
 		if !GameManager.hub_instructions_shown:
 			show_start_combat_label()
+			spawn_hub_context()
 			GameManager.hub_instructions_shown = true
 	
 	var percentage : float = PlayerStats.player_stats["Current XP"]/PlayerStats.player_stats["Needed XP"]
@@ -109,10 +115,10 @@ func _physics_process(delta: float) -> void:
 		spawn_pause_menu()
 		GameManager.in_menu = true
 	
-	if Input.is_action_just_pressed("start_round"):
-		spawn_round_select_menu()
-	else:
-		start_round_timer = start_round_timer_wait_time
+	#if Input.is_action_just_pressed("start_round"):
+		#spawn_round_select_menu()
+	#else:
+		#start_round_timer = start_round_timer_wait_time
 
 	if !GameManager.in_arena:
 		var mouse_pos = get_viewport().get_mouse_position()
@@ -154,21 +160,17 @@ func spawn_hub_context() -> void:
 	canvas_layer.add_child(hub_context_panel)
 
 func show_start_combat_label() -> void:
-	start_battle_label.show()
+
 	controls_label.show()
 	progress_bar.show()
 	ap.show()
 	level.show()
 	xp.show()
 
-func show_start_battle_label() -> void:
-	start_battle_label.show()
-
 func show_controls_label() -> void:
 	controls_label.show()
 
 func spawn_round_select_menu() -> void:
-	GameManager.in_menu = true
 	var round_select_menu : StartRoundPanel =preload("uid://noxi046h5l3k").instantiate()
 	canvas_layer.add_child(round_select_menu)
 
@@ -213,6 +215,15 @@ func play_merchant_talk_2() -> void:
 
 func play_merchant_talk_3() -> void:
 	merchant_animator.play("talk disappointed")
+
+func play_merchant_idle() -> void:
+	merchant_animator.play("idle")
+
+func play_merchant_idle_2() -> void:
+	merchant_animator.play("idle 2")
+
+func play_merchant_idle_inside_1() -> void:
+	merchant_animator.play("idleinside1_001")
 
 func play_starting_cutscene() -> void:
 	GameManager.can_move = false
@@ -286,3 +297,22 @@ func check_for_remaining_ap() -> void:
 		spend_ap_label.show()
 	else:
 		spend_ap_label.hide()
+
+
+func _on_timer_timeout() -> void:
+	var rand_num : int = randi_range(0,100)
+	if rand_num <= 50:
+		play_merchant_idle()
+	else:
+		play_merchant_idle_2()
+	
+	timer.wait_time = randi_range(5,8)
+	timer.start()
+
+func start_idle_timer() -> void:
+	play_merchant_idle()
+	timer.wait_time = randi_range(10,13)
+	timer.start()
+
+func stop_idle_timer() -> void:
+	timer.stop()

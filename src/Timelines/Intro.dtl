@@ -1,4 +1,5 @@
 do GameManager.lock_player()
+do CutSceneManager.play_merchant_idle_1()
 [wait time="1.5"]
 do CutSceneManager.start_intro_cutscene()
 do CutSceneManager.start_cutscene()
@@ -16,7 +17,7 @@ ShopMan: Oh! Didn't mean to scare ya!
 ShopMan: Don't run off just yet! Think of this as a training exercise. Survive - erm, complete the job successfully - and you'll be a bonafide Exterminator!
 ShopMan: Now, this here is our base of operations. The Hub, for short!
 do CutSceneManager.show_controls_label()
-ShopMan: Use WASD to rotate between the four cardinal directions. Click my shop cart to purchase weapon upgrades, or turn left to visit the Character Campfire. That's where you can spend Ability Points earned from leveling up to grow stronger!
+ShopMan: Use WASD to rotate between the four cardinal directions. Click my shop cart to purchase weapon upgrades.
 [wait time="0.7"]
 do CutSceneManager.move_player_to_campfire_during_cutscene()
 [wait time="0.7"]
@@ -26,13 +27,16 @@ do CutSceneManager.move_player_to_cart_during_cutscene()
 [wait time="1.0"]
 do CutSceneManager.show_start_battle_label()
 do CutSceneManager.play_merchant_talk_2()
-ShopMan: When you're ready to fight, press R, select a wave, and get to exterminatin'!
 ShopMan: That's about it!
 ShopMan: ...Oh? Why aren't I joining you?
+do CutSceneManager.play_merchant_idle_1()
 ShopMan: Well, someone's gotta watch the car! Besides, there's nothing like a good trial by fire to whip a rookie into shape.
 do CutSceneManager.play_merchant_talk_1()
 ShopMan: Good luck out there, kid! You're gonna need it!
+do CutSceneManager.move_player_to_cart_during_cutscene()
+ShopMan: When you're ready, enter the arena and get your first taste of exterminatin'!
 do CutSceneManager.show_hub_hud()
 [wait time="1.0"]
 do GameManager.unlock_player()
 do CutSceneManager.end_cutscene()
+do CutSceneManager.start_merchant_idle()

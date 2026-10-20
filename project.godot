@@ -113,6 +113,12 @@ Arena=""
 Enemy=""
 Ore=""
 
+[importer_defaults]
+
+3d_texture={
+&"compress/mode": 2
+}
+
 [input]
 
 rotate_left={

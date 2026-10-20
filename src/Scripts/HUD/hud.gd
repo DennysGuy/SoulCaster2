@@ -41,7 +41,6 @@ const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 @onready var top_bar: ColorRect = $TopBar
 @onready var bot_bar: ColorRect = $BotBar
 
-
 const BOSS_STYLE = preload("uid://dw6lx7qdi3qjd")
 const ROUND_STYLE = preload("uid://5eyxyvcgpq2q")
 
@@ -108,7 +107,6 @@ var displayed_progress_count : float = 0.0
 
 @onready var round_completion_label: Label = $RoundTracker/RoundCompletionLabel
 @onready var round_phase_label: Label = $RoundTracker/RoundPhaseLabel
-
 
 func _ready() -> void:
 	
@@ -425,7 +423,7 @@ func go_to_hub() -> void:
 	GameManager.current_boss_health = GameManager.max_boss_health
 	GameManager.current_boss_stun = 0
 	await get_tree().create_timer(1.0).timeout
-	get_tree().change_scene_to_file("uid://b54wn7lrvkbdi")
+	get_tree().change_scene_to_file("uid://jgsciuanachx")
 
 func play_round_start_sfx() -> void:
 	GameManager.play_sfx(ROUND_START)
@@ -588,12 +586,13 @@ func adjust_progress_bar(bar : TextureProgressBar, value : float, speed : float 
 
 
 func update_round_completion_count(new_count: float) -> void:
-	
 	if new_count > 0:
 		while displayed_progress_count < new_count:
 			displayed_progress_count += 0.1
 			round_completion_label.text = "%s%%" % snappedf(displayed_progress_count,0.1)
-			await get_tree().create_timer(0.012).timeout
+			var tree = get_tree()
+			if tree:
+				await tree.create_timer(0.012).timeout
 		
 	else:
 		displayed_progress_count = new_count

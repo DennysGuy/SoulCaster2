@@ -7,6 +7,7 @@ class_name StartRoundPanel extends TextureRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalBus.gate_exited.connect(close_menu)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	GameManager.current_round_selected = GameManager.furtherest_round_unlocked
 	update_round_label()
@@ -25,7 +26,10 @@ func _on_start_button_button_up() -> void:
 	get_tree().change_scene_to_file("uid://c8ok5h5m1ggwb")
 
 func _on_close_button_button_up() -> void:
-	GameManager.in_menu = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	queue_free()
+
+func close_menu() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	queue_free()
 

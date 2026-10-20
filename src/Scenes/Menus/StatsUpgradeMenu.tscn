@@ -518,6 +518,7 @@ offset_left = 57.0
 offset_top = 47.0
 offset_right = 131.0
 offset_bottom = 121.0
+tooltip_text = "Upgrades Base Weapon Attack by +3 for each level."
 texture = ExtResource("4_ito4p")
 expand_mode = 1
 
@@ -527,6 +528,7 @@ offset_left = 57.0
 offset_top = 189.0
 offset_right = 131.0
 offset_bottom = 263.0
+tooltip_text = "Increases chance to deal critical damage to an enemy by 12% for each level."
 texture = ExtResource("5_4dv7x")
 expand_mode = 1
 
@@ -536,6 +538,7 @@ offset_left = 57.0
 offset_top = 326.0
 offset_right = 131.0
 offset_bottom = 400.0
+tooltip_text = "Increases Starting Timer by 10 for each level."
 texture = ExtResource("6_01lut")
 expand_mode = 1
 
@@ -545,6 +548,7 @@ offset_left = 57.0
 offset_top = 458.0
 offset_right = 131.0
 offset_bottom = 532.0
+tooltip_text = "Increases bonus time gained from killing an enemy by 1 second per level."
 texture = ExtResource("7_g0t1s")
 expand_mode = 1
 
@@ -554,6 +558,7 @@ offset_left = 57.0
 offset_top = 596.0
 offset_right = 131.0
 offset_bottom = 670.0
+tooltip_text = "Increases amount of XP gained from killing an enemy."
 texture = ExtResource("8_oaid5")
 expand_mode = 1
 
@@ -563,6 +568,7 @@ offset_left = 409.0
 offset_top = 461.0
 offset_right = 483.0
 offset_bottom = 535.0
+tooltip_text = "Increases amount of AP received upon leveling up - 1 extra AP per level."
 texture = ExtResource("9_yw0ye")
 expand_mode = 1
 
@@ -572,6 +578,7 @@ offset_left = 409.0
 offset_top = 322.0
 offset_right = 483.0
 offset_bottom = 396.0
+tooltip_text = "Increases reload speed."
 texture = ExtResource("7_sky01")
 expand_mode = 1
 
@@ -581,6 +588,7 @@ offset_left = 409.0
 offset_top = 187.0
 offset_right = 483.0
 offset_bottom = 261.0
+tooltip_text = "Increases Critical damage by 50% per level."
 texture = ExtResource("8_g0t1s")
 expand_mode = 1
 
@@ -594,6 +602,7 @@ offset_top = 48.0
 offset_right = 108.5
 offset_bottom = 122.0
 grow_horizontal = 2
+tooltip_text = "Upgrades Base Weapon Attack Speed by 10% per level."
 texture = ExtResource("9_oaid5")
 expand_mode = 1
 

@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dp4t3anradmae" path="res://src/Scenes/EnemySpawnPoint.tscn" id="4_sfhgb"]
 [ext_resource type="Texture2D" uid="uid://b8xkhq31bcoqr" path="res://Assets/Arena/Swamp.png" id="6_uqw8w"]
 [ext_resource type="Texture2D" uid="uid://11ko8ou7pad5" path="res://Assets/Arena/pngwing_com_png.png" id="7_plpmp"]
-[ext_resource type="AudioStream" uid="uid://ltnbfbfkls2x" path="res://Assets/Audio/Music/Round1Theme-Mastered.wav" id="8_uqw8w"]
 [ext_resource type="Texture2D" uid="uid://dd5dsbxw6eimn" path="res://Assets/Arena/pngwing_com_1.png" id="9_gureh"]
 [ext_resource type="Shader" uid="uid://bp61plnfa2kpn" path="res://src/Scenes/TestRealm.gdshader" id="14_cjxld"]
 [ext_resource type="Texture2D" uid="uid://brka4756v2ter" path="res://Assets/Arena/Wispy_Sky-Night_03-1024x512.png" id="15_s5xg8"]
@@ -3548,7 +3547,7 @@ look_at_point_3 = NodePath("../CameraPoint4")
 look_at_point_4 = NodePath("../CameraPoint3")
 
 [node name="UltraBow" parent="Player/Head/Marker3D/GunArm" parent_id_path=PackedInt32Array(1844450298, 405541628) index="1" unique_id=1504733302]
-transform = Transform3D(-0.99754035, -0.047986653, -0.051094152, -0.051125932, 0.99676466, 0.062018484, 0.047952786, 0.064478174, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
+transform = Transform3D(-0.99754035, -0.04798665, -0.051094152, -0.05112593, 0.99676466, 0.062018484, 0.047952786, 0.064478174, -0.9967663, 0.4916079, -1.1768167, -5.4381113)
 
 [node name="PlayerSprite" type="CSGBox3D" parent="." unique_id=1774175450]
 transform = Transform3D(1, 0, 0, 0, 0.016283223, 0.9998674, 0, -0.9998673, 0.016283223, -5.6775446, 2.013178, -5.0043445)
@@ -3717,7 +3716,6 @@ bus = &"Ambience"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=907528117]
 process_mode = 3
-stream = ExtResource("8_uqw8w")
 bus = &"Music"
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1559373778]

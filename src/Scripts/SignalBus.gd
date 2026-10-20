@@ -101,3 +101,16 @@ signal game_ended
 signal merchant_talked
 signal merchant_talked_2
 signal merchant_talked_dissapointed
+signal merchant_idled_1
+signal merchant_idled_2
+signal merchant_idle_in_cart_1
+signal merchant_idle_in_cart_2
+
+signal shop_entered
+
+
+signal gate_faced
+signal gate_exited
+
+signal item_purchased
+signal intro_ended

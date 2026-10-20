@@ -148,9 +148,7 @@ func damage_enemy(applied_damage : int = 0) -> void:
 		if GameManager.current_boss_health <= 0:
 			kill_enemy()
 		else:
-			if sfx_player:
-				sfx_player.stream = hurts.pick_random()
-				sfx_player.play()
+			GameManager.play_sfx(hurts.pick_random())
 	else:
 		health -= damage
 		SignalBus.enemy_found.emit(enemy_name, health, max_enemy_health)

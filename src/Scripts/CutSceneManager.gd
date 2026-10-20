@@ -59,3 +59,18 @@ func play_merchant_talk_2() -> void:
 
 func play_merchant_talk_3() -> void:
 	SignalBus.merchant_talked_dissapointed.emit()
+
+func play_merchant_idle_1() -> void:
+	SignalBus.merchant_idled_1.emit()
+
+func play_merchant_idle_2() -> void:
+	SignalBus.merchant_idled_2.emit()
+
+func play_merchant_idle_in_cart_1() -> void:
+	SignalBus.merchant_idle_in_cart_1.emit()
+
+func play_merchant_idle_in_cart_2() -> void:
+	SignalBus.merchant_idle_in_cart_2.emit()
+
+func start_merchant_idle() -> void:
+	SignalBus.intro_ended.emit()

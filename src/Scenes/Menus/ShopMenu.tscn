@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://clt28k4c6j7kp" path="res://Assets/Arena/radar2.png" id="11_tf7al"]
 [ext_resource type="Texture2D" uid="uid://cgkslt3ubg254" path="res://Assets/Arena/amulethealthtracker.png" id="12_l2xwa"]
 [ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="13_tf7al"]
+[ext_resource type="Texture2D" uid="uid://dx8de7koaa2fx" path="res://Assets/PurchaseNotice.png" id="19_3m10n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sowbe"]
 bg_color = Color(0.65001917, 0.19913083, 0.46035814, 1)
@@ -271,9 +272,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -109.5
+offset_left = -36.5
 offset_top = -67.0
-offset_right = -2.5
+offset_right = 70.5
 offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -305,22 +306,22 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 68.5
+offset_left = 189.5
 offset_top = 333.0
-offset_right = 156.5
+offset_right = 277.5
 offset_bottom = 377.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 42
-text = "x 150"
+text = "x 200"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="OreIcon" type="TextureRect" parent="WeaponPanel" unique_id=808567126]
 layout_mode = 0
-offset_left = 433.0
+offset_left = 554.0
 offset_top = 330.0
-offset_right = 520.0
+offset_right = 641.0
 offset_bottom = 439.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_appjw")
@@ -464,6 +465,7 @@ offset_top = -42.0
 offset_right = 81.0
 offset_bottom = 42.0
 grow_vertical = 2
+tooltip_text = "Increases the amount of crossbow bolts you can hold at once."
 texture = ExtResource("7_tf7al")
 expand_mode = 1
 
@@ -554,6 +556,7 @@ offset_top = -42.0
 offset_right = 72.0
 offset_bottom = 42.0
 grow_vertical = 2
+tooltip_text = "Double's damage and crystal output to mining mounds with basic crossbow."
 texture = ExtResource("8_l2xwa")
 expand_mode = 1
 
@@ -589,7 +592,7 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 24
-text = "Mining Cross Bow Bolt"
+text = "Mining Crossbow Bolt"
 
 [node name="MiningBoltCost" type="Label" parent="UpgradesPanel/MarginContainer/WeaponUpgradesPanel/CrossBowMiningBolt" unique_id=272811791]
 layout_mode = 1
@@ -643,6 +646,7 @@ offset_top = -42.0
 offset_right = 84.0
 offset_bottom = 42.0
 grow_vertical = 2
+tooltip_text = "Increases the amount of bolts that can be held at once with the Bolt-O-Matic 8000 (increases by 2 for every purchase)"
 texture = ExtResource("9_jkh00")
 expand_mode = 1
 
@@ -733,6 +737,7 @@ offset_top = -42.0
 offset_right = 79.0
 offset_bottom = 42.0
 grow_vertical = 2
+tooltip_text = "Double's damage and crystal output to mining mounds with the Bolt-O-Matic 8000"
 texture = ExtResource("10_u6w4y")
 expand_mode = 1
 
@@ -855,6 +860,7 @@ offset_top = -49.658447
 offset_right = 92.0
 offset_bottom = 43.341553
 grow_vertical = 2
+tooltip_text = "Displays an arrow in the given direction of rat spawn, relative to the player."
 texture = ExtResource("11_tf7al")
 expand_mode = 1
 
@@ -908,7 +914,7 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 24
-text = "x 30"
+text = "x 40"
 
 [node name="RadarPurchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/AmuletsPanel/RadarAmulet" unique_id=1887783481]
 layout_mode = 1
@@ -952,6 +958,7 @@ offset_top = -51.658447
 offset_right = 94.0
 offset_bottom = 47.341553
 grow_vertical = 2
+tooltip_text = "Displays the remaining HP of current targeted rat."
 texture = ExtResource("12_l2xwa")
 expand_mode = 1
 
@@ -1005,7 +1012,7 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_tt1ee")
 theme_override_font_sizes/font_size = 24
-text = "x 20"
+text = "x 30"
 
 [node name="TrackerPuchaseButton" type="Button" parent="UpgradesPanel/MarginContainer/AmuletsPanel/TrackerAmulet" unique_id=1240171277]
 layout_mode = 1
@@ -1192,6 +1199,38 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_ihxn1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yjrxx")
 text = "Special Weapons"
+
+[node name="UpgradesPurchaseNotice" type="TextureRect" parent="UpgradesPanel" unique_id=437496807]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 2.0
+offset_right = 168.0
+offset_bottom = 50.0
+texture = ExtResource("19_3m10n")
+
+[node name="AmuletsPurchaseNotice" type="TextureRect" parent="UpgradesPanel" unique_id=417342683]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 2.0
+offset_right = 296.0
+offset_bottom = 50.0
+texture = ExtResource("19_3m10n")
+
+[node name="SpecialWeaponsNotice" type="TextureRect" parent="UpgradesPanel" unique_id=194767586]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 2.0
+offset_right = 418.0
+offset_bottom = 50.0
+texture = ExtResource("19_3m10n")
+
+[node name="RifleNotice" type="TextureRect" parent="UpgradesPanel" unique_id=1150198828]
+layout_mode = 0
+offset_left = 331.0
+offset_top = -76.0
+offset_right = 379.0
+offset_bottom = -28.0
+texture = ExtResource("19_3m10n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1585083139]
 libraries/ = SubResource("AnimationLibrary_jkh00")

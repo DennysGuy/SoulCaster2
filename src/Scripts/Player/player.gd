@@ -91,6 +91,7 @@ var stored_target : Node3D = null
 	"point 4" : look_at_point_4,
 }
 
+
 var reticle_offset := Vector2(-90,0)
 const SENSITIVITY := 0.6
 
@@ -207,26 +208,48 @@ func move_player() -> void:
 		#SignalBus.reload_pistol.emit()
 	
 func rotate_camera_left() -> void:
+	
+	if target_index == 2 and !GameManager.in_arena:
+		SignalBus.gate_exited.emit()
+	
 	target_index -= 1
 		
 	if target_index < 0:
 		target_index = 3
-			
+	
+	if target_index == 2 and !GameManager.in_arena:
+		SignalBus.gate_faced.emit()
+	
 	target_location = look_at_positions[target_index]
 
 func rotate_camera_right() -> void:
+	
+	if target_index == 2 and !GameManager.in_arena:
+		SignalBus.gate_exited.emit()
+	
 	target_index += 1
 		
 	if target_index > look_at_positions.size()-1:
 		target_index = 0
-			
+
+	if target_index == 2 and !GameManager.in_arena:
+		SignalBus.gate_faced.emit()
+
 	target_location = look_at_positions[target_index]
 
 func rotate_camera_opposite() -> void:
+	
+	if target_index == 2 and !GameManager.in_arena:
+		SignalBus.gate_exited.emit()
+	
 	if target_index == look_at_positions.size()-1:
 		target_index = 1
+
+			
 	elif target_index == 0:
 		target_index = 2
+		if !GameManager.in_arena:
+			SignalBus.gate_faced.emit()
 	else:
 		target_index += 2
 		if target_index == look_at_positions.size():
@@ -548,3 +571,32 @@ func spawn_grenade() -> void:
 
 func release_target_look_at() -> void:
 	target_location = null
+
+@onready var magazine: MeshInstance3D = $Head/Marker3D/GunArm/UltraBow/UltraBow/Skeleton3D/magazine
+
+
+func set_super_bow_opacity_50() -> void:
+	var mater_0 : Material = magazine.get_active_material(0) as StandardMaterial3D
+	var mater_1 : Material = magazine.get_active_material(1) as StandardMaterial3D
+	var mater_2 : Material = magazine.get_active_material(2) as StandardMaterial3D
+	mater_0.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mater_0.albedo_color.a = 0.25
+	mater_1.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mater_1.albedo_color.a = 0.25
+	mater_2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mater_2.albedo_color.a = 0.25
+
+func set_super_bow_opacity_100() -> void:
+	var mater_0: StandardMaterial3D = magazine.get_active_material(0) as StandardMaterial3D
+	var mater_1: StandardMaterial3D = magazine.get_active_material(1) as StandardMaterial3D
+	var mater_2: StandardMaterial3D = magazine.get_active_material(2) as StandardMaterial3D
+
+	mater_0.albedo_color.a = 1.0
+	mater_0.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+
+	mater_1.albedo_color.a = 1.0
+	mater_1.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+
+	mater_2.albedo_color.a = 1.0
+	mater_2.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+	
