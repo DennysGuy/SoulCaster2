@@ -28,10 +28,14 @@ theme_override_fonts/font = ExtResource("2_xbur7")
 theme_override_font_sizes/font_size = 20
 text = "TLDR
 
-Hunt Rounds are short BUFFER EVENTS before combat rounds. 
-You have 20 seconds to gather any resources that spawn on the map.
+Clean up rounds are short BUFFER EVENTS before combat rounds. 
+You have 20 seconds to clean up those vermin mounds that spawn  around the map. 
+This is a great opportuninty to acquire some extra cash to purchase weapon upgrades.
 
-Hold \"SPACE BAR\" to skip the hunt round and proceed to the combat phase.
+- Starting combat will start with a Clean Up round
+- Beating a Round will Conclude in an Clean Up Intermission Round prior to starting the next
+
+Hold \"SPACE BAR\" to skip the Clean Up Round and proceed to the combat phase.
 
 Good Luck!"
 

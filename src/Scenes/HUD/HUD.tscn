@@ -14,7 +14,6 @@
 [ext_resource type="FontFile" uid="uid://yoog80aqqm5o" path="res://Assets/Fonts/dum3.ttf" id="10_6w4u3"]
 [ext_resource type="Texture2D" uid="uid://b148mdwbx16pg" path="res://Assets/ProgressBar/empty.png" id="11_s42vb"]
 [ext_resource type="Texture2D" uid="uid://co7gcjkdp83yu" path="res://Assets/grenade_icon.png" id="12_lt1va"]
-[ext_resource type="Texture2D" uid="uid://f4gt1blpi87m" path="res://Assets/ProgressBar/Full.png" id="12_phtwg"]
 [ext_resource type="PackedScene" uid="uid://booyib7rd0el6" path="res://src/Scenes/HUD/BoltHUDIcon.tscn" id="13_xs85b"]
 [ext_resource type="Shader" uid="uid://dlwe4p5tl2jbq" path="res://src/Scripts/DamagePulse.gdshader" id="14_fmwqo"]
 [ext_resource type="Texture2D" uid="uid://j3bjw76bnnul" path="res://Assets/Arena/CombatMode.png" id="15_g1kdu"]
@@ -1225,26 +1224,18 @@ theme_override_constants/separation = 100
 [node name="RoundDiamond" parent="RoundDiamondContainer" unique_id=1550612314 instance=ExtResource("4_7pn66")]
 layout_mode = 2
 texture = ExtResource("11_s42vb")
-wave_graphic_unfilled = ExtResource("11_s42vb")
-wave_graphic_filled = ExtResource("12_phtwg")
 
 [node name="RoundDiamond2" parent="RoundDiamondContainer" unique_id=793161586 instance=ExtResource("4_7pn66")]
 layout_mode = 2
 texture = ExtResource("11_s42vb")
-wave_graphic_unfilled = ExtResource("11_s42vb")
-wave_graphic_filled = ExtResource("12_phtwg")
 
 [node name="RoundDiamond3" parent="RoundDiamondContainer" unique_id=1610435108 instance=ExtResource("4_7pn66")]
 layout_mode = 2
 texture = ExtResource("11_s42vb")
-wave_graphic_unfilled = ExtResource("11_s42vb")
-wave_graphic_filled = ExtResource("12_phtwg")
 
 [node name="RoundDiamond4" parent="RoundDiamondContainer" unique_id=279467700 instance=ExtResource("4_7pn66")]
 layout_mode = 2
 texture = ExtResource("11_s42vb")
-wave_graphic_unfilled = ExtResource("11_s42vb")
-wave_graphic_filled = ExtResource("12_phtwg")
 
 [node name="HurtRect" type="ColorRect" parent="." unique_id=295245294]
 modulate = Color(1, 1, 1, 0)
@@ -1305,7 +1296,7 @@ grow_vertical = 2
 pivot_offset = Vector2(177, 70)
 theme_override_fonts/font = ExtResource("10_6w4u3")
 theme_override_font_sizes/font_size = 128
-text = "3"
+text = "Survive!"
 horizontal_alignment = 1
 
 [node name="HoldSpaceNotice" type="Label" parent="." unique_id=2142271763]

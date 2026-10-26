@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://8tvgp0y5q4rc" path="res://src/Scripts/ending_panel.gd" id="1_v1fa3"]
 [ext_resource type="FontFile" uid="uid://dmbs7kjv52urx" path="res://Assets/Fonts/KnightsQuest.ttf" id="2_24pii"]
 [ext_resource type="Texture2D" uid="uid://1k8p4usin0id" path="res://Assets/end.png" id="2_r0mfa"]
+[ext_resource type="StyleBox" uid="uid://b81vauesdl25q" path="res://src/ButtonNormal.tres" id="4_exyhg"]
+[ext_resource type="StyleBox" uid="uid://cxc37ghsbrgyg" path="res://src/ButtonHover.tres" id="5_adiwc"]
 
 [sub_resource type="Animation" id="Animation_24pii"]
 resource_name = "FadeIn"
@@ -67,9 +69,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -268.0
-offset_top = -413.0
+offset_top = -469.0
 offset_right = 268.0
-offset_bottom = -332.0
+offset_bottom = -388.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -85,9 +87,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -701.5
-offset_top = -256.0
+offset_top = -339.0
 offset_right = 701.5
-offset_bottom = 77.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -108,9 +110,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -701.5
-offset_top = 179.5
+offset_top = 49.0
 offset_right = 701.5
-offset_bottom = 411.5
+offset_bottom = 326.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -119,10 +121,11 @@ theme_override_font_sizes/font_size = 52
 text = "Credits:
 
 Artwork, Story, and Character Concepts - Rottenflash
-Programming, Game Design, Story, and Music Composition - Denny'sGuy"
+Programming, Game Design, Story, Sound Design, and Music Composition - Denny'sGuy"
 autowrap_mode = 3
 
 [node name="FadeInRect" type="ColorRect" parent="." unique_id=2019711897]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,3 +137,24 @@ color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1433184293]
 libraries/ = SubResource("AnimationLibrary_pq26r")
+
+[node name="Button" type="Button" parent="." unique_id=1162440466]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -177.0
+offset_right = 157.5
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_24pii")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = ExtResource("4_exyhg")
+theme_override_styles/hover = ExtResource("5_adiwc")
+text = "Back to Hub"
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

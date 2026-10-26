@@ -12,8 +12,8 @@ class_name HUD extends CanvasLayer
 @onready var time_gained_position: Marker2D = $TimeGainedPosition
 @onready var ore_gained_position: Marker2D = $OreGainedPosition
 
-const HUNT_ROUND_TUTORIAL = preload("uid://cpgwqckakdvgg")
-const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
+#const HUNT_ROUND_TUTORIAL = preload("uid://cpgwqckakdvgg")
+#const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 
 @onready var enemy_tracker: Control = $EnemyTracker
 @onready var enemy_name: Label = $EnemyTracker/EnemyName
@@ -65,6 +65,7 @@ const BASE_XP_AMOUNT : int = 50
 
 const VOX_BOSS_DIALOGUE_BLASPHEMY_04 = preload("uid://1taeuss8bqxl")
 @onready var hold_space_notice: Label = $HoldSpaceNotice
+const BOSS_INTRO = preload("uid://d1o5p32odqhp7")
 
 var round_started : bool = false
 var round_ended : bool = false
@@ -98,6 +99,7 @@ var skip_time_left : float = 15
 var skip_time : float = 15
 
 const COMBAT_TUTORIAL = preload("uid://h53ha3ah86nd")
+const HUNT_ROUND_TUTORIAL = preload("uid://cpgwqckakdvgg")
 
 @onready var bar_player: AnimationPlayer = $BarPlayer
 @onready var icon_player: AnimationPlayer = $IconPlayer
@@ -179,7 +181,6 @@ func _ready() -> void:
 				SignalBus.count_down_ended.emit()
 				start_ore_hunt_countdown()
 		else:
-			
 			start_combat_round()
 	bar_player.play("CloseIn")
 

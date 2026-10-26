@@ -111,9 +111,10 @@ func _physics_process(delta: float) -> void:
 		
 		debug_menu_showing = !debug_menu_showing
 	
-	if Input.is_action_just_pressed("close_menu") and !GameManager.in_menu and Input.is_action_just_pressed("close_menu") and !GameManager.in_cutscene:
+	if Input.is_action_just_pressed("close_menu") and !GameManager.in_menu and !GameManager.in_cutscene:
 		spawn_pause_menu()
 		GameManager.in_menu = true
+
 	
 	#if Input.is_action_just_pressed("start_round"):
 		#spawn_round_select_menu()
@@ -290,6 +291,10 @@ func hide_letter_box() -> void:
 func spawn_pause_menu() -> void:
 	var pause_menu : PauseMenu = preload("uid://b3fjukg0yqsop").instantiate()
 	canvas_layer.add_child(pause_menu)
+	print("Menu added: ", pause_menu.is_inside_tree())
+	print("Visible: ", pause_menu.visible)
+	print("CanvasLayer: ", canvas_layer)
+	print("Menu position: ", pause_menu.global_position)
 
 func check_for_remaining_ap() -> void:
 	ap.text = "AP: %s" % int(PlayerStats.player_stats["Ability Points"])
@@ -311,7 +316,7 @@ func _on_timer_timeout() -> void:
 
 func start_idle_timer() -> void:
 	play_merchant_idle()
-	timer.wait_time = randi_range(10,13)
+	timer.wait_time = 11.6
 	timer.start()
 
 func stop_idle_timer() -> void:

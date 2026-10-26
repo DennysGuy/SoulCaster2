@@ -22,9 +22,10 @@ func _exit_tree() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("close_menu"):
-		GameManager.in_menu = false
-		queue_free()
+	pass
+	#if Input.is_action_just_pressed("close_menu"):
+		#GameManager.in_menu = false
+		#queue_free()
 
 
 func _on_master_slider_value_changed(value: float) -> void:
@@ -38,8 +39,6 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 func _on_ambience_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(3,value)
-
-
 
 
 func _on_button_button_up() -> void:

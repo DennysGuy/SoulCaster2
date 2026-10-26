@@ -140,7 +140,7 @@ func _process(delta: float) -> void:
 		_update_arrows()
 	
 	if GameManager.can_move:
-		if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena:
+		if Input.is_action_pressed("shoot") and !shooting and GameManager.in_arena and !GameManager.in_cutscene:
 			if GameManager.bullets_in_clip <= 0:
 				shooting = true
 				GameManager.play_sfx(CROSS_BOW_RELOAD)
