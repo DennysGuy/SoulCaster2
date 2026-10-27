@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cs4a6rlrtm5r7"]
 
 [ext_resource type="Script" uid="uid://dba5lm5i7tskh" path="res://src/Scripts/super_bolt_projectile.gd" id="1_bajuq"]
+[ext_resource type="PackedScene" uid="uid://cf7o01i3nvskd" path="res://Assets/Weapons/Bolt.glb" id="2_raj6d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g22ua"]
 size = Vector3(0.31933594, 0.27697754, 0.32910156)
@@ -455,6 +456,30 @@ draw_pass_1 = SubResource("RibbonTrailMesh_hmioj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08759481, -1.242635)
 material_override = SubResource("StandardMaterial3D_bajuq")
 radius = 0.7921758
+
+[node name="Bolt" parent="." unique_id=621196264 instance=ExtResource("2_raj6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0000786, -0.8328056, -0.9556795)
+
+[node name="Bolt2" parent="." unique_id=1177327681 instance=ExtResource("2_raj6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7313571, -0.33265087, -1.0712833)
+
+[node name="Bolt3" parent="." unique_id=100932603 instance=ExtResource("2_raj6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009288728, -0.007027924, -1.0712833)
+
+[node name="Bolt4" parent="." unique_id=1072460984 instance=ExtResource("2_raj6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8383486, -0.439198, -1.0712833)
+
+[node name="Bolt5" parent="." unique_id=1551466513 instance=ExtResource("2_raj6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.89295053, -0.8432229, -1.0712833)
+
+[node name="Bolt6" parent="." unique_id=1220056705 instance=ExtResource("2_raj6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.77490133, -1.4569935, -1.0712833)
+
+[node name="Bolt7" parent="." unique_id=313921162 instance=ExtResource("2_raj6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0973016, -1.8138183, -1.0712833)
+
+[node name="Bolt8" parent="." unique_id=775448346 instance=ExtResource("2_raj6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8533143, -1.4641973, -1.0712833)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_static_body_3d_body_entered"]

@@ -1,10 +1,11 @@
 class_name SuperBoltExplosion extends Node3D
 
 var impacted_enemy : Enemy
+@onready var explosion: Sprite3D = $Explosion
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	expand_explosion()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -21,3 +22,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 func _on_timer_timeout() -> void:
 	queue_free()
+
+func expand_explosion() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(explosion, "scale", Vector3(1.0,1.0,1.0),0.3).set_ease(Tween.EASE_IN_OUT)

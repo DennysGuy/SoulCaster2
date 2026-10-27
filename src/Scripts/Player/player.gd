@@ -152,8 +152,9 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("throw_grenade") and GameManager.grenades_owned > 0:
 			spawn_grenade()
 		
-		if Input.is_action_just_pressed("jump") and GameManager.super_shot_cost and GameManager.can_use_super_shot:
-			SignalBus.super_shot_unleashed.emit()
+		if Input.is_action_just_pressed("jump") and GameManager.super_shot_cost and GameManager.can_use_super_shot and !shooting:
+			shooting = true
+			super_bow_animation_player.play("UltraShot")
 		
 		if Input.is_action_just_pressed("reload") and GameManager.in_arena:
 			shooting = true
@@ -331,8 +332,6 @@ func play_shoot_animation() -> void:
 	else:
 		GameManager.play_sfx(pistol_sfx.pick_random())
 		chosen_gun_animation_player.speed_scale = attack_speed
-	#GameManager.ammo_count -= 1
-	#SignalBus.update_ammo_count.emit()
 	chosen_gun_animation_player.play("SHOOT")
 	var body_part = shoot_ray()
 	if body_part:
@@ -541,6 +540,35 @@ func spawn_cross_bow_bolt(bolt_position : Marker3D) -> void:
 	get_parent().add_child(sparks)
 	get_parent().add_child(cross_bow_bolt)
 	HitStopManager.freeze(0.02,0.05)
+
+func spawn_super_shot() -> void:
+	var direction : Vector3 = Vector3.ZERO
+	
+	var cross_bow_bolt : SuperBoltProjectile = preload("uid://cs4a6rlrtm5r7").instantiate()
+	cross_bow_bolt.bolts_in_mag = GameManager.bullets_in_clip
+	GameManager.bullets_in_clip = 0
+	SignalBus.shot_fired.emit()
+	var sparks : ShootSparks = preload("uid://l5ueculb03l5").instantiate()
+	if is_instance_valid(tracked_enemy):
+		cross_bow_bolt.target = tracked_enemy
+	super_cross_bow_bolt_position.global_position = super_cross_bow_bolt_position.global_position
+	sparks.global_position = super_cross_bow_bolt_position.global_position
+	sparks.rotation = rotation
+	if !tracked_enemy:
+		direction = -super_cross_bow_bolt_position.global_transform.basis.z
+		cross_bow_bolt.direction = direction
+	else:
+		if tracked_enemy.has_method("show_lock_on_target"):
+			#tracked_enemy.show_lock_on_target()
+			SignalBus.enemy_hit.emit(tracked_enemy)
+		#print("Distance: ",bolt_position.global_position.distance_to(tracked_enemy.bolt_position.global_position))
+	get_parent().add_child(sparks)
+	get_parent().add_child(cross_bow_bolt)
+	HitStopManager.freeze(0.02,0.08)
+
+func end_super_shot() -> void:
+	SignalBus.super_shot_unleashed.emit()
+	shooting = false
 
 func spawn_bolt_from_cross_bow() -> void:
 	

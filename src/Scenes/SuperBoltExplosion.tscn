@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://2bmd4oij3kmi"]
 
 [ext_resource type="Script" uid="uid://bt75o7pjl1eku" path="res://src/Scripts/super_bolt_explosion.gd" id="1_8br07"]
+[ext_resource type="Texture2D" uid="uid://iudfww07i17i" path="res://Assets/Weapons/sun.png" id="2_2m0vj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8br07"]
 
@@ -11,10 +12,16 @@ script = ExtResource("1_8br07")
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1047772110]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 shape = SubResource("BoxShape3D_8br07")
 
 [node name="Timer" type="Timer" parent="." unique_id=580624575]
+process_callback = 0
+wait_time = 0.3
+
+[node name="Explosion" type="Sprite3D" parent="." unique_id=1731044092]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.34600186, -0.81069183, 0)
+texture = ExtResource("2_2m0vj")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
