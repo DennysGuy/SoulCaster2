@@ -548,19 +548,14 @@ func spawn_super_shot() -> void:
 	cross_bow_bolt.bolts_in_mag = GameManager.bullets_in_clip
 	GameManager.bullets_in_clip = 0
 	SignalBus.shot_fired.emit()
+	SignalBus.bullet_fired.emit()
 	var sparks : ShootSparks = preload("uid://l5ueculb03l5").instantiate()
-	if is_instance_valid(tracked_enemy):
-		cross_bow_bolt.target = tracked_enemy
-	super_cross_bow_bolt_position.global_position = super_cross_bow_bolt_position.global_position
+	cross_bow_bolt.global_position = super_cross_bow_bolt_position.global_position
 	sparks.global_position = super_cross_bow_bolt_position.global_position
 	sparks.rotation = rotation
-	if !tracked_enemy:
-		direction = -super_cross_bow_bolt_position.global_transform.basis.z
-		cross_bow_bolt.direction = direction
-	else:
-		if tracked_enemy.has_method("show_lock_on_target"):
-			#tracked_enemy.show_lock_on_target()
-			SignalBus.enemy_hit.emit(tracked_enemy)
+	direction = -super_cross_bow_bolt_position.global_transform.basis.z
+	cross_bow_bolt.direction = direction
+
 		#print("Distance: ",bolt_position.global_position.distance_to(tracked_enemy.bolt_position.global_position))
 	get_parent().add_child(sparks)
 	get_parent().add_child(cross_bow_bolt)

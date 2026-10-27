@@ -6,12 +6,11 @@ var target : Node3D
 var bolts_in_mag : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	print("Im here! BABB")
 	if direction == Vector3.ZERO:
 		direction = Vector3(0,0,1)
 	
 	look_at(global_position + direction, Vector3.UP)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -30,32 +29,6 @@ func _physics_process(delta: float) -> void:
 
 	global_position += direction * speed * delta
 	
-	if target and global_position.distance_to(target.bolt_position.global_position) <= 1.0:
-		if target is BabyBullet:
-			target.die()
-			queue_free()
-		elif target is Enemy:
-			if target.can_hurt:
-				target.damage_enemy()
-			queue_free()
-		elif target is TestOre:
-			target.damage_ore()
-			queue_free()
-
-func _on_static_body_3d_body_entered(body: Node3D) -> void:
-	var body_parent := body.get_parent()
-	if body_parent == target:
-		if body is EnemyBodyCollider:
-			if body_parent is BabyBullet:
-				body_parent.die()
-				spawn_explosion()
-				queue_free()
-			spawn_explosion()
-			var multiplier : float = 0.25 * bolts_in_mag
-			var super_damage : int = randi_range(PlayerStats.player_stats["Attack Damage"] * multiplier-5,PlayerStats.player_stats["Attack Damage"] * multiplier)
-			body_parent.damage_enemy(super_damage)
-			queue_free()
-
 func _on_timer_timeout() -> void:
 	queue_free()
 
@@ -64,3 +37,17 @@ func spawn_explosion() -> void:
 	get_parent().add_child(explosion)
 	SignalBus.shake_camera.emit(1.5)
 	explosion.global_position = global_position
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	var body_parent := body.get_parent()
+	if body is EnemyBodyCollider:
+		if body_parent is BabyBullet:
+			body_parent.die()
+		print("This is bolts in mag %s" % bolts_in_mag)
+		var multiplier : float = 0.5 * bolts_in_mag
+		print("THIS IS MULTIPLIER %s" % multiplier)
+		var super_damage : float = PlayerStats.player_stats["Attack Damage"]+10 * multiplier
+		print("THIS IS SUPER DAMAGE %s" % super_damage)
+		body_parent.damage_enemy(super_damage)
+		#spawn_explosion()
+		queue_free()

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cf7o01i3nvskd" path="res://Assets/Weapons/Bolt.glb" id="2_raj6d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g22ua"]
-size = Vector3(0.31933594, 0.27697754, 0.32910156)
+size = Vector3(0.31933594, 0.27697754, 0.25195313)
 
 [sub_resource type="Shader" id="Shader_g22ua"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.6.stable's ParticleProcessMaterial.
@@ -426,6 +426,7 @@ albedo_color = Color(0.9999998, 0.21896681, 0.07893819, 1)
 
 [node name="BoltProjectile" type="Node3D" unique_id=994679456]
 script = ExtResource("1_bajuq")
+speed = 20.0
 
 [node name="Timer" type="Timer" parent="." unique_id=153126694]
 process_callback = 0
@@ -434,17 +435,16 @@ one_shot = true
 autostart = true
 
 [node name="Area3D" type="Area3D" parent="." unique_id=47952017]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03047645, -1.9615108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20732075, 0.18788993)
 collision_layer = 32
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=472115641]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016113281, 0.042175293, -0.08251953)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0.016113281, 0.26154006, -0.4555664)
 shape = SubResource("BoxShape3D_g22ua")
-disabled = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=513317661]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022709012, -0.43623888)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2605062, 0.91002834)
 amount = 1
 transform_align = 1
 trail_enabled = true
@@ -453,33 +453,33 @@ process_material = SubResource("ShaderMaterial_1ox5o")
 draw_pass_1 = SubResource("RibbonTrailMesh_hmioj")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=498444599]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08759481, -1.242635)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325392, 0.10363221)
 material_override = SubResource("StandardMaterial3D_bajuq")
 radius = 0.7921758
 
 [node name="Bolt" parent="." unique_id=621196264 instance=ExtResource("2_raj6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0000786, -0.8328056, -0.9556795)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0000786, -0.5950084, 0.39058775)
 
 [node name="Bolt2" parent="." unique_id=1177327681 instance=ExtResource("2_raj6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7313571, -0.33265087, -1.0712833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7313571, -0.09485367, 0.27498388)
 
 [node name="Bolt3" parent="." unique_id=100932603 instance=ExtResource("2_raj6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009288728, -0.007027924, -1.0712833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009288728, 0.23076928, 0.27498388)
 
 [node name="Bolt4" parent="." unique_id=1072460984 instance=ExtResource("2_raj6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8383486, -0.439198, -1.0712833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8383486, -0.20140079, 0.27498388)
 
 [node name="Bolt5" parent="." unique_id=1551466513 instance=ExtResource("2_raj6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.89295053, -0.8432229, -1.0712833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.89295053, -0.6054257, 0.27498388)
 
 [node name="Bolt6" parent="." unique_id=1220056705 instance=ExtResource("2_raj6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.77490133, -1.4569935, -1.0712833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.77490133, -1.2191963, 0.27498388)
 
 [node name="Bolt7" parent="." unique_id=313921162 instance=ExtResource("2_raj6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0973016, -1.8138183, -1.0712833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0973016, -1.5760212, 0.27498388)
 
 [node name="Bolt8" parent="." unique_id=775448346 instance=ExtResource("2_raj6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8533143, -1.4641973, -1.0712833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8533143, -1.2264001, 0.27498388)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_static_body_3d_body_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

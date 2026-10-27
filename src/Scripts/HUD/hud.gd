@@ -714,7 +714,7 @@ func hide_super_shot_notice() -> void:
 
 func start_super_shot_cool_down() -> void:
 	hide_super_shot_notice()
-	super_shot_cool_down_timer.wait_time = 30
+	super_shot_cool_down_timer.wait_time = 3
 	super_shot_cool_down_timer.start()
 	super_shot_cool_down_icon.show()
 	
